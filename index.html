@@ -53,6 +53,47 @@ footer{text-align:center;padding:22px;color:#63718a;font-size:13px}
   const classes=["1","2","3","4","5","6","7","8","9","10","Plus 1","Plus 2"];
 const holder=document.getElementById("classes");
   classes.forEach(c=>{const b=document.createElement("button");b.className="class-btn";b.textContent=c;b.onclick=()=>{document.querySelector(".panel h2").style.display="none";document.getElementById("selectedClass").textContent=c;holder.style.display="none";document.getElementById("gender").style.display="block";document.getElementById("selectionNote").textContent="വിദ്യാർത്ഥികളുടെ വിഭാഗം തിരഞ്ഞെടുക്കുക.";};holder.appendChild(b);});
-function chooseGender(g){document.getElementById("selectionNote").textContent=document.getElementById("selectedClass").textContent+" • "+g+" — റിസൾട്ട് സംവിധാനം തയ്യാറാകുന്നു.";}
-</script>
+function chooseGender(g){
+  const isBoys=/ആൺ|boy/i.test(g);
+  const boys=[
+    "Muhammad Aflah K",
+    "Muhammad Fauzan",
+    "Zain Muhammad KC",
+    "Sayyid Muad PC",
+    "Muhammed Sheniz Hafez",
+    "Shazin Muhammed KT",
+    "Muhammad Yafiz",
+    "Basil Zaman K",
+    "Muhammed Zaihan EP",
+    "Azan Ahmad KP",
+    "Aizam Hazin"
+  ];
+  const girls=[
+    "Fathima Azra K",
+    "Rabeea Mariyam K",
+    "Ayisha Noura K",
+    "Ayisha Mehar P",
+    "Fathima Haniya",
+    "Havva Aayath",
+    "Dua Kadeeja P"
+  ];
+
+  document.getElementById("selectionNote").textContent=
+    document.getElementById("selectedClass").textContent+" • "+g;
+
+  let list=document.getElementById("studentList");
+  if(!list){
+    list=document.createElement("div");
+    list.id="studentList";
+    document.getElementById("gender").appendChild(list);
+  }
+
+  list.innerHTML="";
+  (isBoys?boys:girls).forEach((name,i)=>{
+    const b=document.createElement("button");
+    b.className="gender-btn";
+    b.textContent=(i+1)+". "+name;
+    list.appendChild(b);
+  });
+}
 </body></html>
