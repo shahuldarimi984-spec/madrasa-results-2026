@@ -55,6 +55,10 @@ const holder=document.getElementById("classes");
   classes.forEach(c=>{const b=document.createElement("button");b.className="class-btn";b.textContent=c;b.onclick=()=>{document.querySelector(".panel h2").style.display="none";document.getElementById("selectedClass").textContent=c;holder.style.display="none";document.getElementById("gender").style.display="block";document.getElementById("selectionNote").textContent="വിദ്യാർത്ഥികളുടെ വിഭാഗം തിരഞ്ഞെടുക്കുക.";};holder.appendChild(b);});
 function chooseGender(g){
   const isBoys=/ആൺ|boy/i.test(g);
+
+  document.querySelectorAll("#gender > button.gender-btn")
+    .forEach(button=>button.style.display="none");
+
   const boys=[
     "Muhammad Aflah K",
     "Muhammad Fauzan",
@@ -68,6 +72,7 @@ function chooseGender(g){
     "Azan Ahmad KP",
     "Aizam Hazin"
   ];
+
   const girls=[
     "Fathima Azra K",
     "Rabeea Mariyam K",
