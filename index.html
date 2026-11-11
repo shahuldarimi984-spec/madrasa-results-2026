@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="ml">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta property="og:title" content="അസാസുൽ ഉലൂം മദ്രസ – അർദ്ധവാർഷിക പരീക്ഷാ ഫലം">
+<meta property="og:description" content="പനക്കോട് | രജിസ്റ്റർ നമ്പർ: 2692">
+<meta property="og:image" content="emblem-panakkode.jpg">
+<title>അസാസുൽ ഉലൂം മദ്രസ | പരീക്ഷാ ഫലം</title>
+<style>
+:root{--navy:#172b4d;--gold:#c9a45c;--green:#168653;--cream:#fffaf0;--ink:#20304a}
+*{box-sizing:border-box}body{margin:0;background:linear-gradient(135deg,#eef5ff,#fff8e9);font-family:system-ui,"Noto Sans Malayalam",sans-serif;color:var(--ink)}
+header{background:linear-gradient(125deg,#10264a,#244b78);color:white;text-align:center;padding:24px 14px 28px;border-bottom:5px solid var(--gold)}
+.logo{width:150px;height:150px;object-fit:contain;background:white;border-radius:50%;padding:8px;border:4px solid var(--gold);box-shadow:0 8px 25px #0003}
+h1{font-size:clamp(23px,5vw,32px);margin:12px 0 4px;color:#ffe3a1}header p{margin:4px 0;color:#fff}
+main{max-width:850px;margin:22px auto;padding:0 14px}
+.panel{background:#fff;border:1px solid #e4d6b8;border-radius:18px;padding:20px;box-shadow:0 8px 24px #1d355710}
+h2{text-align:center;color:var(--navy);margin:0 0 16px}
+.classes{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+button{font:inherit;cursor:pointer;border:0}
+.class-btn,.gender-btn{padding:15px 8px;border-radius:13px;background:linear-gradient(135deg,#fff,#f4e8ce);border:1px solid #d8bd82;color:var(--navy);font-weight:700;box-shadow:0 3px 8px #1d355110}
+.class-btn:active,.gender-btn:active{transform:scale(.98)}
+#gender{display:none;margin-top:20px;text-align:center}
+.gender-btn{min-width:42%;margin:5px;background:linear-gradient(135deg,#eaf3ff,#fff)}
+.note{font-size:13px;color:#68758a;text-align:center;margin:18px 0 0}
+footer{text-align:center;padding:22px;color:#63718a;font-size:13px}
+@media(min-width:600px){.classes{grid-template-columns:repeat(4,1fr)}}
+</style>
+</head>
+<body>
+<header>
+<img class="logo" src="emblem-panakkode.jpg" alt="അസാസുൽ ഉലൂം മദ്രസ പനക്കോട് എംബ്ലം">
+<h1>അസാസുൽ ഉലൂം മദ്രസ</h1>
+<p>പനക്കോട്</p>
+<p>രജിസ്റ്റർ നമ്പർ: 2692</p>
+<p style="color:#ffe3a1;font-weight:700;font-size:20px;margin-top:14px">അർദ്ധവാർഷിക പരീക്ഷാ ഫലം</p>
+</header>
+<main>
+<section class="panel">
+<h2>ക്ലാസ് തിരഞ്ഞെടുക്കുക</h2>
+<div class="classes" id="classes"></div>
+<div id="gender">
+<h2 id="selectedClass"></h2>
+<button class="gender-btn" onclick="chooseGender('ആൺകുട്ടികൾ')">ആൺകുട്ടികൾ</button>
+<button class="gender-btn" onclick="chooseGender('പെൺകുട്ടികൾ')">പെൺകുട്ടികൾ</button>
+<p class="note" id="selectionNote"></p>
+</div>
+<p class="note">വിദ്യാർത്ഥികളുടെ റിസൾട്ട് ലഭ്യമാക്കുന്ന സംവിധാനം തയ്യാറാക്കിക്കൊണ്ടിരിക്കുന്നു.</p>
+</section>
+</main>
+<footer>അസാസുൽ ഉലൂം മദ്രസ • പനക്കോട്</footer>
+<script>
+const classes=[..."12345678910".split(""),"Plus 1","Plus 2"];
+const holder=document.getElementById("classes");
+classes.forEach(c=>{const b=document.createElement("button");b.className="class-btn";b.textContent=(c.startsWith("Plus")?c:c+"ാം ക്ലാസ്");b.onclick=()=>{document.getElementById("gender").style.display="block";document.getElementById("selectedClass").textContent=b.textContent;document.getElementById("selectionNote").textContent="തിരഞ്ഞെടുത്ത വിഭാഗം പിന്നീട് റിസൾട്ടുമായി ബന്ധിപ്പിക്കും.";};holder.appendChild(b);});
+function chooseGender(g){document.getElementById("selectionNote").textContent=document.getElementById("selectedClass").textContent+" • "+g+" — റിസൾട്ട് സംവിധാനം തയ്യാറാകുന്നു.";}
+</script>
+</body></html>
