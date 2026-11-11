@@ -52,7 +52,7 @@ footer{text-align:center;padding:22px;color:#63718a;font-size:13px}
 <script>
 const classes=[..."12345678910".split(""),"Plus 1","Plus 2"];
 const holder=document.getElementById("classes");
-classes.forEach(c=>{const b=document.createElement("button");b.className="class-btn";b.textContent=(c.startsWith("Plus")?c:c+"ാം ക്ലാസ്");b.onclick=()=>{document.getElementById("gender").style.display="block";document.getElementById("selectedClass").textContent=b.textContent;document.getElementById("selectionNote").textContent="തിരഞ്ഞെടുത്ത വിഭാഗം പിന്നീട് റിസൾട്ടുമായി ബന്ധിപ്പിക്കും.";};holder.appendChild(b);});
+classes.forEach(c=>{const b=document.createElement("button");b.className="class-btn";b.textContent=c;b.onclick=()=>{document.getElementById("selectedClass").textContent=c;document.getElementById("gender").style.display="block";document.getElementById("selectionNote").textContent="വിദ്യാർത്ഥികളുടെ വിഭാഗം തിരഞ്ഞെടുക്കുക.";};holder.appendChild(b);});
 function chooseGender(g){document.getElementById("selectionNote").textContent=document.getElementById("selectedClass").textContent+" • "+g+" — റിസൾട്ട് സംവിധാനം തയ്യാറാകുന്നു.";}
 </script>
 </body></html>
