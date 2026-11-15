@@ -56,7 +56,7 @@ footer{text-align:center;padding:22px;color:#63718a;font-size:13px}
 <label for="student">വിദ്യാർത്ഥിയുടെ പേര്</label>
 <select id="student"><option value="">ആദ്യം വിഭാഗം തിരഞ്ഞെടുക്കുക</option></select>
 <label for="dob">ജനനത്തീയതി</label>
-<input id="dob" type="date">
+<input id="dob" type="text" inputmode="numeric" placeholder="DD/MM/YYYY">
 <button class="action" id="checkBtn">ഫലം അറിയുക</button>
 <button class="action" id="backBtn" type="button">പിന്നിലേക്ക്</button>
 <p class="status" id="status"></p>
@@ -121,7 +121,9 @@ function grade(mark){
 }
 document.getElementById("checkBtn").onclick=async()=>{
   const name=document.getElementById("student").value;
-  const dob=document.getElementById("dob").value;
+  const dobInput=document.getElementById("dob").value.trim();
+const parts=dobInput.split("/");
+const dob=parts.length===3 ? `${parts[2]}-${parts[1].padStart(2,"0")}-${parts[0].padStart(2,"0")}` : "";
   const status=document.getElementById("status");
   if(!name||!dob){status.textContent="പേരും ജനനത്തീയതിയും നൽകുക.";return;}
   status.textContent="ഫലം പരിശോധിക്കുന്നു...";
