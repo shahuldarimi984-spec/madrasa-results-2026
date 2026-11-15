@@ -122,7 +122,7 @@ function grade(mark){
 document.getElementById("checkBtn").onclick=async()=>{
   const name=document.getElementById("student").value;
   const dobInput=document.getElementById("dob").value.trim();
-const parts=dobInput.split("/");
+const parts=dobInput.replace(/-/g,"/").split("/");
 const dob=parts.length===3 ? `${parts[2]}-${parts[1].padStart(2,"0")}-${parts[0].padStart(2,"0")}` : "";
   const status=document.getElementById("status");
   if(!name||!dob){status.textContent="പേരും ജനനത്തീയതിയും നൽകുക.";return;}
