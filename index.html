@@ -167,17 +167,7 @@ const dob=parts.length===3 ? `${parts[2]}-${parts[1].padStart(2,"0")}-${parts[0]
     document.getElementById("sendWhatsappBtn").onclick=()=>{
       const parentComment=document.getElementById("parentComment").value.trim();
       if(!parentComment){alert("രക്ഷിതാവിന്റെ അഭിപ്രായം എഴുതുക.");return;}
-      const message=[
-        "അസാസുൽ ഉലൂം മദ്രസ, പനക്കോട്",
-        "വിദ്യാർത്ഥിയുടെ ഫലത്തെക്കുറിച്ചുള്ള രക്ഷിതാവിന്റെ അഭിപ്രായം",
-        "വിദ്യാർത്ഥി: "+name,
-        "ക്ലാസ്: ഒന്നാം ക്ലാസ്",
-        "ആകെ മാർക്ക്: "+r.total_marks+" / 200",
-        "ക്ലാസ് റാങ്ക്: "+r.class_rank,
-        "ഹാജർ: "+r.attendance+" / 140",
-        "അധ്യാപകന്റെ അഭിപ്രായം: "+teacherComment,
-        "രക്ഷിതാവിന്റെ അഭിപ്രായം: "+parentComment
-      ].join("\n");
+      const message=teacherComment;
       const whatsappUrl="https://wa.me/919645154849?text="+encodeURIComponent(message);
       window.open(whatsappUrl,"_blank");
     };
