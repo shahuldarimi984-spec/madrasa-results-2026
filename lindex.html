@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="ml">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta property="og:title" content="അസാസുൽ ഉലൂം മദ്രസ – അർദ്ധവാർഷിക പരീക്ഷാ ഫലം">
+<meta property="og:description" content="പനക്കോട് | രജിസ്റ്റർ നമ്പർ: 2692">
+<meta property="og:image" content="emblem-panakkode.jpg">
+<title>അസാസുൽ ഉലൂം മദ്രസ | പരീക്ഷാ ഫലം</title>
+<style>
+:root{--navy:#172b4d;--gold:#c9a45c;--cream:#fffaf0;--ink:#20304a}
+*{box-sizing:border-box}
+body{margin:0;background:linear-gradient(135deg,#eef5ff,#fff8e9);font-family:system-ui,"Noto Sans Malayalam",sans-serif;color:var(--ink)}
+header{background:linear-gradient(125deg,#10264a,#244b78);color:white;text-align:center;padding:24px 14px 28px;border-bottom:5px solid var(--gold)}
+.logo{width:130px;height:130px;object-fit:contain;background:white;border-radius:50%;padding:8px;border:4px solid var(--gold)}
+h1{font-size:clamp(23px,5vw,32px);margin:12px 0 4px;color:#ffe3a1}
+header p{margin:4px 0}
+main{max-width:850px;margin:22px auto;padding:0 14px}
+.panel,.result{background:#fff;border:1px solid #e4d6b8;border-radius:18px;padding:20px;box-shadow:0 8px 24px #1d355710;margin-bottom:18px}
+h2{text-align:center;color:var(--navy);margin:0 0 16px}
+.classes{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+button{font:inherit;cursor:pointer;border:0}
+.class-btn,.action{padding:14px 8px;border-radius:13px;background:linear-gradient(135deg,#fff,#f4e8ce);border:1px solid #d8bd82;color:var(--navy);font-weight:700}
+.action{background:var(--navy);color:#fff;padding:12px 18px;margin:6px}
+input,select{width:100%;padding:13px;border:1px solid #c9b98f;border-radius:10px;font:inherit;margin:7px 0 14px;background:#fff}
+label{font-weight:650}
+.hidden{display:none}
+.note{font-size:13px;color:#68758a;text-align:center;margin:16px 0 0}
+.status{text-align:center;margin:12px 0;color:#9a3d2e}
+.result table{width:100%;border-collapse:collapse}
+.result td{padding:10px;border-bottom:1px solid #eee}
+.result td:first-child{font-weight:650;color:var(--navy)}
+.big{text-align:center;font-size:24px;font-weight:800;color:var(--navy)}
+.feedback{margin-top:18px;padding:16px;border:1px solid #e4d6b8;border-radius:14px;background:#fffaf0}
+.feedback h3{color:var(--navy);margin:0 0 10px}
+.feedback p{line-height:1.8;margin:8px 0}
+.feedback textarea{width:100%;min-height:105px;padding:12px;border:1px solid #c9b98f;border-radius:10px;font:inherit;resize:vertical}
+.whatsapp-btn{display:block;width:100%;margin:12px 0 0;padding:13px 16px;border-radius:12px;background:#168b4b;color:#fff;font-weight:700}
+footer{text-align:center;padding:22px;color:#63718a;font-size:13px}
+@media(min-width:600px){.classes{grid-template-columns:repeat(4,1fr)}}
+@media print{body{background:#fff}.action{display:none}.panel{box-shadow:none}}
+</style>
+</head>
+<body>
+<header>
+<img class="logo" src="emblem-panakkode.jpg" alt="അസാസുൽ ഉലൂം മദ്രസ പനക്കോട് എംബ്ലം">
+<h1>അസാസുൽ ഉലൂം മദ്രസ</h1>
+<p>പനക്കോട്</p><p>രജിസ്റ്റർ നമ്പർ: 2692</p>
+<p style="color:#ffe3a1;font-weight:700;font-size:20px;margin-top:14px">അർദ്ധവാർഷിക പരീക്ഷാ ഫലം</p>
+</header>
+<main>
+<section class="panel" id="classPanel">
+<h2>ക്ലാസ് തിരഞ്ഞെടുക്കുക</h2>
+<div class="classes" id="classes"></div>
+<p class="note">ഒന്നാം ക്ലാസിന്റെ ഫലം ഇപ്പോൾ ലഭ്യമാണ്. മറ്റു ക്ലാസുകളുടെ വിവരങ്ങൾ പിന്നീട് ചേർക്കും.</p>
+</section>
+<section class="panel hidden" id="studentPanel">
+<h2>ഒന്നാം ക്ലാസ്</h2>
+<label for="gender">വിഭാഗം</label>
+<select id="gender"><option value="">തിരഞ്ഞെടുക്കുക</option><option value="ആൺകുട്ടികൾ">ആൺകുട്ടികൾ</option><option value="പെൺകുട്ടികൾ">പെൺകുട്ടികൾ</option></select>
+<label for="student">വിദ്യാർത്ഥിയുടെ പേര്</label>
+<select id="student"><option value="">ആദ്യം വിഭാഗം തിരഞ്ഞെടുക്കുക</option></select>
+<label for="dob">ജനനത്തീയതി</label>
+<input id="dob" type="text" inputmode="numeric" placeholder="DD/MM/YYYY">
+<button class="action" id="checkBtn">ഫലം അറിയുക</button>
+<button class="action" id="backBtn" type="button">പിന്നിലേക്ക്</button>
+<p class="status" id="status"></p>
+</section>
+<section class="result hidden" id="resultPanel">
+<h2>പരീക്ഷാ ഫലം</h2>
+<div id="resultContent"></div>
+<button class="action" onclick="window.print()">പ്രിന്റ് / PDF</button>
+<button class="action" id="againBtn">മറ്റൊരു വിദ്യാർത്ഥിയുടെ ഫലം</button>
+</section>
+</main>
+<footer>അസാസുൽ ഉലൂം മദ്രസ • പനക്കോട്</footer>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+const SUPABASE_URL = "https://nryrifmwzzdxwlxwencv.supabase.co";
+const SUPABASE_KEY = "sb_publishable_3yBW4LtifO9DmRN14rm85A_yqV8vm2c";
+const db = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+const boys = ["Muhammad Aflah K","Muhammad Fauzan","Zain Muhammad KC","Sayyid Muad PC","Muhammed Shenzil Hafeez","Shazin Muhammed KT","Muhammad Yafiz","Basil Zaman K","Muhammed Zaihan EP","Azan Ahmad KP","Aizam Hazin"];
+const girls = ["Fathima Azra K","Rabeea Mariyam K","Ayisha Noura K","Ayisha Mehar P","Fathima Haniya","Havva Aayath","Dua Kadeeja P"];
+
+const classHolder=document.getElementById("classes");
+["1","2","3","4","5","6","7","8","9","10","Plus 1","Plus 2"].forEach(c=>{
+  const b=document.createElement("button");
+  b.className="class-btn"; b.textContent=c;
+  b.onclick=()=>{
+    if(c!=="1"){alert("ഈ ക്ലാസിന്റെ ഫലം പിന്നീട് ലഭ്യമാക്കും.");return;}
+    document.getElementById("classPanel").classList.add("hidden");
+    document.getElementById("studentPanel").classList.remove("hidden");
+  };
+  classHolder.appendChild(b);
+});
+
+document.getElementById("gender").addEventListener("change",e=>{
+  const names=e.target.value==="ആൺകുട്ടികൾ"?boys:e.target.value==="പെൺകുട്ടികൾ"?girls:[];
+  const sel=document.getElementById("student");
+  sel.innerHTML='<option value="">പേര് തിരഞ്ഞെടുക്കുക</option>';
+  names.forEach(n=>{const o=document.createElement("option");o.value=n;o.textContent=n;sel.appendChild(o);});
+});
+document.getElementById("backBtn").onclick=()=>{
+  document.getElementById("studentPanel").classList.add("hidden");
+  document.getElementById("classPanel").classList.remove("hidden");
+  document.getElementById("status").textContent="";
+};
+document.getElementById("againBtn").onclick=()=>{
+  document.getElementById("resultPanel").classList.add("hidden");
+  document.getElementById("studentPanel").classList.remove("hidden");
+  document.getElementById("dob").value="";
+  document.getElementById("status").textContent="";
+};
+function grade(mark){
+  if(mark===null||mark===undefined)return "ലഭ്യമല്ല";
+  if(mark>=45)return "A+";
+  if(mark>=40)return "A";
+  if(mark>=35)return "B+";
+  if(mark>=30)return "B";
+  if(mark>=25)return "C+";
+  if(mark>=20)return "C";
+  if(mark>=18)return "D+";
+  if(mark>=1)return "D";
+  return "—";
+}
+document.getElementById("checkBtn").onclick=async()=>{
+  const name=document.getElementById("student").value;
+  const dobInput=document.getElementById("dob").value.trim();
+const parts=dobInput.replace(/-/g,"/").split("/");
+const dob=parts.length===3 ? `${parts[2]}-${parts[1].padStart(2,"0")}-${parts[0].padStart(2,"0")}` : "";
+  const status=document.getElementById("status");
+  if(!name||!dob){status.textContent="പേരും ജനനത്തീയതിയും നൽകുക.";return;}
+  status.textContent="ഫലം പരിശോധിക്കുന്നു...";
+  const btn=document.getElementById("checkBtn"); btn.disabled=true;
+  try{
+    const {data,error}=await db.rpc("get_class1_result",{p_student_name:name,p_dob:dob});
+    if(error)throw error;
+    const r=Array.isArray(data)?data[0]:data;
+    if(!r){status.textContent="നൽകിയ വിവരങ്ങൾ ശരിയല്ല. വീണ്ടും പരിശോധിക്കുക.";return;}
+    const subjects=[["കേട്ടെഴുത്ത്",r.dictation_mark],["ദീനിയാത്ത് & അഖ്ലാഖ്",r.deeniyath_mark],["എഴുത്ത്",r.writing_mark],["വായന",r.reading_mark]];
+    const rows=subjects.map(([label,mark])=>`<tr><td>${label}</td><td>${mark===null?"—":mark+" / 50"}</td><td>${grade(mark)}</td></tr>`).join("");
+    const total=Number(r.total_marks)||0;
+    const attendance=Number(r.attendance)||0;
+    const weakSubjects=subjects.filter(([label,mark])=>mark!==null&&mark!==undefined&&Number(mark)<25).map(([label])=>label);
+    const strongSubjects=subjects.filter(([label,mark])=>mark!==null&&mark!==undefined&&Number(mark)>=40).map(([label])=>label);
+    let teacherComment="";
+    if(total>=180) teacherComment="മികച്ച വിജയം. എല്ലാ വിഷയങ്ങളിലും ഈ മികവ് നിലനിർത്താൻ ശ്രമിക്കുക. അല്ലാഹു കൂടുതൽ അറിവും വിജയവും നൽകട്ടെ.";
+    else if(total>=160) teacherComment="വളരെ നല്ല പ്രകടനമാണ്. പഠനത്തിലെ ഈ മുന്നേറ്റം തുടരുക. അല്ലാഹു അനുഗ്രഹിക്കട്ടെ.";
+    else if(total>=140) teacherComment="നല്ല ശ്രമം നടത്തിയിട്ടുണ്ട്. സ്ഥിരമായ പഠനത്തിലൂടെ ഇനിയും മികച്ച വിജയം നേടാൻ കഴിയും. അല്ലാഹു തൗഫീഖ് നൽകട്ടെ.";
+    else if(total>=100) teacherComment="ഇനിയും മെച്ചപ്പെടാൻ നല്ല അവസരമുണ്ട്. ദിവസവും കുറച്ചുസമയം പഠനത്തിന് മാറ്റിവെച്ച് അധ്യാപകരുടെ നിർദേശങ്ങൾ പാലിക്കുക. അല്ലാഹു സഹായിക്കട്ടെ.";
+    else teacherComment="കൂടുതൽ ശ്രദ്ധയും സ്ഥിരമായ പരിശീലനവും ആവശ്യമാണ്. രക്ഷിതാക്കളും അധ്യാപകരും ചേർന്ന് കുട്ടിക്ക് പിന്തുണ നൽകുക. അല്ലാഹു എളുപ്പമാക്കട്ടെ.";
+    if(weakSubjects.length) teacherComment+=" പ്രത്യേകിച്ച് "+weakSubjects.join(", ")+" എന്നീ വിഷയങ്ങളിൽ കൂടുതൽ പരിശീലനം നൽകണം.";
+    if(strongSubjects.length) teacherComment+=" "+strongSubjects.join(", ")+" വിഷയങ്ങളിലെ മികച്ച പ്രകടനം അഭിനന്ദനാർഹമാണ്.";
+    if(attendance>=133) teacherComment+=" ഹാജർ വളരെ മികച്ചതാണ്.";
+    else if(attendance>=119) teacherComment+=" ഹാജർ തൃപ്തികരമാണ്; കഴിയുന്നത്ര സ്ഥിരമായി ക്ലാസിൽ പങ്കെടുക്കണം.";
+    else teacherComment+=" ഹാജർ മെച്ചപ്പെടുത്താൻ പ്രത്യേകം ശ്രദ്ധിക്കണം.";
+    const safeName=String(name).replace(/[&<>"']/g,ch=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[ch]));
+    document.getElementById("resultContent").innerHTML=
+      `<p><b>വിദ്യാർത്ഥി:</b> ${safeName}</p><table>${rows}<tr><td>ആകെ മാർക്ക്</td><td colspan="2"><b>${r.total_marks} / 200</b></td></tr><tr><td>ക്ലാസ് റാങ്ക്</td><td colspan="2"><b>${r.class_rank}</b></td></tr><tr><td>ഹാജർ</td><td colspan="2"><b>${r.attendance} / 140</b></td></tr></table>
+      <div class="feedback"><h3>അധ്യാപകന്റെ അഭിപ്രായം</h3><p id="teacherComment"></p>
+      <h3 style="margin-top:18px">രക്ഷിതാവിന്റെ അഭിപ്രായം</h3>
+      <textarea id="parentComment" placeholder="രക്ഷിതാവിന്റെ അഭിപ്രായം ഇവിടെ എഴുതുക..."></textarea>
+      <button class="whatsapp-btn" id="sendWhatsappBtn" type="button">WhatsApp വഴി പ്രധാനാധ്യാപകന് അയക്കാം</button></div>
+      <p class="big">അഭിനന്ദനങ്ങൾ!</p>`;
+    document.getElementById("teacherComment").textContent=teacherComment;
+    document.getElementById("sendWhatsappBtn").onclick=()=>{
+      const parentComment=document.getElementById("parentComment").value.trim();
+      if(!parentComment){alert("രക്ഷിതാവിന്റെ അഭിപ്രായം എഴുതുക.");return;}
+      const message=parentComment;
+      const whatsappUrl="https://wa.me/919645154849?text="+encodeURIComponent(message);
+      window.open(whatsappUrl,"_blank");
+    };
+    document.getElementById("studentPanel").classList.add("hidden");
+    document.getElementById("resultPanel").classList.remove("hidden");
+    status.textContent="";
+  }catch(err){
+    status.textContent="ഫലം ലഭ്യമാക്കാൻ കഴിഞ്ഞില്ല. ഡാറ്റാബേസ് ക്രമീകരണം പരിശോധിക്കണം.";
+    console.error(err);
+  }finally{btn.disabled=false;}
+};
+</script>
+</body>
+</html>
