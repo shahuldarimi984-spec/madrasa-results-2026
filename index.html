@@ -1,3 +1,4 @@
+
 <!doctype html>
 <html lang="ml">
 <head>
@@ -7,6 +8,10 @@
 <meta property="og:description" content="പനക്കോട് | രജിസ്റ്റർ നമ്പർ: 2692">
 <meta property="og:image" content="emblem-panakkode.jpg">
 <title>അസാസുൽ ഉലൂം മദ്രസ | പരീക്ഷാ ഫലം</title>
+
+<!-- Date Picker CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+
 <style>
 :root{--navy:#172b4d;--gold:#c9a45c;--cream:#fffaf0;--ink:#20304a}
 *{box-sizing:border-box}
@@ -45,6 +50,7 @@ footer{text-align:center;padding:22px;color:#63718a;font-size:13px}
 @media print{body{background:#fff}.action{display:none}.panel{box-shadow:none}}
 </style>
 </head>
+
 <body>
 <header>
 <img class="logo" src="emblem-panakkode.jpg" alt="അസാസുൽ ഉലൂം മദ്രസ പനക്കോട് എംബ്ലം">
@@ -52,12 +58,14 @@ footer{text-align:center;padding:22px;color:#63718a;font-size:13px}
 <p>പനക്കോട്</p><p>രജിസ്റ്റർ നമ്പർ: 2692</p>
 <p style="color:#ffe3a1;font-weight:700;font-size:20px;margin-top:14px">അർദ്ധവാർഷിക പരീക്ഷാ ഫലം</p>
 </header>
+
 <main>
 <section class="panel" id="classPanel">
 <h2>Select Class</h2>
 <div class="classes" id="classes"></div>
 <p class="note">ഒന്നാം ക്ലാസിന്റെ ഫലം ഇപ്പോൾ ലഭ്യമാണ്. മറ്റു ക്ലാസുകളുടെ വിവരങ്ങൾ പിന്നീട് ചേർക്കും.</p>
 </section>
+
 <section class="panel hidden" id="genderPanel">
 <h2>Class 1</h2>
 <div class="choice-grid">
@@ -65,17 +73,20 @@ footer{text-align:center;padding:22px;color:#63718a;font-size:13px}
 <button class="choice-btn" id="girlsBtn" type="button">GIRLS</button>
 </div>
 </section>
+
 <section class="panel hidden" id="studentPanel">
 <h2 id="studentHeading">Students</h2>
 <div class="name-list" id="studentList"></div>
 </section>
+
 <section class="panel hidden" id="dobPanel">
 <h2 id="dobHeading">Date of Birth</h2>
 <label for="dob">Date of Birth</label>
-<input id="dob" type="text" inputmode="numeric" placeholder="DD/MM/YYYY">
+<input id="dob" type="text" inputmode="numeric" placeholder="DD/MM/YYYY" readonly>
 <button class="action" id="checkBtn" type="button">View Result</button>
 <p class="status" id="status"></p>
 </section>
+
 <section class="result hidden" id="resultPanel">
 <h2>പരീക്ഷാ ഫലം</h2>
 <div id="resultContent"></div>
@@ -83,8 +94,12 @@ footer{text-align:center;padding:22px;color:#63718a;font-size:13px}
 <button class="action" id="againBtn">മറ്റൊരു വിദ്യാർത്ഥിയുടെ ഫലം</button>
 </section>
 </main>
+
 <footer>അസാസുൽ ഉലൂം മദ്രസ • പനക്കോട്</footer>
+
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
 <script>
 const SUPABASE_URL = "https://nryrifmwzzdxwlxwencv.supabase.co";
 const SUPABASE_KEY = "sb_publishable_3yBW4LtifO9DmRN14rm85A_yqV8vm2c";
@@ -95,6 +110,15 @@ const girls = ["Fathima Azra K","Rabeea Mariyam K","Ayisha Noura K","Ayisha Meha
 const classHolder=document.getElementById("classes");
 const panels=["classPanel","genderPanel","studentPanel","dobPanel","resultPanel"].map(id=>document.getElementById(id));
 let selectedStudent="";
+
+// Date Picker: DD/MM/YYYY
+flatpickr("#dob", {
+  dateFormat: "d/m/Y",
+  allowInput: false,
+  disableMobile: true,
+  maxDate: "today",
+  clickOpens: true
+});
 
 function showOnly(panel){
   panels.forEach(p=>p.classList.add("hidden"));
