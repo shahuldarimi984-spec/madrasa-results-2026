@@ -38,6 +38,10 @@ label{font-weight:650}
 .whatsapp-btn{display:block;width:100%;margin:12px 0 0;padding:13px 16px;border-radius:12px;background:#168b4b;color:#fff;font-weight:700}
 footer{text-align:center;padding:22px;color:#63718a;font-size:13px}
 @media(min-width:600px){.classes{grid-template-columns:repeat(4,1fr)}}
+.choice-grid,.name-list{display:grid;grid-template-columns:1fr;gap:12px}
+.choice-btn{padding:16px;border-radius:13px;background:var(--navy);color:#fff;font-weight:800}
+.name-btn{width:100%;text-align:left;padding:14px;background:#fff;border:1px solid #d8bd82;border-radius:13px;color:var(--navy);font-weight:700}
+@media(min-width:600px){.choice-grid{grid-template-columns:repeat(2,1fr)}.name-list{grid-template-columns:repeat(2,1fr)}}
 @media print{body{background:#fff}.action{display:none}.panel{box-shadow:none}}
 </style>
 </head>
@@ -50,20 +54,26 @@ footer{text-align:center;padding:22px;color:#63718a;font-size:13px}
 </header>
 <main>
 <section class="panel" id="classPanel">
-<h2>ക്ലാസ് തിരഞ്ഞെടുക്കുക</h2>
+<h2>Select Class</h2>
 <div class="classes" id="classes"></div>
 <p class="note">ഒന്നാം ക്ലാസിന്റെ ഫലം ഇപ്പോൾ ലഭ്യമാണ്. മറ്റു ക്ലാസുകളുടെ വിവരങ്ങൾ പിന്നീട് ചേർക്കും.</p>
 </section>
+<section class="panel hidden" id="genderPanel">
+<h2>Class 1</h2>
+<div class="choice-grid">
+<button class="choice-btn" id="boysBtn" type="button">BOYS</button>
+<button class="choice-btn" id="girlsBtn" type="button">GIRLS</button>
+</div>
+</section>
 <section class="panel hidden" id="studentPanel">
-<h2>ഒന്നാം ക്ലാസ്</h2>
-<label for="gender">വിഭാഗം</label>
-<select id="gender"><option value="">തിരഞ്ഞെടുക്കുക</option><option value="ആൺകുട്ടികൾ">ആൺകുട്ടികൾ</option><option value="പെൺകുട്ടികൾ">പെൺകുട്ടികൾ</option></select>
-<label for="student">വിദ്യാർത്ഥിയുടെ പേര്</label>
-<select id="student"><option value="">ആദ്യം വിഭാഗം തിരഞ്ഞെടുക്കുക</option></select>
-<label for="dob">ജനനത്തീയതി</label>
+<h2 id="studentHeading">Students</h2>
+<div class="name-list" id="studentList"></div>
+</section>
+<section class="panel hidden" id="dobPanel">
+<h2 id="dobHeading">Date of Birth</h2>
+<label for="dob">Date of Birth</label>
 <input id="dob" type="text" inputmode="numeric" placeholder="DD/MM/YYYY">
-<button class="action" id="checkBtn">ഫലം അറിയുക</button>
-<button class="action" id="backBtn" type="button">പിന്നിലേക്ക്</button>
+<button class="action" id="checkBtn" type="button">View Result</button>
 <p class="status" id="status"></p>
 </section>
 <section class="result hidden" id="resultPanel">
@@ -84,33 +94,46 @@ const boys = ["Muhammad Aflah K","Muhammad Fauzan","Zain Muhammad KC","Sayyid Mu
 const girls = ["Fathima Azra K","Rabeea Mariyam K","Ayisha Noura K","Ayisha Mehar P","Fathima Haniya","Havva Aayath","Dua Kadeeja P"];
 
 const classHolder=document.getElementById("classes");
+const panels=["classPanel","genderPanel","studentPanel","dobPanel","resultPanel"].map(id=>document.getElementById(id));
+let selectedStudent="";
+function showOnly(panel){panels.forEach(p=>p.classList.add("hidden"));panel.classList.remove("hidden");}
 ["1","2","3","4","5","6","7","8","9","10","Plus 1","Plus 2"].forEach(c=>{
   const b=document.createElement("button");
   b.className="class-btn"; b.textContent=c;
   b.onclick=()=>{
     if(c!=="1"){alert("ഈ ക്ലാസിന്റെ ഫലം പിന്നീട് ലഭ്യമാക്കും.");return;}
-    document.getElementById("classPanel").classList.add("hidden");
-    document.getElementById("studentPanel").classList.remove("hidden");
+    selectedStudent="";
+    document.getElementById("dob").value="";
+    document.getElementById("status").textContent="";
+    showOnly(document.getElementById("genderPanel"));
   };
   classHolder.appendChild(b);
 });
-
-document.getElementById("gender").addEventListener("change",e=>{
-  const names=e.target.value==="ആൺകുട്ടികൾ"?boys:e.target.value==="പെൺകുട്ടികൾ"?girls:[];
-  const sel=document.getElementById("student");
-  sel.innerHTML='<option value="">പേര് തിരഞ്ഞെടുക്കുക</option>';
-  names.forEach(n=>{const o=document.createElement("option");o.value=n;o.textContent=n;sel.appendChild(o);});
-});
-document.getElementById("backBtn").onclick=()=>{
-  document.getElementById("studentPanel").classList.add("hidden");
-  document.getElementById("classPanel").classList.remove("hidden");
-  document.getElementById("status").textContent="";
-};
+function showStudents(names, heading){
+  const list=document.getElementById("studentList");
+  list.replaceChildren();
+  document.getElementById("studentHeading").textContent=heading;
+  names.forEach(name=>{
+    const b=document.createElement("button");
+    b.type="button"; b.className="name-btn"; b.textContent=name;
+    b.onclick=()=>{
+      selectedStudent=name;
+      document.getElementById("dob").value="";
+      document.getElementById("status").textContent="";
+      document.getElementById("dobHeading").textContent=name;
+      showOnly(document.getElementById("dobPanel"));
+    };document.getElementById(\"dobHeading\").textContent=name;
+    list.appendChild(b);
+  });
+  showOnly(document.getElementById("studentPanel"));
+}
+document.getElementById("boysBtn").onclick=()=>showStudents(boys,"BOYS");
+document.getElementById("girlsBtn").onclick=()=>showStudents(girls,"GIRLS");
 document.getElementById("againBtn").onclick=()=>{
-  document.getElementById("resultPanel").classList.add("hidden");
-  document.getElementById("studentPanel").classList.remove("hidden");
+  selectedStudent="";
   document.getElementById("dob").value="";
   document.getElementById("status").textContent="";
+  showOnly(document.getElementById("genderPanel"));
 };
 function grade(mark){
   if(mark===null||mark===undefined)return "ലഭ്യമല്ല";
@@ -125,7 +148,7 @@ function grade(mark){
   return "—";
 }
 document.getElementById("checkBtn").onclick=async()=>{
-  const name=document.getElementById("student").value;
+  const name=selectedStudent;
   const dobInput=document.getElementById("dob").value.trim();
 const parts=dobInput.replace(/-/g,"/").split("/");
 const dob=parts.length===3 ? `${parts[2]}-${parts[1].padStart(2,"0")}-${parts[0].padStart(2,"0")}` : "";
@@ -167,12 +190,11 @@ const dob=parts.length===3 ? `${parts[2]}-${parts[1].padStart(2,"0")}-${parts[0]
     document.getElementById("sendWhatsappBtn").onclick=()=>{
       const parentComment=document.getElementById("parentComment").value.trim();
       if(!parentComment){alert("രക്ഷിതാവിന്റെ അഭിപ്രായം എഴുതുക.");return;}
-      const message=parentComment;
+      const message=teacherComment;
       const whatsappUrl="https://wa.me/919645154849?text="+encodeURIComponent(message);
       window.open(whatsappUrl,"_blank");
     };
-    document.getElementById("studentPanel").classList.add("hidden");
-    document.getElementById("resultPanel").classList.remove("hidden");
+    showOnly(document.getElementById("resultPanel"));
     status.textContent="";
   }catch(err){
     status.textContent="ഫലം ലഭ്യമാക്കാൻ കഴിഞ്ഞില്ല. ഡാറ്റാബേസ് ക്രമീകരണം പരിശോധിക്കണം.";
