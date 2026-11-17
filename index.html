@@ -67,11 +67,11 @@ footer{text-align:center;padding:22px;color:#63718a;font-size:13px}
 <section class="panel" id="classPanel">
 <h2>Select Class</h2>
 <div class="classes" id="classes"></div>
-<p class="note">ഒന്നാം ക്ലാസിന്റെ ഫലം ഇപ്പോൾ ലഭ്യമാണ്. മറ്റു ക്ലാസുകളുടെ വിവരങ്ങൾ പിന്നീട് ചേർക്കും.</p>
+<p class="note">ഒന്നാം ക്ലാസിന്റെയും രണ്ടാം ക്ലാസിന്റെയും ഫലം ലഭ്യമാണ്.</p>
 </section>
 
 <section class="panel hidden" id="genderPanel">
-<h2>Class 1</h2>
+<h2 id="genderHeading">Class 1</h2>
 <div class="choice-grid">
 <button class="choice-btn" id="boysBtn" type="button">BOYS</button>
 <button class="choice-btn" id="girlsBtn" type="button">GIRLS</button>
@@ -111,9 +111,13 @@ const SUPABASE_KEY = "sb_publishable_3yBW4LtifO9DmRN14rm85A_yqV8vm2c";
 const boys = ["Muhammad Aflah K","Muhammad Fauzan","Zain Muhammad KC","Sayyid Muad PC","Muhammed Shenzil Hafeez","Shazin Muhammed KT","Muhammad Yafiz","Basil Zaman K","Muhammed Zaihan EP","Azan Ahmad KP","Aizam Hazin"];
 const girls = ["Fathima Azra K","Rabeea Mariyam K","Ayisha Noura K","Ayisha Mehar P","Fathima Haniya","Havva Aayath","Dua Kadeeja P"];
 
+const class2Boys = ["MUHAMMAD HAMDAN CK","MUHAMMAD NAHIYAN PK","MUHAMMAD FAHMIL VK","MUHAMMAD AFLAH VK","MUHAMMAD HAIZAM K","MUHAMMAD ARZAN MP","HANAN ABDULLA MP","MUHAMMAD HATHIM THEYAZIN","DEMIN MUHAMMAD MT"];
+const class2Girls = ["SHEZA ZAINAB","AYISHA EMIN AYRIN","HENZA AYRIN KT","FATHIMA RAYYA","AYISHA ROUHA P","AYISHA JANNA MT"];
+
 const classHolder=document.getElementById("classes");
 const panels=["classPanel","genderPanel","studentPanel","dobPanel","resultPanel"].map(id=>document.getElementById(id));
 let selectedStudent="";
+let selectedClass="1";
 
 // Date Picker: DD/MM/YYYY
 flatpickr("#dob", {
@@ -134,13 +138,15 @@ function showOnly(panel){
   b.className="class-btn";
   b.textContent=c;
   b.onclick=()=>{
-    if(c!=="1"){
+    if(c!=="1" && c!=="2"){
       alert("ഈ ക്ലാസിന്റെ ഫലം പിന്നീട് ലഭ്യമാക്കും.");
       return;
     }
+    selectedClass=c;
     selectedStudent="";
     document.getElementById("dob").value="";
     document.getElementById("status").textContent="";
+    document.getElementById("genderHeading").textContent="Class "+c;
     showOnly(document.getElementById("genderPanel"));
   };
   classHolder.appendChild(b);
@@ -168,8 +174,8 @@ function showStudents(names, heading){
   showOnly(document.getElementById("studentPanel"));
 }
 
-document.getElementById("boysBtn").onclick=()=>showStudents(boys,"BOYS");
-document.getElementById("girlsBtn").onclick=()=>showStudents(girls,"GIRLS");
+document.getElementById("boysBtn").onclick=()=>showStudents(selectedClass==="2"?class2Boys:boys,"BOYS");
+document.getElementById("girlsBtn").onclick=()=>showStudents(selectedClass==="2"?class2Girls:girls,"GIRLS");
 
 document.getElementById("againBtn").onclick=()=>{
   selectedStudent="";
@@ -213,7 +219,8 @@ document.getElementById("checkBtn").onclick=async()=>{
     }
 
     const db = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
-    const {data,error}=await db.rpc("get_class1_result",{p_student_name:name,p_dob:dob});
+    const rpcName = selectedClass === "2" ? "get_class2_result" : "get_class1_result";
+    const {data,error}=await db.rpc(rpcName,{p_student_name:name,p_dob:dob});
 
     if(error)throw error;
     const r=Array.isArray(data)?data[0]:data;
@@ -223,38 +230,55 @@ document.getElementById("checkBtn").onclick=async()=>{
       return;
     }
 
-    const subjects=[
+    const isClass2 = selectedClass === "2";
+    const subjects = isClass2 ? [
+      ["ഖുർആൻ",r.quran_mark],
+      ["ഹിഫ്ള്",r.hifz_mark],
+      ["ഫിഖ്ഹ്",r.fiqh_mark],
+      ["ലിസാനുൽ ഖുർആൻ",r.lisan_mark],
+      ["അഖീദ",r.aqeeda_mark],
+      ["ദുറൂസുൽ ഇഹ്സാൻ",r.durusul_ihsan_mark]
+    ] : [
       ["കേട്ടെഴുത്ത്",r.dictation_mark],
       ["ദീനിയാത്ത് & അഖ്ലാഖ്",r.deeniyath_mark],
       ["എഴുത്ത്",r.writing_mark],
       ["വായന",r.reading_mark]
     ];
 
-    const rows=subjects.map(([label,mark])=>`<tr><td>${label}</td><td>${mark===null?"—":mark+" / 50"}</td><td>${grade(mark)}</td></tr>`).join("");
+    const rows=subjects.map(([label,mark])=>{
+      const absent = String(mark).toUpperCase() === "A";
+      const numericMark = mark === null || mark === undefined ? null : Number(mark);
+      const markText = absent ? "A (ഹാജരില്ല)" : numericMark === null ? "—" : numericMark+" / 50";
+      const gradeText = absent ? "ഹാജരില്ല" : numericMark === null ? "ലഭ്യമല്ല" : grade(numericMark);
+      return `<tr><td>${label}</td><td>${markText}</td><td>${gradeText}</td></tr>`;
+    }).join("");
     const total=Number(r.total_marks)||0;
     const attendance=Number(r.attendance)||0;
+    const maxTotal = isClass2 ? 300 : 200;
+    const workingDays = Number(r.total_working_days) || (isClass2 ? 148 : 140);
 
-    const weakSubjects=subjects.filter(([label,mark])=>mark!==null&&mark!==undefined&&Number(mark)<25).map(([label])=>label);
-    const strongSubjects=subjects.filter(([label,mark])=>mark!==null&&mark!==undefined&&Number(mark)>=40).map(([label])=>label);
+    const weakSubjects=subjects.filter(([label,mark])=>mark!==null&&mark!==undefined&&String(mark).toUpperCase()!=="A"&&Number(mark)<25).map(([label])=>label);
+    const strongSubjects=subjects.filter(([label,mark])=>mark!==null&&mark!==undefined&&String(mark).toUpperCase()!=="A"&&Number(mark)>=40).map(([label])=>label);
 
     let teacherComment="";
 
-    if(total>=180) teacherComment="മികച്ച വിജയം. എല്ലാ വിഷയങ്ങളിലും ഈ മികവ് നിലനിർത്താൻ ശ്രമിക്കുക. അല്ലാഹു കൂടുതൽ അറിവും വിജയവും നൽകട്ടെ.";
-    else if(total>=160) teacherComment="വളരെ നല്ല പ്രകടനമാണ്. പഠനത്തിലെ ഈ മുന്നേറ്റം തുടരുക. അല്ലാഹു അനുഗ്രഹിക്കട്ടെ.";
-    else if(total>=140) teacherComment="നല്ല ശ്രമം നടത്തിയിട്ടുണ്ട്. സ്ഥിരമായ പഠനത്തിലൂടെ ഇനിയും മികച്ച വിജയം നേടാൻ കഴിയും. അല്ലാഹു തൗഫീഖ് നൽകട്ടെ.";
-    else if(total>=100) teacherComment="ഇനിയും മെച്ചപ്പെടാൻ നല്ല അവസരമുണ്ട്. ദിവസവും കുറച്ചുസമയം പഠനത്തിന് മാറ്റിവെച്ച് അധ്യാപകരുടെ നിർദേശങ്ങൾ പാലിക്കുക. അല്ലാഹു സഹായിക്കട്ടെ.";
+    const ratio = total / maxTotal;
+    if(ratio>=0.90) teacherComment="മികച്ച വിജയം. എല്ലാ വിഷയങ്ങളിലും ഈ മികവ് നിലനിർത്താൻ ശ്രമിക്കുക. അല്ലാഹു കൂടുതൽ അറിവും വിജയവും നൽകട്ടെ.";
+    else if(ratio>=0.80) teacherComment="വളരെ നല്ല പ്രകടനമാണ്. പഠനത്തിലെ ഈ മുന്നേറ്റം തുടരുക. അല്ലാഹു അനുഗ്രഹിക്കട്ടെ.";
+    else if(ratio>=0.65) teacherComment="നല്ല ശ്രമം നടത്തിയിട്ടുണ്ട്. സ്ഥിരമായ പഠനത്തിലൂടെ ഇനിയും മികച്ച വിജയം നേടാൻ കഴിയും. അല്ലാഹു തൗഫീഖ് നൽകട്ടെ.";
+    else if(ratio>=0.50) teacherComment="ഇനിയും മെച്ചപ്പെടാൻ നല്ല അവസരമുണ്ട്. ദിവസവും കുറച്ചുസമയം പഠനത്തിന് മാറ്റിവെച്ച് അധ്യാപകരുടെ നിർദേശങ്ങൾ പാലിക്കുക. അല്ലാഹു സഹായിക്കട്ടെ.";
     else teacherComment="കൂടുതൽ ശ്രദ്ധയും സ്ഥിരമായ പരിശീലനവും ആവശ്യമാണ്. രക്ഷിതാക്കളും അധ്യാപകരും ചേർന്ന് കുട്ടിക്ക് പിന്തുണ നൽകുക. അല്ലാഹു എളുപ്പമാക്കട്ടെ.";
 
     if(weakSubjects.length) teacherComment+=" പ്രത്യേകിച്ച് "+weakSubjects.join(", ")+" എന്നീ വിഷയങ്ങളിൽ കൂടുതൽ പരിശീലനം നൽകണം.";
     if(strongSubjects.length) teacherComment+=" "+strongSubjects.join(", ")+" വിഷയങ്ങളിലെ മികച്ച പ്രകടനം അഭിനന്ദനാർഹമാണ്.";
-    if(attendance>=133) teacherComment+=" ഹാജർ വളരെ മികച്ചതാണ്.";
-    else if(attendance>=119) teacherComment+=" ഹാജർ തൃപ്തികരമാണ്; കഴിയുന്നത്ര സ്ഥിരമായി ക്ലാസിൽ പങ്കെടുക്കണം.";
+    if(attendance>=Math.ceil(workingDays*0.90)) teacherComment+=" ഹാജർ വളരെ മികച്ചതാണ്.";
+    else if(attendance>=Math.ceil(workingDays*0.80)) teacherComment+=" ഹാജർ തൃപ്തികരമാണ്; കഴിയുന്നത്ര സ്ഥിരമായി ക്ലാസിൽ പങ്കെടുക്കണം.";
     else teacherComment+=" ഹാജർ മെച്ചപ്പെടുത്താൻ പ്രത്യേകം ശ്രദ്ധിക്കണം.";
 
     const safeName=String(name).replace(/[&<>"']/g,ch=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[ch]));
 
     document.getElementById("resultContent").innerHTML=
-      `<p><b>വിദ്യാർത്ഥി:</b> ${safeName}</p><table>${rows}<tr><td>ആകെ മാർക്ക്</td><td colspan="2"><b>${r.total_marks} / 200</b></td></tr><tr><td>ക്ലാസ് റാങ്ക്</td><td colspan="2"><b>${r.class_rank}</b></td></tr><tr><td>ഹാജർ</td><td colspan="2"><b>${r.attendance} / 140</b></td></tr></table>
+      `<p><b>വിദ്യാർത്ഥി:</b> ${safeName}</p><table>${rows}<tr><td>ആകെ മാർക്ക്</td><td colspan="2"><b>${r.total_marks} / ${maxTotal}</b></td></tr><tr><td>ക്ലാസ് റാങ്ക്</td><td colspan="2"><b>${r.class_rank}</b></td></tr><tr><td>ഹാജർ</td><td colspan="2"><b>${r.attendance} / ${workingDays}</b></td></tr></table>
       <div class="feedback"><h3>അധ്യാപകന്റെ അഭിപ്രായം</h3><p id="teacherComment"></p>
       <h3 style="margin-top:18px">രക്ഷിതാവിന്റെ അഭിപ്രായം</h3>
       <textarea id="parentComment" placeholder="രക്ഷിതാവിന്റെ അഭിപ്രായം ഇവിടെ എഴുതുക..."></textarea>
