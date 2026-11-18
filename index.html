@@ -245,9 +245,10 @@ document.getElementById("checkBtn").onclick=async()=>{
     const db = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
     const rpcName =
-      selectedClass === "2" ? "get_class2_result" :
-      selectedClass === "4" ? "get_class4_result" :
-      "get_class1_result";
+  selectedClass === "2" ? "get_class2_result" :
+  selectedClass === "4" ? "get_class4_result" :
+  selectedClass === "5" ? "get_class5_result" :
+  "get_class1_result";
 
     const {data,error}=await db.rpc(rpcName,{p_student_name:name,p_dob:dob});
 
