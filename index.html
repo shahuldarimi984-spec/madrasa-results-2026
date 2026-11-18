@@ -132,7 +132,33 @@ const class4Girls = [
 "KENZA FASAL",
 "LAIHA SHARAF K"
 ];
+const class5Boys = [
+  "MUHAMMAD ASMIL.PK",
+  "MUHEMMED NAZEL K P",
+  "AMAL MALIK",
+  "MUHAMMED FAILAN T",
+  "MUHAMMED RABEEH",
+  "MUHAMMED THAMEEM KP",
+  "MUHAMMED IJLAN EK",
+  "MUHAMMED HISHAM EK",
+  "MUHAMMED MIFTHAH",
+  "MUHAMMED LAZAN",
+  "SHAHNU RAHMAN K",
+  "Muhammed Rajal shan VK"
+];
 
+const class5Girls = [
+  "FATHIMA NAJA.K",
+  "HIFA FATHIMA.K",
+  "FATHIMA NAHVA.T",
+  "FATHIMA INSHA.CK",
+  "HALA FATHIMA.P",
+  "AISHA EZZA K",
+  "FATHIMA HAIBA.KP",
+  "REJA NIYAS MP",
+  "AISHASIYA.P",
+  "THANHA FATHIMA V K"
+];
 const classHolder=document.getElementById("classes");
 const panels=["classPanel","genderPanel","studentPanel","dobPanel","resultPanel"].map(id=>document.getElementById(id));
 let selectedStudent="";
@@ -192,12 +218,12 @@ function showStudents(names, heading){
 }
 
 document.getElementById("boysBtn").onclick=()=>{
-  const names=selectedClass==="2"?class2Boys:selectedClass==="4"?class4Boys:boys;
+  const names=selectedClass==="2"?class2Boys:selectedClass==="4"?class4Boys:selectedClass==="5"?class5Boys:boys;
   showStudents(names,"BOYS");
 };
 
 document.getElementById("girlsBtn").onclick=()=>{
-  const names=selectedClass==="2"?class2Girls:selectedClass==="4"?class4Girls:girls;
+  const names=selectedClass==="2"?class2Girls:selectedClass==="4"?class4Girls:selectedClass==="5"?class5Girls:girls;
   showStudents(names,"GIRLS");
 };
 
