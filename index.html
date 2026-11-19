@@ -49,7 +49,7 @@ footer{text-align:center;padding:22px;color:#63718a;font-size:13px}
 .choice-btn{padding:16px;border-radius:13px;background:var(--navy);color:#fff;font-weight:800}
 .name-btn{width:100%;text-align:left;padding:14px;background:#fff;border:1px solid #d8bd82;border-radius:13px;color:var(--navy);font-weight:700}
 @media(min-width:600px){.choice-grid{grid-template-columns:repeat(2,1fr)}.name-list{grid-template-columns:repeat(2,1fr)}}
-@media print{body{background:#fff}.action{display:none}.panel{box-shadow:none}}
+@media print{body{background:#fff}.action,.whatsapp-btn{display:none}.panel{box-shadow:none}}
 </style>
 </head>
 
@@ -65,7 +65,7 @@ footer{text-align:center;padding:22px;color:#63718a;font-size:13px}
 <section class="panel" id="classPanel">
 <h2>Select Class</h2>
 <div class="classes" id="classes"></div>
-<p class="note">ഒന്നാം, രണ്ടാം, നാലാം ക്ലാസുകളുടെ ഫലം ലഭ്യമാണ്.</p>
+<p class="note">ഒന്നാം, രണ്ടാം, നാലാം, അഞ്ചാം ക്ലാസുകളുടെ ഫലം ലഭ്യമാണ്.</p>
 </section>
 
 <section class="panel hidden" id="genderPanel">
@@ -107,9 +107,11 @@ const SUPABASE_URL = "https://nryrifmwzzdxwlxwencv.supabase.co";
 const SUPABASE_KEY = "sb_publishable_3yBW4LtifO9DmRN14rm85A_yqV8vm2c";
 
 const boys = ["Muhammad Aflah K","Muhammad Fauzan","Zain Muhammad KC","Sayyid Muad PC","Muhammed Shenzil Hafeez","Shazin Muhammed KT","Muhammad Yafiz","Basil Zaman K","Muhammed Zaihan EP","Azan Ahmad KP","Aizam Hazin"];
+
 const girls = ["Fathima Azra K","Rabeea Mariyam K","Ayisha Noura K","Ayisha Mehar P","Fathima Haniya","Havva Aayath","Dua Kadeeja P"];
 
 const class2Boys = ["MUHAMMAD HAMDAN CK","MUHAMMAD NAHIYAN PK","MUHAMMAD FAHMIL VK","MUHAMMAD AFLAH VK","MUHAMMAD HAIZAM K","MUHAMMAD ARZAN MP","HANAN ABDULLA MP","MUHAMMAD HATHIM THEYAZIN","DEMIN MUHAMMAD MT"];
+
 const class2Girls = ["SHEZA ZAINAB","AYISHA EMIN AYRIN","HENZA AYRIN KT","FATHIMA RAYYA","AYISHA ROUHA P","AYISHA JANNA MT"];
 
 const class4Boys = [
@@ -132,33 +134,35 @@ const class4Girls = [
 "KENZA FASAL",
 "LAIHA SHARAF K"
 ];
+
 const class5Boys = [
-  "MUHAMMAD ASMIL.PK",
-  "MUHEMMED NAZEL K P",
-  "AMAL MALIK",
-  "MUHAMMED FAILAN T",
-  "MUHAMMED RABEEH",
-  "MUHAMMED THAMEEM KP",
-  "MUHAMMED IJLAN EK",
-  "MUHAMMED HISHAM EK",
-  "MUHAMMED MIFTHAH",
-  "MUHAMMED LAZAN",
-  "SHAHNU RAHMAN K",
-  "Muhammed Rajal shan VK"
+"MUHAMMAD ASMIL.PK",
+"MUHEMMED NAZEL K P",
+"AMAL MALIK",
+"MUHAMMED FAILAN T",
+"MUHAMMED RABEEH",
+"MUHAMMED THAMEEM KP",
+"MUHAMMED IJLAN EK",
+"MUHAMMED HISHAM EK",
+"MUHAMMED MIFTHAH",
+"MUHAMMED LAZAN",
+"SHAHNU RAHMAN K",
+"Muhammed Rajal shan VK"
 ];
 
 const class5Girls = [
-  "FATHIMA NAJA.K",
-  "HIFA FATHIMA.K",
-  "FATHIMA NAHVA.T",
-  "FATHIMA INSHA.CK",
-  "HALA FATHIMA.P",
-  "AISHA EZZA K",
-  "FATHIMA HAIBA.KP",
-  "REJA NIYAS MP",
-  "AISHASIYA.P",
-  "THANHA FATHIMA V K"
+"FATHIMA NAJA.K",
+"HAIFA FATHIMA.K",
+"FATHIMA NAHVA.T",
+"FATHIMA INSHA.CK",
+"HALA FATHIMA.P",
+"AISHA EZZA K",
+"FATHIMA HAIBA.KP",
+"REJA NIYAS MP",
+"AISHASIYA.P",
+"THANHA FATHIMA V K"
 ];
+
 const classHolder=document.getElementById("classes");
 const panels=["classPanel","genderPanel","studentPanel","dobPanel","resultPanel"].map(id=>document.getElementById(id));
 let selectedStudent="";
@@ -247,6 +251,12 @@ function grade(mark){
   return "—";
 }
 
+function escapeHTML(value){
+  return String(value??"").replace(/[&<>"']/g,ch=>({
+    "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
+  }[ch]));
+}
+
 document.getElementById("checkBtn").onclick=async()=>{
   const name=selectedStudent;
   const dobInput=document.getElementById("dob").value.trim();
@@ -271,12 +281,15 @@ document.getElementById("checkBtn").onclick=async()=>{
     const db = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
     const rpcName =
-  selectedClass === "2" ? "get_class2_result" :
-  selectedClass === "4" ? "get_class4_result" :
-  selectedClass === "5" ? "get_class5_result" :
-  "get_class1_result";
+      selectedClass === "2" ? "get_class2_result" :
+      selectedClass === "4" ? "get_class4_result" :
+      selectedClass === "5" ? "get_class5_result" :
+      "get_class1_result";
 
-    const {data,error}=await db.rpc(rpcName,{p_student_name:name,p_dob:dob});
+    const {data,error}=await db.rpc(rpcName,{
+      p_student_name:name,
+      p_dob:dob
+    });
 
     if(error)throw error;
     const r=Array.isArray(data)?data[0]:data;
@@ -289,7 +302,19 @@ document.getElementById("checkBtn").onclick=async()=>{
     let subjects;
     let maxTotal;
 
-    if(selectedClass==="4"){
+    if(selectedClass==="5"){
+      subjects=[
+        ["ഹിഫ്ള്",r.hifz_mark],
+        ["ഖുർആൻ",r.quran_mark],
+        ["തജ്‌വീദ്",r.tajweed_mark],
+        ["ലിസാനുൽ ഖുർആൻ",r.lisan_mark],
+        ["താരീഖ്",r.tarikh_mark],
+        ["ഫിഖ്ഹ്",r.fiqh_mark],
+        ["ദുറൂസുൽ ഇഹ്സാൻ",r.durus_mark]
+      ];
+      maxTotal=350;
+
+    }else if(selectedClass==="4"){
       subjects=[
         ["ഖുർആൻ & തദ്രീബുത്തിലാവ",r.quran_tadrib_mark],
         ["ഹിഫ്ള്",r.hifz_mark],
@@ -301,6 +326,7 @@ document.getElementById("checkBtn").onclick=async()=>{
         ["പ്രാക്ടിക്കൽ",r.practical_mark]
       ];
       maxTotal=400;
+
     }else if(selectedClass==="2"){
       subjects=[
         ["ഖുർആൻ",r.quran_mark],
@@ -311,6 +337,7 @@ document.getElementById("checkBtn").onclick=async()=>{
         ["ദുറൂസുൽ ഇഹ്സാൻ",r.durusul_ihsan_mark]
       ];
       maxTotal=300;
+
     }else{
       subjects=[
         ["കേട്ടെഴുത്ത്",r.dictation_mark],
@@ -326,15 +353,28 @@ document.getElementById("checkBtn").onclick=async()=>{
       const numericMark=mark===null||mark===undefined?null:Number(mark);
       const markText=absent?"A (ഹാജരില്ല)":numericMark===null?"—":numericMark+" / 50";
       const gradeText=absent?"ഹാജരില്ല":numericMark===null?"ലഭ്യമല്ല":grade(numericMark);
-      return `<tr><td>${label}</td><td>${markText}</td><td>${gradeText}</td></tr>`;
+      return `<tr><td>${escapeHTML(label)}</td><td>${markText}</td><td>${gradeText}</td></tr>`;
     }).join("");
 
-    const total=Number(r.total_marks)||0;
-    const attendance=Number(r.attendance)||0;
-    const workingDays=Number(r.total_working_days)||(selectedClass==="4"?148:selectedClass==="2"?148:140);
+    const calculatedTotal=subjects.reduce((sum,[,mark])=>{
+      return sum+(Number(mark)||0);
+    },0);
 
-    const weakSubjects=subjects.filter(([label,mark])=>mark!==null&&mark!==undefined&&String(mark).toUpperCase()!=="A"&&Number(mark)<25).map(([label])=>label);
-    const strongSubjects=subjects.filter(([label,mark])=>mark!==null&&mark!==undefined&&String(mark).toUpperCase()!=="A"&&Number(mark)>=40).map(([label])=>label);
+    const total=r.total_marks!==null&&r.total_marks!==undefined
+      ?Number(r.total_marks):calculatedTotal;
+
+    const attendance=Number(r.attendance)||0;
+
+    const workingDays=Number(r.total_working_days)||
+      (selectedClass==="5"?147:selectedClass==="4"?148:selectedClass==="2"?148:140);
+
+    const weakSubjects=subjects
+      .filter(([label,mark])=>mark!==null&&mark!==undefined&&String(mark).toUpperCase()!=="A"&&Number(mark)<25)
+      .map(([label])=>label);
+
+    const strongSubjects=subjects
+      .filter(([label,mark])=>mark!==null&&mark!==undefined&&String(mark).toUpperCase()!=="A"&&Number(mark)>=40)
+      .map(([label])=>label);
 
     let teacherComment="";
     const ratio=total/maxTotal;
@@ -347,20 +387,19 @@ document.getElementById("checkBtn").onclick=async()=>{
 
     if(weakSubjects.length)teacherComment+=" പ്രത്യേകിച്ച് "+weakSubjects.join(", ")+" എന്നീ വിഷയങ്ങളിൽ കൂടുതൽ പരിശീലനം നൽകണം.";
     if(strongSubjects.length)teacherComment+=" "+strongSubjects.join(", ")+" വിഷയങ്ങളിലെ മികച്ച പ്രകടനം അഭിനന്ദനാർഹമാണ്.";
+
     if(attendance>=Math.ceil(workingDays*0.90))teacherComment+=" ഹാജർ വളരെ മികച്ചതാണ്.";
     else if(attendance>=Math.ceil(workingDays*0.80))teacherComment+=" ഹാജർ തൃപ്തികരമാണ്; കഴിയുന്നത്ര സ്ഥിരമായി ക്ലാസിൽ പങ്കെടുക്കണം.";
     else teacherComment+=" ഹാജർ മെച്ചപ്പെടുത്താൻ പ്രത്യേകം ശ്രദ്ധിക്കണം.";
 
-    const safeName=String(name).replace(/[&<>"']/g,ch=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[ch]));
-
-    const rankRow=selectedClass==="Plus 2"?"":`<tr><td>ക്ലാസ് റാങ്ക്</td><td colspan="2"><b>${r.class_rank??"—"}</b></td></tr>`;
+    const rankRow=selectedClass==="Plus 2"?"":`<tr><td>ക്ലാസ് റാങ്ക്</td><td colspan="2"><b>${escapeHTML(r.class_rank??"—")}</b></td></tr>`;
 
     document.getElementById("resultContent").innerHTML=
-      `<p><b>വിദ്യാർത്ഥി:</b> ${safeName}</p>
+      `<p><b>വിദ്യാർത്ഥി:</b> ${escapeHTML(name)}</p>
       <table>${rows}
-      <tr><td>ആകെ മാർക്ക്</td><td colspan="2"><b>${r.total_marks} / ${maxTotal}</b></td></tr>
+      <tr><td>ആകെ മാർക്ക്</td><td colspan="2"><b>${total} / ${maxTotal}</b></td></tr>
       ${rankRow}
-      <tr><td>ഹാജർ</td><td colspan="2"><b>${r.attendance} / ${workingDays}</b></td></tr>
+      <tr><td>ഹാജർ</td><td colspan="2"><b>${attendance} / ${workingDays}</b></td></tr>
       </table>
       <div class="feedback">
       <h3>അധ്യാപകന്റെ അഭിപ്രായം</h3>
@@ -375,11 +414,17 @@ document.getElementById("checkBtn").onclick=async()=>{
 
     document.getElementById("sendWhatsappBtn").onclick=()=>{
       const parentComment=document.getElementById("parentComment").value.trim();
+
       if(!parentComment){
         alert("രക്ഷിതാവിന്റെ അഭിപ്രായം എഴുതുക.");
         return;
       }
-      const message=parentComment;
+
+      const message=
+        "വിദ്യാർത്ഥി: "+name+"\n"+
+        "ക്ലാസ്: "+selectedClass+"\n"+
+        "രക്ഷിതാവിന്റെ അഭിപ്രായം: "+parentComment;
+
       const whatsappUrl="https://wa.me/919645154849?text="+encodeURIComponent(message);
       window.open(whatsappUrl,"_blank");
     };
