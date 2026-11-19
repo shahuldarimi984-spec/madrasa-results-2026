@@ -431,10 +431,10 @@ document.getElementById("checkBtn").onclick=async()=>{
 
     showOnly(document.getElementById("resultPanel"));
     status.textContent="";
-
-  }catch(err){
-    status.textContent="ഫലം ലഭ്യമാക്കാൻ കഴിഞ്ഞില്ല. ഡാറ്റാബേസ് ക്രമീകരണം പരിശോധിക്കണം.";
+}catch(err){
+    status.textContent="ERROR: "+(err.message||JSON.stringify(err));
     console.error(err);
+
   }finally{
     btn.disabled=false;
   }
