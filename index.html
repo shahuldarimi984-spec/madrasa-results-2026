@@ -365,8 +365,8 @@ document.getElementById("checkBtn").onclick=async()=>{
 
     const attendance=Number(r.attendance)||0;
 
-    const workingDays=Number(r.total_working_days)||
-      (selectedClass==="5"?147:selectedClass==="4"?148:selectedClass==="2"?148:140);
+    const workingDays=Number(selectedClass==="5"?r.working_days:r.total_working_days)||
+  (selectedClass==="5"?147:selectedClass==="4"?148:selectedClass==="2"?148:140);
 
     const weakSubjects=subjects
       .filter(([label,mark])=>mark!==null&&mark!==undefined&&String(mark).toUpperCase()!=="A"&&Number(mark)<25)
