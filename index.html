@@ -58,7 +58,8 @@ footer{text-align:center;padding:22px;color:#63718a;font-size:13px}
 <header>
 <img class="logo" src="emblem-panakkode.jpg" alt="അസാസുൽ ഉലൂം മദ്രസ പനക്കോട് എംബ്ലം">
 <h1>അസാസുൽ ഉലൂം മദ്രസ</h1>
-<p>പനക്കോട്</p><p>രജിസ്റ്റർ നമ്പർ: 2692</p>
+<p>പനക്കോട്</p>
+<p>രജിസ്റ്റർ നമ്പർ: 2692</p>
 <p style="color:#ffe3a1;font-weight:700;font-size:20px;margin-top:14px">അർദ്ധവാർഷിക പരീക്ഷാ ഫലം</p>
 </header>
 
@@ -66,7 +67,7 @@ footer{text-align:center;padding:22px;color:#63718a;font-size:13px}
 <section class="panel" id="classPanel">
 <h2>Select Class</h2>
 <div class="classes" id="classes"></div>
-<p class="note">ഒന്നാം, രണ്ടാം, മൂന്നാം, നാലാം, അഞ്ചാം ക്ലാസുകളുടെ ഫലം ലഭ്യമാണ്.</p>
+<p class="note">ഒന്നാം മുതൽ ആറാം ക്ലാസ് വരെയുള്ള ഫലം ലഭ്യമാണ്.</p>
 </section>
 
 <section class="panel hidden" id="genderPanel">
@@ -197,6 +198,26 @@ const class5Girls = [
 "THANHA FATHIMA V K"
 ];
 
+/* CLASS 6 STUDENTS */
+const class6Boys = [
+"MUHAMMED ZAYAN OK",
+"MUHAMMAD SAMEEN HADI.K",
+"ILLAN ASIF.MP",
+"AMAN MUHAMMED",
+"ZAYAN ABOOBAKKER"
+];
+
+const class6Girls = [
+"LENA FATHIMA MT",
+"FATHIMA ZAHRA.TV",
+"FATHIMA ESHAL.P",
+"SAYYIDATH FATHIMA HAIZA.VK",
+"NIYA FATHIMA.T",
+"SANAA ZAINAB VT",
+"FATHIMA NASHWA.MP",
+"MARYAM LANIKA KK"
+];
+
 const classHolder=document.getElementById("classes");
 const panels=["classPanel","genderPanel","studentPanel","dobPanel","resultPanel"].map(id=>document.getElementById(id));
 let selectedStudent="";
@@ -214,7 +235,7 @@ flatpickr("#dob", {
   b.className="class-btn";
   b.textContent=c;
   b.onclick=()=>{
-    if(!["1","2","3","4","5"].includes(c)){
+    if(!["1","2","3","4","5","6"].includes(c)){
       alert("ഈ ക്ലാസിന്റെ ഫലം പിന്നീട് ലഭ്യമാക്കും.");
       return;
     }
@@ -260,7 +281,8 @@ document.getElementById("boysBtn").onclick=()=>{
     selectedClass==="2"?class2Boys:
     selectedClass==="3"?class3Boys:
     selectedClass==="4"?class4Boys:
-    selectedClass==="5"?class5Boys:boys;
+    selectedClass==="5"?class5Boys:
+    selectedClass==="6"?class6Boys:boys;
   showStudents(names,"BOYS");
 };
 
@@ -269,7 +291,8 @@ document.getElementById("girlsBtn").onclick=()=>{
     selectedClass==="2"?class2Girls:
     selectedClass==="3"?class3Girls:
     selectedClass==="4"?class4Girls:
-    selectedClass==="5"?class5Girls:girls;
+    selectedClass==="5"?class5Girls:
+    selectedClass==="6"?class6Girls:girls;
   showStudents(names,"GIRLS");
 };
 
@@ -327,6 +350,7 @@ document.getElementById("checkBtn").onclick=async()=>{
       selectedClass === "3" ? "get_class3_result" :
       selectedClass === "4" ? "get_class4_result" :
       selectedClass === "5" ? "get_class5_result" :
+      selectedClass === "6" ? "get_class6_result" :
       "get_class1_result";
 
     const {data,error}=await db.rpc(rpcName,{
@@ -345,7 +369,19 @@ document.getElementById("checkBtn").onclick=async()=>{
     let subjects;
     let maxTotal;
 
-    if(selectedClass==="3"){
+    if(selectedClass==="6"){
+      subjects=[
+        ["ഖുർആൻ",r.quran],
+        ["ഹിഫ്ള്",r.hifz],
+        ["തജ്‌വീദ്",r.tajweed],
+        ["ലിസാനുൽ ഖുർആൻ",r.lisan],
+        ["ഫിഖ്ഹ്",r.fiqh],
+        ["ദുറൂസുൽ ഇഹ്സാൻ",r.durus],
+        ["താരീഖ്",r.tarikh]
+      ];
+      maxTotal=350;
+
+    }else if(selectedClass==="3"){
       subjects=[
         ["ഹിഫ്ള്",r.hifz],
         ["ഖുർആൻ & തദ്രീബ്",r.quran_tadreeb],
@@ -423,8 +459,9 @@ document.getElementById("checkBtn").onclick=async()=>{
     const workingDays=Number(
       selectedClass==="3" ? r.working_days :
       selectedClass==="5" ? r.working_days :
+      selectedClass==="6" ? r.working_days :
       r.total_working_days
-    ) || (selectedClass==="3"?151:selectedClass==="5"?147:selectedClass==="4"?148:selectedClass==="2"?148:140);
+    ) || (selectedClass==="3"?151:selectedClass==="5"?147:selectedClass==="6"?148:selectedClass==="4"?148:selectedClass==="2"?148:140);
 
     const weakSubjects=subjects
       .filter(([label,mark])=>mark!==null&&mark!==undefined&&String(mark).toUpperCase()!=="A"&&Number(mark)<25)
