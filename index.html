@@ -67,7 +67,7 @@ footer{text-align:center;padding:22px;color:#63718a;font-size:13px}
 <section class="panel" id="classPanel">
 <h2>Select Class</h2>
 <div class="classes" id="classes"></div>
-<p class="note">ഒന്നാം മുതൽ ആറാം ക്ലാസ് വരെയുള്ള ഫലം ലഭ്യമാണ്.</p>
+<p class="note">ഒന്നാം മുതൽ ഏഴാം ക്ലാസ് വരെയുള്ള ഫലം ലഭ്യമാണ്.</p>
 </section>
 
 <section class="panel hidden" id="genderPanel">
@@ -218,6 +218,40 @@ const class6Girls = [
 "MARYAM LANIKA KK"
 ];
 
+/* CLASS 7 STUDENTS */
+const class7Boys = [
+"MUHAMMAD ISHAN.CK",
+"MUHAMMAD ATHIF.KT",
+"MUHAMMAD ANAS.P.K",
+"MUHAMMED HANAN P",
+"MUHAMMAD FAIDAN.VK",
+"AHDAL ZANEEN.P",
+"MUHAMMAD HISHAM K",
+"ISMAIL ZAN K",
+"MUHAMMED MISBAH K",
+"MUHAMMAD EBRAHIM BADUSHA.VT",
+"AHMED ZAYAN.P",
+"MUHAMMED RAYAN TV",
+"MUHAMMAD ANSHIF."
+];
+
+const class7Girls = [
+"AYISHA NOUR.CK",
+"AYISHA RINHA.KT",
+"SIYA FATHIMA.MP",
+"SIDRATHUL MUNTHAHA.VK",
+"RIMSHA FATHIMA.CK",
+"AISHA ZEBA NK",
+"RIYA FATHIMA EK",
+"HANIYA K",
+"FATHIMA ASHMI PK",
+"SAYYIDA ZAHRA BATHOOL TP",
+"AYISHA ANHA KP",
+"FATHIMA RIFA P",
+"AJVA FATHIMA K",
+"AYSHA AIMAN SAJIR"
+];
+
 const classHolder=document.getElementById("classes");
 const panels=["classPanel","genderPanel","studentPanel","dobPanel","resultPanel"].map(id=>document.getElementById(id));
 let selectedStudent="";
@@ -235,7 +269,7 @@ flatpickr("#dob", {
   b.className="class-btn";
   b.textContent=c;
   b.onclick=()=>{
-    if(!["1","2","3","4","5","6"].includes(c)){
+    if(!["1","2","3","4","5","6","7"].includes(c)){
       alert("ഈ ക്ലാസിന്റെ ഫലം പിന്നീട് ലഭ്യമാക്കും.");
       return;
     }
@@ -282,7 +316,8 @@ document.getElementById("boysBtn").onclick=()=>{
     selectedClass==="3"?class3Boys:
     selectedClass==="4"?class4Boys:
     selectedClass==="5"?class5Boys:
-    selectedClass==="6"?class6Boys:boys;
+    selectedClass==="6"?class6Boys:
+    selectedClass==="7"?class7Boys:boys;
   showStudents(names,"BOYS");
 };
 
@@ -292,7 +327,8 @@ document.getElementById("girlsBtn").onclick=()=>{
     selectedClass==="3"?class3Girls:
     selectedClass==="4"?class4Girls:
     selectedClass==="5"?class5Girls:
-    selectedClass==="6"?class6Girls:girls;
+    selectedClass==="6"?class6Girls:
+    selectedClass==="7"?class7Girls:girls;
   showStudents(names,"GIRLS");
 };
 
@@ -351,6 +387,7 @@ document.getElementById("checkBtn").onclick=async()=>{
       selectedClass === "4" ? "get_class4_result" :
       selectedClass === "5" ? "get_class5_result" :
       selectedClass === "6" ? "get_class6_result" :
+      selectedClass === "7" ? "get_class7_result" :
       "get_class1_result";
 
     const {data,error}=await db.rpc(rpcName,{
@@ -369,7 +406,19 @@ document.getElementById("checkBtn").onclick=async()=>{
     let subjects;
     let maxTotal;
 
-    if(selectedClass==="6"){
+    if(selectedClass==="7"){
+      subjects=[
+        ["ഖുർആൻ",r.quran],
+        ["ഹിഫ്ള്",r.hifz],
+        ["തജ്‌വീദ്",r.tajweed],
+        ["ലിസാനുൽ ഖുർആൻ",r.lisan],
+        ["ഫിഖ്ഹ്",r.fiqh],
+        ["ദുറൂസുൽ ഇഹ്സാൻ",r.durus],
+        ["താരീഖ്",r.tarikh]
+      ];
+      maxTotal=350;
+
+    }else if(selectedClass==="6"){
       subjects=[
         ["ഖുർആൻ",r.quran],
         ["ഹിഫ്ള്",r.hifz],
@@ -440,15 +489,35 @@ document.getElementById("checkBtn").onclick=async()=>{
     }
 
     const rows=subjects.map(([label,mark])=>{
-      const absent=String(mark).toUpperCase()==="A";
-      const numericMark=mark===null||mark===undefined?null:Number(mark);
-      const markText=absent?"A (ഹാജരില്ല)":numericMark===null?"—":numericMark+" / 50";
-      const gradeText=absent?"ഹാജരില്ല":numericMark===null?"ലഭ്യമല്ല":grade(numericMark);
+      const value=String(mark??"").trim();
+      const absent=value.toUpperCase()==="A";
+      const missing=mark===null||mark===undefined||value===""||value==="—";
+      const numericMark=missing||absent?null:Number(value);
+
+      const markText=absent
+        ?"A (ഹാജരില്ല)"
+        :missing
+          ?"—"
+          :Number.isFinite(numericMark)
+            ?numericMark+" / 50"
+            :"—";
+
+      const gradeText=absent
+        ?"ഹാജരില്ല"
+        :missing
+          ?"—"
+          :Number.isFinite(numericMark)
+            ?grade(numericMark)
+            :"—";
+
       return `<tr><td>${escapeHTML(label)}</td><td>${markText}</td><td>${gradeText}</td></tr>`;
     }).join("");
 
     const calculatedTotal=subjects.reduce((sum,[,mark])=>{
-      return sum+(Number(mark)||0);
+      const value=String(mark??"").trim();
+      if(value.toUpperCase()==="A"||value==="—"||value==="")return sum;
+      const n=Number(value);
+      return sum+(Number.isFinite(n)?n:0);
     },0);
 
     const total=r.total_marks!==null&&r.total_marks!==undefined
@@ -457,18 +526,25 @@ document.getElementById("checkBtn").onclick=async()=>{
     const attendance=Number(r.attendance)||0;
 
     const workingDays=Number(
+      selectedClass==="7" ? r.working_days :
       selectedClass==="3" ? r.working_days :
       selectedClass==="5" ? r.working_days :
       selectedClass==="6" ? r.working_days :
       r.total_working_days
-    ) || (selectedClass==="3"?151:selectedClass==="5"?147:selectedClass==="6"?148:selectedClass==="4"?148:selectedClass==="2"?148:140);
+    ) || (selectedClass==="7"?152:selectedClass==="3"?151:selectedClass==="5"?147:selectedClass==="6"?148:selectedClass==="4"?148:selectedClass==="2"?148:140);
 
     const weakSubjects=subjects
-      .filter(([label,mark])=>mark!==null&&mark!==undefined&&String(mark).toUpperCase()!=="A"&&Number(mark)<25)
+      .filter(([label,mark])=>{
+        const value=String(mark??"").trim();
+        return value!==""&&value!=="—"&&value.toUpperCase()!=="A"&&Number.isFinite(Number(value))&&Number(value)<25;
+      })
       .map(([label])=>label);
 
     const strongSubjects=subjects
-      .filter(([label,mark])=>mark!==null&&mark!==undefined&&String(mark).toUpperCase()!=="A"&&Number(mark)>=40)
+      .filter(([label,mark])=>{
+        const value=String(mark??"").trim();
+        return value!==""&&value!=="—"&&value.toUpperCase()!=="A"&&Number.isFinite(Number(value))&&Number(value)>=40;
+      })
       .map(([label])=>label);
 
     let teacherComment="";
