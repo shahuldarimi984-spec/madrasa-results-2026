@@ -95,7 +95,8 @@ footer{text-align:center;padding:22px;color:#63718a;font-size:13px}
 <h2>പരീക്ഷാ ഫലം</h2>
 <div id="resultContent"></div>
 <button class="action" onclick="window.print()">പ്രിന്റ് / PDF</button>
-<button class="action" id="againBtn">മറ്റൊരു വിദ്യാർത്ഥിയുടെ ഫലം</button>
+<button class="action" id="againBtn" type="button">മറ്റൊരു വിദ്യാർത്ഥിയുടെ ഫലം</button>
+<button class="action" id="resultBackBtn" type="button">പട്ടികയിലേക്ക് മടങ്ങുക</button>
 </section>
 </main>
 
@@ -254,8 +255,12 @@ const class7Girls = [
 
 const classHolder=document.getElementById("classes");
 const panels=["classPanel","genderPanel","studentPanel","dobPanel","resultPanel"].map(id=>document.getElementById(id));
+
 let selectedStudent="";
 let selectedClass="1";
+
+/* INITIAL BROWSER HISTORY */
+history.replaceState({panel:"classPanel"},"","#classPanel");
 
 flatpickr("#dob", {
   dateFormat: "d/m/Y",
@@ -283,10 +288,36 @@ flatpickr("#dob", {
   classHolder.appendChild(b);
 });
 
-function showOnly(panel){
+/* PANEL NAVIGATION WITH BROWSER BACK SUPPORT */
+function showOnly(panel,saveHistory=true){
   panels.forEach(p=>p.classList.add("hidden"));
   panel.classList.remove("hidden");
+
+  if(saveHistory){
+    history.pushState({panel:panel.id},"","#"+panel.id);
+  }
 }
+
+/* PHONE / BROWSER BACK BUTTON */
+window.addEventListener("popstate",e=>{
+  const panelId=e.state?.panel || "classPanel";
+  const panel=document.getElementById(panelId);
+
+  if(panel){
+    panels.forEach(p=>p.classList.add("hidden"));
+    panel.classList.remove("hidden");
+
+    if(panelId==="studentPanel"){
+      selectedStudent="";
+      document.getElementById("dob").value="";
+      document.getElementById("status").textContent="";
+    }
+
+    if(panelId==="dobPanel"){
+      document.getElementById("status").textContent="";
+    }
+  }
+});
 
 function showStudents(names, heading){
   const list=document.getElementById("studentList");
@@ -332,12 +363,21 @@ document.getElementById("girlsBtn").onclick=()=>{
   showStudents(names,"GIRLS");
 };
 
-document.getElementById("againBtn").onclick=()=>{
+/* RETURN TO SAME STUDENT LIST */
+function returnToStudentList(){
   selectedStudent="";
   document.getElementById("dob").value="";
   document.getElementById("status").textContent="";
-  showOnly(document.getElementById("genderPanel"));
-};
+
+  if(history.state?.panel==="resultPanel"){
+    history.back();
+  }else{
+    showOnly(document.getElementById("studentPanel"));
+  }
+}
+
+document.getElementById("againBtn").onclick=returnToStudentList;
+document.getElementById("resultBackBtn").onclick=returnToStudentList;
 
 function grade(mark){
   if(mark===null||mark===undefined)return "ലഭ്യമല്ല";
@@ -600,7 +640,11 @@ document.getElementById("checkBtn").onclick=async()=>{
       window.open(whatsappUrl,"_blank");
     };
 
-    showOnly(document.getElementById("resultPanel"));
+    /* RESULTS PAGE: MAKE THE PREVIOUS HISTORY ENTRY THE STUDENT LIST */
+    history.replaceState({panel:"studentPanel"},"","#studentPanel");
+    history.pushState({panel:"resultPanel"},"","#resultPanel");
+
+    showOnly(document.getElementById("resultPanel"),false);
     status.textContent="";
 
   }catch(err){
