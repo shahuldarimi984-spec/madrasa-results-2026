@@ -1,3 +1,4 @@
+
 <!doctype html>
 <html lang="ml">
 <head>
@@ -65,7 +66,7 @@ footer{text-align:center;padding:22px;color:#63718a;font-size:13px}
 <section class="panel" id="classPanel">
 <h2>Select Class</h2>
 <div class="classes" id="classes"></div>
-<p class="note">ഒന്നാം, രണ്ടാം, നാലാം, അഞ്ചാം ക്ലാസുകളുടെ ഫലം ലഭ്യമാണ്.</p>
+<p class="note">ഒന്നാം, രണ്ടാം, മൂന്നാം, നാലാം, അഞ്ചാം ക്ലാസുകളുടെ ഫലം ലഭ്യമാണ്.</p>
 </section>
 
 <section class="panel hidden" id="genderPanel">
@@ -113,6 +114,39 @@ const girls = ["Fathima Azra K","Rabeea Mariyam K","Ayisha Noura K","Ayisha Meha
 const class2Boys = ["MUHAMMAD HAMDAN CK","MUHAMMAD NAHIYAN PK","MUHAMMAD FAHMIL VK","MUHAMMAD AFLAH VK","MUHAMMAD HAIZAM K","MUHAMMAD ARZAN MP","HANAN ABDULLA MP","MUHAMMAD HATHIM THEYAZIN","DEMIN MUHAMMAD MT"];
 
 const class2Girls = ["SHEZA ZAINAB","AYISHA EMIN AYRIN","HENZA AYRIN KT","FATHIMA RAYYA","AYISHA ROUHA P","AYISHA JANNA MT"];
+
+/* CLASS 3 STUDENTS */
+const class3Boys = [
+"MUHAMMED QASIM UWAIS V T",
+"AHMED SHAYAN",
+"HADHI MUHAMMED K P",
+"LASHIN AYMAN",
+"MUHAMMAD HATHIM OK",
+"MUHAMMAD AYMAN VK",
+"MUHAMMAD ZAYAN P",
+"MUHAMMAD RAEF K",
+"MUHAMMAD NAJI KT",
+"ASIM MUHAMMAD P",
+"MUHAMMAD DIHAN KP",
+"Muhammed Azam"
+];
+
+const class3Girls = [
+"ZEHARA SHERIN KC",
+"AZAH FATHIMA M P",
+"SAYYIDATH FATHIMA SHIFA P C",
+"FATHIMA RIZWA T",
+"AYISHA KENZA TK",
+"HANA FATHIMA OK",
+"AISHA HILA JABIR",
+"KHADEEJATHUL KUBRA PK",
+"ANCHOOM KHADHEEJA K",
+"JAZA MARYAM TK",
+"FILZA FATHIMA C",
+"DUA KHADHEEJA VP",
+"AESHA MALEEKKA MKC",
+"NAISHA FATHIMA K K"
+];
 
 const class4Boys = [
 "MUHAMMED FAIZAN EK",
@@ -180,7 +214,7 @@ flatpickr("#dob", {
   b.className="class-btn";
   b.textContent=c;
   b.onclick=()=>{
-    if(!["1","2","4","5"].includes(c)){
+    if(!["1","2","3","4","5"].includes(c)){
       alert("ഈ ക്ലാസിന്റെ ഫലം പിന്നീട് ലഭ്യമാക്കും.");
       return;
     }
@@ -222,12 +256,20 @@ function showStudents(names, heading){
 }
 
 document.getElementById("boysBtn").onclick=()=>{
-  const names=selectedClass==="2"?class2Boys:selectedClass==="4"?class4Boys:selectedClass==="5"?class5Boys:boys;
+  const names=
+    selectedClass==="2"?class2Boys:
+    selectedClass==="3"?class3Boys:
+    selectedClass==="4"?class4Boys:
+    selectedClass==="5"?class5Boys:boys;
   showStudents(names,"BOYS");
 };
 
 document.getElementById("girlsBtn").onclick=()=>{
-  const names=selectedClass==="2"?class2Girls:selectedClass==="4"?class4Girls:selectedClass==="5"?class5Girls:girls;
+  const names=
+    selectedClass==="2"?class2Girls:
+    selectedClass==="3"?class3Girls:
+    selectedClass==="4"?class4Girls:
+    selectedClass==="5"?class5Girls:girls;
   showStudents(names,"GIRLS");
 };
 
@@ -282,6 +324,7 @@ document.getElementById("checkBtn").onclick=async()=>{
 
     const rpcName =
       selectedClass === "2" ? "get_class2_result" :
+      selectedClass === "3" ? "get_class3_result" :
       selectedClass === "4" ? "get_class4_result" :
       selectedClass === "5" ? "get_class5_result" :
       "get_class1_result";
@@ -302,7 +345,19 @@ document.getElementById("checkBtn").onclick=async()=>{
     let subjects;
     let maxTotal;
 
-    if(selectedClass==="5"){
+    if(selectedClass==="3"){
+      subjects=[
+        ["ഹിഫ്ള്",r.hifz],
+        ["ഖുർആൻ & തദ്രീബ്",r.quran_tadreeb],
+        ["ലിസാനുൽ ഖുർആൻ",r.lisan],
+        ["ദുറൂസുൽ ഇഹ്സാൻ",r.durus],
+        ["താരീഖ്",r.tarikh],
+        ["അഖീദ",r.aqeeda],
+        ["ഫിഖ്ഹ്",r.fiqh]
+      ];
+      maxTotal=350;
+
+    }else if(selectedClass==="5"){
       subjects=[
         ["ഹിഫ്ള്",r.hifz_mark],
         ["ഖുർആൻ",r.quran_mark],
@@ -365,8 +420,11 @@ document.getElementById("checkBtn").onclick=async()=>{
 
     const attendance=Number(r.attendance)||0;
 
-    const workingDays=Number(selectedClass==="5"?r.working_days:r.total_working_days)||
-  (selectedClass==="5"?147:selectedClass==="4"?148:selectedClass==="2"?148:140);
+    const workingDays=Number(
+      selectedClass==="3" ? r.working_days :
+      selectedClass==="5" ? r.working_days :
+      r.total_working_days
+    ) || (selectedClass==="3"?151:selectedClass==="5"?147:selectedClass==="4"?148:selectedClass==="2"?148:140);
 
     const weakSubjects=subjects
       .filter(([label,mark])=>mark!==null&&mark!==undefined&&String(mark).toUpperCase()!=="A"&&Number(mark)<25)
@@ -431,7 +489,8 @@ document.getElementById("checkBtn").onclick=async()=>{
 
     showOnly(document.getElementById("resultPanel"));
     status.textContent="";
-}catch(err){
+
+  }catch(err){
     status.textContent="ERROR: "+(err.message||JSON.stringify(err));
     console.error(err);
 
