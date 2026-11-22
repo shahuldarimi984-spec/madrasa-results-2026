@@ -66,7 +66,7 @@ footer{text-align:center;padding:22px;color:#63718a;font-size:13px}
 <section class="panel" id="classPanel">
 <h2>Select Class</h2>
 <div class="classes" id="classes"></div>
-<p class="note">ഒന്നാം മുതൽ ഏഴാം ക്ലാസ് വരെയും ഒമ്പത്, പത്ത്, പ്ലസ് വൺ ക്ലാസുകളിലെയും ഫലം ലഭ്യമാണ്.</p>
+<p class="note">ഒന്നാം മുതൽ ഏഴാം ക്ലാസ് വരെയും ഒമ്പത്, പത്ത്, പ്ലസ് വൺ, പ്ലസ് ടൂ ക്ലാസുകളിലെയും ഫലം ലഭ്യമാണ്.</p>
 </section>
 
 <section class="panel hidden" id="genderPanel">
@@ -105,99 +105,60 @@ footer{text-align:center;padding:22px;color:#63718a;font-size:13px}
 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 
 <script>
-const SUPABASE_URL = "https://nryrifmwzzdxwlxwencv.supabase.co";
-const SUPABASE_KEY = "sb_publishable_3yBW4LtifO9DmRN14rm85A_yqV8vm2c";
+const SUPABASE_URL="https://nryrifmwzzdxwlxwencv.supabase.co";
+const SUPABASE_KEY="sb_publishable_3yBW4LtifO9DmRN14rm85A_yqV8vm2c";
 
-const boys = ["Muhammad Aflah K","Muhammad Fauzan","Zain Muhammad KC","Sayyid Muad PC","Muhammed Shenzil Hafeez","Shazin Muhammed KT","Muhammad Yafiz","Basil Zaman K","Muhammed Zaihan EP","Azan Ahmad KP","Aizam Hazin"];
-const girls = ["Fathima Azra K","Rabeea Mariyam K","Ayisha Noura K","Ayisha Mehar P","Fathima Haniya","Havva Aayath","Dua Kadeeja P"];
+const boys=["Muhammad Aflah K","Muhammad Fauzan","Zain Muhammad KC","Sayyid Muad PC","Muhammed Shenzil Hafeez","Shazin Muhammed KT","Muhammad Yafiz","Basil Zaman K","Muhammed Zaihan EP","Azan Ahmad KP","Aizam Hazin"];
+const girls=["Fathima Azra K","Rabeea Mariyam K","Ayisha Noura K","Ayisha Mehar P","Fathima Haniya","Havva Aayath","Dua Kadeeja P"];
 
-const class2Boys = ["MUHAMMAD HAMDAN CK","MUHAMMAD NAHIYAN PK","MUHAMMAD FAHMIL VK","MUHAMMAD AFLAH VK","MUHAMMAD HAIZAM K","MUHAMMAD ARZAN MP","HANAN ABDULLA MP","MUHAMMAD HATHIM THEYAZIN","DEMIN MUHAMMAD MT"];
-const class2Girls = ["SHEZA ZAINAB","AYISHA EMIN AYRIN","HENZA AYRIN KT","FATHIMA RAYYA","AYISHA ROUHA P","AYISHA JANNA MT"];
+const class2Boys=["MUHAMMAD HAMDAN CK","MUHAMMAD NAHIYAN PK","MUHAMMAD FAHMIL VK","MUHAMMAD AFLAH VK","MUHAMMAD HAIZAM K","MUHAMMAD ARZAN MP","HANAN ABDULLA MP","MUHAMMAD HATHIM THEYAZIN","DEMIN MUHAMMAD MT"];
+const class2Girls=["SHEZA ZAINAB","AYISHA EMIN AYRIN","HENZA AYRIN KT","FATHIMA RAYYA","AYISHA ROUHA P","AYISHA JANNA MT"];
 
-const class3Boys = [
-"MUHAMMED QASIM UWAIS V T","AHMED SHAYAN","HADHI MUHAMMED K P","LASHIN AYMAN",
-"MUHAMMAD HATHIM OK","MUHAMMAD AYMAN VK","MUHAMMAD ZAYAN P","MUHAMMAD RAEF K",
-"MUHAMMAD NAJI KT","ASIM MUHAMMAD P","MUHAMMAD DIHAN KP","Muhammed Azam"
-];
-const class3Girls = [
-"ZEHARA SHERIN KC","AZAH FATHIMA M P","SAYYIDATH FATHIMA SHIFA P C","FATHIMA RIZWA T",
-"AYISHA KENZA TK","HANA FATHIMA OK","AISHA HILA JABIR","KHADEEJATHUL KUBRA PK",
-"ANCHOOM KHADHEEJA K","JAZA MARYAM TK","FILZA FATHIMA C","DUA KHADHEEJA VP",
-"AESHA MALEEKKA MKC","NAISHA FATHIMA K K"
-];
+const class3Boys=["MUHAMMED QASIM UWAIS V T","AHMED SHAYAN","HADHI MUHAMMED K P","LASHIN AYMAN","MUHAMMAD HATHIM OK","MUHAMMAD AYMAN VK","MUHAMMAD ZAYAN P","MUHAMMAD RAEF K","MUHAMMAD NAJI KT","ASIM MUHAMMAD P","MUHAMMAD DIHAN KP","Muhammed Azam"];
+const class3Girls=["ZEHARA SHERIN KC","AZAH FATHIMA M P","SAYYIDATH FATHIMA SHIFA P C","FATHIMA RIZWA T","AYISHA KENZA TK","HANA FATHIMA OK","AISHA HILA JABIR","KHADEEJATHUL KUBRA PK","ANCHOOM KHADHEEJA K","JAZA MARYAM TK","FILZA FATHIMA C","DUA KHADHEEJA VP","AESHA MALEEKKA MKC","NAISHA FATHIMA K K"];
 
-const class4Boys = ["MUHAMMED FAIZAN EK","MUHAMMED SHIFIN VK","ALTHAF PK","MUHAMMED ZAYAN VK","AINAN MASHOOD K K S"];
-const class4Girls = ["AZA FATHIMA KT","FATHIMA MEHAR CK","FATHIMA NASMIN C K","LAIBA V K","AYISHA ALISHBA C K","FAISA FATHIMA V K","NAFEESATHUL MISRIYA V K","ZENHA FATHIMA V K","KENZA FASAL","LAIHA SHARAF K"];
+const class4Boys=["MUHAMMED FAIZAN EK","MUHAMMED SHIFIN VK","ALTHAF PK","MUHAMMED ZAYAN VK","AINAN MASHOOD K K S"];
+const class4Girls=["AZA FATHIMA KT","FATHIMA MEHAR CK","FATHIMA NASMIN C K","LAIBA V K","AYISHA ALISHBA C K","FAISA FATHIMA V K","NAFEESATHUL MISRIYA V K","ZENHA FATHIMA V K","KENZA FASAL","LAIHA SHARAF K"];
 
-const class5Boys = [
-"MUHAMMAD ASMIL.PK","MUHEMMED NAZEL K P","AMAL MALIK","MUHAMMED FAILAN T",
-"MUHAMMED RABEEH","MUHAMMED THAMEEM KP","MUHAMMED IJLAN EK","MUHAMMED HISHAM EK",
-"MUHAMMED MIFTHAH","MUHAMMED LAZAN","SHAHNU RAHMAN K","Muhammed Rajal shan VK"
-];
-const class5Girls = [
-"FATHIMA NAJA.K","HAIFA FATHIMA.K","FATHIMA NAHVA.T","FATHIMA INSHA.CK",
-"HALA FATHIMA.P","AISHA EZZA K","FATHIMA HAIBA.KP","REJA NIYAS MP",
-"AISHASIYA.P","THANHA FATHIMA V K"
-];
+const class5Boys=["MUHAMMAD ASMIL.PK","MUHEMMED NAZEL K P","AMAL MALIK","MUHAMMED FAILAN T","MUHAMMED RABEEH","MUHAMMED THAMEEM KP","MUHAMMED IJLAN EK","MUHAMMED HISHAM EK","MUHAMMED MIFTHAH","MUHAMMED LAZAN","SHAHNU RAHMAN K","Muhammed Rajal shan VK"];
+const class5Girls=["FATHIMA NAJA.K","HAIFA FATHIMA.K","FATHIMA NAHVA.T","FATHIMA INSHA.CK","HALA FATHIMA.P","AISHA EZZA K","FATHIMA HAIBA.KP","REJA NIYAS MP","AISHASIYA.P","THANHA FATHIMA V K"];
 
-const class6Boys = ["MUHAMMED ZAYAN OK","MUHAMMAD SAMEEN HADI.K","ILLAN ASIF.MP","AMAN MUHAMMED","ZAYAN ABOOBACKER"];
-const class6Girls = ["LENA FATHIMA MT","FATHIMA ZAHRA.TV","FATHIMA ESHAL.P","SAYYIDATH FATHIMA HAIZA.VK","NIYA FATHIMA.T","SANAA ZAINAB VT","FATHIMA NASHWA.MP","MARYAM LANIKA KK"];
+const class6Boys=["MUHAMMED ZAYAN OK","MUHAMMAD SAMEEN HADI.K","ILLAN ASIF.MP","AMAN MUHAMMED","ZAYAN ABOOBACKER"];
+const class6Girls=["LENA FATHIMA MT","FATHIMA ZAHRA.TV","FATHIMA ESHAL.P","SAYYIDATH FATHIMA HAIZA.VK","NIYA FATHIMA.T","SANAA ZAINAB VT","FATHIMA NASHWA.MP","MARYAM LANIKA KK"];
 
-const class7Boys = [
-"MUHAMMAD ISHAN.CK","MUHAMMAD ATHIF.KT","MUHAMMAD ANAS.P.K","MUHAMMED HANAN P",
-"MUHAMMAD FAIDAN.VK","AHDAL ZANEEN.P","MUHAMMAD HISHAM K","ISMAIL ZAN K",
-"MUHAMMED MISBAH K","MUHAMMAD EBRAHIM BADUSHA.VT","AHMED ZAYAN.P",
-"MUHAMMED RAYAN TV","MUHAMMAD ANSHIF."
-];
-const class7Girls = [
-"AYISHA NOUR.CK","AYISHA RINHA.KT","SIYA FATHIMA.MP","SIDRATHUL MUNTHAHA.VK",
-"RIMSHA FATHIMA.CK","AISHA ZEBA NK","RIYA FATHIMA EK","HANIYA K",
-"FATHIMA ASHMI PK","SAYYIDA ZAHRA BATHOOL TP","AYISHA ANHA KP",
-"FATHIMA RIFA P","AJVA FATHIMA K","AYSHA AIMAN SAJIR"
-];
+const class7Boys=["MUHAMMAD ISHAN.CK","MUHAMMAD ATHIF.KT","MUHAMMAD ANAS.P.K","MUHAMMED HANAN P","MUHAMMAD FAIDAN.VK","AHDAL ZANEEN.P","MUHAMMAD HISHAM K","ISMAIL ZAN K","MUHAMMED MISBAH K","MUHAMMAD EBRAHIM BADUSHA.VT","AHMED ZAYAN.P","MUHAMMED RAYAN TV","MUHAMMAD ANSHIF."];
+const class7Girls=["AYISHA NOUR.CK","AYISHA RINHA.KT","SIYA FATHIMA.MP","SIDRATHUL MUNTHAHA.VK","RIMSHA FATHIMA.CK","AISHA ZEBA NK","RIYA FATHIMA EK","HANIYA K","FATHIMA ASHMI PK","SAYYIDA ZAHRA BATHOOL TP","AYISHA ANHA KP","FATHIMA RIFA P","AJVA FATHIMA K","AYSHA AIMAN SAJIR"];
 
 /* CLASS 9 */
-const class9Boys = ["Muhammad Mazin VT","Muhammad Zayan MT","Muhammad Shihan KT","Hadi Muhammed TP"];
-const class9Girls = ["Fathima Naja K","Fathima Noula VT","Neha Niyas MP"];
+const class9Boys=["Muhammad Mazin VT","Muhammad Zayan MT","Muhammad Shihan KT","Hadi Muhammed TP"];
+const class9Girls=["Fathima Naja K","Fathima Noula VT","Neha Niyas MP"];
 
 /* CLASS 10 */
-const class10Boys = ["Muhammad Bishr","Hadi Noor","Hathim Abdul Hakeem","Ahmad Izan"];
-const class10Girls = ["Nashwa Fathima","Ayisha Amna","Jaza Maryam","Siya Fathima","Fathima Liya","Fathima Misna","Hadiya Thasni","Fathima Alisha","Ayisha Hemin","Saja Fathima","Khadeeja Mirfa"];
+const class10Boys=["Muhammad Bishr","Hadi Noor","Hathim Abdul Hakeem","Ahmad Izan"];
+const class10Girls=["Nashwa Fathima","Ayisha Amna","Jaza Maryam","Siya Fathima","Fathima Liya","Fathima Misna","Hadiya Thasni","Fathima Alisha","Ayisha Hemin","Saja Fathima","Khadeeja Mirfa"];
 
-/* PLUS ONE - GIRLS ONLY */
-const plus1Girls = [
-"Thamanna Jahana",
-"Nashwa Sherin",
-"Fathima Shaikha",
-"Nafeesathul Misriyya",
-"Janfiya",
-"Amna Fathima",
-"Haya Fathima",
-"Liya Razwin",
-"Naja Fathima"
-];
+/* PLUS ONE */
+const plus1Girls=["Thamanna Jahana","Nashwa Sherin","Fathima Shaikha","Nafeesathul Misriyya","Janfiya","Amna Fathima","Haya Fathima","Liya Razwin","Naja Fathima"];
+
+/* PLUS TWO */
+const plus2Boys=["ASMIL SHAN","MUHAMMED NIHAL","MUHAMMED ZAIN","SAYYID MUHAMMAD MIQDAD","MUHAMMED SHIBILI"];
+const plus2Girls=["FAHMI JABIN","FATHIMA FIDA","NASWEEHA","RIFA FATHIMA","NIHA NASRIN","HASHIMA FINU"];
 
 const classHolder=document.getElementById("classes");
 const panels=["classPanel","genderPanel","studentPanel","dobPanel","resultPanel"].map(id=>document.getElementById(id));
-
 let selectedStudent="";
 let selectedClass="1";
 
 history.replaceState({panel:"classPanel"},"","#classPanel");
 
-flatpickr("#dob",{
-  dateFormat:"d/m/Y",
-  allowInput:false,
-  disableMobile:true,
-  maxDate:"today"
-});
+flatpickr("#dob",{dateFormat:"d/m/Y",allowInput:false,disableMobile:true,maxDate:"today"});
 
 ["1","2","3","4","5","6","7","8","9","10","Plus 1","Plus 2"].forEach(c=>{
   const b=document.createElement("button");
   b.className="class-btn";
   b.textContent=c;
   b.onclick=()=>{
-    if(!["1","2","3","4","5","6","7","9","10","Plus 1"].includes(c)){
+    if(!["1","2","3","4","5","6","7","9","10","Plus 1","Plus 2"].includes(c)){
       alert("ഈ ക്ലാസിന്റെ ഫലം പിന്നീട് ലഭ്യമാക്കും.");
       return;
     }
@@ -205,14 +166,12 @@ flatpickr("#dob",{
     selectedStudent="";
     document.getElementById("dob").value="";
     document.getElementById("status").textContent="";
-
     if(c==="Plus 1"){
       document.getElementById("genderHeading").textContent="Plus 1 - GIRLS";
       showStudents(plus1Girls,"PLUS 1 - GIRLS");
       return;
     }
-
-    document.getElementById("genderHeading").textContent="Class "+c;
+    document.getElementById("genderHeading").textContent=c==="Plus 2"?"PLUS 2":"Class "+c;
     showOnly(document.getElementById("genderPanel"));
   };
   classHolder.appendChild(b);
@@ -221,9 +180,7 @@ flatpickr("#dob",{
 function showOnly(panel,saveHistory=true){
   panels.forEach(p=>p.classList.add("hidden"));
   panel.classList.remove("hidden");
-  if(saveHistory){
-    history.pushState({panel:panel.id},"","#"+panel.id);
-  }
+  if(saveHistory)history.pushState({panel:panel.id},"","#"+panel.id);
 }
 
 window.addEventListener("popstate",e=>{
@@ -237,9 +194,7 @@ window.addEventListener("popstate",e=>{
       document.getElementById("dob").value="";
       document.getElementById("status").textContent="";
     }
-    if(panelId==="dobPanel"){
-      document.getElementById("status").textContent="";
-    }
+    if(panelId==="dobPanel")document.getElementById("status").textContent="";
   }
 });
 
@@ -247,7 +202,6 @@ function showStudents(names,heading){
   const list=document.getElementById("studentList");
   list.replaceChildren();
   document.getElementById("studentHeading").textContent=heading;
-
   names.forEach(name=>{
     const b=document.createElement("button");
     b.type="button";
@@ -274,7 +228,8 @@ document.getElementById("boysBtn").onclick=()=>{
     selectedClass==="6"?class6Boys:
     selectedClass==="7"?class7Boys:
     selectedClass==="9"?class9Boys:
-    selectedClass==="10"?class10Boys:boys;
+    selectedClass==="10"?class10Boys:
+    selectedClass==="Plus 2"?plus2Boys:boys;
   showStudents(names,"BOYS");
 };
 
@@ -287,7 +242,8 @@ document.getElementById("girlsBtn").onclick=()=>{
     selectedClass==="6"?class6Girls:
     selectedClass==="7"?class7Girls:
     selectedClass==="9"?class9Girls:
-    selectedClass==="10"?class10Girls:girls;
+    selectedClass==="10"?class10Girls:
+    selectedClass==="Plus 2"?plus2Girls:girls;
   showStudents(names,"GIRLS");
 };
 
@@ -295,13 +251,9 @@ function returnToStudentList(){
   selectedStudent="";
   document.getElementById("dob").value="";
   document.getElementById("status").textContent="";
-  if(history.state?.panel==="resultPanel"){
-    history.back();
-  }else{
-    showOnly(document.getElementById("studentPanel"));
-  }
+  if(history.state?.panel==="resultPanel")history.back();
+  else showOnly(document.getElementById("studentPanel"));
 }
-
 document.getElementById("againBtn").onclick=returnToStudentList;
 document.getElementById("resultBackBtn").onclick=returnToStudentList;
 
@@ -319,34 +271,23 @@ function grade(mark){
 }
 
 function escapeHTML(value){
-  return String(value??"").replace(/[&<>"']/g,ch=>({
-    "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
-  }[ch]));
+  return String(value??"").replace(/[&<>"']/g,ch=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[ch]));
 }
 
 document.getElementById("checkBtn").onclick=async()=>{
   const name=selectedStudent;
   const dobInput=document.getElementById("dob").value.trim();
   const parts=dobInput.replace(/-/g,"/").split("/");
-  const dob=parts.length===3
-    ?`${parts[2]}-${parts[1].padStart(2,"0")}-${parts[0].padStart(2,"0")}`
-    :"";
+  const dob=parts.length===3?`${parts[2]}-${parts[1].padStart(2,"0")}-${parts[0].padStart(2,"0")}`:"";
   const status=document.getElementById("status");
 
-  if(!name||!dob){
-    status.textContent="പേരും ജനനത്തീയതിയും നൽകുക.";
-    return;
-  }
-
+  if(!name||!dob){status.textContent="പേരും ജനനത്തീയതിയും നൽകുക.";return;}
   status.textContent="ഫലം പരിശോധിക്കുന്നു...";
   const btn=document.getElementById("checkBtn");
   btn.disabled=true;
 
   try{
-    if(!window.supabase||!window.supabase.createClient){
-      throw new Error("Supabase library did not load");
-    }
-
+    if(!window.supabase||!window.supabase.createClient)throw new Error("Supabase library did not load");
     const db=window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
 
     const rpcName=
@@ -359,25 +300,28 @@ document.getElementById("checkBtn").onclick=async()=>{
       selectedClass==="9"?"get_class9_result":
       selectedClass==="10"?"get_class10_result":
       selectedClass==="Plus 1"?"get_plus1_result":
+      selectedClass==="Plus 2"?"get_plus2_result":
       "get_class1_result";
 
-    const {data,error}=await db.rpc(rpcName,{
-      p_student_name:name,
-      p_dob:dob
-    });
-
+    const {data,error}=await db.rpc(rpcName,{p_student_name:name,p_dob:dob});
     if(error)throw error;
     const r=Array.isArray(data)?data[0]:data;
 
-    if(!r){
-      status.textContent="നൽകിയ വിവരങ്ങൾ ശരിയല്ല. വീണ്ടും പരിശോധിക്കുക.";
-      return;
-    }
+    if(!r){status.textContent="നൽകിയ വിവരങ്ങൾ ശരിയല്ല. വീണ്ടും പരിശോധിക്കുക.";return;}
 
     let subjects;
     let maxTotal;
 
-    if(selectedClass==="Plus 1"){
+    if(selectedClass==="Plus 2"){
+      subjects=[
+        ["ഫിഖ്ഹ്",r.fiqh],
+        ["ലിസാനുൽ ഖുർആൻ",r.lisanul_quran],
+        ["ദുറൂസുൽ ഇഹ്സാൻ",r.durusul_ihsan],
+        ["തഫ്സീറുൽ ഖുർആൻ",r.tafsirul_quran]
+      ];
+      maxTotal=200;
+
+    }else if(selectedClass==="Plus 1"){
       subjects=[
         ["ദുറൂസുൽ ഇഹ്സാൻ",r.duroosul_lug],
         ["ലിസാനുൽ ഖുർആൻ",r.lisanul_quran],
@@ -397,45 +341,32 @@ document.getElementById("checkBtn").onclick=async()=>{
 
     }else if(selectedClass==="9"){
       subjects=[
-        ["ഫിഖ്ഹ്",r.fiqh],
-        ["താരീഖ്",r.tarikh],
-        ["ലിസാനുൽ ഖുർആൻ",r.lisanul_quran],
-        ["ദുറൂസ്",r.durus]
+        ["ഫിഖ്ഹ്",r.fiqh],["താരീഖ്",r.tarikh],
+        ["ലിസാനുൽ ഖുർആൻ",r.lisanul_quran],["ദുറൂസ്",r.durus]
       ];
       maxTotal=200;
 
     }else if(selectedClass==="7"||selectedClass==="6"){
       subjects=[
-        ["ഖുർആൻ",r.quran],
-        ["ഹിഫ്ള്",r.hifz],
-        ["തജ്‌വീദ്",r.tajweed],
-        ["ലിസാനുൽ ഖുർആൻ",r.lisan],
-        ["ഫിഖ്ഹ്",r.fiqh],
-        ["ദുറൂസുൽ ഇഹ്സാൻ",r.durus],
-        ["താരീഖ്",r.tarikh]
+        ["ഖുർആൻ",r.quran],["ഹിഫ്ള്",r.hifz],["തജ്‌വീദ്",r.tajweed],
+        ["ലിസാനുൽ ഖുർആൻ",r.lisan],["ഫിഖ്ഹ്",r.fiqh],
+        ["ദുറൂസുൽ ഇഹ്സാൻ",r.durus],["താരീഖ്",r.tarikh]
       ];
       maxTotal=350;
 
     }else if(selectedClass==="3"){
       subjects=[
-        ["ഹിഫ്ള്",r.hifz],
-        ["ഖുർആൻ & തദ്രീബ്",r.quran_tadreeb],
-        ["ലിസാനുൽ ഖുർആൻ",r.lisan],
-        ["ദുറൂസുൽ ഇഹ്സാൻ",r.durus],
-        ["താരീഖ്",r.tarikh],
-        ["അഖീദ",r.aqeeda],
-        ["ഫിഖ്ഹ്",r.fiqh]
+        ["ഹിഫ്ള്",r.hifz],["ഖുർആൻ & തദ്രീബ്",r.quran_tadreeb],
+        ["ലിസാനുൽ ഖുർആൻ",r.lisan],["ദുറൂസുൽ ഇഹ്സാൻ",r.durus],
+        ["താരീഖ്",r.tarikh],["അഖീദ",r.aqeeda],["ഫിഖ്ഹ്",r.fiqh]
       ];
       maxTotal=350;
 
     }else if(selectedClass==="5"){
       subjects=[
-        ["ഹിഫ്ള്",r.hifz_mark],
-        ["ഖുർആൻ",r.quran_mark],
-        ["തജ്‌വീദ്",r.tajweed_mark],
-        ["ലിസാനുൽ ഖുർആൻ",r.lisan_mark],
-        ["താരീഖ്",r.tarikh_mark],
-        ["ഫിഖ്ഹ്",r.fiqh_mark],
+        ["ഹിഫ്ള്",r.hifz_mark],["ഖുർആൻ",r.quran_mark],
+        ["തജ്‌വീദ്",r.tajweed_mark],["ലിസാനുൽ ഖുർആൻ",r.lisan_mark],
+        ["താരീഖ്",r.tarikh_mark],["ഫിഖ്ഹ്",r.fiqh_mark],
         ["ദുറൂസുൽ ഇഹ്സാൻ",r.durus_mark]
       ];
       maxTotal=350;
@@ -443,24 +374,18 @@ document.getElementById("checkBtn").onclick=async()=>{
     }else if(selectedClass==="4"){
       subjects=[
         ["ഖുർആൻ & തദ്രീബുത്തിലാവ",r.quran_tadrib_mark],
-        ["ഹിഫ്ള്",r.hifz_mark],
-        ["അഖീദ",r.aqeeda_mark],
+        ["ഹിഫ്ള്",r.hifz_mark],["അഖീദ",r.aqeeda_mark],
         ["ദുറൂസുൽ ഇഹ്സാൻ",r.durusul_ihsan_mark],
-        ["ഫിഖ്ഹ്",r.fiqh_mark],
-        ["താരീഖ്",r.tarikh_mark],
-        ["ലിസാനുൽ ഖുർആൻ",r.lisan_mark],
-        ["പ്രാക്ടിക്കൽ",r.practical_mark]
+        ["ഫിഖ്ഹ്",r.fiqh_mark],["താരീഖ്",r.tarikh_mark],
+        ["ലിസാനുൽ ഖുർആൻ",r.lisan_mark],["പ്രാക്ടിക്കൽ",r.practical_mark]
       ];
       maxTotal=400;
 
     }else if(selectedClass==="2"){
       subjects=[
-        ["ഖുർആൻ",r.quran_mark],
-        ["ഹിഫ്ള്",r.hifz_mark],
-        ["ഫിഖ്ഹ്",r.fiqh_mark],
-        ["ലിസാനുൽ ഖുർആൻ",r.lisan_mark],
-        ["അഖീദ",r.aqeeda_mark],
-        ["ദുറൂസുൽ ഇഹ്സാൻ",r.durusul_ihsan_mark]
+        ["ഖുർആൻ",r.quran_mark],["ഹിഫ്ള്",r.hifz_mark],
+        ["ഫിഖ്ഹ്",r.fiqh_mark],["ലിസാനുൽ ഖുർആൻ",r.lisan_mark],
+        ["അഖീദ",r.aqeeda_mark],["ദുറൂസുൽ ഇഹ്സാൻ",r.durusul_ihsan_mark]
       ];
       maxTotal=300;
 
@@ -468,8 +393,7 @@ document.getElementById("checkBtn").onclick=async()=>{
       subjects=[
         ["കേട്ടെഴുത്ത്",r.dictation_mark],
         ["ദീനിയാത്ത് & അഖ്ലാഖ്",r.deeniyath_mark],
-        ["എഴുത്ത്",r.writing_mark],
-        ["വായന",r.reading_mark]
+        ["എഴുത്ത്",r.writing_mark],["വായന",r.reading_mark]
       ];
       maxTotal=200;
     }
@@ -479,23 +403,8 @@ document.getElementById("checkBtn").onclick=async()=>{
       const absent=value.toUpperCase()==="A";
       const missing=mark===null||mark===undefined||value===""||value==="—";
       const numericMark=missing||absent?null:Number(value);
-
-      const markText=absent
-        ?"A (ഹാജരില്ല)"
-        :missing
-          ?"—"
-          :Number.isFinite(numericMark)
-            ?numericMark+" / 50"
-            :"—";
-
-      const gradeText=absent
-        ?"ഹാജരില്ല"
-        :missing
-          ?"—"
-          :Number.isFinite(numericMark)
-            ?grade(numericMark)
-            :"—";
-
+      const markText=absent?"A (ഹാജരില്ല)":missing?"—":Number.isFinite(numericMark)?numericMark+" / 50":"—";
+      const gradeText=absent?"ഹാജരില്ല":missing?"—":Number.isFinite(numericMark)?grade(numericMark):"—";
       return `<tr><td>${escapeHTML(label)}</td><td>${markText}</td><td>${gradeText}</td></tr>`;
     }).join("");
 
@@ -506,12 +415,11 @@ document.getElementById("checkBtn").onclick=async()=>{
       return sum+(Number.isFinite(n)?n:0);
     },0);
 
-    const total=r.total_marks!==null&&r.total_marks!==undefined
-      ?Number(r.total_marks):calculatedTotal;
-
+    const total=r.total_marks!==null&&r.total_marks!==undefined?Number(r.total_marks):calculatedTotal;
     const attendance=Number(r.attendance)||0;
 
     const workingDays=Number(
+      selectedClass==="Plus 2"?r.working_days:
       selectedClass==="Plus 1"?r.working_days:
       selectedClass==="10"?r.working_days:
       selectedClass==="9"?r.working_days:
@@ -520,25 +428,20 @@ document.getElementById("checkBtn").onclick=async()=>{
       selectedClass==="5"?r.working_days:
       selectedClass==="6"?r.working_days:
       r.total_working_days
-    )||(selectedClass==="Plus 1"?147:selectedClass==="10"?147:selectedClass==="9"?146:selectedClass==="7"?152:selectedClass==="3"?151:selectedClass==="5"?147:selectedClass==="6"?148:selectedClass==="4"?148:selectedClass==="2"?148:140);
+    )||(selectedClass==="Plus 2"?147:selectedClass==="Plus 1"?147:selectedClass==="10"?147:selectedClass==="9"?146:selectedClass==="7"?152:selectedClass==="3"?151:selectedClass==="5"?147:selectedClass==="6"?148:selectedClass==="4"?148:selectedClass==="2"?148:140);
 
-    const weakSubjects=subjects
-      .filter(([label,mark])=>{
-        const value=String(mark??"").trim();
-        return value!==""&&value!=="—"&&value.toUpperCase()!=="A"&&Number.isFinite(Number(value))&&Number(value)<25;
-      })
-      .map(([label])=>label);
+    const weakSubjects=subjects.filter(([label,mark])=>{
+      const value=String(mark??"").trim();
+      return value!==""&&value!=="—"&&value.toUpperCase()!=="A"&&Number.isFinite(Number(value))&&Number(value)<25;
+    }).map(([label])=>label);
 
-    const strongSubjects=subjects
-      .filter(([label,mark])=>{
-        const value=String(mark??"").trim();
-        return value!==""&&value!=="—"&&value.toUpperCase()!=="A"&&Number.isFinite(Number(value))&&Number(value)>=40;
-      })
-      .map(([label])=>label);
+    const strongSubjects=subjects.filter(([label,mark])=>{
+      const value=String(mark??"").trim();
+      return value!==""&&value!=="—"&&value.toUpperCase()!=="A"&&Number.isFinite(Number(value))&&Number(value)>=40;
+    }).map(([label])=>label);
 
     let teacherComment="";
     const ratio=total/maxTotal;
-
     if(ratio>=0.90)teacherComment="മികച്ച വിജയം. എല്ലാ വിഷയങ്ങളിലും ഈ മികവ് നിലനിർത്താൻ ശ്രമിക്കുക. അല്ലാഹു കൂടുതൽ അറിവും വിജയവും നൽകട്ടെ.";
     else if(ratio>=0.80)teacherComment="വളരെ നല്ല പ്രകടനമാണ്. പഠനത്തിലെ ഈ മുന്നേറ്റം തുടരുക. അല്ലാഹു അനുഗ്രഹിക്കട്ടെ.";
     else if(ratio>=0.65)teacherComment="നല്ല ശ്രമം നടത്തിയിട്ടുണ്ട്. സ്ഥിരമായ പഠനത്തിലൂടെ ഇനിയും മികച്ച വിജയം നേടാൻ കഴിയും. അല്ലാഹു തൗഫീഖ് നൽകട്ടെ.";
@@ -552,7 +455,8 @@ document.getElementById("checkBtn").onclick=async()=>{
     else if(attendance>=Math.ceil(workingDays*0.80))teacherComment+=" ഹാജർ തൃപ്തികരമാണ്; കഴിയുന്നത്ര സ്ഥിരമായി ക്ലാസിൽ പങ്കെടുക്കണം.";
     else teacherComment+=" ഹാജർ മെച്ചപ്പെടുത്താൻ പ്രത്യേകം ശ്രദ്ധിക്കണം.";
 
-    const rankRow=`<tr><td>ക്ലാസ് റാങ്ക്</td><td colspan="2"><b>${escapeHTML(r.class_rank??"—")}</b></td></tr>`;
+    // Plus Two-ന് ക്ലാസ് റാങ്ക് ഒഴിവാക്കുന്നു.
+    const rankRow=selectedClass==="Plus 2"?"":`<tr><td>ക്ലാസ് റാങ്ക്</td><td colspan="2"><b>${escapeHTML(r.class_rank??"—")}</b></td></tr>`;
 
     document.getElementById("resultContent").innerHTML=
       `<p><b>വിദ്യാർത്ഥി:</b> ${escapeHTML(name)}</p>
@@ -574,24 +478,14 @@ document.getElementById("checkBtn").onclick=async()=>{
 
     document.getElementById("sendWhatsappBtn").onclick=()=>{
       const parentComment=document.getElementById("parentComment").value.trim();
-
-      if(!parentComment){
-        alert("രക്ഷിതാവിന്റെ അഭിപ്രായം എഴുതുക.");
-        return;
-      }
-
-      const message=
-        "വിദ്യാർത്ഥി: "+name+"\n"+
-        "ക്ലാസ്: "+selectedClass+"\n"+
-        "രക്ഷിതാവിന്റെ അഭിപ്രായം: "+parentComment;
-
+      if(!parentComment){alert("രക്ഷിതാവിന്റെ അഭിപ്രായം എഴുതുക.");return;}
+      const message="വിദ്യാർത്ഥി: "+name+"\n"+"ക്ലാസ്: "+selectedClass+"\n"+"രക്ഷിതാവിന്റെ അഭിപ്രായം: "+parentComment;
       const whatsappUrl="https://wa.me/919645154849?text="+encodeURIComponent(message);
       window.open(whatsappUrl,"_blank");
     };
 
     history.replaceState({panel:"studentPanel"},"","#studentPanel");
     history.pushState({panel:"resultPanel"},"","#resultPanel");
-
     showOnly(document.getElementById("resultPanel"),false);
     status.textContent="";
 
