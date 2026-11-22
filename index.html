@@ -1,3 +1,4 @@
+
 <!doctype html>
 <html lang="ml">
 <head>
@@ -66,7 +67,7 @@ footer{text-align:center;padding:22px;color:#63718a;font-size:13px}
 <section class="panel" id="classPanel">
 <h2>Select Class</h2>
 <div class="classes" id="classes"></div>
-<p class="note">ഒന്നാം മുതൽ ഏഴാം ക്ലാസ് വരെയും ഒമ്പതാം ക്ലാസിലെയും ഫലം ലഭ്യമാണ്.</p>
+<p class="note">ഒന്നാം മുതൽ ഏഴാം ക്ലാസ് വരെയും ഒമ്പത്, പത്ത് ക്ലാസുകളിലെയും ഫലം ലഭ്യമാണ്.</p>
 </section>
 
 <section class="panel hidden" id="genderPanel">
@@ -177,6 +178,28 @@ const class9Girls = [
 "Neha Niyas MP"
 ];
 
+/* CLASS 10 */
+const class10Boys = [
+"Muhammad Bishr",
+"Hadi Noor",
+"Hathim Abdul Hakeem",
+"Ahmad Izan"
+];
+
+const class10Girls = [
+"Nashwa Fathima",
+"Ayisha Amna",
+"Jaza Maryam",
+"Siya Fathima",
+"Fathima Liya",
+"Fathima Misna",
+"Hadiya Thasni",
+"Fathima Alisha",
+"Ayisha Hemin",
+"Saja Fathima",
+"Khadeeja Mirfa"
+];
+
 const classHolder=document.getElementById("classes");
 const panels=["classPanel","genderPanel","studentPanel","dobPanel","resultPanel"].map(id=>document.getElementById(id));
 
@@ -197,7 +220,7 @@ flatpickr("#dob",{
   b.className="class-btn";
   b.textContent=c;
   b.onclick=()=>{
-    if(!["1","2","3","4","5","6","7","9"].includes(c)){
+    if(!["1","2","3","4","5","6","7","9","10"].includes(c)){
       alert("ഈ ക്ലാസിന്റെ ഫലം പിന്നീട് ലഭ്യമാക്കും.");
       return;
     }
@@ -266,7 +289,8 @@ document.getElementById("boysBtn").onclick=()=>{
     selectedClass==="5"?class5Boys:
     selectedClass==="6"?class6Boys:
     selectedClass==="7"?class7Boys:
-    selectedClass==="9"?class9Boys:boys;
+    selectedClass==="9"?class9Boys:
+    selectedClass==="10"?class10Boys:boys;
   showStudents(names,"BOYS");
 };
 
@@ -278,7 +302,8 @@ document.getElementById("girlsBtn").onclick=()=>{
     selectedClass==="5"?class5Girls:
     selectedClass==="6"?class6Girls:
     selectedClass==="7"?class7Girls:
-    selectedClass==="9"?class9Girls:girls;
+    selectedClass==="9"?class9Girls:
+    selectedClass==="10"?class10Girls:girls;
   showStudents(names,"GIRLS");
 };
 
@@ -348,6 +373,7 @@ document.getElementById("checkBtn").onclick=async()=>{
       selectedClass==="6"?"get_class6_result":
       selectedClass==="7"?"get_class7_result":
       selectedClass==="9"?"get_class9_result":
+      selectedClass==="10"?"get_class10_result":
       "get_class1_result";
 
     const {data,error}=await db.rpc(rpcName,{
@@ -366,7 +392,16 @@ document.getElementById("checkBtn").onclick=async()=>{
     let subjects;
     let maxTotal;
 
-    if(selectedClass==="9"){
+    if(selectedClass==="10"){
+      subjects=[
+        ["ഫിഖ്ഹ്",r.fiqh],
+        ["ലിസാനുൽ ഖുർആൻ",r.lisanul_quran],
+        ["തഫ്സീറുൽ ഖുർആൻ",r.tafsirul_quran],
+        ["ദുറൂസുൽ ഇഹ്സാൻ",r.durusul_ihsan]
+      ];
+      maxTotal=200;
+
+    }else if(selectedClass==="9"){
       subjects=[
         ["ഫിഖ്ഹ്",r.fiqh],
         ["താരീഖ്",r.tarikh],
@@ -483,13 +518,14 @@ document.getElementById("checkBtn").onclick=async()=>{
     const attendance=Number(r.attendance)||0;
 
     const workingDays=Number(
+      selectedClass==="10"?r.working_days:
       selectedClass==="9"?r.working_days:
       selectedClass==="7"?r.working_days:
       selectedClass==="3"?r.working_days:
       selectedClass==="5"?r.working_days:
       selectedClass==="6"?r.working_days:
       r.total_working_days
-    )||(selectedClass==="9"?146:selectedClass==="7"?152:selectedClass==="3"?151:selectedClass==="5"?147:selectedClass==="6"?148:selectedClass==="4"?148:selectedClass==="2"?148:140);
+    )||(selectedClass==="10"?147:selectedClass==="9"?146:selectedClass==="7"?152:selectedClass==="3"?151:selectedClass==="5"?147:selectedClass==="6"?148:selectedClass==="4"?148:selectedClass==="2"?148:140);
 
     const weakSubjects=subjects
       .filter(([label,mark])=>{
