@@ -12,7 +12,6 @@
 <meta property="og:url" content="https://shahuldarimi984-spec.github.io/madrasa-results-2026/">
 <meta name="twitter:card" content="summary">
 <title>അസാസുൽ ഉലൂം മദ്രസ | പരീക്ഷാ ഫലം</title>
-
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 
 <style>
@@ -110,11 +109,9 @@ const SUPABASE_URL = "https://nryrifmwzzdxwlxwencv.supabase.co";
 const SUPABASE_KEY = "sb_publishable_3yBW4LtifO9DmRN14rm85A_yqV8vm2c";
 
 const boys = ["Muhammad Aflah K","Muhammad Fauzan","Zain Muhammad KC","Sayyid Muad PC","Muhammed Shenzil Hafeez","Shazin Muhammed KT","Muhammad Yafiz","Basil Zaman K","Muhammed Zaihan EP","Azan Ahmad KP","Aizam Hazin"];
-
 const girls = ["Fathima Azra K","Rabeea Mariyam K","Ayisha Noura K","Ayisha Mehar P","Fathima Haniya","Havva Aayath","Dua Kadeeja P"];
 
 const class2Boys = ["MUHAMMAD HAMDAN CK","MUHAMMAD NAHIYAN PK","MUHAMMAD FAHMIL VK","MUHAMMAD AFLAH VK","MUHAMMAD HAIZAM K","MUHAMMAD ARZAN MP","HANAN ABDULLA MP","MUHAMMAD HATHIM THEYAZIN","DEMIN MUHAMMAD MT"];
-
 const class2Girls = ["SHEZA ZAINAB","AYISHA EMIN AYRIN","HENZA AYRIN KT","FATHIMA RAYYA","AYISHA ROUHA P","AYISHA JANNA MT"];
 
 const class3Boys = [
@@ -122,7 +119,6 @@ const class3Boys = [
 "MUHAMMAD HATHIM OK","MUHAMMAD AYMAN VK","MUHAMMAD ZAYAN P","MUHAMMAD RAEF K",
 "MUHAMMAD NAJI KT","ASIM MUHAMMAD P","MUHAMMAD DIHAN KP","Muhammed Azam"
 ];
-
 const class3Girls = [
 "ZEHARA SHERIN KC","AZAH FATHIMA M P","SAYYIDATH FATHIMA SHIFA P C","FATHIMA RIZWA T",
 "AYISHA KENZA TK","HANA FATHIMA OK","AISHA HILA JABIR","KHADEEJATHUL KUBRA PK",
@@ -131,7 +127,6 @@ const class3Girls = [
 ];
 
 const class4Boys = ["MUHAMMED FAIZAN EK","MUHAMMED SHIFIN VK","ALTHAF PK","MUHAMMED ZAYAN VK","AINAN MASHOOD K K S"];
-
 const class4Girls = ["AZA FATHIMA KT","FATHIMA MEHAR CK","FATHIMA NASMIN C K","LAIBA V K","AYISHA ALISHBA C K","FAISA FATHIMA V K","NAFEESATHUL MISRIYA V K","ZENHA FATHIMA V K","KENZA FASAL","LAIHA SHARAF K"];
 
 const class5Boys = [
@@ -139,7 +134,6 @@ const class5Boys = [
 "MUHAMMED RABEEH","MUHAMMED THAMEEM KP","MUHAMMED IJLAN EK","MUHAMMED HISHAM EK",
 "MUHAMMED MIFTHAH","MUHAMMED LAZAN","SHAHNU RAHMAN K","Muhammed Rajal shan VK"
 ];
-
 const class5Girls = [
 "FATHIMA NAJA.K","HAIFA FATHIMA.K","FATHIMA NAHVA.T","FATHIMA INSHA.CK",
 "HALA FATHIMA.P","AISHA EZZA K","FATHIMA HAIBA.KP","REJA NIYAS MP",
@@ -147,7 +141,6 @@ const class5Girls = [
 ];
 
 const class6Boys = ["MUHAMMED ZAYAN OK","MUHAMMAD SAMEEN HADI.K","ILLAN ASIF.MP","AMAN MUHAMMED","ZAYAN ABOOBACKER"];
-
 const class6Girls = ["LENA FATHIMA MT","FATHIMA ZAHRA.TV","FATHIMA ESHAL.P","SAYYIDATH FATHIMA HAIZA.VK","NIYA FATHIMA.T","SANAA ZAINAB VT","FATHIMA NASHWA.MP","MARYAM LANIKA KK"];
 
 const class7Boys = [
@@ -156,7 +149,6 @@ const class7Boys = [
 "MUHAMMED MISBAH K","MUHAMMAD EBRAHIM BADUSHA.VT","AHMED ZAYAN.P",
 "MUHAMMED RAYAN TV","MUHAMMAD ANSHIF."
 ];
-
 const class7Girls = [
 "AYISHA NOUR.CK","AYISHA RINHA.KT","SIYA FATHIMA.MP","SIDRATHUL MUNTHAHA.VK",
 "RIMSHA FATHIMA.CK","AISHA ZEBA NK","RIYA FATHIMA EK","HANIYA K",
@@ -165,40 +157,12 @@ const class7Girls = [
 ];
 
 /* CLASS 9 */
-const class9Boys = [
-"Muhammad Mazin VT",
-"Muhammad Zayan MT",
-"Muhammad Shihan KT",
-"Hadi Muhammed TP"
-];
-
-const class9Girls = [
-"Fathima Naja K",
-"Fathima Noula VT",
-"Neha Niyas MP"
-];
+const class9Boys = ["Muhammad Mazin VT","Muhammad Zayan MT","Muhammad Shihan KT","Hadi Muhammed TP"];
+const class9Girls = ["Fathima Naja K","Fathima Noula VT","Neha Niyas MP"];
 
 /* CLASS 10 */
-const class10Boys = [
-"Muhammad Bishr",
-"Hadi Noor",
-"Hathim Abdul Hakeem",
-"Ahmad Izan"
-];
-
-const class10Girls = [
-"Nashwa Fathima",
-"Ayisha Amna",
-"Jaza Maryam",
-"Siya Fathima",
-"Fathima Liya",
-"Fathima Misna",
-"Hadiya Thasni",
-"Fathima Alisha",
-"Ayisha Hemin",
-"Saja Fathima",
-"Khadeeja Mirfa"
-];
+const class10Boys = ["Muhammad Bishr","Hadi Noor","Hathim Abdul Hakeem","Ahmad Izan"];
+const class10Girls = ["Nashwa Fathima","Ayisha Amna","Jaza Maryam","Siya Fathima","Fathima Liya","Fathima Misna","Hadiya Thasni","Fathima Alisha","Ayisha Hemin","Saja Fathima","Khadeeja Mirfa"];
 
 /* PLUS ONE - GIRLS ONLY */
 const plus1Girls = [
@@ -415,7 +379,7 @@ document.getElementById("checkBtn").onclick=async()=>{
 
     if(selectedClass==="Plus 1"){
       subjects=[
-        ["ദുറൂസുൽ ലുഗ",r.duroosul_lug],
+        ["ദുറൂസുൽ ഇഹ്സാൻ",r.duroosul_lug],
         ["ലിസാനുൽ ഖുർആൻ",r.lisanul_quran],
         ["ഫിഖ്ഹ്",r.fiqh],
         ["തഫ്സീറുൽ ഖുർആൻ",r.tafsirul_quran]
