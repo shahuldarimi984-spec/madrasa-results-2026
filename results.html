@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="ml">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>അസാസുൽ ഉലൂം മദ്രസ – പരീക്ഷാ ഫലം</title>
+<style>
+:root{--navy:#172b4d;--gold:#c9a45c;--cream:#fffaf0;--ink:#20304a}
+*{box-sizing:border-box}
+body{margin:0;background:#f3f5f8;color:var(--ink);font-family:system-ui,"Noto Sans Malayalam",sans-serif}
+header{background:linear-gradient(120deg,#10264a,#244b78);color:#fff;text-align:center;padding:18px 12px;border-bottom:5px solid var(--gold)}
+header h1{margin:0;font-size:21px;color:#ffe3a1}header p{margin:5px 0 0}
+main{width:min(900px,100%);margin:16px auto;padding:0 12px}
+.panel{background:white;border:1px solid #e5dbc5;border-radius:16px;padding:16px;margin:12px 0;box-shadow:0 5px 20px #172b4d0b}
+h2{margin:0 0 12px;color:var(--navy);font-size:20px}
+.btn{width:100%;border:0;border-radius:11px;padding:14px 12px;background:var(--navy);color:white;font:inherit;font-weight:750;margin:6px 0;cursor:pointer}
+.btn.secondary{background:#fff7e8;color:var(--navy);border:1px solid var(--gold)}
+.btn.green{background:#167b48}
+.hidden{display:none!important}
+label{display:block;font-weight:700;margin:12px 0 5px}
+select,input,textarea{width:100%;padding:12px;border:1px solid #cfc7b6;border-radius:9px;font:inherit;background:#fff}
+.note{color:#617087;font-size:14px;line-height:1.6}
+.status{min-height:25px;color:#a33;text-align:center;margin:10px 0}
+table{width:100%;border-collapse:collapse;background:white;margin:12px 0}
+th,td{border:1px solid #e4dfd4;padding:9px 7px;text-align:left;font-size:14px}
+th{background:#f8f3e8;color:var(--navy)}
+.result-meta{line-height:1.8}
+.feedback{margin-top:16px;padding:13px;border:1px solid #e8dec9;border-radius:12px;background:#fffdf8}
+.feedback h3{margin:0 0 8px;color:var(--navy)}
+.big{text-align:center;color:var(--navy);font-size:22px;font-weight:800;margin:18px 0}
+#oldResultsFrame{display:none;width:100%;height:calc(100vh - 50px);min-height:720px;border:0;background:white}
+@media print{header,.no-print{display:none!important}body{background:#fff}main{width:100%;margin:0;padding:0}.panel{box-shadow:none;border:0}.feedback textarea,.feedback button{display:none!important}}
+</style>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+<header><h1>അസാസുൽ ഉലൂം മദ്രസ</h1><p>പനക്കോട് • അർദ്ധവാർഷിക പരീക്ഷാ ഫലം</p></header>
+<main>
+<section id="choicePanel" class="panel no-print">
+<h2>ക്ലാസ് തിരഞ്ഞെടുക്കുക</h2>
+<p class="note">എട്ടാം ക്ലാസിന്റെ പുതിയ ഫലം താഴെ നിന്ന് തിരഞ്ഞെടുക്കാം. മറ്റു ക്ലാസുകളുടെ പഴയ റിസൾട്ട് സംവിധാനം അതേപടി തുടരും.</p>
+<button class="btn" id="class8Open">എട്ടാം ക്ലാസ് ഫലം</button>
+<button class="btn secondary" id="oldResultsOpen">മറ്റ് ക്ലാസുകളുടെ ഫലം (1–7, 9, 10, Plus 1, Plus 2)</button>
+</section>
+
+<section id="class8Panel" class="panel hidden">
+<div class="no-print"><button class="btn secondary" id="class8Back">← ക്ലാസ് തിരഞ്ഞെടുപ്പിലേക്ക് മടങ്ങുക</button></div>
+<h2>എട്ടാം ക്ലാസ് – അർദ്ധവാർഷിക പരീക്ഷാ ഫലം</h2>
+<p class="note">ആൺകുട്ടികൾ അല്ലെങ്കിൽ പെൺകുട്ടികൾ തിരഞ്ഞെടുക്കുക. തുടർന്ന് പേര്, ജനനത്തീയതി എന്നിവ നൽകി ഫലം പരിശോധിക്കാം.</p>
+<div class="no-print" style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+<button class="btn" id="boysBtn">ആൺകുട്ടികൾ</button><button class="btn" id="girlsBtn">പെൺകുട്ടികൾ</button>
+</div>
+<div id="studentArea" class="hidden no-print">
+<label for="studentName">വിദ്യാർത്ഥിയുടെ പേര്</label>
+<select id="studentName"><option value="">പേര് തിരഞ്ഞെടുക്കുക</option></select>
+<label for="dob">ജനനത്തീയതി</label>
+<input id="dob" type="date">
+<button class="btn" id="checkResult">ഫലം അറിയുക</button>
+</div>
+<p id="status" class="status"></p>
+<div id="resultArea" class="hidden"></div>
+</section>
+</main>
+
+<iframe id="oldResultsFrame" title="മറ്റ് ക്ലാസുകളുടെ പഴയ റിസൾട്ട്"></iframe>
+
+<script>
+const SUPABASE_URL = "https://nryrifmwzzdxwlxwencv.supabase.co";
+const SUPABASE_KEY = "sb_publishable_3yBW4LtifO9DmRN14rm85A_yqV8vm2c";
+const OLD_RESULTS_URL = "https://rawcdn.githack.com/shahuldarimi984-spec/madrasa-results-2026/1eac794ceb34e4fc914e88fb721b1f6e1cada8e1/index.html";
+
+const boys = [
+"MUHAMMED BILAL K","MUHAMMED FADI","MUHAMMED SHAFI","FAHIM AZEEZ",
+"ALHAN ABOOBACKER","MUHAMMED NAFI","MUHAMMED FIZAN","MUHAMMED TWAYYIB",
+"IMRAN ALI","MUHAMMED ABU ZAYYAN","ALI AZMIL"
+];
+const girls = [
+"FATHIMA RIFA TP","JANHA CK","AYISHA LIYA","AYISHA NIYA","FATHIMA NASHMIYA",
+"FATHIMA HIBA","NAFIA","FATHIMA ZAHRA","LIVA ABDUL JALEEL","FAIHA FATHIMA"
+];
+
+const choicePanel=document.getElementById("choicePanel");
+const class8Panel=document.getElementById("class8Panel");
+const oldFrame=document.getElementById("oldResultsFrame");
+const studentArea=document.getElementById("studentArea");
+const studentName=document.getElementById("studentName");
+const statusEl=document.getElementById("status");
+const resultArea=document.getElementById("resultArea");
+let selectedGender="";
+
+function showChoice(){
+  choicePanel.classList.remove("hidden");
+  class8Panel.classList.add("hidden");
+  oldFrame.style.display="none";
+}
+document.getElementById("class8Open").addEventListener("click",()=>{
+  choicePanel.classList.add("hidden");
+  class8Panel.classList.remove("hidden");
+  oldFrame.style.display="none";
+  window.scrollTo(0,0);
+});
+document.getElementById("class8Back").addEventListener("click",showChoice);
+document.getElementById("oldResultsOpen").addEventListener("click",()=>{
+  choicePanel.classList.add("hidden");
+  class8Panel.classList.add("hidden");
+  oldFrame.style.display="block";
+  if(!oldFrame.src)oldFrame.src=OLD_RESULTS_URL;
+  window.scrollTo(0,0);
+});
+
+function chooseGender(gender){
+  selectedGender=gender;
+  const names=gender==="Male"?boys:girls;
+  studentName.innerHTML='<option value="">പേര് തിരഞ്ഞെടുക്കുക</option>';
+  names.forEach(name=>{
+    const option=document.createElement("option");
+    option.value=name;option.textContent=name;studentName.appendChild(option);
+  });
+  studentArea.classList.remove("hidden");
+  resultArea.classList.add("hidden");
+  statusEl.textContent="";
+}
+document.getElementById("boysBtn").addEventListener("click",()=>chooseGender("Male"));
+document.getElementById("girlsBtn").addEventListener("click",()=>chooseGender("Female"));
+
+function escapeHTML(value){
+  return String(value??"").replace(/[&<>"']/g,ch=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[ch]));
+}
+function grade(mark){
+  if(mark===null||mark===undefined)return "—";
+  if(mark>=45)return "A+";if(mark>=40)return "A";if(mark>=35)return "B+";
+  if(mark>=30)return "B";if(mark>=25)return "C+";if(mark>=20)return "C";
+  if(mark>=18)return "D+";if(mark>=1)return "D";return "—";
+}
+
+document.getElementById("checkResult").addEventListener("click",async()=>{
+  const name=studentName.value;
+  const dob=document.getElementById("dob").value;
+  if(!name||!dob){statusEl.textContent="പേരും ജനനത്തീയതിയും തിരഞ്ഞെടുക്കുക.";return;}
+  const button=document.getElementById("checkResult");
+  button.disabled=true;statusEl.textContent="ഫലം പരിശോധിക്കുന്നു...";
+  try{
+    if(!window.supabase?.createClient)throw new Error("Supabase library load ആയില്ല.");
+    const db=window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
+    const {data,error}=await db.rpc("get_class8_result",{p_student_name:name,p_dob:dob});
+    if(error)throw error;
+    const r=Array.isArray(data)?data[0]:data;
+    if(!r){statusEl.textContent="പേരും ജനനത്തീയതിയും ശരിയാണെന്ന് പരിശോധിക്കുക.";return;}
+
+    const subjects=[
+      ["ദുറൂസുൽ ഇഹ്സാൻ",r.durusul_ihsan],
+      ["ഫിഖ്ഹ്",r.fiqh],
+      ["ലിസാൻ",r.lisan],
+      ["താരീഖ്",r.tarikh],
+      ["ഖുർആൻ",r.quran],
+      ["ഹിഫ്‌സ്",r.hifz]
+    ];
+    const rows=subjects.map(([label,mark])=>`<tr><td>${escapeHTML(label)}</td><td>${mark??"—"} / 50</td><td>${grade(mark)}</td></tr>`).join("");
+    const total=Number(r.total_marks)||0;
+    const workingDays=Number(r.working_days)||147;
+    const attendance=(r.attendance===null||r.attendance===undefined)?null:Number(r.attendance);
+    const ratio=total/300;
+    let teacherComment=ratio>=0.90
+      ?"മികച്ച വിജയം. എല്ലാ വിഷയങ്ങളിലും ഈ മികവ് നിലനിർത്താൻ ശ്രമിക്കുക. അല്ലാഹു കൂടുതൽ അറിവും വിജയവും നൽകട്ടെ."
+      :ratio>=0.80
+      ?"വളരെ നല്ല പ്രകടനമാണ്. പഠനത്തിലെ ഈ മുന്നേറ്റം തുടരുക. അല്ലാഹു അനുഗ്രഹിക്കട്ടെ."
+      :ratio>=0.65
+      ?"നല്ല ശ്രമമാണ്. സ്ഥിരമായ പഠനത്തിലൂടെ ഇനിയും മികച്ച വിജയം നേടാം."
+      :ratio>=0.50
+      ?"കൂടുതൽ ശ്രദ്ധയും സ്ഥിരമായ പരിശീലനവും ആവശ്യമാണ്. അധ്യാപകരുടെ നിർദേശങ്ങൾ പാലിക്കുക."
+      :"പഠനത്തിൽ കൂടുതൽ ശ്രദ്ധ നൽകണം. രക്ഷിതാക്കളും അധ്യാപകരും ചേർന്ന് കുട്ടിക്ക് പിന്തുണ നൽകുക.";
+    if(attendance===null)teacherComment+=" ഹാജർ വിവരം ലഭ്യമല്ല.";
+    else if(attendance>=Math.ceil(workingDays*.90))teacherComment+=" ഹാജർ വളരെ മികച്ചതാണ്.";
+    else if(attendance>=Math.ceil(workingDays*.80))teacherComment+=" ഹാജർ തൃപ്തികരമാണ്; സ്ഥിരമായി ക്ലാസിൽ പങ്കെടുക്കുക.";
+    else teacherComment+=" ഹാജർ മെച്ചപ്പെടുത്താൻ പ്രത്യേകം ശ്രദ്ധിക്കണം.";
+
+    resultArea.innerHTML=`
+      <div class="result-meta"><p><b>വിദ്യാർത്ഥി:</b> ${escapeHTML(r.student_name)}</p><p><b>ക്ലാസ്:</b> എട്ടാം ക്ലാസ്</p></div>
+      <table><thead><tr><th>വിഷയം</th><th>മാർക്ക്</th><th>ഗ്രേഡ്</th></tr></thead><tbody>${rows}
+      <tr><td><b>ആകെ മാർക്ക്</b></td><td colspan="2"><b>${total} / 300</b></td></tr>
+      <tr><td><b>ക്ലാസിലെ സ്ഥാനം</b></td><td colspan="2"><b>${r.class_rank??"—"}</b></td></tr>
+      <tr><td><b>ഹാജർ</b></td><td colspan="2"><b>${attendance===null?"—":attendance} / ${workingDays}</b></td></tr></tbody></table>
+      <div class="feedback"><h3>അധ്യാപകന്റെ അഭിപ്രായം</h3><p id="teacherComment"></p>
+      <div class="no-print"><h3>രക്ഷിതാവിന്റെ അഭിപ്രായം</h3><textarea id="parentComment" rows="4" placeholder="രക്ഷിതാവിന്റെ അഭിപ്രായം എഴുതുക..."></textarea>
+      <button class="btn green" id="sendWhatsapp">WhatsApp വഴി പ്രധാനാധ്യാപകന് അയക്കാം</button></div></div>
+      <p class="big">അഭിനന്ദനങ്ങൾ!</p><button class="btn no-print" id="printResult">പ്രിന്റ് / PDF</button>`;
+    document.getElementById("teacherComment").textContent=teacherComment;
+    document.getElementById("sendWhatsapp").addEventListener("click",()=>{
+      const comment=document.getElementById("parentComment").value.trim();
+      if(!comment){alert("രക്ഷിതാവിന്റെ അഭിപ്രായം എഴുതുക.");return;}
+      const message=`വിദ്യാർത്ഥി: ${r.student_name}\nക്ലാസ്: എട്ടാം ക്ലാസ്\nരക്ഷിതാവിന്റെ അഭിപ്രായം: ${comment}`;
+      window.open("https://wa.me/919645154849?text="+encodeURIComponent(message),"_blank");
+    });
+    document.getElementById("printResult").addEventListener("click",()=>window.print());
+    resultArea.classList.remove("hidden");statusEl.textContent="";
+  }catch(err){
+    console.error(err);
+    statusEl.textContent="ഫലം ലഭ്യമാക്കാൻ കഴിഞ്ഞില്ല. Supabase-ൽ Class 8 SQL പ്രവർത്തിപ്പിച്ചിട്ടുണ്ടെന്ന് ഉറപ്പാക്കുക.";
+  }finally{button.disabled=false;}
+});
+</script>
+</body>
+</html>
