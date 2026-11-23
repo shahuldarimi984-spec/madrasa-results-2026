@@ -180,11 +180,11 @@ button{font:inherit;cursor:pointer}
   </section>
 
   <div class="navbar">
-    <button class="nav-btn" id="prevPage" type="button" disabled>മുൻപോട്ട്</button>
+    <button class="nav-btn" id="prevPage" type="button" disabled>BACK</button>
     <div class="dots" aria-label="പേജ് സൂചിക">
       <span class="dot on"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span>
     </div>
-    <button class="nav-btn primary" id="nextPage" type="button">അടുത്തത്</button>
+    <button class="nav-btn primary" id="nextPage" type="button">NEXT</button>
   </div>
 </div>
 
@@ -211,7 +211,7 @@ function showPage(index){
   pageNumber.textContent=String(current+1).padStart(2,"0")+" / 04";
   prev.disabled=current===0;
   next.disabled=current===3;
-  next.textContent=current===2?"അവസാന പേജ്":"അടുത്തത്";
+ next.textContent="NEXT";
   window.scrollTo({top:0,behavior:"smooth"});
 }
 prev.addEventListener("click",()=>showPage(current-1));
