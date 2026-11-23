@@ -211,19 +211,25 @@ prev.addEventListener("click",()=>showPage(current-1));
 next.addEventListener("click",()=>showPage(current+1));
 document.querySelectorAll(".dot").forEach((d,i)=>d.addEventListener("click",()=>showPage(i)));
 
-const originalResultUrl="https://rawcdn.githack.com/shahuldarimi984-spec/madrasa-results-2026/1eac794ceb34e4fc914e88fb721b1f6e1cada8e1/index.html";
-document.getElementById("openResults").addEventListener("click",()=>{
-  document.getElementById("intro").style.display="none";
-  document.querySelector(".topline").style.display="none";
-  document.getElementById("resultsScreen").style.display="block";
-  const frame=document.getElementById("resultFrame");
-  if(!frame.src)frame.src=originalResultUrl;
-  window.scrollTo(0,0);
+
+const originalResultUrl = "results.html";
+
+document.getElementById("openResults").addEventListener("click", () => {
+  document.getElementById("intro").style.display = "none";
+  document.querySelector(".topline").style.display = "none";
+  document.getElementById("resultsScreen").style.display = "block";
+
+  const frame = document.getElementById("resultFrame");
+  frame.src = originalResultUrl;
+
+  window.scrollTo(0, 0);
 });
-document.getElementById("backIntro").addEventListener("click",()=>{
-  document.getElementById("resultsScreen").style.display="none";
-  document.getElementById("intro").style.display="flex";
-  document.querySelector(".topline").style.display="block";
+
+document.getElementById("backIntro").addEventListener("click", () => {
+  document.getElementById("resultsScreen").style.display = "none";
+  document.getElementById("intro").style.display = "flex";
+  document.querySelector(".topline").style.display = "block";
+
   showPage(3);
 });
 </script>
