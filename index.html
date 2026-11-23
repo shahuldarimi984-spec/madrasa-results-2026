@@ -1,501 +1,231 @@
-
 <!doctype html>
 <html lang="ml">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta property="og:title" content="അസാസുൽ ഉലൂം മദ്രസ – അർദ്ധവാർഷിക പരീക്ഷാ ഫലം">
-<meta property="og:description" content="പനക്കോട് | രജിസ്റ്റർ നമ്പർ: 2692">
-<meta property="og:image" content="https://shahuldarimi984-spec.github.io/madrasa-results-2026/emblem-panakkode.jpg?v=2">
-<meta property="og:image:alt" content="അസാസുൽ ഉലൂം മദ്രസ പനക്കോട് എംബ്ലം">
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://shahuldarimi984-spec.github.io/madrasa-results-2026/">
-<meta name="twitter:card" content="summary">
-<title>അസാസുൽ ഉലൂം മദ്രസ | പരീക്ഷാ ഫലം</title>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
-
+<meta name="theme-color" content="#172b4d">
+<meta property="og:title" content="അസാസുൽ ഉലൂം ഹയർ സെക്കൻഡറി മദ്രസ – പനക്കോട്">
+<meta property="og:description" content="ചരിത്രം, പ്രോത്സാഹന സന്ദേശം, അർദ്ധവാർഷിക പരീക്ഷാ ഫലം">
+<title>അസാസുൽ ഉലൂം ഹയർ സെക്കൻഡറി മദ്രസ | പനക്കോട്</title>
 <style>
-:root{--navy:#172b4d;--gold:#c9a45c;--cream:#fffaf0;--ink:#20304a}
+:root{--navy:#172b4d;--navy2:#244b78;--gold:#c9a45c;--cream:#fffaf0;--ink:#20304a;--muted:#65738a}
 *{box-sizing:border-box}
-body{margin:0;background:linear-gradient(135deg,#eef5ff,#fff8e9);font-family:system-ui,"Noto Sans Malayalam",sans-serif;color:var(--ink)}
-header{background:linear-gradient(125deg,#10264a,#244b78);color:white;text-align:center;padding:24px 14px 28px;border-bottom:5px solid var(--gold)}
-.logo{width:130px;height:130px;object-fit:contain;background:white;border-radius:50%;padding:8px;border:4px solid var(--gold)}
-h1{font-size:clamp(23px,5vw,32px);margin:12px 0 4px;color:#ffe3a1}
-header p{margin:4px 0}
-main{max-width:850px;margin:22px auto;padding:0 14px}
-.panel,.result{background:#fff;border:1px solid #e4d6b8;border-radius:18px;padding:20px;box-shadow:0 8px 24px #1d355710;margin-bottom:18px}
-h2{text-align:center;color:var(--navy);margin:0 0 16px}
-.classes{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
-button{font:inherit;cursor:pointer;border:0}
-.class-btn,.action{padding:14px 8px;border-radius:13px;background:linear-gradient(135deg,#fff,#f4e8ce);border:1px solid #d8bd82;color:var(--navy);font-weight:700}
-.action{background:var(--navy);color:#fff;padding:12px 18px;margin:6px}
-input,select{width:100%;padding:13px;border:1px solid #c9b98f;border-radius:10px;font:inherit;margin:7px 0 14px;background:#fff}
-label{font-weight:650}
-.hidden{display:none}
-.note{font-size:13px;color:#68758a;text-align:center;margin:16px 0 0}
-.status{text-align:center;margin:12px 0;color:#9a3d2e}
-.result table{width:100%;border-collapse:collapse}
-.result td{padding:10px;border-bottom:1px solid #eee}
-.result td:first-child{font-weight:650;color:var(--navy)}
-.big{text-align:center;font-size:24px;font-weight:800;color:var(--navy)}
-.feedback{margin-top:18px;padding:16px;border:1px solid #e4d6b8;border-radius:14px;background:#fffaf0}
-.feedback h3{color:var(--navy);margin:0 0 10px}
-.feedback p{line-height:1.8;margin:8px 0}
-.feedback textarea{width:100%;min-height:105px;padding:12px;border:1px solid #c9b98f;border-radius:10px;font:inherit;resize:vertical}
-.whatsapp-btn{display:block;width:100%;margin:12px 0 0;padding:13px 16px;border-radius:12px;background:#168b4b;color:#fff;font-weight:700}
-footer{text-align:center;padding:22px;color:#63718a;font-size:13px}
-@media(min-width:600px){.classes{grid-template-columns:repeat(4,1fr)}}
-.choice-grid,.name-list{display:grid;grid-template-columns:1fr;gap:12px}
-.choice-btn{padding:16px;border-radius:13px;background:var(--navy);color:#fff;font-weight:800}
-.name-btn{width:100%;text-align:left;padding:14px;background:#fff;border:1px solid #d8bd82;border-radius:13px;color:var(--navy);font-weight:700}
-@media(min-width:600px){.choice-grid{grid-template-columns:repeat(2,1fr)}.name-list{grid-template-columns:repeat(2,1fr)}}
-@media print{body{background:#fff}.action,.whatsapp-btn{display:none}.panel{box-shadow:none}}
+html,body{margin:0;min-height:100%;font-family:system-ui,"Noto Sans Malayalam",sans-serif;color:var(--ink)}
+body{background:linear-gradient(135deg,#eff4fa,#fff8e9)}
+button{font:inherit;cursor:pointer}
+#intro{min-height:100vh;display:flex;flex-direction:column}
+.topline{height:7px;background:linear-gradient(90deg,var(--gold),#f4dfaa,var(--gold))}
+.intro-head{width:min(940px,100%);margin:0 auto;padding:18px 18px 0;display:flex;align-items:center;justify-content:space-between}
+.brandmark{width:66px;height:66px;object-fit:contain;background:#fff;border:2px solid var(--gold);border-radius:50%;padding:4px}
+.pageno{font-size:13px;color:var(--muted);font-weight:700}
+.page{display:none;width:min(940px,100%);margin:0 auto;padding:18px 18px 24px;flex:1}
+.page.active{display:block;animation:fade .25s ease}
+@keyframes fade{from{opacity:.45;transform:translateY(5px)}to{opacity:1;transform:none}}
+.paper{background:#fff;border:1px solid #e6d9bd;border-radius:24px;box-shadow:0 12px 34px #1d355712;overflow:hidden}
+.hero{background:linear-gradient(125deg,#10264a,#244b78);color:white;text-align:center;padding:23px 20px 20px;border-bottom:5px solid var(--gold)}
+.hero img{width:90px;height:90px;object-fit:contain;background:white;border-radius:50%;padding:5px;border:3px solid var(--gold)}
+.hero h1{font-size:clamp(21px,4.7vw,31px);line-height:1.35;color:#ffe3a1;margin:12px 0 3px}
+.hero p{margin:3px 0;font-weight:650;letter-spacing:.5px}
+.reg{font-size:13px;color:#f4dfaa;margin-top:7px!important}
+.building{display:block;width:100%;max-height:300px;object-fit:cover}
+.details{padding:17px 20px 22px}
+.address{text-align:center;line-height:1.7;color:#52627a;font-size:13px;font-weight:700;letter-spacing:.35px;margin:0 0 16px}
+.contact-grid{display:grid;grid-template-columns:1fr;gap:9px}
+.contact{border:1px solid #e9dfcb;background:#fffdf8;border-radius:13px;padding:10px 13px}
+.contact .role{display:block;color:#9b7738;font-size:11px;font-weight:800;letter-spacing:.8px}
+.contact strong{display:block;color:var(--navy);font-size:14px;margin:2px 0}
+.contact a{color:#3e6287;text-decoration:none;font-weight:700;font-size:13px}
+.teachers{margin-top:12px;border:1px solid #e9dfcb;background:#fffdf8;border-radius:14px;padding:12px 14px}
+.teachers h3{margin:0 0 8px;color:#9b7738;font-size:12px;letter-spacing:.6px}
+.teacher-list{display:grid;grid-template-columns:1fr 1fr;gap:7px 12px}
+.teacher{font-size:13px;line-height:1.5}
+.teacher b{display:block;color:var(--navy)}
+.teacher a{color:#3e6287;text-decoration:none;font-size:12px;font-weight:700}
+.story{padding:24px clamp(18px,4vw,34px);line-height:1.95;font-size:15px}
+.page-title{text-align:center;color:var(--navy);font-size:clamp(23px,5vw,32px);line-height:1.45;margin:6px 0 4px}
+.subtitle{text-align:center;color:#a17c3e;font-weight:750;margin:0 0 22px;font-size:15px}
+.section{margin:17px 0 0}
+.section h3{display:inline-block;background:var(--navy);color:#fff;padding:7px 15px;border-radius:9px;font-size:16px;margin:0 0 9px}
+.section p{margin:0;color:#33435b}
+.encourage{padding:25px clamp(18px,5vw,42px);text-align:center;line-height:1.95}
+.encourage h2{margin:3px 0 18px;color:var(--navy);font-size:clamp(25px,5.5vw,34px)}
+.encourage p{font-size:15px;text-align:left;line-height:2;margin:0 0 14px}
+.quote{margin:21px 0 16px;padding:18px 14px;border-radius:16px;background:#f8f1e2;border:1px solid #ead9b6;color:var(--navy);font-weight:750;line-height:1.9}
+.quote strong{display:block;font-size:20px;color:#9a7332}
+.big-message{font-size:clamp(19px,4vw,25px);font-weight:850;color:var(--navy);line-height:1.8;margin:15px 0}
+.gateway{padding:36px 22px;text-align:center}
+.gateway img{width:105px;height:105px;object-fit:contain;background:#fff;border:3px solid var(--gold);border-radius:50%;padding:6px}
+.gateway h2{font-size:clamp(23px,5vw,31px);line-height:1.4;color:var(--navy);margin:13px 0 2px}
+.gateway .year{font-size:17px;color:#9b7738;font-weight:800;margin:4px 0 16px}
+.gateway p{line-height:1.9;color:#53627a;margin:0 auto 20px;max-width:530px}
+.start-btn,.nav-btn{border:0;border-radius:13px;font-weight:800}
+.start-btn{padding:16px 32px;background:linear-gradient(120deg,#17355d,#285988);color:#fff;font-size:20px;box-shadow:0 7px 18px #172b4d2a;border:2px solid var(--gold)}
+.navbar{width:min(940px,100%);margin:0 auto;padding:0 18px 18px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.nav-btn{padding:11px 18px;background:#fff;border:1px solid #dac89f;color:var(--navy);min-width:112px}
+.nav-btn.primary{background:var(--navy);color:white;border-color:var(--navy)}
+.nav-btn:disabled{opacity:.35;cursor:default}
+.dots{display:flex;gap:7px;align-items:center}
+.dot{width:8px;height:8px;border-radius:50%;background:#d8ccb2}
+.dot.on{width:22px;border-radius:10px;background:var(--gold)}
+#resultsScreen{display:none;min-height:100vh;background:#f4f6f9}
+.resultbar{position:sticky;top:0;z-index:5;background:#172b4d;padding:9px 12px;display:flex;justify-content:space-between;align-items:center;color:#fff;gap:8px}
+.resultbar span{font-size:13px;font-weight:700}
+.resultbar button{border:1px solid #e3ca8f;border-radius:9px;background:#fff7e6;color:#172b4d;font-weight:800;padding:8px 12px}
+#resultFrame{display:block;width:100%;height:calc(100vh - 48px);border:0;background:white}
+@media(min-width:650px){
+ .contact-grid{grid-template-columns:repeat(3,1fr)}
+ .teachers .teacher-list{grid-template-columns:repeat(3,1fr)}
+ .building{max-height:330px}
+ .page{padding-top:22px}
+}
+@media(max-width:380px){.intro-head{padding-top:12px}.brandmark{width:54px;height:54px}.teacher-list{grid-template-columns:1fr}.story{font-size:14px}}
 </style>
 </head>
-
 <body>
-<header>
-<img class="logo" src="emblem-panakkode.jpg" alt="അസാസുൽ ഉലൂം മദ്രസ പനക്കോട് എംബ്ലം">
-<h1>അസാസുൽ ഉലൂം മദ്രസ</h1>
-<p>പനക്കോട്</p>
-<p>രജിസ്റ്റർ നമ്പർ: 2692</p>
-<p style="color:#ffe3a1;font-weight:700;font-size:20px;margin-top:14px">അർദ്ധവാർഷിക പരീക്ഷാ ഫലം</p>
-</header>
+<div class="topline"></div>
+<div id="intro">
+  <div class="intro-head">
+    <img class="brandmark" src="https://shahuldarimi984-spec.github.io/madrasa-results-2026/emblem-panakkode.jpg" alt="മദ്രസ എംബ്ലം">
+    <span class="pageno" id="pageNumber">01 / 04</span>
+  </div>
 
-<main>
-<section class="panel" id="classPanel">
-<h2>Select Class</h2>
-<div class="classes" id="classes"></div>
-<p class="note">ഒന്നാം മുതൽ ഏഴാം ക്ലാസ് വരെയും ഒമ്പത്, പത്ത്, പ്ലസ് വൺ, പ്ലസ് ടൂ ക്ലാസുകളിലെയും ഫലം ലഭ്യമാണ്.</p>
-</section>
+  <section class="page active" data-page="0">
+    <div class="paper">
+      <div class="hero">
+        <img src="https://shahuldarimi984-spec.github.io/madrasa-results-2026/emblem-panakkode.jpg" alt="അസാസുൽ ഉലൂം മദ്രസ എംബ്ലം">
+        <h1>ASASUL ULOOM HIGHER SECONDARY MADRASA</h1>
+        <p>PANAKKODE</p>
+        <p class="reg">REGISTER NO: 2692</p>
+      </div>
+      <img class="building" src="madrasa-building.jpg" alt="അസാസുൽ ഉലൂം മദ്രസ പാനക്കോട് കെട്ടിടം">
+      <div class="details">
+        <p class="address">P.O. VALIYAPARAMBA<br>PIN CODE: 673572<br>KOZHIKODE DISTRICT, KERALA</p>
+        <div class="contact-grid">
+          <div class="contact"><span class="role">PRESIDENT</span><strong>ABDU HAJI</strong><a href="tel:9846028299">98460 28299</a></div>
+          <div class="contact"><span class="role">SECRETARY</span><strong>V.T. AHMAD SHAREEF MASTER</strong><a href="tel:9447426139">9447426139</a></div>
+          <div class="contact"><span class="role">SADR USTHAD</span><strong>SHAHUL HAMEED DARIMI</strong><a href="tel:8111838360">8111838360</a></div>
+        </div>
+        <div class="teachers">
+          <h3>TEACHERS</h3>
+          <div class="teacher-list">
+            <div class="teacher"><b>SALEEM USTHAD</b><a href="tel:9656188105">96561 88105</a></div>
+            <div class="teacher"><b>SHAREEF USTHAD</b><a href="tel:9745135881">97451 35881</a></div>
+            <div class="teacher"><b>HAMZA USTHAD</b><a href="tel:9645499544">96454 99544</a></div>
+            <div class="teacher"><b>ANWAR SA'ADI</b><a href="tel:9072977169">90729 77169</a></div>
+            <div class="teacher"><b>MAJEED USTHAD</b><a href="tel:9048157297">90481 57297</a></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-<section class="panel hidden" id="genderPanel">
-<h2 id="genderHeading">Class 1</h2>
-<div class="choice-grid">
-<button class="choice-btn" id="boysBtn" type="button">BOYS</button>
-<button class="choice-btn" id="girlsBtn" type="button">GIRLS</button>
+  <section class="page" data-page="1">
+    <div class="paper story">
+      <h2 class="page-title">അറിവിന്റെ അറുപത്തിയഞ്ച് വർഷങ്ങൾ</h2>
+      <p class="subtitle">ആത്മീയ മുന്നേറ്റത്തിന്റെ അഭിമാനയാത്ര</p>
+      <p>പാനക്കോടിന്റെ ദീനീ മുന്നേറ്റത്തിൽ നിർണായകമായ പങ്കുവഹിച്ചുകൊണ്ട് ആറര പതിറ്റാണ്ടിന്റെ അഭിമാനകരമായ ചരിത്രം പിന്നിടുകയാണ് നമ്മുടെ പ്രിയപ്പെട്ട അസാസുൽ ഉലൂം ഹയർ സെക്കൻഡറി മദ്രസ. ഏകദേശം 65 വർഷങ്ങൾക്ക് മുമ്പ്, നിസ്വാർത്ഥരും നിഷ്കളങ്കരുമായ നമ്മുടെ നാട്ടിലെ കാരണവന്മാരുടെ ദീർഘവീക്ഷണത്തിലും ആത്മാർത്ഥമായ പരിശ്രമത്തിലുമാണ് ഈ മഹത്തായ സ്ഥാപനം പിറവിയെടുത്തത്. തലമുറകൾക്ക് ദീനീ വിജ്ഞാനത്തിന്റെ വെളിച്ചം പകർന്നുനൽകിയ ഈ സ്ഥാപനം ഇന്ന് നമ്മുടെ നാടിന്റെ അഭിമാനമായി വളർന്നിരിക്കുന്നു.</p>
+      <div class="section">
+        <h3>പഠനമികവും നേട്ടങ്ങളും</h3>
+        <p>സമസ്ത കേരള ഇസ്‌ലാം മത വിദ്യാഭ്യാസ ബോർഡിന്റെ കീഴിൽ 2692-ാം നമ്പറായി രജിസ്റ്റർ ചെയ്യപ്പെട്ട നമ്മുടെ മദ്രസ, ഇന്ന് പാനക്കോട് പ്രദേശത്തെ ദീനീ പ്രവർത്തനങ്ങൾക്ക് നേതൃത്വം നൽകുന്ന പ്രധാന കേന്ദ്രങ്ങളിലൊന്നാണ്. ഒന്നാം ക്ലാസ് മുതൽ പ്ലസ് ടു വരെയുള്ള ക്ലാസുകളിലായി ഇരുന്നൂറിലധികം വിദ്യാർത്ഥികൾ ഇവിടെ വിജ്ഞാനം അഭ്യസിക്കുന്നു. താമരശ്ശേരി റേഞ്ചിലെ പതിനേഴ് മദ്രസകൾക്കിടയിൽ പഠനനിലവാരത്തിലും പാഠ്യേതര മികവിലും ശ്രദ്ധേയമായ സ്ഥാനമാണ് നമ്മുടെ മദ്രസയ്ക്കുള്ളത്. പരീക്ഷകളിലും കലാ-സാഹിത്യ മത്സരങ്ങളിലും ഓരോ വർഷവും മികച്ച നേട്ടങ്ങൾ കൈവരിക്കുന്നു. സമസ്ത കേരള ജംഇയ്യത്തുൽ മുഅല്ലിമീൻ സംഘടിപ്പിക്കുന്ന മുസാബഖയിലും റേഞ്ച് തലത്തിൽ ശ്രദ്ധേയമായ സ്ഥാനങ്ങൾ നേടാൻ നമ്മുടെ വിദ്യാർത്ഥികൾക്ക് സാധിച്ചിട്ടുണ്ട്.</p>
+      </div>
+      <div class="section">
+        <h3>ഹയർ സെക്കൻഡറിയുടെ തുടക്കം</h3>
+        <p>രക്ഷിതാക്കളുടെയും വിദ്യാർത്ഥികളുടെയും മദ്രസാ കമ്മിറ്റി ഭാരവാഹികളുടെയും ഉസ്താദുമാരുടെയും കൂട്ടായ പരിശ്രമത്തിന്റെ ഫലമായി കഴിഞ്ഞ വർഷം പ്ലസ് വൺ ആരംഭിക്കാനും ഈ വർഷം പ്ലസ് ടു ക്ലാസ് കൂടി തുടങ്ങാനും നമുക്ക് സാധിച്ചു. ഇന്ന് പതിനൊന്നോളം വിദ്യാർത്ഥികൾ പ്ലസ് ടു വിഭാഗത്തിൽ പഠനം തുടരുന്നു. മദ്രസയുടെ വളർച്ചയിലെ ഈ മുന്നേറ്റം നമ്മുടെ കൂട്ടായ പരിശ്രമത്തിന്റെയും പ്രതീക്ഷയുടെയും അടയാളമാണ്.</p>
+      </div>
+      <div class="section">
+        <h3>നമ്മുടെ മക്കൾ — നമ്മുടെ സമ്പത്ത്</h3>
+        <p>ഭൗതിക വിദ്യാഭ്യാസത്തോടൊപ്പം ആത്മീയ വിജ്ഞാനവും സദാചാരവും നല്ല സ്വഭാവവും നേടിയെടുക്കുമ്പോഴാണ് ഒരു കുട്ടിയുടെ വ്യക്തിത്വം പൂർണമാകുന്നത്. ഖുർആനിന്റെ വെളിച്ചവും തിരുനബിയുടെ അധ്യാപനങ്ങളും ജീവിതത്തിൽ പകർത്തി, മാതാപിതാക്കളെ ആദരിക്കുകയും സമൂഹത്തിന് നന്മ ചെയ്യുന്നവരായി വളരുകയും ചെയ്യുക എന്നതാണ് നമ്മുടെ സ്വപ്നം. പ്രിയപ്പെട്ട രക്ഷിതാക്കളേ, നമ്മുടെ മക്കൾക്ക് ദീനീ വിദ്യാഭ്യാസം ഉറപ്പാക്കുക. അവരെ മദ്രസയിലേക്ക് അയക്കുകയും പഠനത്തിൽ തുടർച്ച ഉറപ്പുവരുത്തുകയും മദ്രസയുടെ പ്രവർത്തനങ്ങളോട് സഹകരിക്കുകയും ചെയ്യുക. ഇന്നത്തെ നമ്മുടെ പരിശ്രമങ്ങൾ നാളെയുടെ നല്ല തലമുറയെ വാർത്തെടുക്കട്ടെ.</p>
+      </div>
+      <div class="section">
+        <h3>നന്ദിയും പ്രാർത്ഥനയും</h3>
+        <p>ഈ സ്ഥാപനത്തിന്റെ വളർച്ചയ്ക്കായി കാലങ്ങളായി നിസ്വാർത്ഥമായി പ്രവർത്തിച്ച പൂർവികരെയും നാട്ടിലെ ക്ഷേമാകാംക്ഷികളെയും സഹായിച്ചവരെയും സഹകരിച്ചവരെയും നന്ദിയോടെ സ്മരിക്കുന്നു. എല്ലാവർക്കും അല്ലാഹു അർഹമായ പ്രതിഫലം നൽകട്ടെ. മരണപ്പെട്ടുപോയ നമ്മുടെ പൂർവികരുടെ ഖബറുകൾ വിശാലമാക്കുകയും അവരുടെ സൽകർമ്മങ്ങൾ സ്വീകരിക്കുകയും ചെയ്യട്ടെ. നമ്മുടെ മദ്രസയെ അറിവിന്റെയും ആത്മീയതയുടെയും നന്മയുടെയും പ്രകാശകേന്ദ്രമായി നിലനിർത്താൻ അല്ലാഹു തൗഫീഖ് നൽകട്ടെ. ആമീൻ.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="page" data-page="2">
+    <div class="paper encourage">
+      <h2>അർദ്ധവാർഷിക പരീക്ഷാ ഫലം</h2>
+      <p><b>പ്രിയപ്പെട്ട രക്ഷിതാക്കളേ, വിദ്യാർത്ഥികളേ,</b></p>
+      <p>നമ്മുടെ മദ്രസയിലെ അർദ്ധവാർഷിക പരീക്ഷയുടെ ഫലമാണ് ഇനി നിങ്ങൾ കാണാൻ പോകുന്നത്. ഓരോ കുട്ടിയുടെയും പഠനയാത്രയിൽ ഈ ഫലം ഒരു ഇടക്കാല വിലയിരുത്തലാണ്. ചിലർക്ക് പ്രതീക്ഷിച്ചതിലും മികച്ച മാർക്ക് ലഭിച്ചിട്ടുണ്ടാകാം. ചിലർക്ക് കുറവുകൾ ഉണ്ടായിട്ടുണ്ടാകാം. ചില കുട്ടികളുടെ ഹാജറിലും പഠനത്തിലെ തുടർച്ചയിലും കൂടുതൽ ശ്രദ്ധ ആവശ്യമായിരിക്കാം.</p>
+      <p>മാർക്ക് കുറഞ്ഞതിന്റെ പേരിൽ നിരാശരാകേണ്ടതില്ല. എവിടെയാണ് കുറവ് വന്നതെന്ന് തിരിച്ചറിഞ്ഞ് അധ്യാപകരുടെയും രക്ഷിതാക്കളുടെയും സഹായത്തോടെ അത് പരിഹരിക്കാൻ ശ്രമിക്കാം. അടുത്ത പരീക്ഷയ്ക്കായി ഇന്ന് മുതൽ തന്നെ ചെറിയ ചെറിയ ലക്ഷ്യങ്ങൾ നിശ്ചയിച്ച് മുന്നോട്ട് പോകുക.</p>
+      <p>ദീനീ വിദ്യാഭ്യാസത്തിന്റെ ലക്ഷ്യം പരീക്ഷയിൽ നല്ല മാർക്ക് നേടുക എന്നതിൽ മാത്രം ഒതുങ്ങുന്നതല്ല. പഠിക്കുന്ന അറിവ് ജീവിതത്തിൽ പകർത്തുകയും നല്ല സ്വഭാവവും അച്ചടക്കവും വളർത്തുകയും ചെയ്യുക എന്നതാണ് അതിന്റെ യഥാർത്ഥ ലക്ഷ്യം. കുട്ടികളുടെ പഠനത്തിന് രക്ഷിതാക്കൾ ആവശ്യമായ പിന്തുണയും പ്രോത്സാഹനവും നൽകണമെന്ന് അഭ്യർത്ഥിക്കുന്നു.</p>
+      <div class="quote">ഓരോ ദിവസവും പുതിയൊരു അവസരമാണ്.<br>ചെറിയ പരിശ്രമങ്ങൾ വലിയ വിജയങ്ങളിലേക്ക് നയിക്കും.</div>
+      <div class="big-message">
+        <strong>ഇന്നത്തെ മാർക്ക് നിങ്ങളുടെ അവസാന വാക്കല്ല.</strong><br>
+        നാളത്തെ വിജയം നേടാനുള്ള പുതിയൊരു തുടക്കമാണ്.<br>
+        ആത്മവിശ്വാസത്തോടെ മുന്നേറുക…
+      </div>
+      <p style="text-align:center;color:#9b7738;font-weight:800;font-size:18px;margin-top:12px">നമുക്ക് ഇനിയും ഒരുപാട് ദൂരം പോകാനുണ്ട്!</p>
+      <p style="text-align:center;margin-top:12px">അല്ലാഹു നമ്മുടെ മക്കൾക്ക് ഉപകാരപ്രദമായ അറിവും അതനുസരിച്ച് ജീവിക്കാനുള്ള തൗഫീഖും നൽകട്ടെ. ആമീൻ.</p>
+    </div>
+  </section>
+
+  <section class="page" data-page="3">
+    <div class="paper gateway">
+      <img src="https://shahuldarimi984-spec.github.io/madrasa-results-2026/emblem-panakkode.jpg" alt="അസാസുൽ ഉലൂം മദ്രസ എംബ്ലം">
+      <h2>അസാസുൽ ഉലൂം ഹയർ സെക്കൻഡറി മദ്രസ</h2>
+      <div class="year">PANAKKODE · 2026</div>
+      <p>നമ്മുടെ പ്രിയപ്പെട്ട വിദ്യാർത്ഥികളുടെ അർദ്ധവാർഷിക പരീക്ഷാ ഫലത്തിലേക്ക് സ്വാഗതം. താഴെയുള്ള ബട്ടൺ അമർത്തി ക്ലാസ് തിരഞ്ഞെടുത്ത് ഫലം അറിയാം.</p>
+      <button class="start-btn" id="openResults">ഫലം അറിയാൻ</button>
+      <p style="margin-top:19px;font-size:13px">എല്ലാ വിദ്യാർത്ഥികൾക്കും ഹൃദയം നിറഞ്ഞ ആശംസകൾ.<br>അല്ലാഹു അറിവിലും ജീവിതത്തിലും ബറകത്ത് നൽകട്ടെ.</p>
+    </div>
+  </section>
+
+  <div class="navbar">
+    <button class="nav-btn" id="prevPage" type="button" disabled>മുൻപോട്ട്</button>
+    <div class="dots" aria-label="പേജ് സൂചിക">
+      <span class="dot on"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span>
+    </div>
+    <button class="nav-btn primary" id="nextPage" type="button">അടുത്തത്</button>
+  </div>
 </div>
-</section>
 
-<section class="panel hidden" id="studentPanel">
-<h2 id="studentHeading">Students</h2>
-<div class="name-list" id="studentList"></div>
-</section>
-
-<section class="panel hidden" id="dobPanel">
-<h2 id="dobHeading">Date of Birth</h2>
-<label for="dob">Date of Birth</label>
-<input id="dob" type="text" inputmode="numeric" placeholder="DD/MM/YYYY" readonly>
-<button class="action" id="checkBtn" type="button">View Result</button>
-<p class="status" id="status"></p>
-</section>
-
-<section class="result hidden" id="resultPanel">
-<h2>പരീക്ഷാ ഫലം</h2>
-<div id="resultContent"></div>
-<button class="action" onclick="window.print()">പ്രിന്റ് / PDF</button>
-<button class="action" id="againBtn" type="button">മറ്റൊരു വിദ്യാർത്ഥിയുടെ ഫലം</button>
-<button class="action" id="resultBackBtn" type="button">പട്ടികയിലേക്ക് മടങ്ങുക</button>
-</section>
-</main>
-
-<footer>അസാസുൽ ഉലൂം മദ്രസ • പനക്കോട്</footer>
-
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+<div id="resultsScreen">
+  <div class="resultbar">
+    <span>അർദ്ധവാർഷിക പരീക്ഷാ ഫലം</span>
+    <button id="backIntro" type="button">ആമുഖത്തിലേക്ക് മടങ്ങുക</button>
+  </div>
+  <iframe id="resultFrame" title="മദ്രസ പരീക്ഷാ ഫലം"></iframe>
+</div>
 
 <script>
-const SUPABASE_URL="https://nryrifmwzzdxwlxwencv.supabase.co";
-const SUPABASE_KEY="sb_publishable_3yBW4LtifO9DmRN14rm85A_yqV8vm2c";
+const pages=[...document.querySelectorAll(".page")];
+const dots=[...document.querySelectorAll(".dot")];
+const pageNumber=document.getElementById("pageNumber");
+const prev=document.getElementById("prevPage");
+const next=document.getElementById("nextPage");
+let current=0;
 
-const boys=["Muhammad Aflah K","Muhammad Fauzan","Zain Muhammad KC","Sayyid Muad PC","Muhammed Shenzil Hafeez","Shazin Muhammed KT","Muhammad Yafiz","Basil Zaman K","Muhammed Zaihan EP","Azan Ahmad KP","Aizam Hazin"];
-const girls=["Fathima Azra K","Rabeea Mariyam K","Ayisha Noura K","Ayisha Mehar P","Fathima Haniya","Havva Aayath","Dua Kadeeja P"];
+function showPage(index){
+  current=Math.max(0,Math.min(3,index));
+  pages.forEach((p,i)=>p.classList.toggle("active",i===current));
+  dots.forEach((d,i)=>d.classList.toggle("on",i===current));
+  pageNumber.textContent=String(current+1).padStart(2,"0")+" / 04";
+  prev.disabled=current===0;
+  next.disabled=current===3;
+  next.textContent=current===2?"അവസാന പേജ്":"അടുത്തത്";
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+prev.addEventListener("click",()=>showPage(current-1));
+next.addEventListener("click",()=>showPage(current+1));
+document.querySelectorAll(".dot").forEach((d,i)=>d.addEventListener("click",()=>showPage(i)));
 
-const class2Boys=["MUHAMMAD HAMDAN CK","MUHAMMAD NAHIYAN PK","MUHAMMAD FAHMIL VK","MUHAMMAD AFLAH VK","MUHAMMAD HAIZAM K","MUHAMMAD ARZAN MP","HANAN ABDULLA MP","MUHAMMAD HATHIM THEYAZIN","DEMIN MUHAMMAD MT"];
-const class2Girls=["SHEZA ZAINAB","AYISHA EMIN AYRIN","HENZA AYRIN KT","FATHIMA RAYYA","AYISHA ROUHA P","AYISHA JANNA MT"];
-
-const class3Boys=["MUHAMMED QASIM UWAIS V T","AHMED SHAYAN","HADHI MUHAMMED K P","LASHIN AYMAN","MUHAMMAD HATHIM OK","MUHAMMAD AYMAN VK","MUHAMMAD ZAYAN P","MUHAMMAD RAEF K","MUHAMMAD NAJI KT","ASIM MUHAMMAD P","MUHAMMAD DIHAN KP","Muhammed Azam"];
-const class3Girls=["ZEHARA SHERIN KC","AZAH FATHIMA M P","SAYYIDATH FATHIMA SHIFA P C","FATHIMA RIZWA T","AYISHA KENZA TK","HANA FATHIMA OK","AISHA HILA JABIR","KHADEEJATHUL KUBRA PK","ANCHOOM KHADHEEJA K","JAZA MARYAM TK","FILZA FATHIMA C","DUA KHADHEEJA VP","AESHA MALEEKKA MKC","NAISHA FATHIMA K K"];
-
-const class4Boys=["MUHAMMED FAIZAN EK","MUHAMMED SHIFIN VK","ALTHAF PK","MUHAMMED ZAYAN VK","AINAN MASHOOD K K S"];
-const class4Girls=["AZA FATHIMA KT","FATHIMA MEHAR CK","FATHIMA NASMIN C K","LAIBA V K","AYISHA ALISHBA C K","FAISA FATHIMA V K","NAFEESATHUL MISRIYA V K","ZENHA FATHIMA V K","KENZA FASAL","LAIHA SHARAF K"];
-
-const class5Boys=["MUHAMMAD ASMIL.PK","MUHEMMED NAZEL K P","AMAL MALIK","MUHAMMED FAILAN T","MUHAMMED RABEEH","MUHAMMED THAMEEM KP","MUHAMMED IJLAN EK","MUHAMMED HISHAM EK","MUHAMMED MIFTHAH","MUHAMMED LAZAN","SHAHNU RAHMAN K","Muhammed Rajal shan VK"];
-const class5Girls=["FATHIMA NAJA.K","HAIFA FATHIMA.K","FATHIMA NAHVA.T","FATHIMA INSHA.CK","HALA FATHIMA.P","AISHA EZZA K","FATHIMA HAIBA.KP","REJA NIYAS MP","AISHASIYA.P","THANHA FATHIMA V K"];
-
-const class6Boys=["MUHAMMED ZAYAN OK","MUHAMMAD SAMEEN HADI.K","ILLAN ASIF.MP","AMAN MUHAMMED","ZAYAN ABOOBACKER"];
-const class6Girls=["LENA FATHIMA MT","FATHIMA ZAHRA.TV","FATHIMA ESHAL.P","SAYYIDATH FATHIMA HAIZA.VK","NIYA FATHIMA.T","SANAA ZAINAB VT","FATHIMA NASHWA.MP","MARYAM LANIKA KK"];
-
-const class7Boys=["MUHAMMAD ISHAN.CK","MUHAMMAD ATHIF.KT","MUHAMMAD ANAS.P.K","MUHAMMED HANAN P","MUHAMMAD FAIDAN.VK","AHDAL ZANEEN.P","MUHAMMAD HISHAM K","ISMAIL ZAN K","MUHAMMED MISBAH K","MUHAMMAD EBRAHIM BADUSHA.VT","AHMED ZAYAN.P","MUHAMMED RAYAN TV","MUHAMMAD ANSHIF."];
-const class7Girls=["AYISHA NOUR.CK","AYISHA RINHA.KT","SIYA FATHIMA.MP","SIDRATHUL MUNTHAHA.VK","RIMSHA FATHIMA.CK","AISHA ZEBA NK","RIYA FATHIMA EK","HANIYA K","FATHIMA ASHMI PK","SAYYIDA ZAHRA BATHOOL TP","AYISHA ANHA KP","FATHIMA RIFA P","AJVA FATHIMA K","AYSHA AIMAN SAJIR"];
-
-/* CLASS 9 */
-const class9Boys=["Muhammad Mazin VT","Muhammad Zayan MT","Muhammad Shihan KT","Hadi Muhammed TP"];
-const class9Girls=["Fathima Naja K","Fathima Noula VT","Neha Niyas MP"];
-
-/* CLASS 10 */
-const class10Boys=["Muhammad Bishr","Hadi Noor","Hathim Abdul Hakeem","Ahmad Izan"];
-const class10Girls=["Nashwa Fathima","Ayisha Amna","Jaza Maryam","Siya Fathima","Fathima Liya","Fathima Misna","Hadiya Thasni","Fathima Alisha","Ayisha Hemin","Saja Fathima","Khadeeja Mirfa"];
-
-/* PLUS ONE */
-const plus1Girls=["Thamanna Jahana","Nashwa Sherin","Fathima Shaikha","Nafeesathul Misriyya","Janfiya","Amna Fathima","Haya Fathima","Liya Razwin","Naja Fathima"];
-
-/* PLUS TWO */
-const plus2Boys=["ASMIL SHAN","MUHAMMED NIHAL","MUHAMMED ZAIN","SAYYID MUHAMMAD MIQDAD","MUHAMMED SHIBILI"];
-const plus2Girls=["FAHMI JABIN","FATHIMA FIDA","NASWEEHA","RIFA FATHIMA","NIHA NASRIN","HASHIMA FINU"];
-
-const classHolder=document.getElementById("classes");
-const panels=["classPanel","genderPanel","studentPanel","dobPanel","resultPanel"].map(id=>document.getElementById(id));
-let selectedStudent="";
-let selectedClass="1";
-
-history.replaceState({panel:"classPanel"},"","#classPanel");
-
-flatpickr("#dob",{dateFormat:"d/m/Y",allowInput:false,disableMobile:true,maxDate:"today"});
-
-["1","2","3","4","5","6","7","8","9","10","Plus 1","Plus 2"].forEach(c=>{
-  const b=document.createElement("button");
-  b.className="class-btn";
-  b.textContent=c;
-  b.onclick=()=>{
-    if(!["1","2","3","4","5","6","7","9","10","Plus 1","Plus 2"].includes(c)){
-      alert("ഈ ക്ലാസിന്റെ ഫലം പിന്നീട് ലഭ്യമാക്കും.");
-      return;
-    }
-    selectedClass=c;
-    selectedStudent="";
-    document.getElementById("dob").value="";
-    document.getElementById("status").textContent="";
-    if(c==="Plus 1"){
-      document.getElementById("genderHeading").textContent="Plus 1 - GIRLS";
-      showStudents(plus1Girls,"PLUS 1 - GIRLS");
-      return;
-    }
-    document.getElementById("genderHeading").textContent=c==="Plus 2"?"PLUS 2":"Class "+c;
-    showOnly(document.getElementById("genderPanel"));
-  };
-  classHolder.appendChild(b);
+const originalResultUrl="https://rawcdn.githack.com/shahuldarimi984-spec/madrasa-results-2026/1eac794ceb34e4fc914e88fb721b1f6e1cada8e1/index.html";
+document.getElementById("openResults").addEventListener("click",()=>{
+  document.getElementById("intro").style.display="none";
+  document.querySelector(".topline").style.display="none";
+  document.getElementById("resultsScreen").style.display="block";
+  const frame=document.getElementById("resultFrame");
+  if(!frame.src)frame.src=originalResultUrl;
+  window.scrollTo(0,0);
 });
-
-function showOnly(panel,saveHistory=true){
-  panels.forEach(p=>p.classList.add("hidden"));
-  panel.classList.remove("hidden");
-  if(saveHistory)history.pushState({panel:panel.id},"","#"+panel.id);
-}
-
-window.addEventListener("popstate",e=>{
-  const panelId=e.state?.panel||"classPanel";
-  const panel=document.getElementById(panelId);
-  if(panel){
-    panels.forEach(p=>p.classList.add("hidden"));
-    panel.classList.remove("hidden");
-    if(panelId==="studentPanel"){
-      selectedStudent="";
-      document.getElementById("dob").value="";
-      document.getElementById("status").textContent="";
-    }
-    if(panelId==="dobPanel")document.getElementById("status").textContent="";
-  }
+document.getElementById("backIntro").addEventListener("click",()=>{
+  document.getElementById("resultsScreen").style.display="none";
+  document.getElementById("intro").style.display="flex";
+  document.querySelector(".topline").style.display="block";
+  showPage(3);
 });
-
-function showStudents(names,heading){
-  const list=document.getElementById("studentList");
-  list.replaceChildren();
-  document.getElementById("studentHeading").textContent=heading;
-  names.forEach(name=>{
-    const b=document.createElement("button");
-    b.type="button";
-    b.className="name-btn";
-    b.textContent=name;
-    b.onclick=()=>{
-      selectedStudent=name;
-      document.getElementById("dob").value="";
-      document.getElementById("status").textContent="";
-      document.getElementById("dobHeading").textContent=name;
-      showOnly(document.getElementById("dobPanel"));
-    };
-    list.appendChild(b);
-  });
-  showOnly(document.getElementById("studentPanel"));
-}
-
-document.getElementById("boysBtn").onclick=()=>{
-  const names=
-    selectedClass==="2"?class2Boys:
-    selectedClass==="3"?class3Boys:
-    selectedClass==="4"?class4Boys:
-    selectedClass==="5"?class5Boys:
-    selectedClass==="6"?class6Boys:
-    selectedClass==="7"?class7Boys:
-    selectedClass==="9"?class9Boys:
-    selectedClass==="10"?class10Boys:
-    selectedClass==="Plus 2"?plus2Boys:boys;
-  showStudents(names,"BOYS");
-};
-
-document.getElementById("girlsBtn").onclick=()=>{
-  const names=
-    selectedClass==="2"?class2Girls:
-    selectedClass==="3"?class3Girls:
-    selectedClass==="4"?class4Girls:
-    selectedClass==="5"?class5Girls:
-    selectedClass==="6"?class6Girls:
-    selectedClass==="7"?class7Girls:
-    selectedClass==="9"?class9Girls:
-    selectedClass==="10"?class10Girls:
-    selectedClass==="Plus 2"?plus2Girls:girls;
-  showStudents(names,"GIRLS");
-};
-
-function returnToStudentList(){
-  selectedStudent="";
-  document.getElementById("dob").value="";
-  document.getElementById("status").textContent="";
-  if(history.state?.panel==="resultPanel")history.back();
-  else showOnly(document.getElementById("studentPanel"));
-}
-document.getElementById("againBtn").onclick=returnToStudentList;
-document.getElementById("resultBackBtn").onclick=returnToStudentList;
-
-function grade(mark){
-  if(mark===null||mark===undefined)return "ലഭ്യമല്ല";
-  if(mark>=45)return "A+";
-  if(mark>=40)return "A";
-  if(mark>=35)return "B+";
-  if(mark>=30)return "B";
-  if(mark>=25)return "C+";
-  if(mark>=20)return "C";
-  if(mark>=18)return "D+";
-  if(mark>=1)return "D";
-  return "—";
-}
-
-function escapeHTML(value){
-  return String(value??"").replace(/[&<>"']/g,ch=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[ch]));
-}
-
-document.getElementById("checkBtn").onclick=async()=>{
-  const name=selectedStudent;
-  const dobInput=document.getElementById("dob").value.trim();
-  const parts=dobInput.replace(/-/g,"/").split("/");
-  const dob=parts.length===3?`${parts[2]}-${parts[1].padStart(2,"0")}-${parts[0].padStart(2,"0")}`:"";
-  const status=document.getElementById("status");
-
-  if(!name||!dob){status.textContent="പേരും ജനനത്തീയതിയും നൽകുക.";return;}
-  status.textContent="ഫലം പരിശോധിക്കുന്നു...";
-  const btn=document.getElementById("checkBtn");
-  btn.disabled=true;
-
-  try{
-    if(!window.supabase||!window.supabase.createClient)throw new Error("Supabase library did not load");
-    const db=window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
-
-    const rpcName=
-      selectedClass==="2"?"get_class2_result":
-      selectedClass==="3"?"get_class3_result":
-      selectedClass==="4"?"get_class4_result":
-      selectedClass==="5"?"get_class5_result":
-      selectedClass==="6"?"get_class6_result":
-      selectedClass==="7"?"get_class7_result":
-      selectedClass==="9"?"get_class9_result":
-      selectedClass==="10"?"get_class10_result":
-      selectedClass==="Plus 1"?"get_plus1_result":
-      selectedClass==="Plus 2"?"get_plus2_result":
-      "get_class1_result";
-
-    const {data,error}=await db.rpc(rpcName,{p_student_name:name,p_dob:dob});
-    if(error)throw error;
-    const r=Array.isArray(data)?data[0]:data;
-
-    if(!r){status.textContent="നൽകിയ വിവരങ്ങൾ ശരിയല്ല. വീണ്ടും പരിശോധിക്കുക.";return;}
-
-    let subjects;
-    let maxTotal;
-
-    if(selectedClass==="Plus 2"){
-      subjects=[
-        ["ഫിഖ്ഹ്",r.fiqh],
-        ["ലിസാനുൽ ഖുർആൻ",r.lisanul_quran],
-        ["ദുറൂസുൽ ഇഹ്സാൻ",r.durusul_ihsan],
-        ["തഫ്സീറുൽ ഖുർആൻ",r.tafsirul_quran]
-      ];
-      maxTotal=200;
-
-    }else if(selectedClass==="Plus 1"){
-      subjects=[
-        ["ദുറൂസുൽ ഇഹ്സാൻ",r.duroosul_lug],
-        ["ലിസാനുൽ ഖുർആൻ",r.lisanul_quran],
-        ["ഫിഖ്ഹ്",r.fiqh],
-        ["തഫ്സീറുൽ ഖുർആൻ",r.tafsirul_quran]
-      ];
-      maxTotal=200;
-
-    }else if(selectedClass==="10"){
-      subjects=[
-        ["ഫിഖ്ഹ്",r.fiqh],
-        ["ലിസാനുൽ ഖുർആൻ",r.lisanul_quran],
-        ["തഫ്സീറുൽ ഖുർആൻ",r.tafsirul_quran],
-        ["ദുറൂസുൽ ഇഹ്സാൻ",r.durusul_ihsan]
-      ];
-      maxTotal=200;
-
-    }else if(selectedClass==="9"){
-      subjects=[
-        ["ഫിഖ്ഹ്",r.fiqh],["താരീഖ്",r.tarikh],
-        ["ലിസാനുൽ ഖുർആൻ",r.lisanul_quran],["ദുറൂസ്",r.durus]
-      ];
-      maxTotal=200;
-
-    }else if(selectedClass==="7"||selectedClass==="6"){
-      subjects=[
-        ["ഖുർആൻ",r.quran],["ഹിഫ്ള്",r.hifz],["തജ്‌വീദ്",r.tajweed],
-        ["ലിസാനുൽ ഖുർആൻ",r.lisan],["ഫിഖ്ഹ്",r.fiqh],
-        ["ദുറൂസുൽ ഇഹ്സാൻ",r.durus],["താരീഖ്",r.tarikh]
-      ];
-      maxTotal=350;
-
-    }else if(selectedClass==="3"){
-      subjects=[
-        ["ഹിഫ്ള്",r.hifz],["ഖുർആൻ & തദ്രീബ്",r.quran_tadreeb],
-        ["ലിസാനുൽ ഖുർആൻ",r.lisan],["ദുറൂസുൽ ഇഹ്സാൻ",r.durus],
-        ["താരീഖ്",r.tarikh],["അഖീദ",r.aqeeda],["ഫിഖ്ഹ്",r.fiqh]
-      ];
-      maxTotal=350;
-
-    }else if(selectedClass==="5"){
-      subjects=[
-        ["ഹിഫ്ള്",r.hifz_mark],["ഖുർആൻ",r.quran_mark],
-        ["തജ്‌വീദ്",r.tajweed_mark],["ലിസാനുൽ ഖുർആൻ",r.lisan_mark],
-        ["താരീഖ്",r.tarikh_mark],["ഫിഖ്ഹ്",r.fiqh_mark],
-        ["ദുറൂസുൽ ഇഹ്സാൻ",r.durus_mark]
-      ];
-      maxTotal=350;
-
-    }else if(selectedClass==="4"){
-      subjects=[
-        ["ഖുർആൻ & തദ്രീബുത്തിലാവ",r.quran_tadrib_mark],
-        ["ഹിഫ്ള്",r.hifz_mark],["അഖീദ",r.aqeeda_mark],
-        ["ദുറൂസുൽ ഇഹ്സാൻ",r.durusul_ihsan_mark],
-        ["ഫിഖ്ഹ്",r.fiqh_mark],["താരീഖ്",r.tarikh_mark],
-        ["ലിസാനുൽ ഖുർആൻ",r.lisan_mark],["പ്രാക്ടിക്കൽ",r.practical_mark]
-      ];
-      maxTotal=400;
-
-    }else if(selectedClass==="2"){
-      subjects=[
-        ["ഖുർആൻ",r.quran_mark],["ഹിഫ്ള്",r.hifz_mark],
-        ["ഫിഖ്ഹ്",r.fiqh_mark],["ലിസാനുൽ ഖുർആൻ",r.lisan_mark],
-        ["അഖീദ",r.aqeeda_mark],["ദുറൂസുൽ ഇഹ്സാൻ",r.durusul_ihsan_mark]
-      ];
-      maxTotal=300;
-
-    }else{
-      subjects=[
-        ["കേട്ടെഴുത്ത്",r.dictation_mark],
-        ["ദീനിയാത്ത് & അഖ്ലാഖ്",r.deeniyath_mark],
-        ["എഴുത്ത്",r.writing_mark],["വായന",r.reading_mark]
-      ];
-      maxTotal=200;
-    }
-
-    const rows=subjects.map(([label,mark])=>{
-      const value=String(mark??"").trim();
-      const absent=value.toUpperCase()==="A";
-      const missing=mark===null||mark===undefined||value===""||value==="—";
-      const numericMark=missing||absent?null:Number(value);
-      const markText=absent?"A (ഹാജരില്ല)":missing?"—":Number.isFinite(numericMark)?numericMark+" / 50":"—";
-      const gradeText=absent?"ഹാജരില്ല":missing?"—":Number.isFinite(numericMark)?grade(numericMark):"—";
-      return `<tr><td>${escapeHTML(label)}</td><td>${markText}</td><td>${gradeText}</td></tr>`;
-    }).join("");
-
-    const calculatedTotal=subjects.reduce((sum,[,mark])=>{
-      const value=String(mark??"").trim();
-      if(value.toUpperCase()==="A"||value==="—"||value==="")return sum;
-      const n=Number(value);
-      return sum+(Number.isFinite(n)?n:0);
-    },0);
-
-    const total=r.total_marks!==null&&r.total_marks!==undefined?Number(r.total_marks):calculatedTotal;
-    const attendance=Number(r.attendance)||0;
-
-    const workingDays=Number(
-      selectedClass==="Plus 2"?r.working_days:
-      selectedClass==="Plus 1"?r.working_days:
-      selectedClass==="10"?r.working_days:
-      selectedClass==="9"?r.working_days:
-      selectedClass==="7"?r.working_days:
-      selectedClass==="3"?r.working_days:
-      selectedClass==="5"?r.working_days:
-      selectedClass==="6"?r.working_days:
-      r.total_working_days
-    )||(selectedClass==="Plus 2"?147:selectedClass==="Plus 1"?147:selectedClass==="10"?147:selectedClass==="9"?146:selectedClass==="7"?152:selectedClass==="3"?151:selectedClass==="5"?147:selectedClass==="6"?148:selectedClass==="4"?148:selectedClass==="2"?148:140);
-
-    const weakSubjects=subjects.filter(([label,mark])=>{
-      const value=String(mark??"").trim();
-      return value!==""&&value!=="—"&&value.toUpperCase()!=="A"&&Number.isFinite(Number(value))&&Number(value)<25;
-    }).map(([label])=>label);
-
-    const strongSubjects=subjects.filter(([label,mark])=>{
-      const value=String(mark??"").trim();
-      return value!==""&&value!=="—"&&value.toUpperCase()!=="A"&&Number.isFinite(Number(value))&&Number(value)>=40;
-    }).map(([label])=>label);
-
-    let teacherComment="";
-    const ratio=total/maxTotal;
-    if(ratio>=0.90)teacherComment="മികച്ച വിജയം. എല്ലാ വിഷയങ്ങളിലും ഈ മികവ് നിലനിർത്താൻ ശ്രമിക്കുക. അല്ലാഹു കൂടുതൽ അറിവും വിജയവും നൽകട്ടെ.";
-    else if(ratio>=0.80)teacherComment="വളരെ നല്ല പ്രകടനമാണ്. പഠനത്തിലെ ഈ മുന്നേറ്റം തുടരുക. അല്ലാഹു അനുഗ്രഹിക്കട്ടെ.";
-    else if(ratio>=0.65)teacherComment="നല്ല ശ്രമം നടത്തിയിട്ടുണ്ട്. സ്ഥിരമായ പഠനത്തിലൂടെ ഇനിയും മികച്ച വിജയം നേടാൻ കഴിയും. അല്ലാഹു തൗഫീഖ് നൽകട്ടെ.";
-    else if(ratio>=0.50)teacherComment="ഇനിയും മെച്ചപ്പെടാൻ നല്ല അവസരമുണ്ട്. ദിവസവും കുറച്ചുസമയം പഠനത്തിന് മാറ്റിവെച്ച് അധ്യാപകരുടെ നിർദേശങ്ങൾ പാലിക്കുക. അല്ലാഹു സഹായിക്കട്ടെ.";
-    else teacherComment="കൂടുതൽ ശ്രദ്ധയും സ്ഥിരമായ പരിശീലനവും ആവശ്യമാണ്. രക്ഷിതാക്കളും അധ്യാപകരും ചേർന്ന് കുട്ടിക്ക് പിന്തുണ നൽകുക. അല്ലാഹു എളുപ്പമാക്കട്ടെ.";
-
-    if(weakSubjects.length)teacherComment+=" പ്രത്യേകിച്ച് "+weakSubjects.join(", ")+" എന്നീ വിഷയങ്ങളിൽ കൂടുതൽ പരിശീലനം നൽകണം.";
-    if(strongSubjects.length)teacherComment+=" "+strongSubjects.join(", ")+" വിഷയങ്ങളിലെ മികച്ച പ്രകടനം അഭിനന്ദനാർഹമാണ്.";
-
-    if(attendance>=Math.ceil(workingDays*0.90))teacherComment+=" ഹാജർ വളരെ മികച്ചതാണ്.";
-    else if(attendance>=Math.ceil(workingDays*0.80))teacherComment+=" ഹാജർ തൃപ്തികരമാണ്; കഴിയുന്നത്ര സ്ഥിരമായി ക്ലാസിൽ പങ്കെടുക്കണം.";
-    else teacherComment+=" ഹാജർ മെച്ചപ്പെടുത്താൻ പ്രത്യേകം ശ്രദ്ധിക്കണം.";
-
-    // Plus Two-ന് ക്ലാസ് റാങ്ക് ഒഴിവാക്കുന്നു.
-    const rankRow=selectedClass==="Plus 2"?"":`<tr><td>ക്ലാസ് റാങ്ക്</td><td colspan="2"><b>${escapeHTML(r.class_rank??"—")}</b></td></tr>`;
-
-    document.getElementById("resultContent").innerHTML=
-      `<p><b>വിദ്യാർത്ഥി:</b> ${escapeHTML(name)}</p>
-      <table>${rows}
-      <tr><td>ആകെ മാർക്ക്</td><td colspan="2"><b>${total} / ${maxTotal}</b></td></tr>
-      ${rankRow}
-      <tr><td>ഹാജർ</td><td colspan="2"><b>${attendance} / ${workingDays}</b></td></tr>
-      </table>
-      <div class="feedback">
-      <h3>അധ്യാപകന്റെ അഭിപ്രായം</h3>
-      <p id="teacherComment"></p>
-      <h3 style="margin-top:18px">രക്ഷിതാവിന്റെ അഭിപ്രായം</h3>
-      <textarea id="parentComment" placeholder="രക്ഷിതാവിന്റെ അഭിപ്രായം ഇവിടെ എഴുതുക..."></textarea>
-      <button class="whatsapp-btn" id="sendWhatsappBtn" type="button">WhatsApp വഴി പ്രധാനാധ്യാപകന് അയക്കാം</button>
-      </div>
-      <p class="big">അഭിനന്ദനങ്ങൾ!</p>`;
-
-    document.getElementById("teacherComment").textContent=teacherComment;
-
-    document.getElementById("sendWhatsappBtn").onclick=()=>{
-      const parentComment=document.getElementById("parentComment").value.trim();
-      if(!parentComment){alert("രക്ഷിതാവിന്റെ അഭിപ്രായം എഴുതുക.");return;}
-      const message="വിദ്യാർത്ഥി: "+name+"\n"+"ക്ലാസ്: "+selectedClass+"\n"+"രക്ഷിതാവിന്റെ അഭിപ്രായം: "+parentComment;
-      const whatsappUrl="https://wa.me/919645154849?text="+encodeURIComponent(message);
-      window.open(whatsappUrl,"_blank");
-    };
-
-    history.replaceState({panel:"studentPanel"},"","#studentPanel");
-    history.pushState({panel:"resultPanel"},"","#resultPanel");
-    showOnly(document.getElementById("resultPanel"),false);
-    status.textContent="";
-
-  }catch(err){
-    status.textContent="ERROR: "+(err.message||JSON.stringify(err));
-    console.error(err);
-  }finally{
-    btn.disabled=false;
-  }
-};
 </script>
 </body>
 </html>
