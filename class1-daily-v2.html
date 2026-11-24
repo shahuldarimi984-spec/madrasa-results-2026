@@ -1,3 +1,4 @@
+
 <!doctype html>
 <html lang="ml">
 <head>
@@ -7,33 +8,34 @@
 <title>ഒന്നാം ക്ലാസ് | ദൈനംദിന പ്രവർത്തന റിപ്പോർട്ട്</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 <style>
-:root{--navy:#17345f;--blue:#24558a;--gold:#c9a45c;--bg:#f3f6fb;--ink:#20304a;--muted:#68778d;--line:#dce4ef;--green:#16794b;--red:#a83232}
+:root{--navy:#17345f;--blue:#24558a;--gold:#c9a45c;--ink:#20304a;--muted:#68778d;--line:#dce4ef;--green:#16794b;--red:#a83232}
 *{box-sizing:border-box}
 body{margin:0;background:linear-gradient(145deg,#edf3fb,#fff9ee);color:var(--ink);font-family:system-ui,"Noto Sans Malayalam",sans-serif}
-header{background:linear-gradient(120deg,#142b50,#285789);color:#fff;text-align:center;padding:25px 14px 22px;border-bottom:5px solid var(--gold)}
+header{background:linear-gradient(120deg,#142b50,#285789);color:white;text-align:center;padding:25px 14px 22px;border-bottom:5px solid var(--gold)}
 header h1{font-size:clamp(22px,5vw,30px);margin:0 0 6px;color:#ffe7b3}
 header p{margin:4px 0;color:#e6eef9}
 main{max-width:760px;margin:20px auto;padding:0 13px 32px}
-.panel{background:#fff;border:1px solid var(--line);border-radius:17px;padding:18px;margin:0 0 15px;box-shadow:0 7px 22px #18365a0c}
+.panel{background:white;border:1px solid var(--line);border-radius:17px;padding:18px;margin:0 0 15px;box-shadow:0 7px 22px #18365a0c}
 h2{font-size:20px;color:var(--navy);margin:0 0 14px}
 .small{font-size:13px;color:var(--muted);line-height:1.65}
 label{display:block;font-weight:650;margin:12px 0 7px}
-input,textarea{width:100%;padding:12px 13px;border:1px solid #cbd6e5;border-radius:11px;font:inherit;background:#fff;color:var(--ink)}
+input,textarea{width:100%;padding:12px 13px;border:1px solid #cbd6e5;border-radius:11px;font:inherit;background:white;color:var(--ink)}
 button{font:inherit;cursor:pointer;border:0}
 .primary,.secondary{width:100%;padding:13px 15px;border-radius:11px;font-weight:700;margin-top:12px}
-.primary{background:var(--navy);color:white}.secondary{background:#eaf0f8;color:var(--navy)}
+.primary{background:var(--navy);color:white}
+.secondary{background:#eaf0f8;color:var(--navy)}
 button:disabled{opacity:.55;cursor:not-allowed}
 .hidden{display:none!important}
 .choice-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
-.choice{padding:13px;border:1px solid var(--line);background:#f8fafd;border-radius:12px;text-align:center;font-weight:700;color:var(--navy)}
+.choice{padding:16px;border:1px solid var(--line);background:#f8fafd;border-radius:12px;text-align:center;font-weight:800;color:var(--navy);font-size:18px}
 .choice.active{background:#e5effb;border:2px solid var(--blue)}
-.gender-screen{min-height:290px}
+.gender-screen{min-height:250px}
 .back-link{background:transparent;color:var(--blue);font-weight:700;padding:4px 0 14px}
 .selected-student{background:#edf4fc;border:1px solid #b9cce4;border-radius:12px;padding:14px;font-size:19px;font-weight:800;color:var(--navy);margin:10px 0 16px}
-#dob{letter-spacing:1px;text-align:center;font-size:19px}
+#dob{letter-spacing:1px;text-align:center;font-size:20px}
 .name-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
-.name-btn{padding:11px 9px;border:1px solid var(--line);border-radius:10px;background:#fff;text-align:left;color:var(--ink)}
-.name-btn.active{border:2px solid var(--blue);background:#edf4fc}
+.name-btn{padding:13px 10px;border:1px solid var(--line);border-radius:10px;background:white;text-align:left;color:var(--ink);font:inherit}
+.name-btn:active{border:2px solid var(--blue);background:#edf4fc}
 .question{border:1px solid var(--line);border-radius:13px;padding:13px;margin:12px 0}
 .question-title{font-weight:750;line-height:1.6;margin-bottom:10px}
 .options{display:grid;gap:8px}
@@ -46,10 +48,12 @@ button:disabled{opacity:.55;cursor:not-allowed}
 .note{border:1px solid var(--line);border-radius:12px;padding:13px;margin:10px 0;background:#fcfdff}
 .note-text{white-space:pre-wrap;line-height:1.65}
 .badge{display:inline-block;padding:4px 9px;border-radius:30px;font-size:12px;font-weight:700}
-.read{background:#e5f5ed;color:#176a43}.unread{background:#fff0d8;color:#805400}
+.read{background:#e5f5ed;color:#176a43}
+.unread{background:#fff0d8;color:#805400}
 .note-meta{font-size:12px;color:var(--muted);margin:7px 0}
 #loginStatus,#reportStatus,#commentStatus{min-height:22px;margin:10px 0 0;font-size:14px;font-weight:650}
-.good{color:var(--green)}.bad{color:var(--red)}
+.good{color:var(--green)}
+.bad{color:var(--red)}
 footer{text-align:center;padding:18px;color:var(--muted);font-size:12px}
 @media(max-width:430px){.panel{padding:15px}.name-list{grid-template-columns:1fr}.choice-grid{grid-template-columns:1fr}}
 </style>
@@ -62,25 +66,35 @@ footer{text-align:center;padding:18px;color:var(--muted);font-size:12px}
   <p>ഒന്നാം ക്ലാസ് · ദൈനംദിന പ്രവർത്തന റിപ്പോർട്ട്</p>
   <p class="small" style="color:#e7edf7">പനക്കോട്</p>
 </header>
+
 <main>
 <section class="panel" id="loginPanel">
+
+  <!-- ഒന്നാം പേജ് -->
   <div id="genderScreen" class="gender-screen">
-    <h2>പ്രവേശനം</h2>
-    <p class="small">പ്രവേശിക്കാൻ താഴെ BOYS അല്ലെങ്കിൽ GIRLS തിരഞ്ഞെടുക്കുക.</p>
+    <h2>രക്ഷിതാക്കളുടെ അഭിപ്രായം അറിയിക്കുക</h2>
     <div class="choice-grid">
       <button class="choice" id="boysChoice" type="button">BOYS</button>
       <button class="choice" id="girlsChoice" type="button">GIRLS</button>
     </div>
   </div>
+
+  <!-- രണ്ടാം പേജ് -->
   <div id="studentChooser" class="hidden">
     <button class="back-link" id="backToGender" type="button">← മടങ്ങുക</button>
+    <h2 id="genderHeading"></h2>
     <div class="name-list" id="studentList"></div>
   </div>
+
+  <!-- മൂന്നാം പേജ് -->
   <div id="dobArea" class="hidden">
     <button class="back-link" id="backToNames" type="button">← പേരുകളുടെ പട്ടികയിലേക്ക്</button>
     <div class="selected-student" id="selectedStudentName"></div>
-    <label for="dob">ജനനത്തീയതി</label>
-    <input id="dob" type="text" inputmode="numeric" placeholder="DD/MM/YYYY" autocomplete="bday" readonly>
+    <label for="dob">ജനനത്തീയതി (DD/MM/YYYY)</label>
+    <input id="dob" type="text" inputmode="numeric"
+      placeholder="DD/MM/YYYY" autocomplete="bday" maxlength="10">
+    <p class="small">തീയതി / മാസം / വർഷം എന്ന ക്രമത്തിൽ നൽകുക. ഉദാ: 07/04/2018</p>
+
     <label style="display:flex;align-items:center;gap:9px;font-weight:500">
       <input id="rememberDevice" type="checkbox" style="width:18px;height:18px;padding:0">
       ഈ ഉപകരണത്തിൽ പ്രവേശനം ഓർമ്മിക്കുക
@@ -88,9 +102,11 @@ footer{text-align:center;padding:18px;color:var(--muted);font-size:12px}
     <p class="small">സ്വന്തമായി ഉപയോഗിക്കുന്ന ഫോണിൽ മാത്രം ഈ ഓപ്ഷൻ തിരഞ്ഞെടുക്കുക. പങ്കിടുന്ന ഫോണിൽ തിരഞ്ഞെടുക്കരുത്.</p>
     <button class="primary" id="loginBtn" type="button">പ്രവേശിക്കുക</button>
   </div>
+
   <p id="loginStatus" role="status"></p>
 </section>
 
+<!-- കുട്ടിയുടെ പ്രവർത്തന പേജ് -->
 <section class="hidden" id="dashboard">
   <div class="panel">
     <h2 id="welcome">സ്വാഗതം</h2>
@@ -107,6 +123,7 @@ footer{text-align:center;padding:18px;color:var(--muted);font-size:12px}
   <section class="panel">
     <h2>ഇന്നത്തെ പ്രവർത്തനങ്ങൾ</h2>
     <div class="notice">ഇന്നത്തെ റിപ്പോർട്ട് രേഖപ്പെടുത്തേണ്ട സമയം ഇന്ത്യൻ സമയം രാവിലെ 5 മണി മുതൽ അടുത്ത ദിവസം രാവിലെ 5 മണി വരെ മാത്രമാണ്. സമയപരിധി കഴിഞ്ഞാൽ പഴയ ദിവസത്തെ റിപ്പോർട്ട് സമർപ്പിക്കാനോ തിരുത്താനോ കഴിയില്ല.</div>
+
     <form id="dailyForm">
       <div class="question">
         <div class="question-title">1. ഇന്ന് മദ്രസയിലെ പാഠം വായിച്ചു</div>
@@ -115,6 +132,7 @@ footer{text-align:center;padding:18px;color:var(--muted);font-size:12px}
           <label class="option"><input type="radio" name="reading" value="not_read"><span>B: വായിച്ചില്ല</span><span class="mark">0 മാർക്ക്</span></label>
         </div>
       </div>
+
       <div class="question">
         <div class="question-title">2. ഇന്ന് മദ്രസയിലെ പാഠം എഴുതി</div>
         <div class="options">
@@ -122,6 +140,7 @@ footer{text-align:center;padding:18px;color:var(--muted);font-size:12px}
           <label class="option"><input type="radio" name="writing" value="not_written"><span>B: എഴുതിയിട്ടില്ല</span><span class="mark">0 മാർക്ക്</span></label>
         </div>
       </div>
+
       <div class="question">
         <div class="question-title">3. ഇന്ന് എല്ലാ നേരവും ഭക്ഷണം കഴിക്കുമ്പോൾ ബിസ്മി ചൊല്ലി</div>
         <div class="options">
@@ -130,6 +149,7 @@ footer{text-align:center;padding:18px;color:var(--muted);font-size:12px}
           <label class="option"><input type="radio" name="bismillah" value="none"><span>C: തീരെ ചൊല്ലിയില്ല</span><span class="mark">0 മാർക്ക്</span></label>
         </div>
       </div>
+
       <div class="question">
         <div class="question-title">4. ഇന്ന് എല്ലാ നേരവും ഭക്ഷണം കഴിച്ചു കഴിഞ്ഞപ്പോൾ അൽഹംദുലില്ലാഹ് ചൊല്ലി</div>
         <div class="options">
@@ -138,6 +158,7 @@ footer{text-align:center;padding:18px;color:var(--muted);font-size:12px}
           <label class="option"><input type="radio" name="alhamdulillah" value="none"><span>C: തീരെ ചൊല്ലിയില്ല</span><span class="mark">0 മാർക്ക്</span></label>
         </div>
       </div>
+
       <div class="question">
         <div class="question-title">5. ഇന്ന് മൊബൈൽ ഉപയോഗിച്ചു</div>
         <div class="options">
@@ -145,6 +166,7 @@ footer{text-align:center;padding:18px;color:var(--muted);font-size:12px}
           <label class="option"><input type="radio" name="mobile" value="high"><span>B: കൂടുതൽ സമയം</span><span class="mark">0 മാർക്ക്</span></label>
         </div>
       </div>
+
       <div class="scorebar">
         <div><strong>ഇന്നത്തെ ആകെ മാർക്ക്</strong><div class="small">പരമാവധി 25 മാർക്ക്</div></div>
         <div class="score"><span id="liveScore">0</span>/25</div>
@@ -165,334 +187,633 @@ footer{text-align:center;padding:18px;color:var(--muted);font-size:12px}
   </section>
 </section>
 </main>
+
 <footer>അസാസുൽ ഉലൂം മദ്രസ · പനക്കോട്</footer>
 
 <script>
 (() => {
-  "use strict";
-  const SUPABASE_URL = "https://nryrifmwzzdxwlxwencv.supabase.co";
-  const SUPABASE_KEY = "sb_publishable_3yBW4LtifO9DmRN14rm85A_yqV8vm2c";
-  if (!window.supabase || !window.supabase.createClient) {
-    document.getElementById("loginStatus").textContent = "സാങ്കേതിക ലൈബ്രറി ലോഡ് ചെയ്തില്ല. ഇന്റർനെറ്റ് പരിശോധിക്കുക.";
-    return;
-  }
-  const db = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY, {
-    auth: {persistSession:false, autoRefreshToken:false}
-  });
-  const $ = id => document.getElementById(id);
-  let students = [];
-  let selectedStudent = null;
-  let session = null;
-  let reportDate = null;
-  let reportAlreadySubmitted = false;
+"use strict";
 
-  function status(id, message, good=false) {
-    const el = $(id);
-    el.textContent = message || "";
-    el.className = message ? (good ? "good" : "bad") : "";
+const SUPABASE_URL = "https://nryrifmwzzdxwlxwencv.supabase.co";
+const SUPABASE_KEY = "sb_publishable_3yBW4LtifO9DmRN14rm85A_yqV8vm2c";
+
+const $ = id => document.getElementById(id);
+
+if (!window.supabase || !window.supabase.createClient) {
+  $("loginStatus").textContent = "സാങ്കേതിക ലൈബ്രറി ലോഡ് ചെയ്തില്ല. ഇന്റർനെറ്റ് പരിശോധിക്കുക.";
+  return;
+}
+
+const db = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY, {
+  auth: {persistSession:false, autoRefreshToken:false}
+});
+
+let students = [];
+let selectedStudent = null;
+let selectedGender = "";
+let session = null;
+let reportDate = null;
+let reportAlreadySubmitted = false;
+
+function status(id, message, good=false) {
+  const el = $(id);
+  el.textContent = message || "";
+  el.className = message ? (good ? "good" : "bad") : "";
+}
+
+function reportDayIndia() {
+  const parts = new Intl.DateTimeFormat("en-CA", {
+    timeZone:"Asia/Kolkata",
+    year:"numeric",
+    month:"2-digit",
+    day:"2-digit",
+    hour:"2-digit",
+    hourCycle:"h23"
+  }).formatToParts(new Date());
+
+  const v = Object.fromEntries(parts.map(p => [p.type,p.value]));
+  let date = `${v.year}-${v.month}-${v.day}`;
+
+  if (Number(v.hour) < 5) {
+    const d = new Date(`${date}T00:00:00Z`);
+    d.setUTCDate(d.getUTCDate()-1);
+    date = d.toISOString().slice(0,10);
   }
-  function reportDayIndia() {
-    const parts = new Intl.DateTimeFormat("en-CA", {
-      timeZone:"Asia/Kolkata", year:"numeric", month:"2-digit", day:"2-digit",
-      hour:"2-digit", hourCycle:"h23"
-    }).formatToParts(new Date());
-    const v = Object.fromEntries(parts.map(p => [p.type,p.value]));
-    let date = `${v.year}-${v.month}-${v.day}`;
-    if (Number(v.hour) < 5) {
-      const d = new Date(`${date}T00:00:00Z`);
-      d.setUTCDate(d.getUTCDate()-1);
-      date = d.toISOString().slice(0,10);
+  return date;
+}
+
+function prettyDate(value) {
+  const [y,m,d] = value.split("-");
+  return `${d}/${m}/${y}`;
+}
+
+function calcScore(v) {
+  const points = {
+    read:5,not_read:0,
+    written:5,not_written:0,
+    all:5,some:3,none:0,
+    low:5,high:0
+  };
+  return Object.values(v).reduce((n,x)=>n+(points[x] ?? 0),0);
+}
+
+function answers() {
+  const get = name =>
+    document.querySelector(`input[name="${name}"]:checked`)?.value || "";
+
+  return {
+    reading:get("reading"),
+    writing:get("writing"),
+    bismillah:get("bismillah"),
+    alhamdulillah:get("alhamdulillah"),
+    mobile:get("mobile")
+  };
+}
+
+function updateScore() {
+  $("liveScore").textContent = calcScore(answers());
+
+  document.querySelectorAll(".option").forEach(label => {
+    const input = label.querySelector("input");
+    label.style.borderColor = input.checked ? "#24558a" : "";
+    label.style.background = input.checked ? "#edf4fc" : "";
+  });
+}
+
+function saveSession(token, remember) {
+  session = {
+    token,
+    student_id:selectedStudent.student_id,
+    student_name:selectedStudent.student_name,
+    gender:selectedStudent.gender
+  };
+
+  localStorage.removeItem("class1_daily_parent_session");
+  sessionStorage.removeItem("class1_daily_parent_session");
+
+  (remember ? localStorage : sessionStorage)
+    .setItem("class1_daily_parent_session", JSON.stringify(session));
+}
+
+function savedSession() {
+  for (const store of [localStorage,sessionStorage]) {
+    try {
+      const value = store.getItem("class1_daily_parent_session");
+      if (value) return JSON.parse(value);
+    } catch (_) {
+      store.removeItem("class1_daily_parent_session");
     }
-    return date;
   }
-  function prettyDate(value) {
-    const [y,m,d] = value.split("-");
-    return `${d}/${m}/${y}`;
-  }
-  function calcScore(v) {
-    const points = {read:5,not_read:0,written:5,not_written:0,all:5,some:3,none:0,low:5,high:0};
-    return Object.values(v).reduce((n,x)=>n+(points[x] ?? 0),0);
-  }
-  function answers() {
-    const get = name => document.querySelector(`input[name="${name}"]:checked`)?.value || "";
-    return {reading:get("reading"),writing:get("writing"),bismillah:get("bismillah"),
-      alhamdulillah:get("alhamdulillah"),mobile:get("mobile")};
-  }
-  function updateScore() {
-    $("liveScore").textContent = calcScore(answers());
-    document.querySelectorAll(".option").forEach(label => {
-      const input = label.querySelector("input");
-      label.style.borderColor = input.checked ? "#24558a" : "";
-      label.style.background = input.checked ? "#edf4fc" : "";
+  return null;
+}
+
+function clearSession() {
+  localStorage.removeItem("class1_daily_parent_session");
+  sessionStorage.removeItem("class1_daily_parent_session");
+  session = null;
+  selectedStudent = null;
+}
+
+async function loadStudents() {
+  status("loginStatus","കുട്ടികളുടെ പട്ടിക ലഭ്യമാക്കുന്നു...");
+
+  const {data,error} = await db.rpc("class1_parent_student_list");
+  if (error) throw error;
+
+  students = Array.isArray(data) ? data : [];
+
+  status(
+    "loginStatus",
+    students.length ? "" : "കുട്ടികളുടെ പട്ടിക ലഭ്യമല്ല."
+  );
+}
+
+function showGender(genderPart) {
+  selectedStudent = null;
+  selectedGender = genderPart;
+
+  $("genderHeading").textContent =
+    genderPart === "ആൺ" ? "BOYS" : "GIRLS";
+
+  $("genderScreen").classList.add("hidden");
+  $("dobArea").classList.add("hidden");
+  $("studentChooser").classList.remove("hidden");
+
+  $("boysChoice").classList.toggle("active",genderPart === "ആൺ");
+  $("girlsChoice").classList.toggle("active",genderPart === "പെൺ");
+
+  status("loginStatus","");
+  renderNames();
+}
+
+function renderNames() {
+  const filtered = students.filter(s =>
+    String(s.gender || "").includes(selectedGender)
+  );
+
+  const list = $("studentList");
+  list.replaceChildren();
+
+  filtered.forEach(student => {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "name-btn";
+    button.textContent = student.student_name || "പേര് ലഭ്യമല്ല";
+
+    button.addEventListener("click", () => {
+      selectedStudent = student;
+
+      $("selectedStudentName").textContent = student.student_name;
+      $("studentChooser").classList.add("hidden");
+      $("dobArea").classList.remove("hidden");
+      $("dob").value = "";
+
+      if (window._class1DobPicker) {
+        window._class1DobPicker.clear();
+      }
+
+      status("loginStatus","");
+      $("dob").focus();
     });
+
+    list.appendChild(button);
+  });
+
+  if (!filtered.length) {
+    list.textContent = "ഈ വിഭാഗത്തിലെ പേരുകൾ ലഭ്യമല്ല.";
   }
-  function saveSession(token, remember) {
-    session = {token,student_id:selectedStudent.student_id,student_name:selectedStudent.student_name,gender:selectedStudent.gender};
-    localStorage.removeItem("class1_daily_parent_session");
-    sessionStorage.removeItem("class1_daily_parent_session");
-    (remember ? localStorage : sessionStorage).setItem("class1_daily_parent_session", JSON.stringify(session));
-  }
-  function savedSession() {
-    for (const store of [localStorage,sessionStorage]) {
-      try {
-        const value = store.getItem("class1_daily_parent_session");
-        if (value) return JSON.parse(value);
-      } catch (_) { store.removeItem("class1_daily_parent_session"); }
-    }
-    return null;
-  }
-  function clearSession() {
-    localStorage.removeItem("class1_daily_parent_session");
-    sessionStorage.removeItem("class1_daily_parent_session");
-    session = null;
-    selectedStudent = null;
-  }
-  async function loadStudents() {
-    status("loginStatus","കുട്ടികളുടെ പട്ടിക ലഭ്യമാക്കുന്നു...");
-    const {data,error} = await db.rpc("class1_parent_student_list");
-    if (error) throw error;
-    students = Array.isArray(data) ? data : [];
-    status("loginStatus", students.length ? "" : "കുട്ടികളുടെ പട്ടിക ലഭ്യമല്ല.", false);
-  }
-  let selectedGender = "";
-  function showGender(genderPart) {
-    selectedStudent = null;
-    selectedGender = genderPart;
-    $("genderScreen").classList.add("hidden");
-    $("dobArea").classList.add("hidden");
-    $("studentChooser").classList.remove("hidden");
-    $("boysChoice").classList.toggle("active", genderPart === "ആൺ");
-    $("girlsChoice").classList.toggle("active", genderPart === "പെൺ");
-    renderNames();
-  }
-  function renderNames() {
-    const filtered = students.filter(s => (s.gender || "").includes(selectedGender));
-    const list = $("studentList");
-    list.replaceChildren();
-    filtered.forEach(student => {
-      const button = document.createElement("button");
-      button.type = "button";
-      button.className = "name-btn";
-      button.textContent = student.student_name;
-      button.addEventListener("click", () => {
-        selectedStudent = student;
-        $("selectedStudentName").textContent = student.student_name;
-        $("studentChooser").classList.add("hidden");
-        $("dobArea").classList.remove("hidden");
-        $("dob").value = "";
-        if (window._class1DobPicker) window._class1DobPicker.clear();
-      });
-      list.appendChild(button);
-    });
-    if (!filtered.length) list.textContent = "പേരുകൾ ലഭ്യമല്ല.";
-  }
-  function parseDobToISO(value) {
-    const match = /^(\d{2})\/(\d{2})\/(\d{4})$/.exec((value || "").trim());
-    if (!match) return null;
-    const day = Number(match[1]), month = Number(match[2]), year = Number(match[3]);
-    const check = new Date(Date.UTC(year, month - 1, day));
-    if (check.getUTCFullYear() !== year || check.getUTCMonth() !== month - 1 || check.getUTCDate() !== day) return null;
-    if (check > new Date(new Date().toISOString().slice(0,10) + "T00:00:00Z")) return null;
-    return `${match[3]}-${match[2]}-${match[1]}`;
-  }
-  function showDashboard() {
-    $("loginPanel").classList.add("hidden");
-    $("dashboard").classList.remove("hidden");
-    $("welcome").textContent = `സ്വാഗതം, ${session.student_name}`;
+}
+
+/* DD/MM/YYYY തീയതി പരിശോധിച്ച് ISO രൂപത്തിലാക്കുന്നു */
+function parseDobToISO(value) {
+  const match = /^(\d{2})\/(\d{2})\/(\d{4})$/.exec((value || "").trim());
+  if (!match) return null;
+
+  const day = Number(match[1]);
+  const month = Number(match[2]);
+  const year = Number(match[3]);
+
+  const check = new Date(Date.UTC(year,month-1,day));
+
+  if (
+    check.getUTCFullYear() !== year ||
+    check.getUTCMonth() !== month-1 ||
+    check.getUTCDate() !== day
+  ) return null;
+
+  const today = new Date();
+  const todayUTC = Date.UTC(
+    today.getUTCFullYear(),
+    today.getUTCMonth(),
+    today.getUTCDate()
+  );
+
+  if (check.getTime() > todayUTC) return null;
+
+  return `${match[3]}-${match[2]}-${match[1]}`;
+}
+
+function showDashboard() {
+  $("loginPanel").classList.add("hidden");
+  $("dashboard").classList.remove("hidden");
+
+  $("welcome").textContent = `സ്വാഗതം, ${session.student_name}`;
+
+  reportDate = reportDayIndia();
+
+  $("reportWindow").textContent =
+    `റിപ്പോർട്ട് ദിവസം: ${prettyDate(reportDate)} · ഇന്ത്യൻ സമയം രാവിലെ 5 മുതൽ അടുത്ത ദിവസം രാവിലെ 5 വരെ`;
+
+  loadDashboard();
+}
+
+async function loadDashboard() {
+  await Promise.all([loadReport(),loadNotes()]);
+}
+
+async function loadReport() {
+  $("reportState").textContent = "റിപ്പോർട്ട് പരിശോധിക്കുന്നു...";
+  $("reportStatus").textContent = "";
+
+  try {
     reportDate = reportDayIndia();
-    $("reportWindow").textContent = `റിപ്പോർട്ട് ദിവസം: ${prettyDate(reportDate)} · ഇന്ത്യൻ സമയം രാവിലെ 5 മുതൽ അടുത്ത ദിവസം രാവിലെ 5 വരെ`;
-    loadDashboard();
-  }
-  async function loadDashboard() {
-    await Promise.all([loadReport(),loadNotes()]);
-  }
-  async function loadReport() {
-    $("reportState").textContent = "റിപ്പോർട്ട് പരിശോധിക്കുന്നു...";
-    $("reportStatus").textContent = "";
-    try {
-      reportDate = reportDayIndia();
-      const {data,error} = await db.rpc("class1_parent_get_daily_report", {
-        p_token:session.token,p_report_date:reportDate
+
+    const {data,error} = await db.rpc("class1_parent_get_daily_report", {
+      p_token:session.token,
+      p_report_date:reportDate
+    });
+
+    if (error) throw error;
+
+    const row = Array.isArray(data) ? data[0] : data;
+
+    $("dailyForm").reset();
+
+    if (row) {
+      const map = {
+        reading:"reading_choice",
+        writing:"writing_choice",
+        bismillah:"bismillah_choice",
+        alhamdulillah:"alhamdulillah_choice",
+        mobile:"mobile_choice"
+      };
+
+      Object.entries(map).forEach(([name,key]) => {
+        const input = document.querySelector(
+          `input[name="${name}"][value="${row[key]}"]`
+        );
+        if (input) input.checked = true;
       });
-      if (error) throw error;
-      const row = Array.isArray(data) ? data[0] : null;
-      $("dailyForm").reset();
-      if (row) {
-        const map = {reading:"reading_choice",writing:"writing_choice",bismillah:"bismillah_choice",
-          alhamdulillah:"alhamdulillah_choice",mobile:"mobile_choice"};
-        Object.entries(map).forEach(([name,key]) => {
-          const input = document.querySelector(`input[name="${name}"][value="${row[key]}"]`);
-          if (input) input.checked = true;
-        });
-        reportAlreadySubmitted = true;
-        $("reportState").textContent = `ഈ ദിവസത്തെ റിപ്പോർട്ട് സമർപ്പിച്ചിട്ടുണ്ട്. ആകെ മാർക്ക്: ${row.total_score}/25. രാവിലെ 5 മണിക്ക് മുമ്പ് മാത്രമേ തിരുത്താൻ കഴിയൂ.`;
-      } else {
-        reportAlreadySubmitted = false;
-        $("reportState").textContent = "ഇന്നത്തെ റിപ്പോർട്ട് ഇതുവരെ സമർപ്പിച്ചിട്ടില്ല.";
-      }
-      updateScore();
-    } catch (e) {
+
+      reportAlreadySubmitted = true;
+
+      $("reportState").textContent =
+        `ഈ ദിവസത്തെ റിപ്പോർട്ട് സമർപ്പിച്ചിട്ടുണ്ട്. ആകെ മാർക്ക്: ${row.total_score}/25. രാവിലെ 5 മണിക്ക് മുമ്പ് മാത്രമേ തിരുത്താൻ കഴിയൂ.`;
+    } else {
       reportAlreadySubmitted = false;
-      $("reportState").textContent = e.message || "റിപ്പോർട്ട് ലഭ്യമാക്കാനായില്ല.";
+      $("reportState").textContent =
+        "ഇന്നത്തെ റിപ്പോർട്ട് ഇതുവരെ സമർപ്പിച്ചിട്ടില്ല.";
     }
+
+    updateScore();
+
+  } catch (e) {
+    reportAlreadySubmitted = false;
+    $("reportState").textContent =
+      e.message || "റിപ്പോർട്ട് ലഭ്യമാക്കാനായില്ല.";
   }
-  async function loadNotes() {
-    const box = $("teacherNotes");
-    box.textContent = "നിർദ്ദേശങ്ങൾ പരിശോധിക്കുന്നു...";
-    try {
-      const {data,error} = await db.rpc("class1_parent_get_notes",{p_token:session.token});
-      if (error) throw error;
-      box.replaceChildren();
-      if (!Array.isArray(data) || data.length === 0) {
-        box.textContent = "ഇപ്പോൾ പ്രത്യേക നിർദ്ദേശങ്ങളൊന്നുമില്ല.";
-        return;
-      }
-      data.forEach(note => {
-        const card = document.createElement("article");
-        card.className = "note";
-        const text = document.createElement("div");
-        text.className = "note-text";
-        text.textContent = note.note_text || "";
-        const time = document.createElement("div");
-        time.className = "note-meta";
-        time.textContent = note.note_created_at ? new Date(note.note_created_at).toLocaleString("ml-IN") : "";
-        const badge = document.createElement("span");
-        badge.className = "badge " + (note.read_at ? "read" : "unread");
-        badge.textContent = note.read_at ? "വായിച്ചു" : "വായിച്ചിട്ടില്ല";
-        card.append(text,time,badge);
-        if (!note.read_at) {
-          const button = document.createElement("button");
-          button.type = "button";
-          button.className = "secondary";
-          button.textContent = "വായിച്ചു";
-          button.addEventListener("click", async () => {
-            button.disabled = true;
-            const {error:markError} = await db.rpc("class1_parent_mark_note_read",{
-              p_token:session.token,p_note_id:note.note_id
-            });
-            if (markError) { button.disabled=false; alert(markError.message); }
-            else await loadNotes();
-          });
-          card.appendChild(button);
-        } else if (note.read_at) {
-          const readTime = document.createElement("div");
-          readTime.className = "note-meta";
-          readTime.textContent = "വായിച്ച സമയം: " + new Date(note.read_at).toLocaleString("ml-IN");
-          card.appendChild(readTime);
-        }
-        box.appendChild(card);
-      });
-    } catch (e) {
-      box.textContent = "നിർദ്ദേശങ്ങൾ ലഭ്യമാക്കാനായില്ല: " + (e.message || "");
+}
+
+async function loadNotes() {
+  const box = $("teacherNotes");
+  box.textContent = "നിർദ്ദേശങ്ങൾ പരിശോധിക്കുന്നു...";
+
+  try {
+    const {data,error} = await db.rpc(
+      "class1_parent_get_notes",
+      {p_token:session.token}
+    );
+
+    if (error) throw error;
+
+    box.replaceChildren();
+
+    if (!Array.isArray(data) || data.length === 0) {
+      box.textContent = "ഇപ്പോൾ പ്രത്യേക നിർദ്ദേശങ്ങളൊന്നുമില്ല.";
+      return;
     }
+
+    data.forEach(note => {
+      const card = document.createElement("article");
+      card.className = "note";
+
+      const noteText = document.createElement("div");
+      noteText.className = "note-text";
+      noteText.textContent = note.note_text || "";
+
+      const time = document.createElement("div");
+      time.className = "note-meta";
+      time.textContent = note.note_created_at
+        ? new Date(note.note_created_at).toLocaleString("ml-IN")
+        : "";
+
+      const badge = document.createElement("span");
+      badge.className = "badge " + (note.read_at ? "read" : "unread");
+      badge.textContent = note.read_at ? "വായിച്ചു" : "വായിച്ചിട്ടില്ല";
+
+      card.append(noteText,time,badge);
+
+      if (!note.read_at) {
+        const button = document.createElement("button");
+        button.type = "button";
+        button.className = "secondary";
+        button.textContent = "വായിച്ചു";
+
+        button.addEventListener("click",async()=>{
+          button.disabled = true;
+
+          try {
+            const {error:markError} = await db.rpc(
+              "class1_parent_mark_note_read",
+              {
+                p_token:session.token,
+                p_note_id:note.note_id
+              }
+            );
+
+            if (markError) throw markError;
+            await loadNotes();
+
+          } catch (e) {
+            button.disabled = false;
+            alert(e.message || "നിർദ്ദേശം വായിച്ചതായി രേഖപ്പെടുത്താനായില്ല.");
+          }
+        });
+
+        card.appendChild(button);
+      } else {
+        const readTime = document.createElement("div");
+        readTime.className = "note-meta";
+        readTime.textContent =
+          "വായിച്ച സമയം: " + new Date(note.read_at).toLocaleString("ml-IN");
+        card.appendChild(readTime);
+      }
+
+      box.appendChild(card);
+    });
+
+  } catch (e) {
+    box.textContent =
+      "നിർദ്ദേശങ്ങൾ ലഭ്യമാക്കാനായില്ല: " + (e.message || "");
+  }
+}
+
+/* ഒന്നാം പേജിലെ വിഭാഗ ബട്ടണുകൾ */
+$("boysChoice").addEventListener("click",()=>showGender("ആൺ"));
+$("girlsChoice").addEventListener("click",()=>showGender("പെൺ"));
+
+/* രണ്ടാം പേജിൽ നിന്ന് മടങ്ങുക */
+$("backToGender").addEventListener("click",()=>{
+  $("studentChooser").classList.add("hidden");
+  $("genderScreen").classList.remove("hidden");
+  selectedStudent = null;
+  status("loginStatus","");
+});
+
+/* മൂന്നാം പേജിൽ നിന്ന് പേരുകളുടെ പട്ടികയിലേക്ക് */
+$("backToNames").addEventListener("click",()=>{
+  $("dobArea").classList.add("hidden");
+  $("studentChooser").classList.remove("hidden");
+  selectedStudent = null;
+
+  if (window._class1DobPicker) {
+    window._class1DobPicker.clear();
   }
 
-  $("boysChoice").addEventListener("click",()=>showGender("ആൺ"));
-  $("girlsChoice").addEventListener("click",()=>showGender("പെൺ"));
-  $("backToGender").addEventListener("click",()=>{
-    $("studentChooser").classList.add("hidden");
-    $("genderScreen").classList.remove("hidden");
-    selectedStudent = null;
-    status("loginStatus","");
-  });
-  $("backToNames").addEventListener("click",()=>{
-    $("dobArea").classList.add("hidden");
-    $("studentChooser").classList.remove("hidden");
-    selectedStudent = null;
-    if (window._class1DobPicker) window._class1DobPicker.clear();
-    status("loginStatus","");
-  });
-  $("loginBtn").addEventListener("click",async()=>{
-    if (!selectedStudent) return status("loginStatus","ആദ്യം കുട്ടിയുടെ പേര് തിരഞ്ഞെടുക്കുക.");
-    const dobISO = parseDobToISO($("dob").value);
-    if (!dobISO) return status("loginStatus","ജനനത്തീയതി DD/MM/YYYY രൂപത്തിൽ ശരിയായി നൽകുക.");
-    const button = $("loginBtn"); button.disabled = true;
-    status("loginStatus","പ്രവേശനം പരിശോധിക്കുന്നു...");
-    try {
-      const {data,error} = await db.rpc("class1_parent_login",{
-        p_student_id:selectedStudent.student_id,p_dob:dobISO
-      });
-      if (error) throw error;
-      const token = typeof data === "string" ? data : data?.session_token;
-      if (!token) throw new Error("പേര് അല്ലെങ്കിൽ ജനനത്തീയതി പൊരുത്തപ്പെടുന്നില്ല. രജിസ്റ്ററിലുള്ള തീയതി DD/MM/YYYY ക്രമത്തിൽ പരിശോധിക്കുക.");
-      saveSession(token,$("rememberDevice").checked);
-      showDashboard();
-    } catch (e) { status("loginStatus",e.message || "പ്രവേശിക്കാൻ കഴിഞ്ഞില്ല."); }
-    finally { button.disabled = false; }
-  });
-  document.querySelectorAll(".question input").forEach(input=>input.addEventListener("change",updateScore));
-  $("dailyForm").addEventListener("submit",async event=>{
-    event.preventDefault();
-    if (reportDayIndia() !== reportDate) {
-      await loadReport();
-      return status("reportStatus","റിപ്പോർട്ട് ദിവസത്തിന്റെ സമയപരിധി മാറി. പുതിയ ദിവസത്തെ റിപ്പോർട്ട് ഇപ്പോൾ കാണിക്കുന്നു.");
+  $("dob").value = "";
+  status("loginStatus","");
+});
+
+/* DOB ടൈപ്പ് ചെയ്യുമ്പോൾ സ്വയം / ചേർക്കുന്നു */
+$("dob").addEventListener("input",event=>{
+  const digits = event.target.value.replace(/\D/g,"").slice(0,8);
+  const day = digits.slice(0,2);
+  const month = digits.slice(2,4);
+  const year = digits.slice(4,8);
+
+  event.target.value =
+    day +
+    (digits.length > 2 ? "/" + month : "") +
+    (digits.length > 4 ? "/" + year : "");
+});
+
+/* ലോഗിൻ */
+$("loginBtn").addEventListener("click",async()=>{
+  if (!selectedStudent) {
+    return status("loginStatus","ആദ്യം കുട്ടിയുടെ പേര് തിരഞ്ഞെടുക്കുക.");
+  }
+
+  const dobISO = parseDobToISO($("dob").value);
+
+  if (!dobISO) {
+    return status(
+      "loginStatus",
+      "ജനനത്തീയതി DD/MM/YYYY രൂപത്തിൽ ശരിയായി നൽകുക. ഉദാ: 07/04/2018"
+    );
+  }
+
+  const button = $("loginBtn");
+  button.disabled = true;
+  status("loginStatus","പ്രവേശനം പരിശോധിക്കുന്നു...");
+
+  try {
+    const {data,error} = await db.rpc("class1_parent_login",{
+      p_student_id:selectedStudent.student_id,
+      p_dob:dobISO
+    });
+
+    if (error) throw error;
+
+    const row = Array.isArray(data) ? data[0] : data;
+
+    const token = typeof data === "string"
+      ? data
+      : row?.session_token || row?.token;
+
+    if (!token) {
+      throw new Error(
+        "പേര് അല്ലെങ്കിൽ ജനനത്തീയതി പൊരുത്തപ്പെടുന്നില്ല. രജിസ്റ്ററിലുള്ള DOB പരിശോധിക്കുക."
+      );
     }
-    const values = answers();
-    if (Object.values(values).some(v=>!v)) return status("reportStatus","അഞ്ച് ചോദ്യങ്ങൾക്കും ഉത്തരം തിരഞ്ഞെടുക്കുക.");
-    const button = $("submitReport"); button.disabled = true;
-    status("reportStatus","റിപ്പോർട്ട് സമർപ്പിക്കുന്നു...");
-    try {
-      const {data,error} = await db.rpc("class1_parent_submit_daily_report",{
+
+    saveSession(token,$("rememberDevice").checked);
+    showDashboard();
+
+  } catch (e) {
+    status(
+      "loginStatus",
+      e.message || "പ്രവേശിക്കാൻ കഴിഞ്ഞില്ല. വീണ്ടും ശ്രമിക്കുക."
+    );
+  } finally {
+    button.disabled = false;
+  }
+});
+
+/* സ്കോർ പുതുക്കൽ */
+document.querySelectorAll(".question input").forEach(input=>{
+  input.addEventListener("change",updateScore);
+});
+
+/* ദിവസത്തെ റിപ്പോർട്ട് സമർപ്പിക്കൽ */
+$("dailyForm").addEventListener("submit",async event=>{
+  event.preventDefault();
+
+  if (reportDayIndia() !== reportDate) {
+    await loadReport();
+    return status(
+      "reportStatus",
+      "റിപ്പോർട്ട് ദിവസത്തിന്റെ സമയപരിധി മാറി. പുതിയ ദിവസത്തെ റിപ്പോർട്ട് ഇപ്പോൾ കാണിക്കുന്നു."
+    );
+  }
+
+  const values = answers();
+
+  if (Object.values(values).some(v=>!v)) {
+    return status("reportStatus","അഞ്ച് ചോദ്യങ്ങൾക്കും ഉത്തരം തിരഞ്ഞെടുക്കുക.");
+  }
+
+  const button = $("submitReport");
+  button.disabled = true;
+  status("reportStatus","റിപ്പോർട്ട് സമർപ്പിക്കുന്നു...");
+
+  try {
+    const {data,error} = await db.rpc(
+      "class1_parent_submit_daily_report",
+      {
         p_token:session.token,
         p_reading_choice:values.reading,
         p_writing_choice:values.writing,
         p_bismillah_choice:values.bismillah,
         p_alhamdulillah_choice:values.alhamdulillah,
         p_mobile_choice:values.mobile
-      });
-      if (error) throw error;
-      const result = Array.isArray(data) ? data[0] : data;
-      const total = Number(result?.total_score ?? result);
-      status("reportStatus",`റിപ്പോർട്ട് സമർപ്പിച്ചു. ആകെ മാർക്ക്: ${Number.isFinite(total) ? total : calcScore(values)}/25`,true);
-      await loadReport();
-    } catch (e) { status("reportStatus",e.message || "റിപ്പോർട്ട് സമർപ്പിക്കാൻ കഴിഞ്ഞില്ല."); }
-    finally { button.disabled=false; }
-  });
-  $("sendComment").addEventListener("click",async()=>{
-    const comment = $("parentComment").value.trim();
-    if (!comment) return status("commentStatus","അഭിപ്രായം എഴുതുക.");
-    const button = $("sendComment"); button.disabled=true;
-    try {
-      const {error} = await db.rpc("class1_parent_add_comment",{
-        p_token:session.token,p_comment_text:comment
-      });
-      if (error) throw error;
-      $("parentComment").value="";
-      status("commentStatus","അഭിപ്രായം അധ്യാപകർക്ക് അയച്ചു.",true);
-    } catch (e) { status("commentStatus",e.message || "അഭിപ്രായം അയക്കാനായില്ല."); }
-    finally { button.disabled=false; }
-  });
-  $("logoutBtn").addEventListener("click",()=>{
-    clearSession();
-    $("dashboard").classList.add("hidden");
-    $("loginPanel").classList.remove("hidden");
-    $("studentChooser").classList.add("hidden");
-    $("dobArea").classList.add("hidden");
-    $("genderScreen").classList.remove("hidden");
-    if (window._class1DobPicker) window._class1DobPicker.clear();
-    document.querySelectorAll(".choice").forEach(b=>b.classList.remove("active"));
-    status("loginStatus","പുറത്തുകടന്നു.",true);
-  });
-  if (window.flatpickr) {
-    window._class1DobPicker = flatpickr("#dob", {
-      dateFormat: "d/m/Y",
-      allowInput: false,
-      disableMobile: true,
-      maxDate: "today"
-    });
+      }
+    );
+
+    if (error) throw error;
+
+    const result = Array.isArray(data) ? data[0] : data;
+    const total = Number(result?.total_score ?? result);
+
+    status(
+      "reportStatus",
+      `റിപ്പോർട്ട് സമർപ്പിച്ചു. ആകെ മാർക്ക്: ${Number.isFinite(total) ? total : calcScore(values)}/25`,
+      true
+    );
+
+    await loadReport();
+
+  } catch (e) {
+    status(
+      "reportStatus",
+      e.message || "റിപ്പോർട്ട് സമർപ്പിക്കാൻ കഴിഞ്ഞില്ല."
+    );
+  } finally {
+    button.disabled = false;
   }
-  (async()=>{
-    try {
-      const saved = savedSession();
-      if (saved?.token && saved?.student_id && saved?.student_name) {
-        session=saved;
-        selectedStudent={student_id:saved.student_id,student_name:saved.student_name,gender:saved.gender};
-        showDashboard();
-      } else await loadStudents();
-    } catch (e) {
-      status("loginStatus","കുട്ടികളുടെ പട്ടിക ലഭിച്ചില്ല. " + (e.message || ""));
+});
+
+/* രക്ഷിതാവിന്റെ അഭിപ്രായം */
+$("sendComment").addEventListener("click",async()=>{
+  const comment = $("parentComment").value.trim();
+
+  if (!comment) {
+    return status("commentStatus","അഭിപ്രായം എഴുതുക.");
+  }
+
+  const button = $("sendComment");
+  button.disabled = true;
+
+  try {
+    const {error} = await db.rpc("class1_parent_add_comment",{
+      p_token:session.token,
+      p_comment_text:comment
+    });
+
+    if (error) throw error;
+
+    $("parentComment").value = "";
+    status("commentStatus","അഭിപ്രായം അധ്യാപകർക്ക് അയച്ചു.",true);
+
+  } catch (e) {
+    status(
+      "commentStatus",
+      e.message || "അഭിപ്രായം അയക്കാനായില്ല."
+    );
+  } finally {
+    button.disabled = false;
+  }
+});
+
+/* പുറത്തുകടക്കൽ */
+$("logoutBtn").addEventListener("click",()=>{
+  clearSession();
+
+  $("dashboard").classList.add("hidden");
+  $("loginPanel").classList.remove("hidden");
+  $("studentChooser").classList.add("hidden");
+  $("dobArea").classList.add("hidden");
+  $("genderScreen").classList.remove("hidden");
+
+  $("dob").value = "";
+
+  if (window._class1DobPicker) {
+    window._class1DobPicker.clear();
+  }
+
+  document.querySelectorAll(".choice").forEach(b=>{
+    b.classList.remove("active");
+  });
+
+  status("loginStatus","പുറത്തുകടന്നു.",true);
+});
+
+/* കലണ്ടർ: DD/MM/YYYY */
+if (window.flatpickr) {
+  window._class1DobPicker = flatpickr("#dob",{
+    dateFormat:"d/m/Y",
+    allowInput:true,
+    disableMobile:true,
+    maxDate:"today"
+  });
+}
+
+/* തുടക്കത്തിൽ കുട്ടികളുടെ പട്ടിക ലഭ്യമാക്കുക */
+(async()=>{
+  try {
+    const saved = savedSession();
+
+    if (saved?.token && saved?.student_id && saved?.student_name) {
+      session = saved;
+
+      selectedStudent = {
+        student_id:saved.student_id,
+        student_name:saved.student_name,
+        gender:saved.gender
+      };
+
+      showDashboard();
+    } else {
+      await loadStudents();
     }
-  })();
+
+  } catch (e) {
+    status(
+      "loginStatus",
+      "കുട്ടികളുടെ പട്ടിക ലഭിച്ചില്ല. " + (e.message || "")
+    );
+  }
+})();
+
 })();
 </script>
 </body>
