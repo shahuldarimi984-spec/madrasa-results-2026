@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="ml">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#17345f">
+<title>അധ്യാപക ഡാഷ്ബോർഡ് | ദൈനംദിന പ്രവർത്തനം</title>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<style>
+:root{--navy:#17345f;--blue:#24558a;--gold:#c9a45c;--ink:#20304a;--muted:#68778d;--line:#dce4ef;--green:#16794b;--red:#a83232;--soft:#edf4fc}
+*{box-sizing:border-box}body{margin:0;background:linear-gradient(145deg,#edf3fb,#fff9ee);color:var(--ink);font-family:system-ui,"Noto Sans Malayalam",sans-serif}
+header{background:linear-gradient(120deg,#142b50,#285789);color:#fff;text-align:center;padding:24px 14px;border-bottom:5px solid var(--gold)}
+h1{font-size:clamp(22px,5vw,29px);margin:0;color:#ffe7b3}header p{margin:6px 0 0}
+main{max-width:850px;margin:20px auto;padding:0 13px 36px}.panel{background:#fff;border:1px solid var(--line);border-radius:16px;padding:18px;margin-bottom:15px;box-shadow:0 7px 22px #18365a0c}
+h2{font-size:20px;color:var(--navy);margin:0 0 13px}label{display:block;font-weight:700;margin:12px 0 6px}
+input,select,textarea{width:100%;padding:12px;border:1px solid #cbd6e5;border-radius:10px;background:#fff;color:var(--ink);font:inherit;min-height:46px}
+textarea{min-height:125px;resize:vertical}button{font:inherit;cursor:pointer;border:0;border-radius:10px;padding:12px 15px;font-weight:750}
+button:disabled{opacity:.55;cursor:not-allowed}.primary{background:var(--navy);color:white;width:100%;margin-top:14px}.secondary{background:#eaf0f8;color:var(--navy);width:100%;margin-top:10px}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:12px;align-items:center}.hidden{display:none!important}.small{font-size:13px;color:var(--muted);line-height:1.6}
+#status,#loginStatus{min-height:22px;font-weight:650;margin:9px 0}.good{color:var(--green)}.bad{color:var(--red)}
+.note{border:1px solid var(--line);border-radius:12px;padding:13px;margin:10px 0;background:#fcfdff}.note p{white-space:pre-wrap;line-height:1.65;margin:8px 0;overflow-wrap:anywhere}
+.meta{font-size:12px;color:var(--muted);line-height:1.6}.pill{display:inline-block;background:var(--soft);color:var(--navy);padding:4px 9px;border-radius:20px;font-size:12px;font-weight:700}
+.topline{display:flex;justify-content:space-between;gap:12px;align-items:center}.topline h2{margin:0}.role{display:inline-block;background:#fff2d7;color:#73531b;border-radius:20px;padding:5px 10px;font-size:12px;font-weight:750;margin-top:5px}
+.empty{padding:15px;text-align:center;color:var(--muted);background:#f7f9fc;border-radius:10px}.hint{background:#f4f8fd;border-left:4px solid var(--gold);padding:10px 12px;border-radius:8px}
+@media(max-width:520px){.row{grid-template-columns:1fr}.panel{padding:15px}.topline{align-items:flex-start}}
+</style>
+</head>
+<body>
+<header><h1>അസാസുൽ ഉലൂം മദ്രസ</h1><p>അധ്യാപക ഡാഷ്ബോർഡ് · ദൈനംദിന പ്രവർത്തനം</p></header>
+<main>
+<section class="panel" id="loginPanel">
+ <h2>അധ്യാപക ലോഗിൻ</h2>
+ <p class="small">അധികൃത അധ്യാപക Supabase അക്കൗണ്ട് ഉപയോഗിച്ച് പ്രവേശിക്കുക.</p>
+ <label for="email">ഇമെയിൽ</label><input id="email" type="email" autocomplete="username">
+ <label for="password">പാസ്‌വേഡ്</label><input id="password" type="password" autocomplete="current-password">
+ <button class="primary" id="loginBtn">പ്രവേശിക്കുക</button><p id="loginStatus" role="status" aria-live="polite"></p>
+</section>
+<section class="hidden" id="app">
+ <div class="panel row">
+  <div><h2 id="teacherName">അധ്യാപകൻ</h2><span class="role" id="teacherRole"></span><p class="small" id="teacherScope"></p></div>
+  <div><button class="secondary" id="logoutBtn">പുറത്തുകടക്കുക</button></div>
+ </div>
+ <section class="panel">
+  <h2>പുതിയ നിർദ്ദേശം അയക്കുക</h2>
+  <label for="audience">ആർക്കാണ് അയക്കേണ്ടത്?</label>
+  <select id="audience">
+   <option value="ALL">എല്ലാ ക്ലാസുകളിലെയും രക്ഷിതാക്കൾ</option>
+   <option value="CLASS">ഒരു ക്ലാസിലെ എല്ലാ രക്ഷിതാക്കൾക്കും</option>
+   <option value="STUDENT">ഒരു കുട്ടിയുടെ രക്ഷിതാവിന്</option>
+  </select>
+  <div id="classWrap" class="hidden"><label for="classCode">ക്ലാസ് തിരഞ്ഞെടുക്കുക</label><select id="classCode"><option value="">ക്ലാസ് തിരഞ്ഞെടുക്കുക</option></select></div>
+  <div id="studentWrap" class="hidden"><label for="studentKey">കുട്ടിയെ തിരഞ്ഞെടുക്കുക</label><select id="studentKey" disabled><option value="">ആദ്യം ക്ലാസ് തിരഞ്ഞെടുക്കുക</option></select></div>
+  <label for="message">സന്ദേശം / നിർദ്ദേശം</label>
+  <textarea id="message" maxlength="3000" placeholder="രക്ഷിതാക്കൾക്ക് നൽകേണ്ട നിർദ്ദേശം എഴുതുക"></textarea>
+  <p class="small hint" id="permissionHint">ഹെഡ്ടീച്ചർക്ക് എല്ലാ ക്ലാസുകളിലേക്കും കുട്ടികളിലേക്കും സന്ദേശം അയക്കാം. ക്ലാസ് ടീച്ചർക്ക് അനുവദിച്ച സ്വന്തം ക്ലാസുകളിലേക്കും അവിടെയുള്ള കുട്ടികൾക്കുമാത്രമേ അയക്കാൻ കഴിയൂ. അന്തിമ അനുമതി Supabase പരിശോധിക്കും.</p>
+  <button class="primary" id="sendBtn">സന്ദേശം അയക്കുക</button><p id="status" role="status" aria-live="polite"></p>
+ </section>
+ <section class="panel">
+  <h2>അയച്ച നിർദ്ദേശങ്ങൾ</h2><p class="small">ഓരോ സന്ദേശവും എത്ര രക്ഷിതാക്കൾ വായിച്ചു എന്ന് ഇവിടെ കാണാം. വായിച്ചവരുടെ എണ്ണം മാത്രം കാണിക്കുന്നതാണ്; വായിക്കാത്തവരുടെ എണ്ണം ഇതിൽനിന്ന് കണക്കാക്കുന്നില്ല.</p>
+  <div id="sentList"><div class="empty">വിവരങ്ങൾ ലോഡ് ചെയ്യുന്നു...</div></div>
+  <button class="secondary" id="refreshBtn">പുതുക്കുക</button>
+ </section>
+</section>
+</main>
+<script>
+(()=>{
+"use strict";
+const SUPABASE_URL="https://nryrifmwzzdxwlxwencv.supabase.co";
+const SUPABASE_KEY="sb_publishable_3yBW4LtifO9DmRN14rm85A_yqV8vm2c";
+const $=id=>document.getElementById(id);
+const db=window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
+let teacher=null, targets=[], classMap=new Map(), studentMap=new Map();
+function say(id,msg,ok=false){$(id).textContent=msg;$(id).className=msg?(ok?"good":"bad"):"";}
+function setOptions(select,items,placeholder,labelFn,valueFn){
+ select.replaceChildren();const first=document.createElement("option");first.value="";first.textContent=placeholder;select.append(first);
+ items.forEach(item=>{const o=document.createElement("option");o.value=valueFn(item);o.textContent=labelFn(item);select.append(o);});
+}
+function classesForTeacher(){return [...new Map(targets.map(t=>[t.class_code,{class_code:t.class_code,class_name:t.class_name}])).values()];}
+function studentsForClass(code){return targets.filter(t=>t.class_code===code&&t.student_key&&t.student_name).sort((a,b)=>a.student_name.localeCompare(b.student_name,"ml"));}
+function audienceUI(){
+ const a=$("audience").value;
+ $("classWrap").classList.toggle("hidden",a==="ALL");
+ $("studentWrap").classList.toggle("hidden",a!=="STUDENT");
+ if(a==="ALL"){$("classCode").value="";setOptions($("studentKey"),[],"ആദ്യം ക്ലാസ് തിരഞ്ഞെടുക്കുക",x=>x.student_name,x=>x.student_key);$("studentKey").disabled=true;}
+ if(a==="CLASS"){$("studentKey").value="";}
+ if(a==="STUDENT")fillStudents();
+}
+function fillStudents(){
+ const code=$("classCode").value;const list=studentsForClass(code);
+ setOptions($("studentKey"),list,code?(list.length?"കുട്ടിയെ തിരഞ്ഞെടുക്കുക":"ഈ ക്ലാസിൽ സജീവ കുട്ടികളെ കണ്ടെത്തിയില്ല") : "ആദ്യം ക്ലാസ് തിരഞ്ഞെടുക്കുക",x=>x.student_name,x=>x.student_key);
+ $("studentKey").disabled=!code||!list.length;
+}
+async function loadProfile(){
+ const {data:{user},error}=await db.auth.getUser();
+ if(error||!user)throw new Error("ലോഗിൻ വീണ്ടും നടത്തുക");
+ const {data:profileData,error:e}=await db.rpc("daily_work_teacher_get_profile");
+ if(e)throw e;
+ const profile=Array.isArray(profileData)?profileData[0]:profileData;
+ if(!profile)throw new Error("ഈ അക്കൗണ്ടിന് സജീവ അധ്യാപക അനുമതിയില്ല");
+ if(!["HEAD_TEACHER","CLASS_TEACHER"].includes(profile.role))throw new Error("അധ്യാപക പദവി ശരിയല്ല");
+ teacher=profile;
+ const data=profile;
+ $("teacherName").textContent=data.display_name||"അധ്യാപകൻ";
+ $("teacherRole").textContent=data.role==="HEAD_TEACHER"?"ഹെഡ്ടീച്ചർ":"ക്ലാസ് ടീച്ചർ";
+ $("teacherScope").textContent=data.role==="HEAD_TEACHER"?"എല്ലാ ക്ലാസുകളുടെയും സന്ദേശ നിയന്ത്രണം":"നിങ്ങൾക്ക് അനുവദിച്ച ക്ലാസുകളുടെ സന്ദേശ നിയന്ത്രണം";
+ $("audience").querySelector('option[value="ALL"]').disabled=data.role!=="HEAD_TEACHER";
+ if(data.role==="CLASS_TEACHER")$("audience").value="CLASS";
+}
+async function loadTargets(){
+ const {data,error}=await db.rpc("daily_work_teacher_get_targets");
+ if(error)throw error;
+ targets=data||[];classMap.clear();studentMap.clear();
+ targets.forEach(t=>{classMap.set(t.class_code,t.class_name);if(t.student_key)studentMap.set(t.student_key,t.student_name);});
+ const classes=classesForTeacher();
+ setOptions($("classCode"),classes,"ക്ലാസ് തിരഞ്ഞെടുക്കുക",x=>x.class_name+" ("+x.class_code+")",x=>x.class_code);
+ if(!classes.length)throw new Error("ഈ അധ്യാപക അക്കൗണ്ടിന് ക്ലാസ് അനുവദിച്ചിട്ടില്ല");
+}
+async function enterApp(){
+ await loadProfile();await loadTargets();
+ $("loginPanel").classList.add("hidden");$("app").classList.remove("hidden");
+ audienceUI();await loadNotes();
+}
+$("audience").addEventListener("change",audienceUI);
+$("classCode").addEventListener("change",()=>{if($("audience").value==="STUDENT")fillStudents();});
+$("loginBtn").addEventListener("click",async()=>{
+ $("loginBtn").disabled=true;say("loginStatus","പ്രവേശിക്കുന്നു...");
+ try{const {error}=await db.auth.signInWithPassword({email:$("email").value.trim(),password:$("password").value});if(error)throw error;await enterApp();say("loginStatus","");}
+ catch(e){say("loginStatus",e.message||"പ്രവേശിക്കാൻ കഴിഞ്ഞില്ല");}
+ finally{$("loginBtn").disabled=false;}
+});
+$("sendBtn").addEventListener("click",async()=>{
+ const audience=$("audience").value,cls=audience==="ALL"?null:($("classCode").value||null);
+ const key=audience==="STUDENT"?($("studentKey").value||null):null,msg=$("message").value.trim();
+ if(!msg)return say("status","സന്ദേശം എഴുതുക");
+ if(audience!=="ALL"&&!cls)return say("status","ക്ലാസ് തിരഞ്ഞെടുക്കുക");
+ if(audience==="STUDENT"&&!key)return say("status","കുട്ടിയെ തിരഞ്ഞെടുക്കുക");
+ if(audience==="CLASS"&&!classMap.has(cls))return say("status","ഈ ക്ലാസ് തിരഞ്ഞെടുക്കാൻ അനുമതിയില്ല");
+ if(audience==="STUDENT"&&!studentsForClass(cls).some(s=>s.student_key===key))return say("status","ഈ കുട്ടിയെ തിരഞ്ഞെടുക്കാൻ അനുമതിയില്ല");
+ $("sendBtn").disabled=true;say("status","സന്ദേശം അയക്കുന്നു...");
+ try{
+  const {error}=await db.rpc("daily_work_teacher_send_note",{p_audience_type:audience,p_class_code:cls,p_student_key:key,p_message:msg});
+  if(error)throw error;
+  $("message").value="";say("status","സന്ദേശം വിജയകരമായി അയച്ചു.",true);await loadNotes();
+ }catch(e){say("status",e.message||"സന്ദേശം അയക്കാനായില്ല");}
+ finally{$("sendBtn").disabled=false;}
+});
+async function loadNotes(){
+ $("sentList").textContent="ലോഡ് ചെയ്യുന്നു...";
+ try{
+  const {data,error}=await db.rpc("daily_work_teacher_list_notes");if(error)throw error;
+  $("sentList").replaceChildren();
+  if(!data||!data.length){const empty=document.createElement("div");empty.className="empty";empty.textContent="ഇതുവരെ സന്ദേശങ്ങളൊന്നും അയച്ചിട്ടില്ല.";$("sentList").append(empty);return;}
+  data.forEach(n=>{
+   const box=document.createElement("article");box.className="note";
+   const tag=document.createElement("span");tag.className="pill";
+   const key=n.student_key||"";
+   tag.textContent=n.audience_type==="ALL"?"എല്ലാ ക്ലാസുകളും":n.audience_type==="CLASS"?"ക്ലാസ് "+(classMap.get(n.class_code)||n.class_code):"കുട്ടി · "+(studentMap.get(key)||key);
+   const p=document.createElement("p");p.textContent=n.message||"";
+   const meta=document.createElement("div");meta.className="meta";
+   const dt=n.created_at?new Date(n.created_at).toLocaleString("ml-IN"):"";
+   meta.textContent=dt+" · വായിച്ച രക്ഷിതാക്കൾ: "+(Number(n.read_count)||0);
+   box.append(tag,p,meta);$("sentList").append(box);
+  });
+ }catch(e){$("sentList").textContent="സന്ദേശങ്ങൾ ലഭിച്ചില്ല: "+(e.message||"");}
+}
+$("refreshBtn").addEventListener("click",loadNotes);
+$("logoutBtn").addEventListener("click",async()=>{
+ await db.auth.signOut();teacher=null;targets=[];$("app").classList.add("hidden");$("loginPanel").classList.remove("hidden");say("loginStatus","പുറത്തുകടന്നു.",true);
+});
+db.auth.getSession().then(async({data})=>{if(data.session){try{await enterApp();}catch(e){await db.auth.signOut();say("loginStatus",e.message||"ഡാഷ്ബോർഡ് തുറക്കാനായില്ല");}}});
+})();
+</script>
+</body>
+</html>
