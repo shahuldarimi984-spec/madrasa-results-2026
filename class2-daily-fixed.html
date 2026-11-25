@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="ml">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#17345f">
+<title>ക്ലാസ് 2 | ദൈനംദിന പ്രവർത്തന റിപ്പോർട്ട്</title>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<style>
+:root{--navy:#17345f;--blue:#24558a;--gold:#c9a45c;--ink:#20304a;--muted:#68778d;--line:#dce4ef;--green:#16794b;--red:#a83232}
+*{box-sizing:border-box}body{margin:0;background:linear-gradient(145deg,#edf3fb,#fff9ee);color:var(--ink);font-family:system-ui,"Noto Sans Malayalam",sans-serif}
+header{background:linear-gradient(120deg,#142b50,#285789);color:white;text-align:center;padding:25px 14px 22px;border-bottom:5px solid var(--gold)}
+header h1{font-size:clamp(22px,5vw,30px);margin:0 0 6px;color:#ffe7b3}header p{margin:4px 0;color:#e6eef9}
+main{max-width:760px;margin:20px auto;padding:0 13px 32px}.panel{background:white;border:1px solid var(--line);border-radius:17px;padding:18px;margin:0 0 15px;box-shadow:0 7px 22px #18365a0c}
+h2{font-size:20px;color:var(--navy);margin:0 0 14px}.small{font-size:13px;color:var(--muted);line-height:1.65}
+button,input{font:inherit}button{cursor:pointer;border:0}.primary,.secondary{width:100%;padding:13px 15px;border-radius:11px;font-weight:700;margin-top:12px}
+.primary{background:var(--navy);color:white}.secondary{background:#eaf0f8;color:var(--navy)}button:disabled{opacity:.55;cursor:not-allowed}
+.hidden{display:none!important}.choice-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.choice{padding:16px;border:1px solid var(--line);background:#f8fafd;border-radius:12px;text-align:center;font-weight:800;color:var(--navy);font-size:18px}
+.back-link{background:transparent;color:var(--blue);font-weight:700;padding:4px 0 14px}.name-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.name-btn{padding:13px 10px;border:1px solid var(--line);border-radius:10px;background:white;text-align:left;color:var(--ink)}
+input[type=date]{width:100%;padding:12px;border:1px solid #cbd6e5;border-radius:11px}
+.selected{background:#edf4fc;border:1px solid #b9cce4;border-radius:12px;padding:14px;font-size:19px;font-weight:800;color:var(--navy);margin:10px 0 16px}
+.question{border:1px solid var(--line);border-radius:13px;padding:13px;margin:12px 0}.question-title{font-weight:750;line-height:1.6;margin-bottom:10px}
+.options{display:grid;gap:8px}.option{display:flex;align-items:center;gap:10px;border:1px solid #e1e7ef;border-radius:10px;padding:10px;background:#fbfcfe;cursor:pointer}
+.option input{width:18px;height:18px;accent-color:var(--blue);flex:0 0 auto}.mark{margin-left:auto;color:var(--green);font-weight:750;white-space:nowrap;font-size:13px}
+.scorebar{display:flex;align-items:center;justify-content:space-between;background:#edf4fc;border-radius:12px;padding:14px;margin:14px 0}.score{font-size:25px;font-weight:850;color:var(--green)}
+.notice{border:1px solid #eadab5;background:#fff9e9;padding:12px;border-radius:11px;margin:10px 0;line-height:1.65}
+.note{border:1px solid var(--line);border-radius:12px;padding:13px;margin:10px 0;background:#fcfdff}.note-text{white-space:pre-wrap;line-height:1.65}
+.badge{display:inline-block;padding:4px 9px;border-radius:30px;font-size:12px;font-weight:700}.read{background:#e5f5ed;color:#176a43}.unread{background:#fff0d8;color:#805400}
+.status{min-height:22px;margin:10px 0 0;font-size:14px;font-weight:650}.good{color:var(--green)}.bad{color:var(--red)}
+footer{text-align:center;padding:18px;color:var(--muted);font-size:12px}@media(max-width:430px){.panel{padding:15px}.name-list{grid-template-columns:1fr}}
+</style></head>
+<body>
+<header><h1>അസാസുൽ ഉലൂം മദ്രസ</h1><p>ക്ലാസ് 2 · ദൈനംദിന പ്രവർത്തന റിപ്പോർട്ട്</p><p class="small" style="color:#e7edf7">പനക്കോട്</p></header>
+<main>
+<section class="panel" id="loginPanel">
+ <div id="genderScreen"><h2>വിഭാഗം തിരഞ്ഞെടുക്കുക</h2><div class="choice-grid"><button class="choice" id="boys">BOYS</button><button class="choice" id="girls">GIRLS</button></div></div>
+ <div id="studentScreen" class="hidden"><button class="back-link" id="backGender">← മടങ്ങുക</button><h2 id="genderTitle"></h2><div class="name-list" id="names"></div></div>
+ <div id="dobScreen" class="hidden"><button class="back-link" id="backNames">← പേരുകളിലേക്ക്</button><div class="selected" id="chosenName"></div><label for="dob">ജനനത്തീയതി</label><input id="dob" type="date"><p class="small">രജിസ്റ്ററിലുള്ള ജനനത്തീയതി തിരഞ്ഞെടുക്കുക.</p><button class="primary" id="login">പ്രവേശിക്കുക</button></div>
+ <p id="loginStatus" class="status" role="status"></p>
+</section>
+<section id="dashboard" class="hidden">
+ <div class="panel"><h2 id="welcome"></h2><p id="window" class="small"></p><button class="secondary" id="logout">പുറത്തുകടക്കുക</button></div>
+ <div class="panel"><h2>അധ്യാപകന്റെ പ്രത്യേക നിർദ്ദേശങ്ങൾ</h2><div id="notes" class="small">നിർദ്ദേശങ്ങൾ പരിശോധിക്കുന്നു...</div></div>
+ <div class="panel"><h2>ഇന്നത്തെ പ്രവർത്തനങ്ങൾ</h2><div class="notice">റിപ്പോർട്ട് ദിവസം ഇന്ത്യൻ സമയം രാവിലെ 5 മണി മുതൽ അടുത്ത ദിവസം രാവിലെ 5 മണി വരെയാണ്.</div>
+  <form id="reportForm"><div id="questions"></div><div class="scorebar"><div><strong>ഇന്നത്തെ ആകെ മാർക്ക്</strong><div class="small">പരമാവധി 24 മാർക്ക്</div></div><div class="score"><span id="score">0</span>/24</div></div><button class="primary" id="submit">റിപ്പോർട്ട് സമർപ്പിക്കുക</button></form><p id="reportStatus" class="status" role="status"></p>
+ </div>
+</section></main><footer>അസാസുൽ ഉലൂം മദ്രസ · ക്ലാസ് 2</footer>
+<script>
+(()=>{'use strict';
+const URL='https://nryrifmwzzdxwlxwencv.supabase.co',KEY='sb_publishable_3yBW4LtifO9DmRN14rm85A_yqV8vm2c',CLASS_CODE='2';
+const db=supabase.createClient(URL,KEY,{auth:{persistSession:false,autoRefreshToken:false}}),$=id=>document.getElementById(id);
+let student=null,gender='',token=null,questions=[];const storeKey='daily_work_parent_'+CLASS_CODE;
+function msg(id,t,ok=false){$(id).textContent=t||'';$(id).className='status '+(t?(ok?'good':'bad'):'');}
+function reportDay(){let p=new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Kolkata',year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',hourCycle:'h23'}).formatToParts(new Date()),v=Object.fromEntries(p.map(x=>[x.type,x.value])),d=new Date(Date.UTC(+v.year,+v.month-1,+v.day));if(+v.hour<5)d.setUTCDate(d.getUTCDate()-1);return d.toISOString().slice(0,10);}
+function showLogin(){$('loginPanel').classList.remove('hidden');$('dashboard').classList.add('hidden');$('genderScreen').classList.remove('hidden');$('studentScreen').classList.add('hidden');$('dobScreen').classList.add('hidden');}
+async function loadStudents(){msg('loginStatus','കുട്ടികളുടെ പട്ടിക ലഭ്യമാക്കുന്നു...');let {data,error}=await db.rpc('daily_work_parent_student_list',{p_class_code:CLASS_CODE,p_gender:gender});if(error)throw error;$('genderScreen').classList.add('hidden');$('studentScreen').classList.remove('hidden');$('genderTitle').textContent=gender;$('names').replaceChildren();(data||[]).forEach(s=>{let b=document.createElement('button');b.className='name-btn';b.textContent=s.student_name;b.onclick=()=>{student=s;$('chosenName').textContent=s.student_name;$('studentScreen').classList.add('hidden');$('dobScreen').classList.remove('hidden');$('dob').value='';};$('names').append(b);});if(!data?.length)$('names').textContent='ഈ വിഭാഗത്തിൽ കുട്ടികളെ കണ്ടെത്താനായില്ല.';msg('loginStatus','');}
+$('boys').onclick=()=>{gender='BOYS';loadStudents().catch(e=>msg('loginStatus','പട്ടിക ലഭിച്ചില്ല: '+e.message));};
+$('girls').onclick=()=>{gender='GIRLS';loadStudents().catch(e=>msg('loginStatus','പട്ടിക ലഭിച്ചില്ല: '+e.message));};
+$('backGender').onclick=()=>{$('studentScreen').classList.add('hidden');$('genderScreen').classList.remove('hidden');};
+$('backNames').onclick=()=>{$('dobScreen').classList.add('hidden');$('studentScreen').classList.remove('hidden');};
+$('login').onclick=async()=>{if(!student)return;const dob=$('dob').value;if(!dob)return msg('loginStatus','ജനനത്തീയതി നൽകുക.');const b=$('login');b.disabled=true;msg('loginStatus','പ്രവേശനം പരിശോധിക്കുന്നു...');try{
+ const {data,error}=await db.rpc('daily_work_parent_login',{p_student_key:String(student.student_key),p_dob:dob});
+ if(error)throw error;const r=Array.isArray(data)?data[0]:(data&&data.token?data:null);
+ if(!r||!r.token)throw Error('ജനനത്തീയതിയോ വിദ്യാർത്ഥി വിവരങ്ങളോ പൊരുത്തപ്പെടുന്നില്ല. വീണ്ടും വീണ്ടും ശ്രമിക്കാതെ തീയതി പരിശോധിക്കുക.');
+ token=r.token;sessionStorage.setItem(storeKey,JSON.stringify({token,student_name:r.student_name||student.student_name}));
+ await openDashboard(r.student_name||student.student_name);
+ }catch(e){msg('loginStatus','പ്രവേശിക്കാൻ കഴിഞ്ഞില്ല: '+(e.message||'ദയവായി വീണ്ടും ശ്രമിക്കുക.'));}finally{b.disabled=false;}};
+async function openDashboard(name){
+ $('welcome').textContent='സ്വാഗതം, '+name;$('window').textContent='റിപ്പോർട്ട് ദിവസം: '+reportDay()+' · ഇന്ത്യൻ സമയം രാവിലെ 5 മുതൽ അടുത്ത ദിവസം രാവിലെ 5 വരെ';
+ $('loginPanel').classList.add('hidden');$('dashboard').classList.remove('hidden');
+ $('questions').textContent='ചോദ്യങ്ങൾ ലഭ്യമാക്കുന്നു...';$('notes').textContent='നിർദ്ദേശങ്ങൾ പരിശോധിക്കുന്നു...';
+ const results=await Promise.allSettled([loadQuestions(),loadNotes()]);
+ if(results[0].status==='rejected'){$('questions').textContent='ചോദ്യങ്ങൾ ലഭിച്ചില്ല: '+results[0].reason.message;}
+}
+async function loadQuestions(){const {data,error}=await db.rpc('daily_work_parent_get_questions',{p_token:token});if(error)throw error;questions=data||[];if(!questions.length){$('questions').textContent='ഇപ്പോൾ ചോദ്യങ്ങൾ ലഭ്യമല്ല.';return;}
+ const root=$('questions');root.replaceChildren();questions.forEach(q=>{const box=document.createElement('div');box.className='question';const title=document.createElement('div');title.className='question-title';title.textContent=q.question_order+'. '+q.question_text;const opts=document.createElement('div');opts.className='options';(q.options||[]).forEach(o=>{const label=document.createElement('label');label.className='option';const input=document.createElement('input');input.type='radio';input.name='q_'+q.question_id;input.value=o.option_id;input.onchange=score;const text=document.createElement('span');text.textContent=o.option_text;const mark=document.createElement('span');mark.className='mark';mark.textContent=o.score+' മാർക്ക്';label.append(input,text,mark);opts.append(label);});box.append(title,opts);root.append(box);});score();}
+function score(){let total=0;questions.forEach(q=>{const id=document.querySelector('input[name="q_'+q.question_id+'"]:checked')?.value,op=(q.options||[]).find(o=>String(o.option_id)===String(id));if(op)total+=Number(op.score)||0;});$('score').textContent=total;}
+async function loadNotes(){const box=$('notes');try{const {data,error}=await db.rpc('daily_work_parent_get_notes',{p_token:token});if(error)throw error;box.replaceChildren();if(!data?.length){box.textContent='ഇപ്പോൾ പ്രത്യേക നിർദ്ദേശങ്ങളൊന്നുമില്ല.';return;}data.forEach(n=>{const card=document.createElement('div');card.className='note';const t=document.createElement('div');t.className='note-text';t.textContent=n.message;const badge=document.createElement('span');badge.className='badge '+(n.is_read?'read':'unread');badge.textContent=n.is_read?'വായിച്ചു':'വായിച്ചിട്ടില്ല';card.append(t,badge);if(!n.is_read){const b=document.createElement('button');b.className='secondary';b.textContent='വായിച്ചു';b.onclick=async()=>{b.disabled=true;const {error}=await db.rpc('daily_work_parent_mark_note_read',{p_token:token,p_note_id:n.note_id});if(error){b.disabled=false;alert(error.message);return;}loadNotes();};card.append(b);}box.append(card);});}catch(e){box.textContent='നിർദ്ദേശങ്ങൾ ലഭിച്ചില്ല: '+e.message;}}
+$('reportForm').onsubmit=async e=>{e.preventDefault();if(questions.some(q=>!document.querySelector('input[name="q_'+q.question_id+'"]:checked')))return msg('reportStatus','എല്ലാ ചോദ്യങ്ങൾക്കും ഉത്തരം തിരഞ്ഞെടുക്കുക.');const answers=questions.map(q=>({question_id:q.question_id,option_id:document.querySelector('input[name="q_'+q.question_id+'"]:checked').value})),b=$('submit');b.disabled=true;msg('reportStatus','റിപ്പോർട്ട് സമർപ്പിക്കുന്നു...');try{const {data,error}=await db.rpc('daily_work_parent_submit_daily_report',{p_token:token,p_answers:answers});if(error)throw error;const r=Array.isArray(data)?data[0]:data;msg('reportStatus','റിപ്പോർട്ട് സമർപ്പിച്ചു. ആകെ മാർക്ക്: '+(r?.total_score??'—')+'/24',true);}catch(e){msg('reportStatus',e.message||'റിപ്പോർട്ട് സമർപ്പിക്കാനായില്ല.');}finally{b.disabled=false;}};
+$('logout').onclick=async()=>{try{await db.rpc('daily_work_parent_logout',{p_token:token});}catch(_){}sessionStorage.removeItem(storeKey);token=null;student=null;questions=[];showLogin();};
+(async()=>{try{const s=JSON.parse(sessionStorage.getItem(storeKey)||'null');if(s?.token){token=s.token;await openDashboard(s.student_name);}}catch(e){sessionStorage.removeItem(storeKey);token=null;showLogin();}})();
+})();
+</script></body></html>
