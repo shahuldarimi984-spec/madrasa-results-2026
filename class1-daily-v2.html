@@ -1,4 +1,3 @@
-
 <!doctype html>
 <html lang="ml">
 <head>
@@ -69,24 +68,19 @@ footer{text-align:center;padding:18px;color:var(--muted);font-size:12px}
 
 <main>
 <section class="panel" id="loginPanel">
-
-  <!-- ഒന്നാം പേജ് -->
   <div id="genderScreen" class="gender-screen">
-    
     <div class="choice-grid">
       <button class="choice" id="boysChoice" type="button">BOYS</button>
       <button class="choice" id="girlsChoice" type="button">GIRLS</button>
     </div>
   </div>
 
-  <!-- രണ്ടാം പേജ് -->
   <div id="studentChooser" class="hidden">
     <button class="back-link" id="backToGender" type="button">← മടങ്ങുക</button>
     <h2 id="genderHeading"></h2>
     <div class="name-list" id="studentList"></div>
   </div>
 
-  <!-- മൂന്നാം പേജ് -->
   <div id="dobArea" class="hidden">
     <button class="back-link" id="backToNames" type="button">← പേരുകളുടെ പട്ടികയിലേക്ക്</button>
     <div class="selected-student" id="selectedStudentName"></div>
@@ -106,7 +100,6 @@ footer{text-align:center;padding:18px;color:var(--muted);font-size:12px}
   <p id="loginStatus" role="status"></p>
 </section>
 
-<!-- കുട്ടിയുടെ പ്രവർത്തന പേജ് -->
 <section class="hidden" id="dashboard">
   <div class="panel">
     <h2 id="welcome">സ്വാഗതം</h2>
@@ -384,7 +377,6 @@ function renderNames() {
   }
 }
 
-/* DD/MM/YYYY തീയതി പരിശോധിച്ച് ISO രൂപത്തിലാക്കുന്നു */
 function parseDobToISO(value) {
   const match = /^(\d{2})\/(\d{2})\/(\d{4})$/.exec((value || "").trim());
   if (!match) return null;
@@ -484,6 +476,7 @@ async function loadReport() {
   }
 }
 
+/* അധ്യാപകന്റെ നിർദ്ദേശങ്ങൾ: വായിക്കാത്തവ ആദ്യം, ഓറഞ്ച്; വായിച്ചവ പച്ച */
 async function loadNotes() {
   const box = $("teacherNotes");
   box.textContent = "നിർദ്ദേശങ്ങൾ പരിശോധിക്കുന്നു...";
@@ -503,9 +496,40 @@ async function loadNotes() {
       return;
     }
 
-    data.forEach(note => {
+    const orderedNotes = [...data].sort(
+      (a,b) => Number(!!a.read_at) - Number(!!b.read_at)
+    );
+
+    const unreadCount = orderedNotes.filter(
+      note => !note.read_at
+    ).length;
+
+    if (unreadCount > 0) {
+      const alertBox = document.createElement("div");
+      alertBox.setAttribute("role","alert");
+      alertBox.textContent =
+        "🔔 വായിക്കാത്ത പുതിയ നിർദ്ദേശങ്ങൾ: " +
+        unreadCount +
+        " എണ്ണം. ആദ്യം ഇവ കാണിച്ചിരിക്കുന്നു.";
+
+      alertBox.style.cssText =
+        "padding:11px;margin:0 0 12px;border:1px solid #e89a24;" +
+        "border-radius:11px;background:#fff0d8;color:#805400;font-weight:750;";
+
+      box.appendChild(alertBox);
+    }
+
+    orderedNotes.forEach(note => {
+      const isRead = !!note.read_at;
+
       const card = document.createElement("article");
-      card.className = "note";
+      card.className = "note " + (isRead ? "read-note" : "unread-note");
+
+      card.style.background = isRead ? "#e5f5ed" : "#fff0d8";
+      card.style.border = isRead
+        ? "2px solid #48a879"
+        : "2px solid #e89a24";
+      card.style.color = isRead ? "#176a43" : "#704500";
 
       const noteText = document.createElement("div");
       noteText.className = "note-text";
@@ -518,12 +542,12 @@ async function loadNotes() {
         : "";
 
       const badge = document.createElement("span");
-      badge.className = "badge " + (note.read_at ? "read" : "unread");
-      badge.textContent = note.read_at ? "വായിച്ചു" : "വായിച്ചിട്ടില്ല";
+      badge.className = "badge " + (isRead ? "read" : "unread");
+      badge.textContent = isRead ? "വായിച്ചു" : "വായിച്ചിട്ടില്ല";
 
       card.append(noteText,time,badge);
 
-      if (!note.read_at) {
+      if (!isRead) {
         const button = document.createElement("button");
         button.type = "button";
         button.className = "secondary";
@@ -542,6 +566,7 @@ async function loadNotes() {
             );
 
             if (markError) throw markError;
+
             await loadNotes();
 
           } catch (e) {
@@ -551,6 +576,7 @@ async function loadNotes() {
         });
 
         card.appendChild(button);
+
       } else {
         const readTime = document.createElement("div");
         readTime.className = "note-meta";
