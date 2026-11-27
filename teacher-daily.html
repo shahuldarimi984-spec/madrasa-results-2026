@@ -5,7 +5,7 @@
 <title>Teacher Dashboard | Daily Work</title>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <style>
-:root{--navy:#17345f;--gold:#c9a45c;--ink:#20304a;--muted:#68778d;--line:#dce4ef;--green:#16794b;--red:#a83232;--soft:#edf4fc}*{box-sizing:border-box}body{margin:0;background:linear-gradient(145deg,#edf3fb,#fff9ee);color:var(--ink);font-family:Arial,system-ui,sans-serif}header{background:linear-gradient(120deg,#142b50,#285789);color:#fff;text-align:center;padding:24px 14px;border-bottom:5px solid var(--gold)}h1{font-size:clamp(22px,5vw,29px);margin:0;color:#ffe7b3}header p{margin:6px 0 0}main{max-width:1000px;margin:20px auto;padding:0 13px 36px}.panel{background:#fff;border:1px solid var(--line);border-radius:16px;padding:18px;margin-bottom:15px;box-shadow:0 7px 22px #18365a0c}h2{font-size:20px;color:var(--navy);margin:0 0 13px}label{display:block;font-weight:700;margin:12px 0 6px}input,select,textarea{width:100%;padding:12px;border:1px solid #cbd6e5;border-radius:10px;background:#fff;color:var(--ink);font:inherit;min-height:46px}textarea{min-height:125px;resize:vertical}button{font:inherit;cursor:pointer;border:0;border-radius:10px;padding:12px 15px;font-weight:750}button:disabled{opacity:.55;cursor:not-allowed}.primary{background:var(--navy);color:white;width:100%;margin-top:14px}.secondary{background:#eaf0f8;color:var(--navy);width:100%;margin-top:10px}.gold-button{background:#946515;color:white;width:100%;margin-top:10px}.row{display:grid;grid-template-columns:1fr 1fr;gap:12px;align-items:center}.hidden{display:none!important}.small{font-size:13px;color:var(--muted);line-height:1.6}#status,#loginStatus,#reportStatus,#grandStatus{min-height:22px;font-weight:650;margin:9px 0}.good{color:var(--green)}.bad{color:var(--red)}.note{border:1px solid var(--line);border-radius:12px;padding:13px;margin:10px 0;background:#fcfdff}.note p{white-space:pre-wrap;line-height:1.65;margin:8px 0;overflow-wrap:anywhere}.meta{font-size:12px;color:var(--muted);line-height:1.6}.pill{display:inline-block;background:var(--soft);color:var(--navy);padding:4px 9px;border-radius:20px;font-size:12px;font-weight:700}.role{display:inline-block;background:#fff2d7;color:#73531b;border-radius:20px;padding:5px 10px;font-size:12px;font-weight:750;margin-top:5px}.empty{padding:15px;text-align:center;color:var(--muted);background:#f7f9fc;border-radius:10px}.hint{background:#f4f8fd;border-left:4px solid var(--gold);padding:10px 12px;border-radius:8px}.report-summary{background:#edf4fc;border:1px solid #cbd9eb;border-radius:12px;padding:13px;margin:14px 0}.table-wrap{width:100%;overflow-x:auto;margin-top:12px}.report-table{width:100%;border-collapse:collapse;font-size:12px;min-width:850px}.report-table th,.report-table td{border:1px solid #dce4ef;padding:9px 7px;text-align:center;white-space:nowrap}.report-table th{background:#17345f;color:#fff}.report-table tr:nth-child(even){background:#f4f8fd}.report-table td:first-child,.report-table td:nth-child(2){text-align:left}.total-cell{font-weight:800;color:#176a43;background:#e5f5ed}.zero{color:#a83232}.winner-box{border:1px solid #e5d4a8;background:#fffaf0;border-radius:12px;padding:14px;margin-top:14px}.winner-box h3{color:#795719;margin:0 0 10px}.winner-list{margin:0;padding-left:22px;line-height:1.9}.report-actions{display:flex;gap:10px;flex-wrap:wrap}.report-actions button{flex:1;min-width:150px}@media(max-width:520px){.row{grid-template-columns:1fr}.panel{padding:15px}}
+:root{--navy:#17345f;--gold:#c9a45c;--ink:#20304a;--muted:#68778d;--line:#dce4ef;--green:#16794b;--red:#a83232;--soft:#edf4fc}*{box-sizing:border-box}body{margin:0;background:linear-gradient(145deg,#edf3fb,#fff9ee);color:var(--ink);font-family:Arial,system-ui,sans-serif}header{background:linear-gradient(120deg,#142b50,#285789);color:#fff;text-align:center;padding:24px 14px;border-bottom:5px solid var(--gold)}h1{font-size:clamp(22px,5vw,29px);margin:0;color:#ffe7b3}header p{margin:6px 0 0}main{max-width:1000px;margin:20px auto;padding:0 13px 36px}.panel{background:#fff;border:1px solid var(--line);border-radius:16px;padding:18px;margin-bottom:15px;box-shadow:0 7px 22px #18365a0c}h2{font-size:20px;color:var(--navy);margin:0 0 13px}label{display:block;font-weight:700;margin:12px 0 6px}input,select,textarea{width:100%;padding:12px;border:1px solid #cbd6e5;border-radius:10px;background:#fff;color:var(--ink);font:inherit;min-height:46px}textarea{min-height:125px;resize:vertical}button{font:inherit;cursor:pointer;border:0;border-radius:10px;padding:12px 15px;font-weight:750}button:disabled{opacity:.55;cursor:not-allowed}.primary{background:var(--navy);color:white;width:100%;margin-top:14px}.secondary{background:#eaf0f8;color:var(--navy);width:100%;margin-top:10px}.gold-button{background:#946515;color:white;width:100%;margin-top:10px}.row{display:grid;grid-template-columns:1fr 1fr;gap:12px;align-items:center}.hidden{display:none!important}.small{font-size:13px;color:var(--muted);line-height:1.6}#status,#loginStatus,#reportStatus,#grandStatus{min-height:22px;font-weight:650;margin:9px 0}.good{color:var(--green)}.bad{color:var(--red)}.note{border:1px solid var(--line);border-radius:12px;padding:13px;margin:10px 0;background:#fcfdff}.note p{white-space:pre-wrap;line-height:1.65;margin:8px 0;overflow-wrap:anywhere}.note.unread-note{background:#fff0d8;border:2px solid #e89a24;color:#704500}.note.read-note{background:#e5f5ed;border:2px solid #48a879;color:#176a43}.inbox-toggle{width:100%;text-align:left;background:#f4f7fb;color:var(--navy);border:1px solid var(--line);margin:8px 0;padding:13px}.inbox-preview{font-size:13px;color:var(--muted);font-weight:400;display:block;margin-top:5px}.inbox-items{margin-top:10px}.read-state{font-size:12px;font-weight:800;border-radius:20px;padding:4px 9px;display:inline-block;margin:0 0 7px}.read-state.unread{background:#ffe2b5;color:#805000}.read-state.read{background:#d9f1e3;color:#176a43}.meta{font-size:12px;color:var(--muted);line-height:1.6}.pill{display:inline-block;background:var(--soft);color:var(--navy);padding:4px 9px;border-radius:20px;font-size:12px;font-weight:700}.role{display:inline-block;background:#fff2d7;color:#73531b;border-radius:20px;padding:5px 10px;font-size:12px;font-weight:750;margin-top:5px}.empty{padding:15px;text-align:center;color:var(--muted);background:#f7f9fc;border-radius:10px}.hint{background:#f4f8fd;border-left:4px solid var(--gold);padding:10px 12px;border-radius:8px}.report-summary{background:#edf4fc;border:1px solid #cbd9eb;border-radius:12px;padding:13px;margin:14px 0}.table-wrap{width:100%;overflow-x:auto;margin-top:12px}.report-table{width:100%;border-collapse:collapse;font-size:12px;min-width:850px}.report-table th,.report-table td{border:1px solid #dce4ef;padding:9px 7px;text-align:center;white-space:nowrap}.report-table th{background:#17345f;color:#fff}.report-table tr:nth-child(even){background:#f4f8fd}.report-table td:first-child,.report-table td:nth-child(2){text-align:left}.total-cell{font-weight:800;color:#176a43;background:#e5f5ed}.zero{color:#a83232}.winner-box{border:1px solid #e5d4a8;background:#fffaf0;border-radius:12px;padding:14px;margin-top:14px}.winner-box h3{color:#795719;margin:0 0 10px}.winner-list{margin:0;padding-left:22px;line-height:1.9}.report-actions{display:flex;gap:10px;flex-wrap:wrap}.report-actions button{flex:1;min-width:150px}@media(max-width:520px){.row{grid-template-columns:1fr}.panel{padding:15px}}
 </style></head><body>
 <header><h1>Azazul Uloom Madrasa</h1><p>Teacher Dashboard · Daily Work</p></header><main>
 <section class="panel" id="loginPanel"><h2>Teacher Login</h2><p class="small">Sign in using your authorized teacher account.</p><label for="email">Email</label><input id="email" type="email" autocomplete="username"><label for="password">Password</label><input id="password" type="password" autocomplete="current-password"><button class="primary" id="loginBtn">Sign In</button><p id="loginStatus" role="status" aria-live="polite"></p></section>
@@ -13,7 +13,7 @@
 <div class="panel row"><div><h2 id="teacherName">Teacher</h2><span class="role" id="teacherRole"></span><p class="small" id="teacherScope"></p></div><div><button class="secondary" id="logoutBtn">Sign Out</button></div></div>
 <section class="panel"><h2>Send a New Message</h2><label for="audience">Send To</label><select id="audience"><option value="ALL">All Classes’ Parents</option><option value="CLASS">All Parents in a Class</option><option value="STUDENT">A Student’s Parent</option></select><div id="classWrap" class="hidden"><label for="classCode">Select Class</label><select id="classCode"><option value="">Select Class</option></select></div><div id="studentWrap" class="hidden"><label for="studentKey">Select Student</label><select id="studentKey" disabled><option value="">Select Class First</option></select></div><label for="message">Message / Instruction</label><textarea id="message" maxlength="3000" placeholder="Write a message for parents"></textarea><p class="small hint">The Head Teacher can message all classes and students. Class Teachers can message only their assigned classes and students. Supabase enforces the final permissions.</p><button class="primary" id="sendBtn">Send Message</button><p id="status" role="status" aria-live="polite"></p></section>
 <section class="panel"><h2>Sent Messages</h2><p class="small">See how many parents have read each message. Only the read count is displayed.</p><div id="sentList"><div class="empty">Loading...</div></div><button class="secondary" id="refreshBtn">Refresh</button></section>
-<section class="panel"><h2>Parent Comments · രക്ഷിതാക്കളുടെ അഭിപ്രായങ്ങൾ</h2><p class="small">രക്ഷിതാക്കൾ അയച്ച അഭിപ്രായങ്ങൾ ഇവിടെ കാണാം. നിങ്ങളുടെ അധ്യാപക ചുമതലയ്ക്ക് അനുമതിയുള്ള ക്ലാസുകളിലെ അഭിപ്രായങ്ങൾ മാത്രമേ കാണിക്കൂ.</p><div id="parentCommentsList"><div class="empty">Loading parent comments...</div></div><button class="secondary" id="parentCommentsRefreshBtn" type="button">Refresh Comments</button></section>
+<section class="panel"><h2>Parent Comments · രക്ഷിതാക്കളുടെ അഭിപ്രായങ്ങൾ</h2><p class="small">പുതിയ അഭിപ്രായം ഓറഞ്ച് നിറത്തിലും വായിച്ച അഭിപ്രായം പച്ച നിറത്തിലും കാണാം.</p><div id="parentCommentsList"><div class="empty">Loading parent comments...</div></div><button class="secondary" id="parentCommentsRefreshBtn" type="button">Refresh Comments</button></section>
 <section class="panel" id="tenDayPanel"><h2>10-Day Daily Work Report</h2><p class="small">Generate a complete class report for 10 consecutive days. Each day's score is converted to 10 marks. Missing reports count as zero. The final score is out of 100.</p><div class="row"><div><label for="reportClass">Select Class</label><select id="reportClass"><option value="">Select Class</option></select></div><div><label for="reportStart">Start Date</label><input id="reportStart" type="date"></div></div><button class="primary" id="loadReportBtn">Generate 10-Day Report</button><p id="reportStatus" role="status" aria-live="polite"></p><div id="reportPreview" class="hidden"><div class="report-summary" id="reportSummary"></div><div class="table-wrap" id="reportTableWrap"></div><div class="winner-box"><h3>🏆 Class Top 3 Winners</h3><div id="classWinnersList"></div></div><div class="report-actions"><button class="primary" id="printReportBtn">Download Class PDF</button></div><p class="small">PDF contains all active students, daily scores, total marks and the class Top 3 winners.</p></div></section>
 <section class="panel hidden" id="grandPanel"><h2>🏆 Madrasa Grand Winners</h2><p class="small">The first-place winner(s) from each of the 12 classes will be compared using the same 10-day period and normalized score out of 100. Students sharing first place are all included.</p><label for="grandStart">Select 10-Day Period Start Date</label><input id="grandStart" type="date"><p class="small">Choose the first date of the 10-day period. This date is independent of the class report date above.</p><button class="gold-button" id="grandBtn">Generate Madrasa Grand Winners PDF</button><p id="grandStatus" role="status" aria-live="polite"></p></section>
 </section></main>
@@ -32,42 +32,74 @@ async function enterApp(){await loadProfile();await loadTargets();setupReportCla
 $('audience').addEventListener('change',audienceUI);$('classCode').addEventListener('change',()=>{if($('audience').value==='STUDENT')fillStudents()});
 $('loginBtn').addEventListener('click',async()=>{$('loginBtn').disabled=true;say('loginStatus','Signing in...');try{let {error}=await db.auth.signInWithPassword({email:$('email').value.trim(),password:$('password').value});if(error)throw error;await enterApp();say('loginStatus','')}catch(e){say('loginStatus',e.message||'Sign-in failed')}finally{$('loginBtn').disabled=false}});
 $('sendBtn').addEventListener('click',async()=>{let a=$('audience').value,c=a==='ALL'?null:($('classCode').value||null),k=a==='STUDENT'?($('studentKey').value||null):null,m=$('message').value.trim();if(!m)return say('status','Please enter a message');if(a!=='ALL'&&!c)return say('status','Select Class');if(a==='STUDENT'&&!k)return say('status','Select Student');if(a==='CLASS'&&!classMap.has(c))return say('status','You are not authorized to select this class');if(a==='STUDENT'&&!studentsForClass(c).some(s=>s.student_key===k))return say('status','You are not authorized to select this student');$('sendBtn').disabled=true;say('status','Sending message...');try{let {error}=await db.rpc('daily_work_teacher_send_note',{p_audience_type:a,p_class_code:c,p_student_key:k,p_message:m});if(error)throw error;$('message').value='';say('status','Message sent successfully.',true);await loadNotes()}catch(e){say('status',e.message||'Could not send the message')}finally{$('sendBtn').disabled=false}});
-async function loadNotes(){$('sentList').textContent='Loading...';try{let {data,error}=await db.rpc('daily_work_teacher_list_notes');if(error)throw error;$('sentList').replaceChildren();if(!data||!data.length){let e=document.createElement('div');e.className='empty';e.textContent='No messages have been sent yet.';$('sentList').append(e);return}data.forEach(n=>{let b=document.createElement('article');b.className='note';let tag=document.createElement('span');tag.className='pill';let k=n.student_key||'';tag.textContent=n.audience_type==='ALL'?'All Classes':n.audience_type==='CLASS'?'Class '+classLabel({class_code:n.class_code,class_name:classMap.get(n.class_code)}):'Student · '+(studentMap.get(k)||k);let p=document.createElement('p');p.textContent=n.message||'';let meta=document.createElement('div');meta.className='meta';meta.textContent=(n.created_at?new Date(n.created_at).toLocaleString('ml-IN'):'')+' · Parents who read: '+(Number(n.read_count)||0);b.append(tag,p,meta);$('sentList').append(b)})}catch(e){$('sentList').textContent='Could not load messages: '+(e.message||'')}}$('refreshBtn').addEventListener('click',loadNotes);
-
-async function loadParentComments(){
- const box=$('parentCommentsList');
- box.textContent='Loading parent comments...';
+let sentInboxOpen=false;
+async function loadNotes(){
+ const box=$('sentList');box.textContent='Loading...';
  try{
-  const {data,error}=await db.rpc('daily_work_teacher_list_parent_comments');
-  if(error)throw error;
+  const {data,error}=await db.rpc('daily_work_teacher_list_notes');if(error)throw error;
   box.replaceChildren();
-  if(!data||!data.length){
-   const empty=document.createElement('div');
-   empty.className='empty';
-   empty.textContent='No parent comments available.';
-   box.append(empty);
-   return;
-  }
-  data.forEach(c=>{
-   const card=document.createElement('article');
-   card.className='note';
-   const tag=document.createElement('span');
-   tag.className='pill';
-   tag.textContent=classLabel({class_code:c.class_code,class_name:classMap.get(c.class_code)});
-   const student=document.createElement('div');
-   student.className='meta';
-   student.textContent=c.student_key?(studentMap.get(c.student_key)||c.student_key):'Student ID: '+(c.student_id??'—');
-   const recipient=document.createElement('div');
-   recipient.className='meta';
-   recipient.textContent=({HEAD_TEACHER:'Recipient: Head Teacher',CLASS_TEACHER:'Recipient: Class Teacher',BOTH:'Recipient: Both Teachers'})[c.recipient_type]||'';
-   const message=document.createElement('p');
-   message.textContent=c.comment_text||'';
-   const time=document.createElement('div');
-   time.className='meta';
-   time.textContent=c.created_at?new Date(c.created_at).toLocaleString('ml-IN'):'';
-   card.append(tag,student,recipient,message,time);
-   box.append(card);
+  if(!data||!data.length){const e=document.createElement('div');e.className='empty';e.textContent='No messages have been sent yet.';box.append(e);return;}
+  const rows=[...data].sort((a,b)=>new Date(b.created_at||0)-new Date(a.created_at||0));
+  const latest=rows[0],readCount=Number(latest.read_count)||0;
+  const toggle=document.createElement('button');toggle.type='button';toggle.className='inbox-toggle';
+  const label=document.createElement('strong');label.textContent='Sent Messages ('+rows.length+')';
+  const preview=document.createElement('span');preview.className='inbox-preview';preview.textContent=(latest.message||'').slice(0,110)+(String(latest.message||'').length>110?'…':'');
+  const status=document.createElement('span');status.className='read-state '+(readCount>0?'read':'unread');status.textContent=readCount>0?'വായിച്ചു · Parents read: '+readCount:'വായിച്ചിട്ടില്ല · Parents read: 0';
+  toggle.append(label,preview,status);
+  const items=document.createElement('div');items.className='inbox-items'+(sentInboxOpen?'':' hidden');
+  rows.forEach(n=>{
+   const card=document.createElement('article');card.className='note '+((Number(n.read_count)||0)>0?'read-note':'unread-note');
+   const tag=document.createElement('span');tag.className='pill';const k=n.student_key||'';
+   tag.textContent=n.audience_type==='ALL'?'All Classes':n.audience_type==='CLASS'?'Class '+classLabel({class_code:n.class_code,class_name:classMap.get(n.class_code)}):'Student · '+(studentMap.get(k)||k);
+   const p=document.createElement('p');p.textContent=n.message||'';
+   const meta=document.createElement('div');meta.className='meta';meta.textContent=(n.created_at?new Date(n.created_at).toLocaleString('ml-IN'):'')+' · Parents who read: '+(Number(n.read_count)||0);
+   const state=document.createElement('span');state.className='read-state '+((Number(n.read_count)||0)>0?'read':'unread');state.textContent=(Number(n.read_count)||0)>0?'Read by parent(s)':'Not read yet';
+   card.append(tag,state,p,meta);items.append(card);
   });
+  toggle.onclick=()=>{sentInboxOpen=!sentInboxOpen;items.classList.toggle('hidden',!sentInboxOpen)};
+  box.append(toggle,items);
+ }catch(e){box.textContent='Could not load messages: '+(e.message||'')}
+}
+$('refreshBtn').addEventListener('click',loadNotes);
+
+let parentInboxOpen=false;
+async function loadParentComments(){
+ const box=$('parentCommentsList');box.textContent='Loading parent comments...';
+ try{
+  const {data,error}=await db.rpc('daily_work_teacher_list_parent_comments_v2');if(error)throw error;
+  box.replaceChildren();
+  if(!data||!data.length){const empty=document.createElement('div');empty.className='empty';empty.textContent='ഇപ്പോൾ രക്ഷിതാക്കളുടെ അഭിപ്രായങ്ങളില്ല.';box.append(empty);return;}
+  const rows=[...data].sort((a,b)=>new Date(b.created_at||0)-new Date(a.created_at||0));
+  const unread=rows.filter(c=>!c.is_read);
+  const latest=rows[0];
+  const toggle=document.createElement('button');toggle.type='button';toggle.className='inbox-toggle';
+  const title=document.createElement('strong');title.textContent='രക്ഷിതാക്കളുടെ അഭിപ്രായങ്ങൾ ('+rows.length+')';
+  const preview=document.createElement('span');preview.className='inbox-preview';preview.textContent=(latest.comment_text||'').slice(0,110)+((latest.comment_text||'').length>110?'…':'');
+  const state=document.createElement('span');state.className='read-state '+(latest.is_read?'read':'unread');state.textContent=unread.length?('വായിക്കാത്തത്: '+unread.length):'എല്ലാം വായിച്ചു';
+  toggle.append(title,preview,state);
+  const items=document.createElement('div');items.className='inbox-items'+(parentInboxOpen?'':' hidden');
+  rows.forEach(c=>{
+   const card=document.createElement('article');card.className='note '+(c.is_read?'read-note':'unread-note');
+   const tag=document.createElement('span');tag.className='pill';tag.textContent=classLabel({class_code:c.class_code,class_name:classMap.get(c.class_code)});
+   const read=document.createElement('span');read.className='read-state '+(c.is_read?'read':'unread');read.textContent=c.is_read?'വായിച്ചു':'പുതിയത് · വായിച്ചിട്ടില്ല';
+   const student=document.createElement('div');student.className='meta';student.textContent=c.student_key?(studentMap.get(c.student_key)||c.student_key):'Student ID: '+(c.student_id??'—');
+   const recipient=document.createElement('div');recipient.className='meta';recipient.textContent=({HEAD_TEACHER:'ലഭിക്കേണ്ടത്: സദർ ഉസ്താദിന്',CLASS_TEACHER:'ലഭിക്കേണ്ടത്: ക്ലാസ് ഉസ്താദിന്',BOTH:'ലഭിക്കേണ്ടത്: രണ്ട് പേർക്കും'})[c.recipient_type]||'';
+   const message=document.createElement('p');message.textContent=c.comment_text||'';
+   const time=document.createElement('div');time.className='meta';time.textContent=c.created_at?new Date(c.created_at).toLocaleString('ml-IN'):'';
+   card.append(tag,read,student,recipient,message,time);items.append(card);
+  });
+  toggle.onclick=async()=>{
+   parentInboxOpen=!parentInboxOpen;items.classList.toggle('hidden',!parentInboxOpen);
+   if(parentInboxOpen){
+    const unreadRows=rows.filter(c=>!c.is_read);
+    for(const c of unreadRows){
+     try{const result=await db.rpc('daily_work_teacher_mark_parent_comment_read',{p_comment_id:c.id});if(result.error)throw result.error;}
+     catch(e){console.error('Could not mark parent comment read',e);}
+    }
+    if(unreadRows.length)await loadParentComments();
+   }
+  };
+  box.append(toggle,items);
  }catch(e){box.textContent='Could not load parent comments: '+(e.message||'')}
 }
 $('parentCommentsRefreshBtn').addEventListener('click',loadParentComments);
