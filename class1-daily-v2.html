@@ -1,4 +1,3 @@
-
 <!doctype html>
 <html lang="ml">
 <head>
@@ -19,7 +18,7 @@ main{max-width:760px;margin:20px auto;padding:0 13px 32px}
 h2{font-size:20px;color:var(--navy);margin:0 0 14px}
 .small{font-size:13px;color:var(--muted);line-height:1.65}
 label{display:block;font-weight:650;margin:12px 0 7px}
-input,textarea{width:100%;padding:12px 13px;border:1px solid #cbd6e5;border-radius:11px;font:inherit;background:white;color:var(--ink)}
+input,textarea,select{width:100%;padding:12px 13px;border:1px solid #cbd6e5;border-radius:11px;font:inherit;background:white;color:var(--ink)}
 button{font:inherit;cursor:pointer;border:0}
 .primary,.secondary{width:100%;padding:13px 15px;border-radius:11px;font-weight:700;margin-top:12px}
 .primary{background:var(--navy);color:white}
@@ -75,21 +74,17 @@ footer{text-align:center;padding:18px;color:var(--muted);font-size:12px}
       <button class="choice" id="girlsChoice" type="button">GIRLS</button>
     </div>
   </div>
-
   <div id="studentChooser" class="hidden">
     <button class="back-link" id="backToGender" type="button">← മടങ്ങുക</button>
     <h2 id="genderHeading"></h2>
     <div class="name-list" id="studentList"></div>
   </div>
-
   <div id="dobArea" class="hidden">
     <button class="back-link" id="backToNames" type="button">← പേരുകളുടെ പട്ടികയിലേക്ക്</button>
     <div class="selected-student" id="selectedStudentName"></div>
     <label for="dob">ജനനത്തീയതി (DD/MM/YYYY)</label>
-    <input id="dob" type="text" inputmode="numeric"
-      placeholder="DD/MM/YYYY" autocomplete="bday" maxlength="10">
+    <input id="dob" type="text" inputmode="numeric" placeholder="DD/MM/YYYY" autocomplete="bday" maxlength="10">
     <p class="small">തീയതി / മാസം / വർഷം എന്ന ക്രമത്തിൽ നൽകുക. ഉദാ: 07/04/2018</p>
-
     <label style="display:flex;align-items:center;gap:9px;font-weight:500">
       <input id="rememberDevice" type="checkbox" style="width:18px;height:18px;padding:0">
       ഈ ഉപകരണത്തിൽ പ്രവേശനം ഓർമ്മിക്കുക
@@ -97,7 +92,6 @@ footer{text-align:center;padding:18px;color:var(--muted);font-size:12px}
     <p class="small">സ്വന്തമായി ഉപയോഗിക്കുന്ന ഫോണിൽ മാത്രം ഈ ഓപ്ഷൻ തിരഞ്ഞെടുക്കുക. പങ്കിടുന്ന ഫോണിൽ തിരഞ്ഞെടുക്കരുത്.</p>
     <button class="primary" id="loginBtn" type="button">പ്രവേശിക്കുക</button>
   </div>
-
   <p id="loginStatus" role="status"></p>
 </section>
 
@@ -107,101 +101,75 @@ footer{text-align:center;padding:18px;color:var(--muted);font-size:12px}
     <p class="small" id="reportWindow"></p>
     <button class="secondary" id="logoutBtn" type="button">പുറത്തുകടക്കുക</button>
   </div>
-
   <section class="panel">
     <h2>അധ്യാപകന്റെ പ്രത്യേക നിർദ്ദേശങ്ങൾ</h2>
     <p class="small">അധ്യാപകൻ നൽകിയ നിർദ്ദേശങ്ങൾ ഇവിടെ കാണാം. വായിച്ചശേഷം “വായിച്ചു” അമർത്തുക.</p>
     <div id="teacherNotes"><p class="small">നിർദ്ദേശങ്ങൾ പരിശോധിക്കുന്നു...</p></div>
   </section>
-
   <section class="panel">
     <h2>ഇന്നത്തെ പ്രവർത്തനങ്ങൾ</h2>
     <div class="notice">ഇന്നത്തെ റിപ്പോർട്ട് രേഖപ്പെടുത്തേണ്ട സമയം ഇന്ത്യൻ സമയം രാവിലെ 5 മണി മുതൽ അടുത്ത ദിവസം രാവിലെ 5 മണി വരെ മാത്രമാണ്. സമയപരിധി കഴിഞ്ഞാൽ പഴയ ദിവസത്തെ റിപ്പോർട്ട് സമർപ്പിക്കാനോ തിരുത്താനോ കഴിയില്ല.</div>
-
     <form id="dailyForm">
-      <div class="question">
-        <div class="question-title">1. ഇന്ന് മദ്രസയിലെ പാഠം വായിച്ചു</div>
-        <div class="options">
-          <label class="option"><input type="radio" name="reading" value="read"><span>A: വായിച്ചു</span><span class="mark">5 മാർക്ക്</span></label>
-          <label class="option"><input type="radio" name="reading" value="not_read"><span>B: വായിച്ചില്ല</span><span class="mark">0 മാർക്ക്</span></label>
-        </div>
-      </div>
-
-      <div class="question">
-        <div class="question-title">2. ഇന്ന് മദ്രസയിലെ പാഠം എഴുതി</div>
-        <div class="options">
-          <label class="option"><input type="radio" name="writing" value="written"><span>A: എഴുതി</span><span class="mark">5 മാർക്ക്</span></label>
-          <label class="option"><input type="radio" name="writing" value="not_written"><span>B: എഴുതിയിട്ടില്ല</span><span class="mark">0 മാർക്ക്</span></label>
-        </div>
-      </div>
-
-      <div class="question">
-        <div class="question-title">3. ഇന്ന് എല്ലാ നേരവും ഭക്ഷണം കഴിക്കുമ്പോൾ ബിസ്മി ചൊല്ലി</div>
-        <div class="options">
-          <label class="option"><input type="radio" name="bismillah" value="all"><span>A: എല്ലാ നേരവും ചൊല്ലി</span><span class="mark">5 മാർക്ക്</span></label>
-          <label class="option"><input type="radio" name="bismillah" value="some"><span>B: ചില നേരങ്ങളിൽ മാത്രം ചൊല്ലി</span><span class="mark">3 മാർക്ക്</span></label>
-          <label class="option"><input type="radio" name="bismillah" value="none"><span>C: തീരെ ചൊല്ലിയില്ല</span><span class="mark">0 മാർക്ക്</span></label>
-        </div>
-      </div>
-
-      <div class="question">
-        <div class="question-title">4. ഇന്ന് എല്ലാ നേരവും ഭക്ഷണം കഴിച്ചു കഴിഞ്ഞപ്പോൾ അൽഹംദുലില്ലാഹ് ചൊല്ലി</div>
-        <div class="options">
-          <label class="option"><input type="radio" name="alhamdulillah" value="all"><span>A: എല്ലാ നേരവും ചൊല്ലി</span><span class="mark">5 മാർക്ക്</span></label>
-          <label class="option"><input type="radio" name="alhamdulillah" value="some"><span>B: ചില നേരങ്ങളിൽ മാത്രം ചൊല്ലി</span><span class="mark">3 മാർക്ക്</span></label>
-          <label class="option"><input type="radio" name="alhamdulillah" value="none"><span>C: തീരെ ചൊല്ലിയില്ല</span><span class="mark">0 മാർക്ക്</span></label>
-        </div>
-      </div>
-
-      <div class="question">
-        <div class="question-title">5. ഇന്ന് മൊബൈൽ ഉപയോഗിച്ചു</div>
-        <div class="options">
-          <label class="option"><input type="radio" name="mobile" value="low"><span>A: കുറഞ്ഞ സമയം മാത്രം</span><span class="mark">5 മാർക്ക്</span></label>
-          <label class="option"><input type="radio" name="mobile" value="high"><span>B: കൂടുതൽ സമയം</span><span class="mark">0 മാർക്ക്</span></label>
-        </div>
-      </div>
-
-      <div class="scorebar">
-        <div><strong>ഇന്നത്തെ ആകെ മാർക്ക്</strong><div class="small">പരമാവധി 25 മാർക്ക്</div></div>
-        <div class="score"><span id="liveScore">0</span>/25</div>
-      </div>
+      <div class="question"><div class="question-title">1. ഇന്ന് മദ്രസയിലെ പാഠം വായിച്ചു</div><div class="options">
+        <label class="option"><input type="radio" name="reading" value="read"><span>A: വായിച്ചു</span><span class="mark">5 മാർക്ക്</span></label>
+        <label class="option"><input type="radio" name="reading" value="not_read"><span>B: വായിച്ചില്ല</span><span class="mark">0 മാർക്ക്</span></label>
+      </div></div>
+      <div class="question"><div class="question-title">2. ഇന്ന് മദ്രസയിലെ പാഠം എഴുതി</div><div class="options">
+        <label class="option"><input type="radio" name="writing" value="written"><span>A: എഴുതി</span><span class="mark">5 മാർക്ക്</span></label>
+        <label class="option"><input type="radio" name="writing" value="not_written"><span>B: എഴുതിയിട്ടില്ല</span><span class="mark">0 മാർക്ക്</span></label>
+      </div></div>
+      <div class="question"><div class="question-title">3. ഇന്ന് എല്ലാ നേരവും ഭക്ഷണം കഴിക്കുമ്പോൾ ബിസ്മി ചൊല്ലി</div><div class="options">
+        <label class="option"><input type="radio" name="bismillah" value="all"><span>A: എല്ലാ നേരവും ചൊല്ലി</span><span class="mark">5 മാർക്ക്</span></label>
+        <label class="option"><input type="radio" name="bismillah" value="some"><span>B: ചില നേരങ്ങളിൽ മാത്രം ചൊല്ലി</span><span class="mark">3 മാർക്ക്</span></label>
+        <label class="option"><input type="radio" name="bismillah" value="none"><span>C: തീരെ ചൊല്ലിയില്ല</span><span class="mark">0 മാർക്ക്</span></label>
+      </div></div>
+      <div class="question"><div class="question-title">4. ഇന്ന് എല്ലാ നേരവും ഭക്ഷണം കഴിച്ചു കഴിഞ്ഞപ്പോൾ അൽഹംദുലില്ലാഹ് ചൊല്ലി</div><div class="options">
+        <label class="option"><input type="radio" name="alhamdulillah" value="all"><span>A: എല്ലാ നേരവും ചൊല്ലി</span><span class="mark">5 മാർക്ക്</span></label>
+        <label class="option"><input type="radio" name="alhamdulillah" value="some"><span>B: ചില നേരങ്ങളിൽ മാത്രം ചൊല്ലി</span><span class="mark">3 മാർക്ക്</span></label>
+        <label class="option"><input type="radio" name="alhamdulillah" value="none"><span>C: തീരെ ചൊല്ലിയില്ല</span><span class="mark">0 മാർക്ക്</span></label>
+      </div></div>
+      <div class="question"><div class="question-title">5. ഇന്ന് മൊബൈൽ ഉപയോഗിച്ചു</div><div class="options">
+        <label class="option"><input type="radio" name="mobile" value="low"><span>A: കുറഞ്ഞ സമയം മാത്രം</span><span class="mark">5 മാർക്ക്</span></label>
+        <label class="option"><input type="radio" name="mobile" value="high"><span>B: കൂടുതൽ സമയം</span><span class="mark">0 മാർക്ക്</span></label>
+      </div></div>
+      <div class="scorebar"><div><strong>ഇന്നത്തെ ആകെ മാർക്ക്</strong><div class="small">പരമാവധി 25 മാർക്ക്</div></div><div class="score"><span id="liveScore">0</span>/25</div></div>
       <p class="small" id="reportState"></p>
       <button class="primary" id="submitReport" type="submit">ഇന്നത്തെ റിപ്പോർട്ട് സമർപ്പിക്കുക</button>
       <p class="small">അഞ്ച് ചോദ്യങ്ങൾക്കും ഉത്തരം തിരഞ്ഞെടുത്താൽ മാത്രമേ സമർപ്പിക്കാൻ കഴിയൂ. റിപ്പോർട്ട് ലഭിക്കാത്ത ദിവസം പൂജ്യം മാർക്കായി കണക്കാക്കില്ല.</p>
     </form>
     <p id="reportStatus" role="status"></p>
   </section>
-
   <section class="panel">
     <h2>രക്ഷിതാവിന്റെ അഭിപ്രായം</h2>
-    <p class="small">ഈ അഭിപ്രായം ബന്ധപ്പെട്ട അധ്യാപകർക്കും അധികാരമുള്ള മദ്രസാ ഭരണസമിതിക്കും മാത്രമേ കാണാൻ കഴിയൂ.</p>
+    <p class="small">അഭിപ്രായം ആർക്കാണ് അയക്കേണ്ടതെന്ന് തിരഞ്ഞെടുക്കുക. “രണ്ട് അധ്യാപകർക്കും” തിരഞ്ഞെടുത്താൽ ഹെഡ് ടീച്ചർക്കും ക്ലാസ് ടീച്ചർക്കും ലഭിക്കും.</p>
+    <label for="commentRecipient">അഭിപ്രായം ലഭിക്കേണ്ടവർ</label>
+    <select id="commentRecipient">
+      <option value="HEAD_TEACHER">ഹെഡ് ടീച്ചർക്ക്</option>
+      <option value="CLASS_TEACHER">ക്ലാസ് ടീച്ചർക്ക്</option>
+      <option value="BOTH">രണ്ട് അധ്യാപകർക്കും</option>
+    </select>
     <textarea id="parentComment" rows="4" maxlength="2000" placeholder="അഭിപ്രായം ഇവിടെ എഴുതുക"></textarea>
     <button class="secondary" id="sendComment" type="button">അഭിപ്രായം അയക്കുക</button>
     <p id="commentStatus" role="status"></p>
   </section>
 </section>
 </main>
-
 <footer>അസാസുൽ ഉലൂം മദ്രസ · പനക്കോട്</footer>
 
 <script>
 (() => {
 "use strict";
-
 const SUPABASE_URL = "https://nryrifmwzzdxwlxwencv.supabase.co";
 const SUPABASE_KEY = "sb_publishable_3yBW4LtifO9DmRN14rm85A_yqV8vm2c";
-
 const $ = id => document.getElementById(id);
 
 if (!window.supabase || !window.supabase.createClient) {
   $("loginStatus").textContent = "സാങ്കേതിക ലൈബ്രറി ലോഡ് ചെയ്തില്ല. ഇന്റർനെറ്റ് പരിശോധിക്കുക.";
   return;
 }
-
 const db = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY, {
   auth: {persistSession:false, autoRefreshToken:false}
 });
-
 let students = [];
 let selectedStudent = null;
 let selectedGender = "";
@@ -214,20 +182,13 @@ function status(id, message, good=false) {
   el.textContent = message || "";
   el.className = message ? (good ? "good" : "bad") : "";
 }
-
 function reportDayIndia() {
   const parts = new Intl.DateTimeFormat("en-CA", {
-    timeZone:"Asia/Kolkata",
-    year:"numeric",
-    month:"2-digit",
-    day:"2-digit",
-    hour:"2-digit",
-    hourCycle:"h23"
+    timeZone:"Asia/Kolkata",year:"numeric",month:"2-digit",day:"2-digit",
+    hour:"2-digit",hourCycle:"h23"
   }).formatToParts(new Date());
-
   const v = Object.fromEntries(parts.map(p => [p.type,p.value]));
   let date = `${v.year}-${v.month}-${v.day}`;
-
   if (Number(v.hour) < 5) {
     const d = new Date(`${date}T00:00:00Z`);
     d.setUTCDate(d.getUTCDate()-1);
@@ -235,613 +196,325 @@ function reportDayIndia() {
   }
   return date;
 }
-
 function prettyDate(value) {
   const [y,m,d] = value.split("-");
   return `${d}/${m}/${y}`;
 }
-
 function calcScore(v) {
-  const points = {
-    read:5,not_read:0,
-    written:5,not_written:0,
-    all:5,some:3,none:0,
-    low:5,high:0
-  };
+  const points = {read:5,not_read:0,written:5,not_written:0,all:5,some:3,none:0,low:5,high:0};
   return Object.values(v).reduce((n,x)=>n+(points[x] ?? 0),0);
 }
-
 function answers() {
-  const get = name =>
-    document.querySelector(`input[name="${name}"]:checked`)?.value || "";
-
-  return {
-    reading:get("reading"),
-    writing:get("writing"),
-    bismillah:get("bismillah"),
-    alhamdulillah:get("alhamdulillah"),
-    mobile:get("mobile")
-  };
+  const get = name => document.querySelector(`input[name="${name}"]:checked`)?.value || "";
+  return {reading:get("reading"),writing:get("writing"),bismillah:get("bismillah"),alhamdulillah:get("alhamdulillah"),mobile:get("mobile")};
 }
-
 function updateScore() {
   $("liveScore").textContent = calcScore(answers());
-
   document.querySelectorAll(".option").forEach(label => {
     const input = label.querySelector("input");
     label.style.borderColor = input.checked ? "#24558a" : "";
     label.style.background = input.checked ? "#edf4fc" : "";
   });
 }
-
 function saveSession(token, remember) {
-  session = {
-    token,
-    student_id:selectedStudent.student_id,
-    student_name:selectedStudent.student_name,
-    gender:selectedStudent.gender
-  };
-
+  session = {token,student_id:selectedStudent.student_id,student_name:selectedStudent.student_name,gender:selectedStudent.gender};
   localStorage.removeItem("class1_daily_parent_session");
   sessionStorage.removeItem("class1_daily_parent_session");
-
-  (remember ? localStorage : sessionStorage)
-    .setItem("class1_daily_parent_session", JSON.stringify(session));
+  (remember ? localStorage : sessionStorage).setItem("class1_daily_parent_session", JSON.stringify(session));
 }
-
 function savedSession() {
   for (const store of [localStorage,sessionStorage]) {
     try {
       const value = store.getItem("class1_daily_parent_session");
       if (value) return JSON.parse(value);
-    } catch (_) {
-      store.removeItem("class1_daily_parent_session");
-    }
+    } catch (_) { store.removeItem("class1_daily_parent_session"); }
   }
   return null;
 }
-
 function clearSession() {
   localStorage.removeItem("class1_daily_parent_session");
   sessionStorage.removeItem("class1_daily_parent_session");
   session = null;
   selectedStudent = null;
 }
-
 async function loadStudents() {
   status("loginStatus","കുട്ടികളുടെ പട്ടിക ലഭ്യമാക്കുന്നു...");
-
   const {data,error} = await db.rpc("class1_parent_student_list");
   if (error) throw error;
-
   students = Array.isArray(data) ? data : [];
-
-  status(
-    "loginStatus",
-    students.length ? "" : "കുട്ടികളുടെ പട്ടിക ലഭ്യമല്ല."
-  );
+  status("loginStatus",students.length ? "" : "കുട്ടികളുടെ പട്ടിക ലഭ്യമല്ല.");
 }
-
 function showGender(genderPart) {
   selectedStudent = null;
   selectedGender = genderPart;
-
-  $("genderHeading").textContent =
-    genderPart === "ആൺ" ? "BOYS" : "GIRLS";
-
+  $("genderHeading").textContent = genderPart === "ആൺ" ? "BOYS" : "GIRLS";
   $("genderScreen").classList.add("hidden");
   $("dobArea").classList.add("hidden");
   $("studentChooser").classList.remove("hidden");
-
   $("boysChoice").classList.toggle("active",genderPart === "ആൺ");
   $("girlsChoice").classList.toggle("active",genderPart === "പെൺ");
-
   status("loginStatus","");
   renderNames();
 }
-
 function renderNames() {
-  const filtered = students.filter(s =>
-    String(s.gender || "").includes(selectedGender)
-  );
-
+  const filtered = students.filter(s => String(s.gender || "").includes(selectedGender));
   const list = $("studentList");
   list.replaceChildren();
-
   filtered.forEach(student => {
     const button = document.createElement("button");
     button.type = "button";
     button.className = "name-btn";
     button.textContent = student.student_name || "പേര് ലഭ്യമല്ല";
-
     button.addEventListener("click", () => {
       selectedStudent = student;
-
       $("selectedStudentName").textContent = student.student_name;
       $("studentChooser").classList.add("hidden");
       $("dobArea").classList.remove("hidden");
       $("dob").value = "";
-
-      if (window._class1DobPicker) {
-        window._class1DobPicker.clear();
-      }
-
+      if (window._class1DobPicker) window._class1DobPicker.clear();
       status("loginStatus","");
       $("dob").focus();
     });
-
     list.appendChild(button);
   });
-
-  if (!filtered.length) {
-    list.textContent = "ഈ വിഭാഗത്തിലെ പേരുകൾ ലഭ്യമല്ല.";
-  }
+  if (!filtered.length) list.textContent = "ഈ വിഭാഗത്തിലെ പേരുകൾ ലഭ്യമല്ല.";
 }
-
 function parseDobToISO(value) {
   const match = /^(\d{2})\/(\d{2})\/(\d{4})$/.exec((value || "").trim());
   if (!match) return null;
-
-  const day = Number(match[1]);
-  const month = Number(match[2]);
-  const year = Number(match[3]);
-
+  const day = Number(match[1]), month = Number(match[2]), year = Number(match[3]);
   const check = new Date(Date.UTC(year,month-1,day));
-
-  if (
-    check.getUTCFullYear() !== year ||
-    check.getUTCMonth() !== month-1 ||
-    check.getUTCDate() !== day
-  ) return null;
-
+  if (check.getUTCFullYear() !== year || check.getUTCMonth() !== month-1 || check.getUTCDate() !== day) return null;
   const today = new Date();
-  const todayUTC = Date.UTC(
-    today.getUTCFullYear(),
-    today.getUTCMonth(),
-    today.getUTCDate()
-  );
-
+  const todayUTC = Date.UTC(today.getUTCFullYear(),today.getUTCMonth(),today.getUTCDate());
   if (check.getTime() > todayUTC) return null;
-
   return `${match[3]}-${match[2]}-${match[1]}`;
 }
-
 function showDashboard() {
   $("loginPanel").classList.add("hidden");
   $("dashboard").classList.remove("hidden");
-
   $("welcome").textContent = `സ്വാഗതം, ${session.student_name}`;
-
   reportDate = reportDayIndia();
-
-  $("reportWindow").textContent =
-    `റിപ്പോർട്ട് ദിവസം: ${prettyDate(reportDate)} · ഇന്ത്യൻ സമയം രാവിലെ 5 മുതൽ അടുത്ത ദിവസം രാവിലെ 5 വരെ`;
-
+  $("reportWindow").textContent = `റിപ്പോർട്ട് ദിവസം: ${prettyDate(reportDate)} · ഇന്ത്യൻ സമയം രാവിലെ 5 മുതൽ അടുത്ത ദിവസം രാവിലെ 5 വരെ`;
   loadDashboard();
 }
-
-async function loadDashboard() {
-  await Promise.all([loadReport(),loadNotes()]);
-}
-
+async function loadDashboard() { await Promise.all([loadReport(),loadNotes()]); }
 async function loadReport() {
   $("reportState").textContent = "റിപ്പോർട്ട് പരിശോധിക്കുന്നു...";
   $("reportStatus").textContent = "";
-
   try {
     reportDate = reportDayIndia();
-
-    const {data,error} = await db.rpc("class1_parent_get_daily_report", {
-      p_token:session.token,
-      p_report_date:reportDate
-    });
-
+    const {data,error} = await db.rpc("class1_parent_get_daily_report", {p_token:session.token,p_report_date:reportDate});
     if (error) throw error;
-
     const row = Array.isArray(data) ? data[0] : data;
-
     $("dailyForm").reset();
-
     if (row) {
-      const map = {
-        reading:"reading_choice",
-        writing:"writing_choice",
-        bismillah:"bismillah_choice",
-        alhamdulillah:"alhamdulillah_choice",
-        mobile:"mobile_choice"
-      };
-
+      const map = {reading:"reading_choice",writing:"writing_choice",bismillah:"bismillah_choice",alhamdulillah:"alhamdulillah_choice",mobile:"mobile_choice"};
       Object.entries(map).forEach(([name,key]) => {
-        const input = document.querySelector(
-          `input[name="${name}"][value="${row[key]}"]`
-        );
+        const input = document.querySelector(`input[name="${name}"][value="${row[key]}"]`);
         if (input) input.checked = true;
       });
-
       reportAlreadySubmitted = true;
-
-      $("reportState").textContent =
-        `ഈ ദിവസത്തെ റിപ്പോർട്ട് സമർപ്പിച്ചിട്ടുണ്ട്. ആകെ മാർക്ക്: ${row.total_score}/25. രാവിലെ 5 മണിക്ക് മുമ്പ് മാത്രമേ തിരുത്താൻ കഴിയൂ.`;
+      $("reportState").textContent = `ഈ ദിവസത്തെ റിപ്പോർട്ട് സമർപ്പിച്ചിട്ടുണ്ട്. ആകെ മാർക്ക്: ${row.total_score}/25. രാവിലെ 5 മണിക്ക് മുമ്പ് മാത്രമേ തിരുത്താൻ കഴിയൂ.`;
     } else {
       reportAlreadySubmitted = false;
-      $("reportState").textContent =
-        "ഇന്നത്തെ റിപ്പോർട്ട് ഇതുവരെ സമർപ്പിച്ചിട്ടില്ല.";
+      $("reportState").textContent = "ഇന്നത്തെ റിപ്പോർട്ട് ഇതുവരെ സമർപ്പിച്ചിട്ടില്ല.";
     }
-
     updateScore();
-
   } catch (e) {
     reportAlreadySubmitted = false;
-    $("reportState").textContent =
-      e.message || "റിപ്പോർട്ട് ലഭ്യമാക്കാനായില്ല.";
+    $("reportState").textContent = e.message || "റിപ്പോർട്ട് ലഭ്യമാക്കാനായില്ല.";
   }
 }
-
-/* അധ്യാപകന്റെ നിർദ്ദേശങ്ങൾ: വായിക്കാത്തവ ആദ്യം, ഓറഞ്ച്; വായിച്ചവ പച്ച */
 async function loadNotes() {
   const box = $("teacherNotes");
   box.textContent = "നിർദ്ദേശങ്ങൾ പരിശോധിക്കുന്നു...";
-
   try {
-    const {data,error} = await db.rpc(
-      "class1_parent_get_notes",
-      {p_token:session.token}
-    );
-
+    const {data,error} = await db.rpc("class1_parent_get_notes",{p_token:session.token});
     if (error) throw error;
-
     box.replaceChildren();
-
     if (!Array.isArray(data) || data.length === 0) {
       box.textContent = "ഇപ്പോൾ പ്രത്യേക നിർദ്ദേശങ്ങളൊന്നുമില്ല.";
       return;
     }
-
-    const orderedNotes = [...data].sort(
-      (a,b) => Number(!!a.read_at) - Number(!!b.read_at)
-    );
-
-    const unreadCount = orderedNotes.filter(
-      note => !note.read_at
-    ).length;
-
+    const orderedNotes = [...data].sort((a,b) => Number(!!a.read_at) - Number(!!b.read_at));
+    const unreadCount = orderedNotes.filter(note => !note.read_at).length;
     if (unreadCount > 0) {
       const alertBox = document.createElement("div");
       alertBox.setAttribute("role","alert");
-      alertBox.textContent =
-        "🔔 വായിക്കാത്ത പുതിയ നിർദ്ദേശങ്ങൾ: " +
-        unreadCount +
-        " എണ്ണം. ആദ്യം ഇവ കാണിച്ചിരിക്കുന്നു.";
-
-      alertBox.style.cssText =
-        "padding:11px;margin:0 0 12px;border:1px solid #e89a24;" +
-        "border-radius:11px;background:#fff0d8;color:#805400;font-weight:750;";
-
+      alertBox.textContent = "🔔 വായിക്കാത്ത പുതിയ നിർദ്ദേശങ്ങൾ: " + unreadCount + " എണ്ണം. ആദ്യം ഇവ കാണിച്ചിരിക്കുന്നു.";
+      alertBox.style.cssText = "padding:11px;margin:0 0 12px;border:1px solid #e89a24;border-radius:11px;background:#fff0d8;color:#805400;font-weight:750;";
       box.appendChild(alertBox);
     }
-
     orderedNotes.forEach(note => {
       const isRead = !!note.read_at;
-
       const card = document.createElement("article");
       card.className = "note " + (isRead ? "read-note" : "unread-note");
-
       card.style.background = isRead ? "#e5f5ed" : "#fff0d8";
-      card.style.border = isRead
-        ? "2px solid #48a879"
-        : "2px solid #e89a24";
+      card.style.border = isRead ? "2px solid #48a879" : "2px solid #e89a24";
       card.style.color = isRead ? "#176a43" : "#704500";
-
       const noteText = document.createElement("div");
       noteText.className = "note-text";
       noteText.textContent = note.note_text || "";
-
       const time = document.createElement("div");
       time.className = "note-meta";
-      time.textContent = note.note_created_at
-        ? new Date(note.note_created_at).toLocaleString("ml-IN")
-        : "";
-
+      time.textContent = note.note_created_at ? new Date(note.note_created_at).toLocaleString("ml-IN") : "";
       const badge = document.createElement("span");
       badge.className = "badge " + (isRead ? "read" : "unread");
       badge.textContent = isRead ? "വായിച്ചു" : "വായിച്ചിട്ടില്ല";
-
       card.append(noteText,time,badge);
-
       if (!isRead) {
         const button = document.createElement("button");
         button.type = "button";
         button.className = "secondary";
         button.textContent = "വായിച്ചു";
-
         button.addEventListener("click",async()=>{
           button.disabled = true;
-
           try {
-            const {error:markError} = await db.rpc(
-              "class1_parent_mark_note_read",
-              {
-                p_token:session.token,
-                p_note_id:note.note_id
-              }
-            );
-
+            const {error:markError} = await db.rpc("class1_parent_mark_note_read",{p_token:session.token,p_note_id:note.note_id});
             if (markError) throw markError;
-
             await loadNotes();
-
           } catch (e) {
             button.disabled = false;
             alert(e.message || "നിർദ്ദേശം വായിച്ചതായി രേഖപ്പെടുത്താനായില്ല.");
           }
         });
-
         card.appendChild(button);
-
       } else {
         const readTime = document.createElement("div");
         readTime.className = "note-meta";
-        readTime.textContent =
-          "വായിച്ച സമയം: " + new Date(note.read_at).toLocaleString("ml-IN");
+        readTime.textContent = "വായിച്ച സമയം: " + new Date(note.read_at).toLocaleString("ml-IN");
         card.appendChild(readTime);
       }
-
       box.appendChild(card);
     });
-
   } catch (e) {
-    box.textContent =
-      "നിർദ്ദേശങ്ങൾ ലഭ്യമാക്കാനായില്ല: " + (e.message || "");
+    box.textContent = "നിർദ്ദേശങ്ങൾ ലഭ്യമാക്കാനായില്ല: " + (e.message || "");
   }
 }
-
-/* ഒന്നാം പേജിലെ വിഭാഗ ബട്ടണുകൾ */
 $("boysChoice").addEventListener("click",()=>showGender("ആൺ"));
 $("girlsChoice").addEventListener("click",()=>showGender("പെൺ"));
-
-/* രണ്ടാം പേജിൽ നിന്ന് മടങ്ങുക */
 $("backToGender").addEventListener("click",()=>{
   $("studentChooser").classList.add("hidden");
   $("genderScreen").classList.remove("hidden");
   selectedStudent = null;
   status("loginStatus","");
 });
-
-/* മൂന്നാം പേജിൽ നിന്ന് പേരുകളുടെ പട്ടികയിലേക്ക് */
 $("backToNames").addEventListener("click",()=>{
   $("dobArea").classList.add("hidden");
   $("studentChooser").classList.remove("hidden");
   selectedStudent = null;
-
-  if (window._class1DobPicker) {
-    window._class1DobPicker.clear();
-  }
-
+  if (window._class1DobPicker) window._class1DobPicker.clear();
   $("dob").value = "";
   status("loginStatus","");
 });
-
-/* DOB ടൈപ്പ് ചെയ്യുമ്പോൾ സ്വയം / ചേർക്കുന്നു */
 $("dob").addEventListener("input",event=>{
   const digits = event.target.value.replace(/\D/g,"").slice(0,8);
-  const day = digits.slice(0,2);
-  const month = digits.slice(2,4);
-  const year = digits.slice(4,8);
-
-  event.target.value =
-    day +
-    (digits.length > 2 ? "/" + month : "") +
-    (digits.length > 4 ? "/" + year : "");
+  const day = digits.slice(0,2), month = digits.slice(2,4), year = digits.slice(4,8);
+  event.target.value = day + (digits.length > 2 ? "/" + month : "") + (digits.length > 4 ? "/" + year : "");
 });
-
-/* ലോഗിൻ */
 $("loginBtn").addEventListener("click",async()=>{
-  if (!selectedStudent) {
-    return status("loginStatus","ആദ്യം കുട്ടിയുടെ പേര് തിരഞ്ഞെടുക്കുക.");
-  }
-
+  if (!selectedStudent) return status("loginStatus","ആദ്യം കുട്ടിയുടെ പേര് തിരഞ്ഞെടുക്കുക.");
   const dobISO = parseDobToISO($("dob").value);
-
-  if (!dobISO) {
-    return status(
-      "loginStatus",
-      "ജനനത്തീയതി DD/MM/YYYY രൂപത്തിൽ ശരിയായി നൽകുക. ഉദാ: 07/04/2018"
-    );
-  }
-
+  if (!dobISO) return status("loginStatus","ജനനത്തീയതി DD/MM/YYYY രൂപത്തിൽ ശരിയായി നൽകുക. ഉദാ: 07/04/2018");
   const button = $("loginBtn");
   button.disabled = true;
   status("loginStatus","പ്രവേശനം പരിശോധിക്കുന്നു...");
-
   try {
-    const {data,error} = await db.rpc("class1_parent_login",{
-      p_student_id:selectedStudent.student_id,
-      p_dob:dobISO
-    });
-
+    const {data,error} = await db.rpc("class1_parent_login",{p_student_id:selectedStudent.student_id,p_dob:dobISO});
     if (error) throw error;
-
     const row = Array.isArray(data) ? data[0] : data;
-
-    const token = typeof data === "string"
-      ? data
-      : row?.session_token || row?.token;
-
-    if (!token) {
-      throw new Error(
-        "പേര് അല്ലെങ്കിൽ ജനനത്തീയതി പൊരുത്തപ്പെടുന്നില്ല. രജിസ്റ്ററിലുള്ള DOB പരിശോധിക്കുക."
-      );
-    }
-
+    const token = typeof data === "string" ? data : row?.session_token || row?.token;
+    if (!token) throw new Error("പേര് അല്ലെങ്കിൽ ജനനത്തീയതി പൊരുത്തപ്പെടുന്നില്ല. രജിസ്റ്ററിലുള്ള DOB പരിശോധിക്കുക.");
     saveSession(token,$("rememberDevice").checked);
     showDashboard();
-
   } catch (e) {
-    status(
-      "loginStatus",
-      e.message || "പ്രവേശിക്കാൻ കഴിഞ്ഞില്ല. വീണ്ടും ശ്രമിക്കുക."
-    );
-  } finally {
-    button.disabled = false;
-  }
+    status("loginStatus",e.message || "പ്രവേശിക്കാൻ കഴിഞ്ഞില്ല. വീണ്ടും ശ്രമിക്കുക.");
+  } finally { button.disabled = false; }
 });
-
-/* സ്കോർ പുതുക്കൽ */
-document.querySelectorAll(".question input").forEach(input=>{
-  input.addEventListener("change",updateScore);
-});
-
-/* ദിവസത്തെ റിപ്പോർട്ട് സമർപ്പിക്കൽ */
+document.querySelectorAll(".question input").forEach(input=>input.addEventListener("change",updateScore));
 $("dailyForm").addEventListener("submit",async event=>{
   event.preventDefault();
-
   if (reportDayIndia() !== reportDate) {
     await loadReport();
-    return status(
-      "reportStatus",
-      "റിപ്പോർട്ട് ദിവസത്തിന്റെ സമയപരിധി മാറി. പുതിയ ദിവസത്തെ റിപ്പോർട്ട് ഇപ്പോൾ കാണിക്കുന്നു."
-    );
+    return status("reportStatus","റിപ്പോർട്ട് ദിവസത്തിന്റെ സമയപരിധി മാറി. പുതിയ ദിവസത്തെ റിപ്പോർട്ട് ഇപ്പോൾ കാണിക്കുന്നു.");
   }
-
   const values = answers();
-
-  if (Object.values(values).some(v=>!v)) {
-    return status("reportStatus","അഞ്ച് ചോദ്യങ്ങൾക്കും ഉത്തരം തിരഞ്ഞെടുക്കുക.");
-  }
-
+  if (Object.values(values).some(v=>!v)) return status("reportStatus","അഞ്ച് ചോദ്യങ്ങൾക്കും ഉത്തരം തിരഞ്ഞെടുക്കുക.");
   const button = $("submitReport");
   button.disabled = true;
   status("reportStatus","റിപ്പോർട്ട് സമർപ്പിക്കുന്നു...");
-
   try {
-    const {data,error} = await db.rpc(
-      "class1_parent_submit_daily_report",
-      {
-        p_token:session.token,
-        p_report_date:reportDate,
-        p_reading_choice:values.reading,
-        p_writing_choice:values.writing,
-        p_bismillah_choice:values.bismillah,
-        p_alhamdulillah_choice:values.alhamdulillah,
-        p_mobile_choice:values.mobile
-      }
-    );
-
+    const {data,error} = await db.rpc("class1_parent_submit_daily_report",{
+      p_token:session.token,p_report_date:reportDate,
+      p_reading_choice:values.reading,p_writing_choice:values.writing,
+      p_bismillah_choice:values.bismillah,p_alhamdulillah_choice:values.alhamdulillah,
+      p_mobile_choice:values.mobile
+    });
     if (error) throw error;
-
     const result = Array.isArray(data) ? data[0] : data;
     const total = Number(result?.total_score ?? result);
-
-    status(
-      "reportStatus",
-      `റിപ്പോർട്ട് സമർപ്പിച്ചു. ആകെ മാർക്ക്: ${Number.isFinite(total) ? total : calcScore(values)}/25`,
-      true
-    );
-
+    status("reportStatus",`റിപ്പോർട്ട് സമർപ്പിച്ചു. ആകെ മാർക്ക്: ${Number.isFinite(total) ? total : calcScore(values)}/25`,true);
     await loadReport();
-
   } catch (e) {
-    status(
-      "reportStatus",
-      e.message || "റിപ്പോർട്ട് സമർപ്പിക്കാൻ കഴിഞ്ഞില്ല."
-    );
-  } finally {
-    button.disabled = false;
-  }
+    status("reportStatus",e.message || "റിപ്പോർട്ട് സമർപ്പിക്കാൻ കഴിഞ്ഞില്ല.");
+  } finally { button.disabled = false; }
 });
 
-/* രക്ഷിതാവിന്റെ അഭിപ്രായം */
+/* Class 1 parent comment: recipient selection is passed to the shared secure RPC. */
 $("sendComment").addEventListener("click",async()=>{
   const comment = $("parentComment").value.trim();
-
-  if (!comment) {
-    return status("commentStatus","അഭിപ്രായം എഴുതുക.");
+  const recipient = $("commentRecipient").value;
+  if (!comment) return status("commentStatus","അഭിപ്രായം എഴുതുക.");
+  if (!["HEAD_TEACHER","CLASS_TEACHER","BOTH"].includes(recipient)) {
+    return status("commentStatus","അഭിപ്രായം ലഭിക്കേണ്ടവരെ ശരിയായി തിരഞ്ഞെടുക്കുക.");
   }
-
   const button = $("sendComment");
   button.disabled = true;
-
+  status("commentStatus","അഭിപ്രായം അയക്കുന്നു...");
   try {
-    const {error} = await db.rpc("class1_parent_add_comment",{
+    const {error} = await db.rpc("daily_work_parent_add_comment",{
+      p_class_code:"1",
       p_token:session.token,
-      p_comment_text:comment
+      p_comment_text:comment,
+      p_recipient_type:recipient
     });
-
     if (error) throw error;
-
     $("parentComment").value = "";
-    status("commentStatus","അഭിപ്രായം അധ്യാപകർക്ക് അയച്ചു.",true);
-
+    status("commentStatus","അഭിപ്രായം തിരഞ്ഞെടുത്ത അധ്യാപകർക്ക് അയച്ചു.",true);
   } catch (e) {
-    status(
-      "commentStatus",
-      e.message || "അഭിപ്രായം അയക്കാനായില്ല."
-    );
-  } finally {
-    button.disabled = false;
-  }
+    status("commentStatus",e.message || "അഭിപ്രായം അയക്കാനായില്ല.");
+  } finally { button.disabled = false; }
 });
-
-/* പുറത്തുകടക്കൽ */
 $("logoutBtn").addEventListener("click",()=>{
   clearSession();
-
   $("dashboard").classList.add("hidden");
   $("loginPanel").classList.remove("hidden");
   $("studentChooser").classList.add("hidden");
   $("dobArea").classList.add("hidden");
   $("genderScreen").classList.remove("hidden");
-
   $("dob").value = "";
-
-  if (window._class1DobPicker) {
-    window._class1DobPicker.clear();
-  }
-
-  document.querySelectorAll(".choice").forEach(b=>{
-    b.classList.remove("active");
-  });
-
+  if (window._class1DobPicker) window._class1DobPicker.clear();
+  document.querySelectorAll(".choice").forEach(b=>b.classList.remove("active"));
   status("loginStatus","പുറത്തുകടന്നു.",true);
 });
-
-/* കലണ്ടർ: DD/MM/YYYY */
 if (window.flatpickr) {
-  window._class1DobPicker = flatpickr("#dob",{
-    dateFormat:"d/m/Y",
-    allowInput:true,
-    disableMobile:true,
-    maxDate:"today"
-  });
+  window._class1DobPicker = flatpickr("#dob",{dateFormat:"d/m/Y",allowInput:true,disableMobile:true,maxDate:"today"});
 }
-
-/* തുടക്കത്തിൽ കുട്ടികളുടെ പട്ടിക ലഭ്യമാക്കുക */
 (async()=>{
   try {
     const saved = savedSession();
-
     if (saved?.token && saved?.student_id && saved?.student_name) {
       session = saved;
-
-      selectedStudent = {
-        student_id:saved.student_id,
-        student_name:saved.student_name,
-        gender:saved.gender
-      };
-
+      selectedStudent = {student_id:saved.student_id,student_name:saved.student_name,gender:saved.gender};
       showDashboard();
     } else {
       await loadStudents();
     }
-
   } catch (e) {
-    status(
-      "loginStatus",
-      "കുട്ടികളുടെ പട്ടിക ലഭിച്ചില്ല. " + (e.message || "")
-    );
+    status("loginStatus","കുട്ടികളുടെ പട്ടിക ലഭിച്ചില്ല. " + (e.message || ""));
   }
 })();
-
 })();
 </script>
 </body>
