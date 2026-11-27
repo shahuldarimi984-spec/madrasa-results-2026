@@ -4,6 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#172b4d">
+  <link rel="manifest" href="manifest.webmanifest">
 <meta property="og:title" content="ASASUL ULOOM HIGHER SECONDARY MADRASA – PANAKKODE">
 <meta property="og:description" content="Educational Portal">
 <title>ASASUL ULOOM HIGHER SECONDARY MADRASA | PANAKKODE</title>
@@ -165,6 +166,13 @@ document.getElementById('showResults').addEventListener('click',()=>{
   window.scrollTo(0,0);
 });
 document.getElementById('backExam').addEventListener('click',()=>{results.hidden=true;exam.hidden=false;window.scrollTo(0,0)});
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker.register(
+      "/madrasa-results-2026/service-worker.js"
+    ).catch(error => console.error("Service Worker:", error));
+  });
+}
 </script>
 </body>
 </html>
