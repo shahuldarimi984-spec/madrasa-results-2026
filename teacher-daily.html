@@ -41,10 +41,11 @@ async function loadNotes(){
   if(!data||!data.length){const e=document.createElement('div');e.className='empty';e.textContent='No messages have been sent yet.';box.append(e);return;}
   const rows=[...data].sort((a,b)=>new Date(b.created_at||0)-new Date(a.created_at||0));
   const latest=rows[0],readCount=Number(latest.read_count)||0;
+  const unreadMessages=rows.filter(n=>(Number(n.read_count)||0)===0).length;
   const toggle=document.createElement('button');toggle.type='button';toggle.className='inbox-toggle';
-  const label=document.createElement('strong');label.textContent='Sent Messages ('+rows.length+')';
+  const label=document.createElement('strong');label.textContent='Sent Messages · വായിക്കാത്തത് ('+unreadMessages+')';
   const preview=document.createElement('span');preview.className='inbox-preview';preview.textContent=(latest.message||'').slice(0,110)+(String(latest.message||'').length>110?'…':'');
-  const status=document.createElement('span');status.className='read-state '+(readCount>0?'read':'unread');status.textContent=readCount>0?'വായിച്ചു · Parents read: '+readCount:'വായിച്ചിട്ടില്ല · Parents read: 0';
+  const status=document.createElement('span');status.className='read-state '+(unreadMessages>0?'unread':'read');status.textContent=unreadMessages>0?'വായിക്കാത്ത സന്ദേശങ്ങൾ: '+unreadMessages:'എല്ലാ സന്ദേശങ്ങളും വായിച്ചു';
   toggle.append(label,preview,status);
   const items=document.createElement('div');items.className='inbox-items'+(sentInboxOpen?'':' hidden');
   rows.forEach(n=>{
@@ -66,7 +67,11 @@ let parentInboxOpen=false;
 async function loadParentComments(){
  const box=$('parentCommentsList');box.textContent='Loading parent comments...';
  try{
-  const {data,error}=await db.rpc('daily_work_teacher_list_parent_comments_v2');if(error)throw error;
+  const {data,error}=await db.rpc('daily_work_teacher_list_parent_comments_v2');
+  if(error){
+   if(error.code==='PGRST202')throw new Error('Parent-comment function Supabase-ൽ ലഭ്യമല്ല. നൽകിയ SQL migration Supabase SQL Editor-ൽ run ചെയ്ത് വീണ്ടും Refresh Comments അമർത്തുക.');
+   throw error;
+  }
   box.replaceChildren();
   if(!data||!data.length){const empty=document.createElement('div');empty.className='empty';empty.textContent='ഇപ്പോൾ രക്ഷിതാക്കളുടെ അഭിപ്രായങ്ങളില്ല.';box.append(empty);return;}
   const rows=[...data].sort((a,b)=>new Date(b.created_at||0)-new Date(a.created_at||0));
