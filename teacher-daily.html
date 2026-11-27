@@ -1,14 +1,14 @@
 <!doctype html>
-<html lang="ml">
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#17345f">
-<title>അധ്യാപക ഡാഷ്ബോർഡ് | ദൈനംദിന പ്രവർത്തനം</title>
+<title>Teacher Dashboard | Daily Work</title>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <style>
 :root{--navy:#17345f;--blue:#24558a;--gold:#c9a45c;--ink:#20304a;--muted:#68778d;--line:#dce4ef;--green:#16794b;--red:#a83232;--soft:#edf4fc}
-*{box-sizing:border-box}body{margin:0;background:linear-gradient(145deg,#edf3fb,#fff9ee);color:var(--ink);font-family:system-ui,"Noto Sans Malayalam",sans-serif}
+*{box-sizing:border-box}body{margin:0;background:linear-gradient(145deg,#edf3fb,#fff9ee);color:var(--ink);font-family:Arial,system-ui,sans-serif}
 header{background:linear-gradient(120deg,#142b50,#285789);color:#fff;text-align:center;padding:24px 14px;border-bottom:5px solid var(--gold)}
 h1{font-size:clamp(22px,5vw,29px);margin:0;color:#ffe7b3}header p{margin:6px 0 0}
 main{max-width:850px;margin:20px auto;padding:0 13px 36px}.panel{background:#fff;border:1px solid var(--line);border-radius:16px;padding:18px;margin-bottom:15px;box-shadow:0 7px 22px #18365a0c}
@@ -26,53 +26,53 @@ button:disabled{opacity:.55;cursor:not-allowed}.primary{background:var(--navy);c
 </style>
 </head>
 <body>
-<header><h1>അസാസുൽ ഉലൂം മദ്രസ</h1><p>അധ്യാപക ഡാഷ്ബോർഡ് · ദൈനംദിന പ്രവർത്തനം</p></header>
+<header><h1>Azazul Uloom Madrasa</h1><p>Teacher Dashboard · Daily Work</p></header>
 <main>
 <section class="panel" id="loginPanel">
- <h2>അധ്യാപക ലോഗിൻ</h2>
- <p class="small">അധികൃത അധ്യാപക Supabase അക്കൗണ്ട് ഉപയോഗിച്ച് പ്രവേശിക്കുക.</p>
- <label for="email">ഇമെയിൽ</label><input id="email" type="email" autocomplete="username">
- <label for="password">പാസ്‌വേഡ്</label><input id="password" type="password" autocomplete="current-password">
- <button class="primary" id="loginBtn">പ്രവേശിക്കുക</button><p id="loginStatus" role="status" aria-live="polite"></p>
+ <h2>Teacher Login</h2>
+ <p class="small">Sign in using your authorized teacher account.</p>
+ <label for="email">Email</label><input id="email" type="email" autocomplete="username">
+ <label for="password">Password</label><input id="password" type="password" autocomplete="current-password">
+ <button class="primary" id="loginBtn">Sign In</button><p id="loginStatus" role="status" aria-live="polite"></p>
 </section>
 <section class="hidden" id="app">
  <div class="panel row">
-  <div><h2 id="teacherName">അധ്യാപകൻ</h2><span class="role" id="teacherRole"></span><p class="small" id="teacherScope"></p></div>
-  <div><button class="secondary" id="logoutBtn">പുറത്തുകടക്കുക</button></div>
+  <div><h2 id="teacherName">Teacher</h2><span class="role" id="teacherRole"></span><p class="small" id="teacherScope"></p></div>
+  <div><button class="secondary" id="logoutBtn">Sign Out</button></div>
  </div>
  <section class="panel">
-  <h2>പുതിയ നിർദ്ദേശം അയക്കുക</h2>
-  <label for="audience">ആർക്കാണ് അയക്കേണ്ടത്?</label>
+  <h2>Send a New Message</h2>
+  <label for="audience">Send To</label>
   <select id="audience">
-   <option value="ALL">എല്ലാ ക്ലാസുകളിലെയും രക്ഷിതാക്കൾ</option>
-   <option value="CLASS">ഒരു ക്ലാസിലെ എല്ലാ രക്ഷിതാക്കൾക്കും</option>
-   <option value="STUDENT">ഒരു കുട്ടിയുടെ രക്ഷിതാവിന്</option>
+   <option value="ALL">All Classes’ Parents</option>
+   <option value="CLASS">All Parents in a Class</option>
+   <option value="STUDENT">A Student’s Parent</option>
   </select>
-  <div id="classWrap" class="hidden"><label for="classCode">ക്ലാസ് തിരഞ്ഞെടുക്കുക</label><select id="classCode"><option value="">ക്ലാസ് തിരഞ്ഞെടുക്കുക</option></select></div>
-  <div id="studentWrap" class="hidden"><label for="studentKey">കുട്ടിയെ തിരഞ്ഞെടുക്കുക</label><select id="studentKey" disabled><option value="">ആദ്യം ക്ലാസ് തിരഞ്ഞെടുക്കുക</option></select></div>
-  <label for="message">സന്ദേശം / നിർദ്ദേശം</label>
-  <textarea id="message" maxlength="3000" placeholder="രക്ഷിതാക്കൾക്ക് നൽകേണ്ട നിർദ്ദേശം എഴുതുക"></textarea>
-  <p class="small hint" id="permissionHint">ഹെഡ്ടീച്ചർക്ക് എല്ലാ ക്ലാസുകളിലേക്കും കുട്ടികളിലേക്കും സന്ദേശം അയക്കാം. ക്ലാസ് ടീച്ചർക്ക് അനുവദിച്ച സ്വന്തം ക്ലാസുകളിലേക്കും അവിടെയുള്ള കുട്ടികൾക്കുമാത്രമേ അയക്കാൻ കഴിയൂ. അന്തിമ അനുമതി Supabase പരിശോധിക്കും.</p>
-  <button class="primary" id="sendBtn">സന്ദേശം അയക്കുക</button><p id="status" role="status" aria-live="polite"></p>
+  <div id="classWrap" class="hidden"><label for="classCode">Select Class</label><select id="classCode"><option value="">Select Class</option></select></div>
+  <div id="studentWrap" class="hidden"><label for="studentKey">Select Student</label><select id="studentKey" disabled><option value="">Select Class First</option></select></div>
+  <label for="message">Message / Instruction</label>
+  <textarea id="message" maxlength="3000" placeholder="Write a message for parents"></textarea>
+  <p class="small hint" id="permissionHint">The Head Teacher can message all classes and students. Class Teachers can message only their assigned classes and students. Supabase enforces the final permissions.</p>
+  <button class="primary" id="sendBtn">Send Message</button><p id="status" role="status" aria-live="polite"></p>
  </section>
  <section class="panel">
-  <h2>അയച്ച നിർദ്ദേശങ്ങൾ</h2><p class="small">ഓരോ സന്ദേശവും എത്ര രക്ഷിതാക്കൾ വായിച്ചു എന്ന് ഇവിടെ കാണാം. വായിച്ചവരുടെ എണ്ണം മാത്രം കാണിക്കുന്നതാണ്; വായിക്കാത്തവരുടെ എണ്ണം ഇതിൽനിന്ന് കണക്കാക്കുന്നില്ല.</p>
-  <div id="sentList"><div class="empty">വിവരങ്ങൾ ലോഡ് ചെയ്യുന്നു...</div></div>
-  <button class="secondary" id="refreshBtn">പുതുക്കുക</button>
+  <h2>Sent Messages</h2><p class="small">See how many parents have read each message. Only the read count is displayed.</p>
+  <div id="sentList"><div class="empty">Loading...</div></div>
+  <button class="secondary" id="refreshBtn">Refresh</button>
  </section>
 
  <section class="panel" id="tenDayPanel">
-  <h2>10 ദിവസത്തെ പ്രവർത്തന റിപ്പോർട്ട്</h2>
-  <p class="small">ഓരോ കുട്ടിയുടെയും തുടർച്ചയായ 10 ദിവസത്തെ മാർക്ക് 100-ൽ കണക്കാക്കുന്നു. റിപ്പോർട്ട് ഇല്ലാത്ത ദിവസം 0 മാർക്കായിരിക്കും.</p>
+  <h2>10-Day Daily Work Report</h2>
+  <p class="small">Each student’s scores for 10 consecutive days are converted to a total out of 100. A missing daily report counts as 0.</p>
   <div class="row">
-   <div><label for="reportClass">ക്ലാസ്</label><select id="reportClass"><option value="">ക്ലാസ് തിരഞ്ഞെടുക്കുക</option></select></div>
-   <div><label for="reportStart">ആദ്യ തീയതി</label><input id="reportStart" type="date" value="2026-11-27"></div>
+   <div><label for="reportClass">Select Class</label><select id="reportClass"><option value="">Select Class</option></select></div>
+   <div><label for="reportStart">Start Date</label><input id="reportStart" type="date" value="2026-11-27"></div>
   </div>
-  <label for="reportStudent">കുട്ടി</label><select id="reportStudent" disabled><option value="">ആദ്യം റിപ്പോർട്ട് ലോഡ് ചെയ്യുക</option></select>
-  <button class="primary" id="loadReportBtn">റിപ്പോർട്ട് ലോഡ് ചെയ്യുക</button>
+  <label for="reportStudent">Select Student</label><select id="reportStudent" disabled><option value="">Load Report First</option></select>
+  <button class="primary" id="loadReportBtn">Load Report</button>
   <p id="reportStatus" role="status" aria-live="polite"></p>
   <div id="reportPreview" class="hidden"></div>
-  <button class="secondary hidden" id="printReportBtn">PDF ആയി സേവ് ചെയ്യുക</button>
+  <button class="secondary hidden" id="printReportBtn">Save as PDF</button>
  </section>
 </section>
 </main>
@@ -89,34 +89,51 @@ function setOptions(select,items,placeholder,labelFn,valueFn){
  select.replaceChildren();const first=document.createElement("option");first.value="";first.textContent=placeholder;select.append(first);
  items.forEach(item=>{const o=document.createElement("option");o.value=valueFn(item);o.textContent=labelFn(item);select.append(o);});
 }
-function classesForTeacher(){return [...new Map(targets.map(t=>[t.class_code,{class_code:t.class_code,class_name:t.class_name}])).values()];}
+function classOrder(code){
+ const s=String(code);
+ if(/^\d+$/.test(s))return Number(s);
+ if(s==="+1")return 11;
+ if(s==="+2")return 12;
+ return 99;
+}
+function classLabel(item){
+ const s=String(item.class_code);
+ if(/^\d+$/.test(s))return "STD "+s;
+ if(s==="+1")return "PLUS ONE";
+ if(s==="+2")return "PLUS TWO";
+ return item.class_name||s;
+}
+function classesForTeacher(){
+ return [...new Map(targets.map(t=>[String(t.class_code),{class_code:String(t.class_code),class_name:t.class_name}])).values()]
+  .sort((a,b)=>classOrder(a.class_code)-classOrder(b.class_code));
+}
 function studentsForClass(code){return targets.filter(t=>t.class_code===code&&t.student_key&&t.student_name).sort((a,b)=>a.student_name.localeCompare(b.student_name,"ml"));}
 function audienceUI(){
  const a=$("audience").value;
  $("classWrap").classList.toggle("hidden",a==="ALL");
  $("studentWrap").classList.toggle("hidden",a!=="STUDENT");
- if(a==="ALL"){$("classCode").value="";setOptions($("studentKey"),[],"ആദ്യം ക്ലാസ് തിരഞ്ഞെടുക്കുക",x=>x.student_name,x=>x.student_key);$("studentKey").disabled=true;}
+ if(a==="ALL"){$("classCode").value="";setOptions($("studentKey"),[],"Select Class First",x=>x.student_name,x=>x.student_key);$("studentKey").disabled=true;}
  if(a==="CLASS"){$("studentKey").value="";}
  if(a==="STUDENT")fillStudents();
 }
 function fillStudents(){
  const code=$("classCode").value;const list=studentsForClass(code);
- setOptions($("studentKey"),list,code?(list.length?"കുട്ടിയെ തിരഞ്ഞെടുക്കുക":"ഈ ക്ലാസിൽ സജീവ കുട്ടികളെ കണ്ടെത്തിയില്ല") : "ആദ്യം ക്ലാസ് തിരഞ്ഞെടുക്കുക",x=>x.student_name,x=>x.student_key);
+ setOptions($("studentKey"),list,code?(list.length?"Select Student":"No Active Students") : "Select Class First",x=>x.student_name,x=>x.student_key);
  $("studentKey").disabled=!code||!list.length;
 }
 async function loadProfile(){
  const {data:{user},error}=await db.auth.getUser();
- if(error||!user)throw new Error("ലോഗിൻ വീണ്ടും നടത്തുക");
+ if(error||!user)throw new Error("Please sign in again");
  const {data:profileData,error:e}=await db.rpc("daily_work_teacher_get_profile");
  if(e)throw e;
  const profile=Array.isArray(profileData)?profileData[0]:profileData;
- if(!profile)throw new Error("ഈ അക്കൗണ്ടിന് സജീവ അധ്യാപക അനുമതിയില്ല");
- if(!["HEAD_TEACHER","CLASS_TEACHER"].includes(profile.role))throw new Error("അധ്യാപക പദവി ശരിയല്ല");
+ if(!profile)throw new Error("This account does not have active teacher access");
+ if(!["HEAD_TEACHER","CLASS_TEACHER"].includes(profile.role))throw new Error("Invalid teacher role");
  teacher=profile;
  const data=profile;
- $("teacherName").textContent=data.display_name||"അധ്യാപകൻ";
- $("teacherRole").textContent=data.role==="HEAD_TEACHER"?"ഹെഡ്ടീച്ചർ":"ക്ലാസ് ടീച്ചർ";
- $("teacherScope").textContent=data.role==="HEAD_TEACHER"?"എല്ലാ ക്ലാസുകളുടെയും സന്ദേശ നിയന്ത്രണം":"നിങ്ങൾക്ക് അനുവദിച്ച ക്ലാസുകളുടെ സന്ദേശ നിയന്ത്രണം";
+ $("teacherName").textContent=data.display_name||"Teacher";
+ $("teacherRole").textContent=data.role==="HEAD_TEACHER"?"Head Teacher":"Class Teacher";
+ $("teacherScope").textContent=data.role==="HEAD_TEACHER"?"Message access for all classes":"Message access for your assigned classes";
  $("audience").querySelector('option[value="ALL"]').disabled=data.role!=="HEAD_TEACHER";
  if(data.role==="CLASS_TEACHER")$("audience").value="CLASS";
 }
@@ -126,8 +143,8 @@ async function loadTargets(){
  targets=data||[];classMap.clear();studentMap.clear();
  targets.forEach(t=>{classMap.set(t.class_code,t.class_name);if(t.student_key)studentMap.set(t.student_key,t.student_name);});
  const classes=classesForTeacher();
- setOptions($("classCode"),classes,"ക്ലാസ് തിരഞ്ഞെടുക്കുക",x=>x.class_name+" ("+x.class_code+")",x=>x.class_code);
- if(!classes.length)throw new Error("ഈ അധ്യാപക അക്കൗണ്ടിന് ക്ലാസ് അനുവദിച്ചിട്ടില്ല");
+ setOptions($("classCode"),classes,"Select Class",classLabel,x=>x.class_code);
+ if(!classes.length)throw new Error("No classes are assigned to this teacher account");
 }
 async function enterApp(){
  await loadProfile();await loadTargets();setupReportClasses();
@@ -137,86 +154,68 @@ async function enterApp(){
 $("audience").addEventListener("change",audienceUI);
 $("classCode").addEventListener("change",()=>{if($("audience").value==="STUDENT")fillStudents();});
 $("loginBtn").addEventListener("click",async()=>{
- $("loginBtn").disabled=true;say("loginStatus","പ്രവേശിക്കുന്നു...");
+ $("loginBtn").disabled=true;say("loginStatus","Signing in...");
  try{const {error}=await db.auth.signInWithPassword({email:$("email").value.trim(),password:$("password").value});if(error)throw error;await enterApp();say("loginStatus","");}
- catch(e){say("loginStatus",e.message||"പ്രവേശിക്കാൻ കഴിഞ്ഞില്ല");}
+ catch(e){say("loginStatus",e.message||"Sign-in failed");}
  finally{$("loginBtn").disabled=false;}
 });
 $("sendBtn").addEventListener("click",async()=>{
  const audience=$("audience").value,cls=audience==="ALL"?null:($("classCode").value||null);
  const key=audience==="STUDENT"?($("studentKey").value||null):null,msg=$("message").value.trim();
- if(!msg)return say("status","സന്ദേശം എഴുതുക");
- if(audience!=="ALL"&&!cls)return say("status","ക്ലാസ് തിരഞ്ഞെടുക്കുക");
- if(audience==="STUDENT"&&!key)return say("status","കുട്ടിയെ തിരഞ്ഞെടുക്കുക");
- if(audience==="CLASS"&&!classMap.has(cls))return say("status","ഈ ക്ലാസ് തിരഞ്ഞെടുക്കാൻ അനുമതിയില്ല");
- if(audience==="STUDENT"&&!studentsForClass(cls).some(s=>s.student_key===key))return say("status","ഈ കുട്ടിയെ തിരഞ്ഞെടുക്കാൻ അനുമതിയില്ല");
- $("sendBtn").disabled=true;say("status","സന്ദേശം അയക്കുന്നു...");
+ if(!msg)return say("status","Please enter a message");
+ if(audience!=="ALL"&&!cls)return say("status","Select Class");
+ if(audience==="STUDENT"&&!key)return say("status","Select Student");
+ if(audience==="CLASS"&&!classMap.has(cls))return say("status","You are not authorized to select this class");
+ if(audience==="STUDENT"&&!studentsForClass(cls).some(s=>s.student_key===key))return say("status","You are not authorized to select this student");
+ $("sendBtn").disabled=true;say("status","Sending message...");
  try{
   const {error}=await db.rpc("daily_work_teacher_send_note",{p_audience_type:audience,p_class_code:cls,p_student_key:key,p_message:msg});
   if(error)throw error;
-  $("message").value="";say("status","സന്ദേശം വിജയകരമായി അയച്ചു.",true);await loadNotes();
- }catch(e){say("status",e.message||"സന്ദേശം അയക്കാനായില്ല");}
+  $("message").value="";say("status","Message sent successfully.",true);await loadNotes();
+ }catch(e){say("status",e.message||"Could not send the message");}
  finally{$("sendBtn").disabled=false;}
 });
 async function loadNotes(){
- $("sentList").textContent="ലോഡ് ചെയ്യുന്നു...";
+ $("sentList").textContent="Loading...";
  try{
   const {data,error}=await db.rpc("daily_work_teacher_list_notes");if(error)throw error;
   $("sentList").replaceChildren();
-  if(!data||!data.length){const empty=document.createElement("div");empty.className="empty";empty.textContent="ഇതുവരെ സന്ദേശങ്ങളൊന്നും അയച്ചിട്ടില്ല.";$("sentList").append(empty);return;}
+  if(!data||!data.length){const empty=document.createElement("div");empty.className="empty";empty.textContent="No messages have been sent yet.";$("sentList").append(empty);return;}
   data.forEach(n=>{
    const box=document.createElement("article");box.className="note";
    const tag=document.createElement("span");tag.className="pill";
    const key=n.student_key||"";
-   tag.textContent=n.audience_type==="ALL"?"എല്ലാ ക്ലാസുകളും":n.audience_type==="CLASS"?"ക്ലാസ് "+(classMap.get(n.class_code)||n.class_code):"കുട്ടി · "+(studentMap.get(key)||key);
+   tag.textContent=n.audience_type==="ALL"?"All Classes":n.audience_type==="CLASS"?"Class "+classLabel({class_code:n.class_code,class_name:classMap.get(n.class_code)}):"Student · "+(studentMap.get(key)||key);
    const p=document.createElement("p");p.textContent=n.message||"";
    const meta=document.createElement("div");meta.className="meta";
    const dt=n.created_at?new Date(n.created_at).toLocaleString("ml-IN"):"";
-   meta.textContent=dt+" · വായിച്ച രക്ഷിതാക്കൾ: "+(Number(n.read_count)||0);
+   meta.textContent=dt+" · Parents who read: "+(Number(n.read_count)||0);
    box.append(tag,p,meta);$("sentList").append(box);
   });
- }catch(e){$("sentList").textContent="സന്ദേശങ്ങൾ ലഭിച്ചില്ല: "+(e.message||"");}
+ }catch(e){$("sentList").textContent="Could not load messages: "+(e.message||"");}
 }
 $("refreshBtn").addEventListener("click",loadNotes);
 $("logoutBtn").addEventListener("click",async()=>{
- await db.auth.signOut();teacher=null;targets=[];$("app").classList.add("hidden");$("loginPanel").classList.remove("hidden");say("loginStatus","പുറത്തുകടന്നു.",true);
+ await db.auth.signOut();teacher=null;targets=[];$("app").classList.add("hidden");$("loginPanel").classList.remove("hidden");say("loginStatus","Signed out.",true);
 });
 
 let reportRows=[];
 function reportEscape(v){return String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
 function setupReportClasses(){
- // The legacy First Class is represented once by CLASS1.
- // Ignore the duplicate daily_work_classes code "1" in this PDF selector.
- const opts=classesForTeacher()
-  .filter(x=>String(x.class_code)!=="1")
-  .sort((a,b)=>{
-    const order=code=>{
-      const s=String(code);
-      if(/^\\d+$/.test(s)) return Number(s);
-      if(s==="+1") return 11;
-      if(s==="+2") return 12;
-      return 99;
-    };
-    return order(a.class_code)-order(b.class_code);
-  });
- const items=opts.map(x=>({
-   class_code:x.class_code,
-   label:/^\\d+$/.test(String(x.class_code))
-     ? "STD "+String(x.class_code)
-     : String(x.class_code)==="+1" ? "PLUS ONE"
-     : String(x.class_code)==="+2" ? "PLUS TWO"
-     : x.class_name
- }));
+ // The separate legacy First Class is available only to the Head Teacher.
+ // Exclude its duplicate numeric code from this PDF selector.
+ const opts=classesForTeacher().filter(x=>String(x.class_code)!=="1");
+ const items=opts.map(x=>({class_code:x.class_code,label:classLabel(x)}));
  if(teacher && teacher.role==="HEAD_TEACHER"){
-   items.unshift({class_code:"CLASS1",label:"STD 1"});
+  items.unshift({class_code:"CLASS1",label:"STD 1"});
  }
- setOptions($("reportClass"),items,"ക്ലാസ് തിരഞ്ഞെടുക്കുക",x=>x.label,x=>x.class_code);
+ setOptions($("reportClass"),items,"Select Class",x=>x.label,x=>x.class_code);
 }
 function fillReportStudents(){
  const m=new Map();
  reportRows.forEach(r=>m.set(r.student_key,r.student_name));
  const items=[...m.entries()].map(([student_key,student_name])=>({student_key,student_name}));
- setOptions($("reportStudent"),items,items.length?"കുട്ടിയെ തിരഞ്ഞെടുക്കുക":"കുട്ടികളെ കണ്ടെത്തിയില്ല",x=>x.student_name,x=>x.student_key);
+ setOptions($("reportStudent"),items,items.length?"Select Student":"No students found",x=>x.student_name,x=>x.student_key);
  $("reportStudent").disabled=!items.length;
  if(items.length){$("reportStudent").value=items[0].student_key;render10DayPreview();}
 }
@@ -227,21 +226,21 @@ function render10DayPreview(){
  if(!rows.length){el.classList.add("hidden");$("printReportBtn").classList.add("hidden");return;}
  const total=rows.reduce((sum,r)=>sum+Number(r.score_out_of_10||0),0);
  el.classList.remove("hidden");$("printReportBtn").classList.remove("hidden");
- el.innerHTML='<article class="note"><strong>'+reportEscape(rows[0].student_name)+'</strong><div class="meta">'+reportEscape(rows[0].class_name)+' · '+reportEscape(rows[0].report_date)+' മുതൽ '+reportEscape(rows[rows.length-1].report_date)+' വരെ</div><p>ആകെ മാർക്ക്: <strong>'+total.toFixed(2)+' / 100</strong></p></article>';
+ el.innerHTML='<article class="note"><strong>'+reportEscape(rows[0].student_name)+'</strong><div class="meta">'+reportEscape(classLabel({class_code:rows[0].class_code,class_name:rows[0].class_name}))+' · '+reportEscape(rows[0].report_date)+' to '+reportEscape(rows[rows.length-1].report_date)+' </div><p>Total Score: <strong>'+total.toFixed(2)+' / 100</strong></p></article>';
 }
 async function load10DayReport(){
  const code=$("reportClass").value,start=$("reportStart").value;
- if(!code)return say("reportStatus","ക്ലാസ് തിരഞ്ഞെടുക്കുക");
- if(!start)return say("reportStatus","ആദ്യ തീയതി തിരഞ്ഞെടുക്കുക");
- $("loadReportBtn").disabled=true;say("reportStatus","റിപ്പോർട്ട് വിവരങ്ങൾ ശേഖരിക്കുന്നു...");
+ if(!code)return say("reportStatus","Select Class");
+ if(!start)return say("reportStatus","Please select a start date.");
+ $("loadReportBtn").disabled=true;say("reportStatus","Loading report data...");
  try{
   const {data,error}=await db.rpc("daily_work_teacher_get_10day_report",{p_class_code:code,p_start_date:start});
   if(error)throw error;
   reportRows=data||[];
-  if(!reportRows.length)throw new Error("ഈ ക്ലാസിൽ കുട്ടികളെ കണ്ടെത്തിയില്ല");
+  if(!reportRows.length)throw new Error("No students found in this class.");
   fillReportStudents();
-  say("reportStatus","റിപ്പോർട്ട് തയ്യാറായി. കുട്ടിയെ തിരഞ്ഞെടുത്ത് PDF സേവ് ചെയ്യാം.",true);
- }catch(e){reportRows=[];$("reportPreview").classList.add("hidden");$("printReportBtn").classList.add("hidden");say("reportStatus",e.message||"റിപ്പോർട്ട് ലോഡ് ചെയ്യാനായില്ല");}
+  say("reportStatus","Report is ready. Select a student and save the PDF.",true);
+ }catch(e){reportRows=[];$("reportPreview").classList.add("hidden");$("printReportBtn").classList.add("hidden");say("reportStatus",e.message||"Could not load report");}
  finally{$("loadReportBtn").disabled=false;}
 }
 function print10DayReport(){
@@ -250,17 +249,17 @@ function print10DayReport(){
  if(!rows.length)return;
  const total=rows.reduce((sum,r)=>sum+Number(r.score_out_of_10||0),0);
  const w=window.open("","_blank");
- if(!w){say("reportStatus","പോപ്പ്-അപ്പ് അനുവദിക്കുക; ശേഷം PDF സേവ് ചെയ്യാം");return;}
+ if(!w){say("reportStatus","Allow pop-ups to open the report, then save it as a PDF");return;}
  const body=rows.map((r,i)=>'<tr><td>'+(i+1)+'</td><td>'+reportEscape(r.report_date)+'</td><td>'+Number(r.score_out_of_10||0).toFixed(2)+' / 10</td></tr>').join("");
  w.document.open();
- w.document.write('<!doctype html><html lang="ml"><head><meta charset="utf-8"><title>10 ദിവസത്തെ റിപ്പോർട്ട്</title><style>body{font-family:system-ui,"Noto Sans Malayalam",sans-serif;color:#172b49;padding:24px}h1,h2{text-align:center}h1{font-size:22px}h2{font-size:18px}p{text-align:center}table{width:100%;border-collapse:collapse;margin-top:22px}th,td{border:1px solid #9eacc0;padding:11px;text-align:center}th{background:#edf3fa}.total{font-size:20px;font-weight:800;text-align:center;margin:24px}@media print{body{padding:8mm}}</style></head><body><h1>അസാസുൽ ഉലൂം മദ്രസ</h1><h2>10 ദിവസത്തെ ദൈനംദിന പ്രവർത്തന റിപ്പോർട്ട്</h2><p><strong>'+reportEscape(rows[0].class_name)+'</strong></p><p>വിദ്യാർത്ഥി: <strong>'+reportEscape(rows[0].student_name)+'</strong></p><p>'+reportEscape(rows[0].report_date)+' മുതൽ '+reportEscape(rows[rows.length-1].report_date)+' വരെ</p><table><thead><tr><th>ദിവസം</th><th>തീയതി</th><th>മാർക്ക്</th></tr></thead><tbody>'+body+'</tbody></table><div class="total">ആകെ: '+total.toFixed(2)+' / 100</div><p>ഓരോ ദിവസത്തെയും മാർക്ക് 10-ലേക്ക് മാറ്റിയാണ് കണക്കാക്കിയിരിക്കുന്നത്.</p><script>window.onload=()=>window.print();<\\/script></body></html>');
+ w.document.write('<!doctype html><html lang="en"><head><meta charset="utf-8"><title>10-Day Daily Work Report</title><style>body{font-family:Arial,system-ui,sans-serif;color:#172b49;padding:24px}h1,h2{text-align:center}h1{font-size:22px}h2{font-size:18px}p{text-align:center}table{width:100%;border-collapse:collapse;margin-top:22px}th,td{border:1px solid #9eacc0;padding:11px;text-align:center}th{background:#edf3fa}.total{font-size:20px;font-weight:800;text-align:center;margin:24px}@media print{body{padding:8mm}}</style></head><body><h1>Azazul Uloom Madrasa</h1><h2>10-Day Daily Work Report</h2><p><strong>'+reportEscape(classLabel({class_code:rows[0].class_code,class_name:rows[0].class_name}))+'</strong></p><p>Student: <strong>'+reportEscape(rows[0].student_name)+'</strong></p><p>'+reportEscape(rows[0].report_date)+' to '+reportEscape(rows[rows.length-1].report_date)+' </p><table><thead><tr><th>Day</th><th>Date</th><th>Score</th></tr></thead><tbody>'+body+'</tbody></table><div class="total">Total: '+total.toFixed(2)+' / 100</div><p>Each day’s score is converted to a score out of 10.</p><script>window.onload=()=>window.print();<\\/script></body></html>');
  w.document.close();
 }
 $("loadReportBtn").addEventListener("click",load10DayReport);
 $("reportStudent").addEventListener("change",render10DayPreview);
 $("printReportBtn").addEventListener("click",print10DayReport);
 
-db.auth.getSession().then(async({data})=>{if(data.session){try{await enterApp();}catch(e){await db.auth.signOut();say("loginStatus",e.message||"ഡാഷ്ബോർഡ് തുറക്കാനായില്ല");}}});
+db.auth.getSession().then(async({data})=>{if(data.session){try{await enterApp();}catch(e){await db.auth.signOut();say("loginStatus",e.message||"Could not open the dashboard");}}});
 })();
 </script>
 </body>
