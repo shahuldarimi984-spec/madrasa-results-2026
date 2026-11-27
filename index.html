@@ -4,241 +4,146 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#172b4d">
-<meta property="og:title" content="അസാസുൽ ഉലൂം ഹയർ സെക്കൻഡറി മദ്രസ – പനക്കോട്">
-<meta property="og:description" content="ചരിത്രം, പ്രോത്സാഹന സന്ദേശം, അർദ്ധവാർഷിക പരീക്ഷാ ഫലം">
-<meta property="og:image" content="https://shahuldarimi984-spec.github.io/madrasa-results-2026/emblem-panakkode.jpg?v=3">
-<meta property="og:image:alt" content="അസാസുൽ ഉലൂം മദ്രസ പനക്കോട് എംബ്ലം">
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://shahuldarimi984-spec.github.io/madrasa-results-2026/">
-<meta name="twitter:card" content="summary">
- <title>അസാസുൽ ഉലൂം ഹയർ സെക്കൻഡറി മദ്രസ | പനക്കോട്</title>
+<meta property="og:title" content="ASASUL ULOOM HIGHER SECONDARY MADRASA – PANAKKODE">
+<meta property="og:description" content="Educational Portal">
+<title>ASASUL ULOOM HIGHER SECONDARY MADRASA | PANAKKODE</title>
 <style>
-:root{--navy:#172b4d;--navy2:#244b78;--gold:#c9a45c;--cream:#fffaf0;--ink:#20304a;--muted:#65738a}
+:root{--navy:#172b4d;--gold:#c9a45c;--ink:#20304a;--muted:#65738a}
 *{box-sizing:border-box}
 html,body{margin:0;min-height:100%;font-family:system-ui,"Noto Sans Malayalam",sans-serif;color:var(--ink)}
-body{background:linear-gradient(135deg,#eff4fa,#fff8e9)}
+body{background:#f7f4eb}
 button{font:inherit;cursor:pointer}
-#intro{min-height:100vh;display:flex;flex-direction:column}
+#home{width:min(100%,900px);margin:0 auto;position:relative;line-height:0}
+#poster{display:block;width:100%;height:auto}
+.hotspot{position:absolute;display:block;border-radius:18px;outline:0;line-height:normal}
+.hotspot:focus-visible{outline:4px solid #ffbf36;outline-offset:3px;background:#ffffff20}
+#aboutLink{left:8.7%;top:39.2%;width:39%;height:12.4%}
+#examLink{left:52.3%;top:39.2%;width:39%;height:12.4%}
+#studentLink{left:8.7%;top:54.7%;width:39%;height:12.4%}
+#teacherLink{left:52.3%;top:54.7%;width:39%;height:12.4%}
+#content{display:none;min-height:100vh}
 .topline{height:7px;background:linear-gradient(90deg,var(--gold),#f4dfaa,var(--gold))}
-.intro-head{width:min(940px,100%);margin:0 auto;padding:18px 18px 0;display:flex;align-items:center;justify-content:space-between}
-.brandmark{width:66px;height:66px;object-fit:contain;background:#fff;border:2px solid var(--gold);border-radius:50%;padding:4px}
-.pageno{font-size:13px;color:var(--muted);font-weight:700}
-.page{display:none;width:min(940px,100%);margin:0 auto;padding:18px 18px 24px;flex:1}
-.page.active{display:block;animation:fade .25s ease}
-@keyframes fade{from{opacity:.45;transform:translateY(5px)}to{opacity:1;transform:none}}
-.paper{background:#fff;border:1px solid #e6d9bd;border-radius:24px;box-shadow:0 12px 34px #1d355712;overflow:hidden}
-.hero{background:linear-gradient(125deg,#10264a,#244b78);color:white;text-align:center;padding:23px 20px 20px;border-bottom:5px solid var(--gold)}
-.hero img{width:90px;height:90px;object-fit:contain;background:white;border-radius:50%;padding:5px;border:3px solid var(--gold)}
-.hero h1{font-size:clamp(21px,4.7vw,31px);line-height:1.35;color:#ffe3a1;margin:12px 0 3px}
-.hero p{margin:3px 0;font-weight:650;letter-spacing:.5px}
-.reg{font-size:13px;color:#f4dfaa;margin-top:7px!important}
-.building{display:block;width:100%;max-height:300px;object-fit:cover}
-.details{padding:17px 20px 22px}
-.address{text-align:center;line-height:1.7;color:#52627a;font-size:13px;font-weight:700;letter-spacing:.35px;margin:0 0 16px}
-.contact-grid{display:grid;grid-template-columns:1fr;gap:9px}
-.contact{border:1px solid #e9dfcb;background:#fffdf8;border-radius:13px;padding:10px 13px}
-.contact .role{display:block;color:#9b7738;font-size:11px;font-weight:800;letter-spacing:.8px}
-.contact strong{display:block;color:var(--navy);font-size:14px;margin:2px 0}
-.contact a{color:#3e6287;text-decoration:none;font-weight:700;font-size:13px}
-.teachers{margin-top:12px;border:1px solid #e9dfcb;background:#fffdf8;border-radius:14px;padding:12px 14px}
-.teachers h3{margin:0 0 8px;color:#9b7738;font-size:12px;letter-spacing:.6px}
-.teacher-list{display:grid;grid-template-columns:1fr 1fr;gap:7px 12px}
-.teacher{font-size:13px;line-height:1.5}
-.teacher b{display:block;color:var(--navy)}
-.teacher a{color:#3e6287;text-decoration:none;font-size:12px;font-weight:700}
-.story{padding:24px clamp(18px,4vw,34px);line-height:1.95;font-size:15px}
-.page-title{text-align:center;color:var(--navy);font-size:clamp(23px,5vw,32px);line-height:1.45;margin:6px 0 4px}
-.subtitle{text-align:center;color:#a17c3e;font-weight:750;margin:0 0 22px;font-size:15px}
+.toolbar{position:sticky;top:0;z-index:5;background:var(--navy);color:#fff;padding:10px 14px;display:flex;align-items:center;justify-content:space-between;gap:10px}
+.toolbar strong{font-size:14px}
+.toolbar button,.action{border:1px solid #e4c987;border-radius:10px;background:#fff7e6;color:var(--navy);font-weight:800;padding:9px 13px}
+.wrap{width:min(940px,100%);margin:0 auto;padding:18px}
+.paper{background:#fff;border:1px solid #e6d9bd;border-radius:20px;box-shadow:0 10px 28px #1d355712;overflow:hidden;margin-bottom:18px}
+.hero{background:linear-gradient(125deg,#10264a,#244b78);color:#fff;text-align:center;padding:22px 16px;border-bottom:5px solid var(--gold)}
+.hero h1{font-size:clamp(20px,4vw,29px);line-height:1.35;color:#ffe3a1;margin:0 0 5px}
+.hero p{margin:0;font-weight:700;letter-spacing:.5px}
+.story,.encourage{padding:22px clamp(17px,4vw,34px);line-height:1.95;font-size:15px}
+.page-title{text-align:center;color:var(--navy);font-size:clamp(23px,5vw,32px);line-height:1.45;margin:4px 0}
+.subtitle{text-align:center;color:#a17c3e;font-weight:750;margin:0 0 20px}
 .section{margin:17px 0 0}
 .section h3{display:inline-block;background:var(--navy);color:#fff;padding:7px 15px;border-radius:9px;font-size:16px;margin:0 0 9px}
-.section p{margin:0;color:#33435b}
-.encourage{padding:25px clamp(18px,5vw,42px);text-align:center;line-height:1.95}
-.encourage h2{margin:3px 0 18px;color:var(--navy);font-size:clamp(25px,5.5vw,34px)}
-.encourage p{font-size:15px;text-align:left;line-height:2;margin:0 0 14px}
-.quote{margin:21px 0 16px;padding:18px 14px;border-radius:16px;background:#f8f1e2;border:1px solid #ead9b6;color:var(--navy);font-weight:750;line-height:1.9}
-.quote strong{display:block;font-size:20px;color:#9a7332}
-.big-message{font-size:clamp(19px,4vw,25px);font-weight:850;color:var(--navy);line-height:1.8;margin:15px 0}
-.gateway{padding:36px 22px;text-align:center}
-.gateway img{width:105px;height:105px;object-fit:contain;background:#fff;border:3px solid var(--gold);border-radius:50%;padding:6px}
-.gateway h2{font-size:clamp(23px,5vw,31px);line-height:1.4;color:var(--navy);margin:13px 0 2px}
-.gateway .year{font-size:17px;color:#9b7738;font-weight:800;margin:4px 0 16px}
-.gateway p{line-height:1.9;color:#53627a;margin:0 auto 20px;max-width:530px}
-.start-btn,.nav-btn{border:0;border-radius:13px;font-weight:800}
-.start-btn{padding:16px 32px;background:linear-gradient(120deg,#17355d,#285988);color:#fff;font-size:20px;box-shadow:0 7px 18px #172b4d2a;border:2px solid var(--gold)}
-.navbar{width:min(940px,100%);margin:0 auto;padding:0 18px 18px;display:flex;align-items:center;justify-content:space-between;gap:12px}
-.nav-btn{padding:11px 18px;background:#fff;border:1px solid #dac89f;color:var(--navy);min-width:112px}
-.nav-btn.primary{background:var(--navy);color:white;border-color:var(--navy)}
-.nav-btn:disabled{opacity:.35;cursor:default}
-.dots{display:flex;gap:7px;align-items:center}
-.dot{width:8px;height:8px;border-radius:50%;background:#d8ccb2}
-.dot.on{width:22px;border-radius:10px;background:var(--gold)}
-#resultsScreen{display:none;min-height:100vh;background:#f4f6f9}
-.resultbar{position:sticky;top:0;z-index:5;background:#172b4d;padding:9px 12px;display:flex;justify-content:space-between;align-items:center;color:#fff;gap:8px}
-.resultbar span{font-size:13px;font-weight:700}
-.resultbar button{border:1px solid #e3ca8f;border-radius:9px;background:#fff7e6;color:#172b4d;font-weight:800;padding:8px 12px}
-#resultFrame{display:block;width:100%;height:calc(100vh - 48px);border:0;background:white}
-@media(min-width:650px){
- .contact-grid{grid-template-columns:repeat(3,1fr)}
- .teachers .teacher-list{grid-template-columns:repeat(3,1fr)}
- .building{max-height:330px}
- .page{padding-top:22px}
-}
-@media(max-width:380px){.intro-head{padding-top:12px}.brandmark{width:54px;height:54px}.teacher-list{grid-template-columns:1fr}.story{font-size:14px}}
+.section p,.story p,.encourage p{margin:0 0 13px;color:#33435b}
+.quote{margin:20px 0;padding:17px;border-radius:15px;background:#f8f1e2;border:1px solid #ead9b6;color:var(--navy);font-weight:750;text-align:center}
+.big-message{text-align:center;font-size:clamp(18px,4vw,24px);font-weight:850;color:var(--navy);line-height:1.8;margin:14px 0}
+.center{text-align:center}
+.actions{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin:18px 0 4px}
+.action.primary{background:var(--navy);color:#fff;border-color:var(--navy);font-size:17px;padding:13px 24px}
+#resultFrame{display:block;width:100%;height:calc(100vh - 55px);border:0;background:#fff}
+@media(max-width:480px){.wrap{padding:11px}.story,.encourage{font-size:14px}.toolbar strong{font-size:12px}}
 </style>
 </head>
 <body>
-<div class="topline"></div>
-<div id="intro">
-  <div class="intro-head">
-    <img class="brandmark" src="https://shahuldarimi984-spec.github.io/madrasa-results-2026/emblem-panakkode.jpg" alt="മദ്രസ എംബ്ലം">
-    <span class="pageno" id="pageNumber">01 / 04</span>
-  </div>
+<div id="home" aria-label="അസാസുൽ ഉലൂം വിദ്യാഭ്യാസ പോർട്ടൽ">
+  <img id="poster" src="portal-home.jpg" alt="ASASUL ULOOM HIGHER SECONDARY MADRASA PANAKKODE Educational Portal">
+  <a class="hotspot" id="aboutLink" href="#about" aria-label="നമ്മുടെ മദ്രസ – മദ്രസയെ പരിചയപ്പെടാം"></a>
+  <a class="hotspot" id="examLink" href="#exam" aria-label="Exam Result – Half Yearly Exam"></a>
+  <a class="hotspot" id="studentLink" href="daily-work.html" aria-label="Daily Work Students"></a>
+  <a class="hotspot" id="teacherLink" href="teacher-daily.html" aria-label="Daily Work Teachers"></a>
+</div>
 
-  <section class="page active" data-page="0">
-    <div class="paper">
-      <div class="hero">
-        <img src="https://shahuldarimi984-spec.github.io/madrasa-results-2026/emblem-panakkode.jpg" alt="അസാസുൽ ഉലൂം മദ്രസ എംബ്ലം">
-        <h1>ASASUL ULOOM HIGHER SECONDARY MADRASA</h1>
-        <p>PANAKKODE</p>
-        <p class="reg">REGISTER NO: 2692</p>
-      </div>
-      
-      <div class="details">
-        <p class="address">P.O. VALIYAPARAMBA<br>PIN CODE: 673572<br>KOZHIKODE DISTRICT, KERALA</p>
-        <div class="contact-grid">
-          <div class="contact"><span class="role">PRESIDENT</span><strong>ABDU HAJI</strong><a href="tel:9846028299">98460 28299</a></div>
-          <div class="contact"><span class="role">SECRETARY</span><strong>V.T. AHMAD SHAREEF MASTER</strong><a href="tel:9447426139">9447426139</a></div>
-          <div class="contact"><span class="role">SADR USTHAD</span><strong>SHAHUL HAMEED DARIMI</strong><a href="tel:8111838360">8111838360</a></div>
+<div id="content">
+  <div class="topline"></div>
+  <div class="toolbar">
+    <strong id="sectionName">ASASUL ULOOM HIGHER SECONDARY MADRASA</strong>
+    <button type="button" id="homeButton">പോർട്ടലിലേക്ക് മടങ്ങുക</button>
+  </div>
+  <main class="wrap">
+    <section id="aboutSection" hidden>
+      <div class="paper">
+        <div class="hero">
+          <h1>ASASUL ULOOM HIGHER SECONDARY MADRASA</h1>
+          <p>PANAKKODE · REGISTER NO: 2692</p>
         </div>
-        <div class="teachers">
-          <h3>TEACHERS</h3>
-          <div class="teacher-list">
-            <div class="teacher"><b>SALEEM USTHAD</b><a href="tel:9656188105">96561 88105</a></div>
-            <div class="teacher"><b>SHAREEF USTHAD</b><a href="tel:9745135881">97451 35881</a></div>
-            <div class="teacher"><b>HAMZA USTHAD</b><a href="tel:9645499544">96454 99544</a></div>
-            <div class="teacher"><b>ANWAR SA'ADI</b><a href="tel:9072977169">90729 77169</a></div>
-            <div class="teacher"><b>MAJEED USTHAD</b><a href="tel:9048157297">90481 57297</a></div>
+        <div class="story">
+          <p class="center"><b>P.O. VALIYAPARAMBA · PIN CODE: 673572 · KOZHIKODE DISTRICT, KERALA</b></p>
+          <div class="section">
+            <h3>ഭാരവാഹികൾ</h3>
+            <p><b>PRESIDENT:</b> ABDU HAJI · 98460 28299</p>
+            <p><b>SECRETARY:</b> V.T. AHMAD SHAREEF MASTER · 9447426139</p>
+            <p><b>SADR USTHAD:</b> SHAHUL HAMEED DARIMI · 8111838360</p>
+          </div>
+          <div class="section">
+            <h3>TEACHERS</h3>
+            <p>SALEEM USTHAD · 96561 88105</p>
+            <p>SHAREEF USTHAD · 97451 35881</p>
+            <p>HAMZA USTHAD · 96454 99544</p>
+            <p>ANWAR SA'ADI · 90729 77169</p>
+            <p>MAJEED USTHAD · 90481 57297</p>
           </div>
         </div>
       </div>
-    </div>
-  </section>
-
-  <section class="page" data-page="1">
-    <div class="paper story">
-      <h2 class="page-title">അറിവിന്റെ അറുപത്തിയഞ്ച് വർഷങ്ങൾ</h2>
-      <p class="subtitle">ആത്മീയ മുന്നേറ്റത്തിന്റെ അഭിമാനയാത്ര</p>
-      <p>പാനക്കോടിന്റെ ദീനീ മുന്നേറ്റത്തിൽ നിർണായകമായ പങ്കുവഹിച്ചുകൊണ്ട് ആറര പതിറ്റാണ്ടിന്റെ അഭിമാനകരമായ ചരിത്രം പിന്നിടുകയാണ് നമ്മുടെ പ്രിയപ്പെട്ട അസാസുൽ ഉലൂം ഹയർ സെക്കൻഡറി മദ്രസ. ഏകദേശം 65 വർഷങ്ങൾക്ക് മുമ്പ്, നിസ്വാർത്ഥരും നിഷ്കളങ്കരുമായ നമ്മുടെ നാട്ടിലെ കാരണവന്മാരുടെ ദീർഘവീക്ഷണത്തിലും ആത്മാർത്ഥമായ പരിശ്രമത്തിലുമാണ് ഈ മഹത്തായ സ്ഥാപനം പിറവിയെടുത്തത്. തലമുറകൾക്ക് ദീനീ വിജ്ഞാനത്തിന്റെ വെളിച്ചം പകർന്നുനൽകിയ ഈ സ്ഥാപനം ഇന്ന് നമ്മുടെ നാടിന്റെ അഭിമാനമായി വളർന്നിരിക്കുന്നു.</p>
-      <div class="section">
-        <h3>പഠനമികവും നേട്ടങ്ങളും</h3>
-        <p>സമസ്ത കേരള ഇസ്‌ലാം മത വിദ്യാഭ്യാസ ബോർഡിന്റെ കീഴിൽ 2692-ാം നമ്പറായി രജിസ്റ്റർ ചെയ്യപ്പെട്ട നമ്മുടെ മദ്രസ, ഇന്ന് പാനക്കോട് പ്രദേശത്തെ ദീനീ പ്രവർത്തനങ്ങൾക്ക് നേതൃത്വം നൽകുന്ന പ്രധാന കേന്ദ്രങ്ങളിലൊന്നാണ്. ഒന്നാം ക്ലാസ് മുതൽ പ്ലസ് ടു വരെയുള്ള ക്ലാസുകളിലായി ഇരുന്നൂറിലധികം വിദ്യാർത്ഥികൾ ഇവിടെ വിജ്ഞാനം അഭ്യസിക്കുന്നു. താമരശ്ശേരി റേഞ്ചിലെ പതിനേഴ് മദ്രസകൾക്കിടയിൽ പഠനനിലവാരത്തിലും പാഠ്യേതര മികവിലും ശ്രദ്ധേയമായ സ്ഥാനമാണ് നമ്മുടെ മദ്രസയ്ക്കുള്ളത്. പരീക്ഷകളിലും കലാ-സാഹിത്യ മത്സരങ്ങളിലും ഓരോ വർഷവും മികച്ച നേട്ടങ്ങൾ കൈവരിക്കുന്നു. സമസ്ത കേരള ജംഇയ്യത്തുൽ മുഅല്ലിമീൻ സംഘടിപ്പിക്കുന്ന മുസാബഖയിലും റേഞ്ച് തലത്തിൽ ശ്രദ്ധേയമായ സ്ഥാനങ്ങൾ നേടാൻ നമ്മുടെ വിദ്യാർത്ഥികൾക്ക് സാധിച്ചിട്ടുണ്ട്.</p>
+      <div class="paper story">
+        <h2 class="page-title">അറിവിന്റെ അറുപത്തിയഞ്ച് വർഷങ്ങൾ</h2>
+        <p class="subtitle">ആത്മീയ മുന്നേറ്റത്തിന്റെ അഭിമാനയാത്ര</p>
+        <p>പാനക്കോടിന്റെ ദീനീ മുന്നേറ്റത്തിൽ നിർണായകമായ പങ്കുവഹിച്ചുകൊണ്ട് ആറര പതിറ്റാണ്ടിന്റെ അഭിമാനകരമായ ചരിത്രം പിന്നിടുകയാണ് നമ്മുടെ പ്രിയപ്പെട്ട അസാസുൽ ഉലൂം ഹയർ സെക്കൻഡറി മദ്രസ. ഏകദേശം 65 വർഷങ്ങൾക്ക് മുമ്പ്, നിസ്വാർത്ഥരും നിഷ്കളങ്കരുമായ നമ്മുടെ നാട്ടിലെ കാരണവന്മാരുടെ ദീർഘവീക്ഷണത്തിലും ആത്മാർത്ഥമായ പരിശ്രമത്തിലുമാണ് ഈ മഹത്തായ സ്ഥാപനം പിറവിയെടുത്തത്. തലമുറകൾക്ക് ദീനീ വിജ്ഞാനത്തിന്റെ വെളിച്ചം പകർന്നുനൽകിയ ഈ സ്ഥാപനം ഇന്ന് നമ്മുടെ നാടിന്റെ അഭിമാനമായി വളർന്നിരിക്കുന്നു.</p>
+        <div class="section"><h3>പഠനമികവും നേട്ടങ്ങളും</h3><p>സമസ്ത കേരള ഇസ്‌ലാം മത വിദ്യാഭ്യാസ ബോർഡിന്റെ കീഴിൽ 2692-ാം നമ്പറായി രജിസ്റ്റർ ചെയ്യപ്പെട്ട നമ്മുടെ മദ്രസ, ഇന്ന് പാനക്കോട് പ്രദേശത്തെ ദീനീ പ്രവർത്തനങ്ങൾക്ക് നേതൃത്വം നൽകുന്ന പ്രധാന കേന്ദ്രങ്ങളിലൊന്നാണ്. ഒന്നാം ക്ലാസ് മുതൽ പ്ലസ് ടു വരെയുള്ള ക്ലാസുകളിലായി ഇരുന്നൂറിലധികം വിദ്യാർത്ഥികൾ ഇവിടെ വിജ്ഞാനം അഭ്യസിക്കുന്നു. താമരശ്ശേരി റേഞ്ചിലെ പതിനേഴ് മദ്രസകൾക്കിടയിൽ പഠനനിലവാരത്തിലും പാഠ്യേതര മികവിലും ശ്രദ്ധേയമായ സ്ഥാനമാണ് നമ്മുടെ മദ്രസയ്ക്കുള്ളത്. പരീക്ഷകളിലും കലാ-സാഹിത്യ മത്സരങ്ങളിലും ഓരോ വർഷവും മികച്ച നേട്ടങ്ങൾ കൈവരിക്കുന്നു. സമസ്ത കേരള ജംഇയ്യത്തുൽ മുഅല്ലിമീൻ സംഘടിപ്പിക്കുന്ന മുസാബഖയിലും റേഞ്ച് തലത്തിൽ ശ്രദ്ധേയമായ സ്ഥാനങ്ങൾ നേടാൻ നമ്മുടെ വിദ്യാർത്ഥികൾക്ക് സാധിച്ചിട്ടുണ്ട്.</p></div>
+        <div class="section"><h3>ഹയർ സെക്കൻഡറിയുടെ തുടക്കം</h3><p>രക്ഷിതാക്കളുടെയും വിദ്യാർത്ഥികളുടെയും മദ്രസാ കമ്മിറ്റി ഭാരവാഹികളുടെയും ഉസ്താദുമാരുടെയും കൂട്ടായ പരിശ്രമത്തിന്റെ ഫലമായി കഴിഞ്ഞ വർഷം പ്ലസ് വൺ ആരംഭിക്കാനും ഈ വർഷം പ്ലസ് ടു ക്ലാസ് കൂടി തുടങ്ങാനും നമുക്ക് സാധിച്ചു. ഇന്ന് പതിനൊന്നോളം വിദ്യാർത്ഥികൾ പ്ലസ് ടു വിഭാഗത്തിൽ പഠനം തുടരുന്നു. മദ്രസയുടെ വളർച്ചയിലെ ഈ മുന്നേറ്റം നമ്മുടെ കൂട്ടായ പരിശ്രമത്തിന്റെയും പ്രതീക്ഷയുടെയും അടയാളമാണ്.</p></div>
+        <div class="section"><h3>നമ്മുടെ മക്കൾ — നമ്മുടെ സമ്പത്ത്</h3><p>ഭൗതിക വിദ്യാഭ്യാസത്തോടൊപ്പം ആത്മീയ വിജ്ഞാനവും സദാചാരവും നല്ല സ്വഭാവവും നേടിയെടുക്കുമ്പോഴാണ് ഒരു കുട്ടിയുടെ വ്യക്തിത്വം പൂർണമാകുന്നത്. ഖുർആനിന്റെ വെളിച്ചവും തിരുനബിയുടെ അധ്യാപനങ്ങളും ജീവിതത്തിൽ പകർത്തി, മാതാപിതാക്കളെ ആദരിക്കുകയും സമൂഹത്തിന് നന്മ ചെയ്യുന്നവരായി വളരുകയും ചെയ്യുക എന്നതാണ് നമ്മുടെ സ്വപ്നം. പ്രിയപ്പെട്ട രക്ഷിതാക്കളേ, നമ്മുടെ മക്കൾക്ക് ദീനീ വിദ്യാഭ്യാസം ഉറപ്പാക്കുക. അവരെ മദ്രസയിലേക്ക് അയക്കുകയും പഠനത്തിൽ തുടർച്ച ഉറപ്പുവരുത്തുകയും മദ്രസയുടെ പ്രവർത്തനങ്ങളോട് സഹകരിക്കുകയും ചെയ്യുക. ഇന്നത്തെ നമ്മുടെ പരിശ്രമങ്ങൾ നാളെയുടെ നല്ല തലമുറയെ വാർത്തെടുക്കട്ടെ.</p></div>
+        <div class="section"><h3>നന്ദിയും പ്രാർത്ഥനയും</h3><p>ഈ മഹത്തായ സ്ഥാപനത്തിന്റെ തുടക്കം മുതൽ ഇന്നുവരെ അതിന്റെ വളർച്ചയ്ക്കും നടത്തിപ്പിനുമായി വിവിധ കാലങ്ങളിൽ കമ്മിറ്റി ഭാരവാഹിത്വം വഹിച്ച എല്ലാവരെയും, നിസ്വാർത്ഥമായി പ്രവർത്തിച്ച പ്രവർത്തകരെയും നന്ദിയോടെ സ്മരിക്കുന്നു. അതോടൊപ്പം, മദ്രസയുടെ ആരംഭകാലം മുതൽ ഇന്നുവരെ തലമുറകൾക്ക് ദീനീ വിജ്ഞാനത്തിന്റെ വെളിച്ചം പകർന്നുനൽകി സേവനമനുഷ്ഠിച്ച എല്ലാ ഉസ്താദുമാരെയും പ്രത്യേകം നന്ദിയോടെ ഓർക്കുന്നു. അവരുടെ ആത്മാർത്ഥമായ സേവനവും ത്യാഗവും അധ്വാനവുമാണ് നമ്മുടെ മദ്രസയുടെ വളർച്ചയുടെ അടിത്തറ. പ്രത്യേകിച്ച്, നിലവിൽ ഈ സ്ഥാപനത്തിൽ സേവനമനുഷ്ഠിച്ചുകൊണ്ടിരിക്കുന്ന പ്രിയപ്പെട്ട ഉസ്താദുമാർക്ക് അല്ലാഹു ആരോഗ്യവും ആയുസ്സിൽ ബറകത്തും അറിവിലും അമലിലും വർധനവും നൽകട്ടെ. അവർ പകർന്നുനൽകുന്ന വിജ്ഞാനം വിദ്യാർത്ഥികൾക്കും സമൂഹത്തിനും ഉപകാരപ്രദമാക്കുകയും അവരുടെ സേവനങ്ങളെ അല്ലാഹു സ്വീകരിക്കുകയും ചെയ്യട്ടെ. ഇനിയും കൂടുതൽ കാലം ദീനീ സേവനം നിർവഹിക്കാനുള്ള തൗഫീഖ് നൽകട്ടെ. ജീവിച്ചിരിക്കുന്ന എല്ലാ മുൻകാല കമ്മിറ്റി ഭാരവാഹികൾക്കും പ്രവർത്തകർക്കും ഉസ്താദുമാർക്കും അല്ലാഹു ആരോഗ്യവും ദീർഘായുസ്സും കൂടുതൽ നന്മകൾ ചെയ്യാനുള്ള തൗഫീഖും നൽകട്ടെ. നമ്മെ വിട്ടുപിരിഞ്ഞുപോയ മുൻകാല കമ്മിറ്റി ഭാരവാഹികൾക്കും ഉസ്താദുമാർക്കും പൂർവികർക്കും അല്ലാഹു മഗ്ഫിറത്തും റഹ്മത്തും നൽകി അവരുടെ ഖബറുകൾ വിശാലമാക്കുകയും ദറജകൾ ഉയർത്തുകയും ചെയ്യട്ടെ. ഈ സ്ഥാപനത്തിന്റെ വളർച്ചയ്ക്കായി സഹായിക്കുകയും സഹകരിക്കുകയും ചെയ്ത എല്ലാവർക്കും അല്ലാഹു അർഹമായ പ്രതിഫലം നൽകട്ടെ. നമ്മുടെ മദ്രസയെ അറിവിന്റെയും ആത്മീയതയുടെയും നന്മയുടെയും പ്രകാശകേന്ദ്രമായി നിലനിർത്താൻ അല്ലാഹു തൗഫീഖ് നൽകട്ടെ. ആമീൻ.</p></div>
       </div>
-      <div class="section">
-        <h3>ഹയർ സെക്കൻഡറിയുടെ തുടക്കം</h3>
-        <p>രക്ഷിതാക്കളുടെയും വിദ്യാർത്ഥികളുടെയും മദ്രസാ കമ്മിറ്റി ഭാരവാഹികളുടെയും ഉസ്താദുമാരുടെയും കൂട്ടായ പരിശ്രമത്തിന്റെ ഫലമായി കഴിഞ്ഞ വർഷം പ്ലസ് വൺ ആരംഭിക്കാനും ഈ വർഷം പ്ലസ് ടു ക്ലാസ് കൂടി തുടങ്ങാനും നമുക്ക് സാധിച്ചു. ഇന്ന് പതിനൊന്നോളം വിദ്യാർത്ഥികൾ പ്ലസ് ടു വിഭാഗത്തിൽ പഠനം തുടരുന്നു. മദ്രസയുടെ വളർച്ചയിലെ ഈ മുന്നേറ്റം നമ്മുടെ കൂട്ടായ പരിശ്രമത്തിന്റെയും പ്രതീക്ഷയുടെയും അടയാളമാണ്.</p>
+    </section>
+
+    <section id="examSection" hidden>
+      <div class="paper encourage">
+        <h2 class="page-title">അർദ്ധവാർഷിക പരീക്ഷാ ഫലം</h2>
+        <p><b>പ്രിയപ്പെട്ട രക്ഷിതാക്കളേ, വിദ്യാർത്ഥികളേ,</b></p>
+        <p>നമ്മുടെ മദ്രസയിലെ അർദ്ധവാർഷിക പരീക്ഷയുടെ ഫലമാണ് ഇനി നിങ്ങൾ കാണാൻ പോകുന്നത്. ഓരോ കുട്ടിയുടെയും പഠനയാത്രയിൽ ഈ ഫലം ഒരു ഇടക്കാല വിലയിരുത്തലാണ്. ചിലർക്ക് പ്രതീക്ഷിച്ചതിലും മികച്ച മാർക്ക് ലഭിച്ചിട്ടുണ്ടാകാം. ചിലർക്ക് കുറവുകൾ ഉണ്ടായിട്ടുണ്ടാകാം. ചില കുട്ടികളുടെ ഹാജറിലും പഠനത്തിലെ തുടർച്ചയിലും കൂടുതൽ ശ്രദ്ധ ആവശ്യമായിരിക്കാം.</p>
+        <p>മാർക്ക് കുറഞ്ഞതിന്റെ പേരിൽ നിരാശരാകേണ്ടതില്ല. എവിടെയാണ് കുറവ് വന്നതെന്ന് തിരിച്ചറിഞ്ഞ് അധ്യാപകരുടെയും രക്ഷിതാക്കളുടെയും സഹായത്തോടെ അത് പരിഹരിക്കാൻ ശ്രമിക്കാം. അടുത്ത പരീക്ഷയ്ക്കായി ഇന്ന് മുതൽ തന്നെ ചെറിയ ചെറിയ ലക്ഷ്യങ്ങൾ നിശ്ചയിച്ച് മുന്നോട്ട് പോകുക.</p>
+        <p>ദീനീ വിദ്യാഭ്യാസത്തിന്റെ ലക്ഷ്യം പരീക്ഷയിൽ നല്ല മാർക്ക് നേടുക എന്നതിൽ മാത്രം ഒതുങ്ങുന്നതല്ല. പഠിക്കുന്ന അറിവ് ജീവിതത്തിൽ പകർത്തുകയും നല്ല സ്വഭാവവും അച്ചടക്കവും വളർത്തുകയും ചെയ്യുക എന്നതാണ് അതിന്റെ യഥാർത്ഥ ലക്ഷ്യം. കുട്ടികളുടെ പഠനത്തിന് രക്ഷിതാക്കൾ ആവശ്യമായ പിന്തുണയും പ്രോത്സാഹനവും നൽകണമെന്ന് അഭ്യർത്ഥിക്കുന്നു.</p>
+        <div class="quote">ഓരോ ദിവസവും പുതിയൊരു അവസരമാണ്.<br>ചെറിയ പരിശ്രമങ്ങൾ വലിയ വിജയങ്ങളിലേക്ക് നയിക്കും.</div>
+        <div class="big-message"><strong>ഇന്നത്തെ മാർക്ക് നിങ്ങളുടെ അവസാന വാക്കല്ല.</strong><br>നാളത്തെ വിജയം നേടാനുള്ള പുതിയൊരു തുടക്കമാണ്.<br>ആത്മവിശ്വാസത്തോടെ മുന്നേറുക…</div>
+        <p class="center" style="color:#9b7738;font-weight:800;font-size:18px">നമുക്ക് ഇനിയും ഒരുപാട് ദൂരം പോകാനുണ്ട്!</p>
+        <p class="center">അല്ലാഹു നമ്മുടെ മക്കൾക്ക് ഉപകാരപ്രദമായ അറിവും അതനുസരിച്ച് ജീവിക്കാനുള്ള തൗഫീഖും നൽകട്ടെ. ആമീൻ.</p>
+        <div class="actions"><button class="action primary" id="showResults" type="button">ഫലം അറിയാൻ</button></div>
       </div>
-      <div class="section">
-        <h3>നമ്മുടെ മക്കൾ — നമ്മുടെ സമ്പത്ത്</h3>
-        <p>ഭൗതിക വിദ്യാഭ്യാസത്തോടൊപ്പം ആത്മീയ വിജ്ഞാനവും സദാചാരവും നല്ല സ്വഭാവവും നേടിയെടുക്കുമ്പോഴാണ് ഒരു കുട്ടിയുടെ വ്യക്തിത്വം പൂർണമാകുന്നത്. ഖുർആനിന്റെ വെളിച്ചവും തിരുനബിയുടെ അധ്യാപനങ്ങളും ജീവിതത്തിൽ പകർത്തി, മാതാപിതാക്കളെ ആദരിക്കുകയും സമൂഹത്തിന് നന്മ ചെയ്യുന്നവരായി വളരുകയും ചെയ്യുക എന്നതാണ് നമ്മുടെ സ്വപ്നം. പ്രിയപ്പെട്ട രക്ഷിതാക്കളേ, നമ്മുടെ മക്കൾക്ക് ദീനീ വിദ്യാഭ്യാസം ഉറപ്പാക്കുക. അവരെ മദ്രസയിലേക്ക് അയക്കുകയും പഠനത്തിൽ തുടർച്ച ഉറപ്പുവരുത്തുകയും മദ്രസയുടെ പ്രവർത്തനങ്ങളോട് സഹകരിക്കുകയും ചെയ്യുക. ഇന്നത്തെ നമ്മുടെ പരിശ്രമങ്ങൾ നാളെയുടെ നല്ല തലമുറയെ വാർത്തെടുക്കട്ടെ.</p>
-      </div>
-      <div class="section">
-        <h3>നന്ദിയും പ്രാർത്ഥനയും</h3>
-        
-<p>ഈ മഹത്തായ സ്ഥാപനത്തിന്റെ തുടക്കം മുതൽ ഇന്നുവരെ അതിന്റെ വളർച്ചയ്ക്കും നടത്തിപ്പിനുമായി വിവിധ കാലങ്ങളിൽ കമ്മിറ്റി ഭാരവാഹിത്വം വഹിച്ച എല്ലാവരെയും, നിസ്വാർത്ഥമായി പ്രവർത്തിച്ച പ്രവർത്തകരെയും നന്ദിയോടെ സ്മരിക്കുന്നു. അതോടൊപ്പം, മദ്രസയുടെ ആരംഭകാലം മുതൽ ഇന്നുവരെ തലമുറകൾക്ക് ദീനീ വിജ്ഞാനത്തിന്റെ വെളിച്ചം പകർന്നുനൽകി സേവനമനുഷ്ഠിച്ച എല്ലാ ഉസ്താദുമാരെയും പ്രത്യേകം നന്ദിയോടെ ഓർക്കുന്നു. അവരുടെ ആത്മാർത്ഥമായ സേവനവും ത്യാഗവും അധ്വാനവുമാണ് നമ്മുടെ മദ്രസയുടെ വളർച്ചയുടെ അടിത്തറ. പ്രത്യേകിച്ച്, നിലവിൽ ഈ സ്ഥാപനത്തിൽ സേവനമനുഷ്ഠിച്ചുകൊണ്ടിരിക്കുന്ന പ്രിയപ്പെട്ട ഉസ്താദുമാർക്ക് അല്ലാഹു ആരോഗ്യവും ആയുസ്സിൽ ബറകത്തും അറിവിലും അമലിലും വർധനവും നൽകട്ടെ. അവർ പകർന്നുനൽകുന്ന വിജ്ഞാനം വിദ്യാർത്ഥികൾക്കും സമൂഹത്തിനും ഉപകാരപ്രദമാക്കുകയും അവരുടെ സേവനങ്ങളെ അല്ലാഹു സ്വീകരിക്കുകയും ചെയ്യട്ടെ. ഇനിയും കൂടുതൽ കാലം ദീനീ സേവനം നിർവഹിക്കാനുള്ള തൗഫീഖ് നൽകട്ടെ. ജീവിച്ചിരിക്കുന്ന എല്ലാ മുൻകാല കമ്മിറ്റി ഭാരവാഹികൾക്കും പ്രവർത്തകർക്കും ഉസ്താദുമാർക്കും അല്ലാഹു ആരോഗ്യവും ദീർഘായുസ്സും കൂടുതൽ നന്മകൾ ചെയ്യാനുള്ള തൗഫീഖും നൽകട്ടെ. നമ്മെ വിട്ടുപിരിഞ്ഞുപോയ മുൻകാല കമ്മിറ്റി ഭാരവാഹികൾക്കും ഉസ്താദുമാർക്കും പൂർവികർക്കും അല്ലാഹു മഗ്ഫിറത്തും റഹ്മത്തും നൽകി അവരുടെ ഖബറുകൾ വിശാലമാക്കുകയും ദറജകൾ ഉയർത്തുകയും ചെയ്യട്ടെ. ഈ സ്ഥാപനത്തിന്റെ വളർച്ചയ്ക്കായി സഹായിക്കുകയും സഹകരിക്കുകയും ചെയ്ത എല്ലാവർക്കും അല്ലാഹു അർഹമായ പ്രതിഫലം നൽകട്ടെ. നമ്മുടെ മദ്രസയെ അറിവിന്റെയും ആത്മീയതയുടെയും നന്മയുടെയും പ്രകാശകേന്ദ്രമായി നിലനിർത്താൻ അല്ലാഹു തൗഫീഖ് നൽകട്ടെ. ആമീൻ.</p>
+    </section>
 
-      </div>
-    </div>
-  </section>
-
-  <section class="page" data-page="2">
-    <div class="paper encourage">
-      <h2>അർദ്ധവാർഷിക പരീക്ഷാ ഫലം</h2>
-      <p><b>പ്രിയപ്പെട്ട രക്ഷിതാക്കളേ, വിദ്യാർത്ഥികളേ,</b></p>
-      <p>നമ്മുടെ മദ്രസയിലെ അർദ്ധവാർഷിക പരീക്ഷയുടെ ഫലമാണ് ഇനി നിങ്ങൾ കാണാൻ പോകുന്നത്. ഓരോ കുട്ടിയുടെയും പഠനയാത്രയിൽ ഈ ഫലം ഒരു ഇടക്കാല വിലയിരുത്തലാണ്. ചിലർക്ക് പ്രതീക്ഷിച്ചതിലും മികച്ച മാർക്ക് ലഭിച്ചിട്ടുണ്ടാകാം. ചിലർക്ക് കുറവുകൾ ഉണ്ടായിട്ടുണ്ടാകാം. ചില കുട്ടികളുടെ ഹാജറിലും പഠനത്തിലെ തുടർച്ചയിലും കൂടുതൽ ശ്രദ്ധ ആവശ്യമായിരിക്കാം.</p>
-      <p>മാർക്ക് കുറഞ്ഞതിന്റെ പേരിൽ നിരാശരാകേണ്ടതില്ല. എവിടെയാണ് കുറവ് വന്നതെന്ന് തിരിച്ചറിഞ്ഞ് അധ്യാപകരുടെയും രക്ഷിതാക്കളുടെയും സഹായത്തോടെ അത് പരിഹരിക്കാൻ ശ്രമിക്കാം. അടുത്ത പരീക്ഷയ്ക്കായി ഇന്ന് മുതൽ തന്നെ ചെറിയ ചെറിയ ലക്ഷ്യങ്ങൾ നിശ്ചയിച്ച് മുന്നോട്ട് പോകുക.</p>
-      <p>ദീനീ വിദ്യാഭ്യാസത്തിന്റെ ലക്ഷ്യം പരീക്ഷയിൽ നല്ല മാർക്ക് നേടുക എന്നതിൽ മാത്രം ഒതുങ്ങുന്നതല്ല. പഠിക്കുന്ന അറിവ് ജീവിതത്തിൽ പകർത്തുകയും നല്ല സ്വഭാവവും അച്ചടക്കവും വളർത്തുകയും ചെയ്യുക എന്നതാണ് അതിന്റെ യഥാർത്ഥ ലക്ഷ്യം. കുട്ടികളുടെ പഠനത്തിന് രക്ഷിതാക്കൾ ആവശ്യമായ പിന്തുണയും പ്രോത്സാഹനവും നൽകണമെന്ന് അഭ്യർത്ഥിക്കുന്നു.</p>
-      <div class="quote">ഓരോ ദിവസവും പുതിയൊരു അവസരമാണ്.<br>ചെറിയ പരിശ്രമങ്ങൾ വലിയ വിജയങ്ങളിലേക്ക് നയിക്കും.</div>
-      <div class="big-message">
-        <strong>ഇന്നത്തെ മാർക്ക് നിങ്ങളുടെ അവസാന വാക്കല്ല.</strong><br>
-        നാളത്തെ വിജയം നേടാനുള്ള പുതിയൊരു തുടക്കമാണ്.<br>
-        ആത്മവിശ്വാസത്തോടെ മുന്നേറുക…
-      </div>
-      <p style="text-align:center;color:#9b7738;font-weight:800;font-size:18px;margin-top:12px">നമുക്ക് ഇനിയും ഒരുപാട് ദൂരം പോകാനുണ്ട്!</p>
-      <p style="text-align:center;margin-top:12px">അല്ലാഹു നമ്മുടെ മക്കൾക്ക് ഉപകാരപ്രദമായ അറിവും അതനുസരിച്ച് ജീവിക്കാനുള്ള തൗഫീഖും നൽകട്ടെ. ആമീൻ.</p>
-    </div>
-  </section>
-
-  <section class="page" data-page="3">
-    <div class="paper gateway">
-      <img src="https://shahuldarimi984-spec.github.io/madrasa-results-2026/emblem-panakkode.jpg" alt="അസാസുൽ ഉലൂം മദ്രസ എംബ്ലം">
-      <h2>അസാസുൽ ഉലൂം ഹയർ സെക്കൻഡറി മദ്രസ</h2>
-      <div class="year">PANAKKODE · 2026</div>
-      <p>നമ്മുടെ പ്രിയപ്പെട്ട വിദ്യാർത്ഥികളുടെ അർദ്ധവാർഷിക പരീക്ഷാ ഫലത്തിലേക്ക് സ്വാഗതം. താഴെയുള്ള ബട്ടൺ അമർത്തി ക്ലാസ് തിരഞ്ഞെടുത്ത് ഫലം അറിയാം.</p>
-      <button class="start-btn" id="openResults">ഫലം അറിയാൻ</button>
-      <p style="margin-top:19px;font-size:13px">എല്ലാ വിദ്യാർത്ഥികൾക്കും ഹൃദയം നിറഞ്ഞ ആശംസകൾ.<br>അല്ലാഹു അറിവിലും ജീവിതത്തിലും ബറകത്ത് നൽകട്ടെ.</p>
-    </div>
-  </section>
-
-  <div class="navbar">
-    <button class="nav-btn" id="prevPage" type="button" disabled>BACK</button>
-    <div class="dots" aria-label="പേജ് സൂചിക">
-      <span class="dot on"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span>
-    </div>
-    <button class="nav-btn primary" id="nextPage" type="button">NEXT</button>
-  </div>
-</div>
-
-<div id="resultsScreen">
-  <div class="resultbar">
-    <span>അർദ്ധവാർഷിക പരീക്ഷാ ഫലം</span>
-    <button id="backIntro" type="button">ആമുഖത്തിലേക്ക് മടങ്ങുക</button>
-  </div>
-  <iframe id="resultFrame" title="മദ്രസ പരീക്ഷാ ഫലം"></iframe>
+    <section id="resultsSection" hidden class="paper">
+      <div class="toolbar"><strong>അർദ്ധവാർഷിക പരീക്ഷാ ഫലം</strong><button type="button" id="backExam">മുമ്പിലേക്ക്</button></div>
+      <iframe id="resultFrame" title="മദ്രസ പരീക്ഷാ ഫലം"></iframe>
+    </section>
+  </main>
 </div>
 
 <script>
-const pages=[...document.querySelectorAll(".page")];
-const dots=[...document.querySelectorAll(".dot")];
-const pageNumber=document.getElementById("pageNumber");
-const prev=document.getElementById("prevPage");
-const next=document.getElementById("nextPage");
-let current=0;
-
-function showPage(index){
-  current=Math.max(0,Math.min(3,index));
-  pages.forEach((p,i)=>p.classList.toggle("active",i===current));
-  dots.forEach((d,i)=>d.classList.toggle("on",i===current));
-  pageNumber.textContent=String(current+1).padStart(2,"0")+" / 04";
-  prev.disabled=current===0;
-  next.disabled=current===3;
- next.textContent="NEXT";
-  window.scrollTo({top:0,behavior:"smooth"});
+const home=document.getElementById('home');
+const content=document.getElementById('content');
+const about=document.getElementById('aboutSection');
+const exam=document.getElementById('examSection');
+const results=document.getElementById('resultsSection');
+const name=document.getElementById('sectionName');
+function openSection(which){
+  home.style.display='none'; content.style.display='block';
+  about.hidden=which!=='about'; exam.hidden=which!=='exam'; results.hidden=true;
+  name.textContent=which==='about'?'നമ്മുടെ മദ്രസ':'EXAM RESULT – HALF YEARLY EXAM';
+  window.scrollTo(0,0);
 }
-prev.addEventListener("click",()=>showPage(current-1));
-next.addEventListener("click",()=>showPage(current+1));
-document.querySelectorAll(".dot").forEach((d,i)=>d.addEventListener("click",()=>showPage(i)));
-
-
-const originalResultUrl = "results-new-1.html";
-
-document.getElementById("openResults").addEventListener("click", () => {
-  document.getElementById("intro").style.display = "none";
-  document.querySelector(".topline").style.display = "none";
-  document.getElementById("resultsScreen").style.display = "block";
-
-  const frame = document.getElementById("resultFrame");
-  frame.src = originalResultUrl;
-
-  window.scrollTo(0, 0);
+document.getElementById('aboutLink').addEventListener('click',e=>{e.preventDefault();openSection('about')});
+document.getElementById('examLink').addEventListener('click',e=>{e.preventDefault();openSection('exam')});
+document.getElementById('homeButton').addEventListener('click',()=>{
+  results.hidden=true;content.style.display='none';home.style.display='block';window.scrollTo(0,0);
 });
-
-document.getElementById("backIntro").addEventListener("click", () => {
-  document.getElementById("resultsScreen").style.display = "none";
-  document.getElementById("intro").style.display = "flex";
-  document.querySelector(".topline").style.display = "block";
-
-  showPage(3);
+document.getElementById('showResults').addEventListener('click',()=>{
+  exam.hidden=true;results.hidden=false;
+  const frame=document.getElementById('resultFrame');
+  if(!frame.src || !frame.src.endsWith('/results-new-1.html')) frame.src='results-new-1.html';
+  window.scrollTo(0,0);
 });
+document.getElementById('backExam').addEventListener('click',()=>{results.hidden=true;exam.hidden=false;window.scrollTo(0,0)});
 </script>
 </body>
 </html>
