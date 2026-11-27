@@ -185,12 +185,32 @@ $("logoutBtn").addEventListener("click",async()=>{
 let reportRows=[];
 function reportEscape(v){return String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
 function setupReportClasses(){
- const opts=classesForTeacher();
- setOptions($("reportClass"),opts,"ക്ലാസ് തിരഞ്ഞെടുക്കുക",x=>x.class_name+" ("+x.class_code+")",x=>x.class_code);
- const first=document.createElement("option");
- first.value="CLASS1";
- first.textContent="ഒന്നാം ക്ലാസ്";
- $("reportClass").insertBefore(first,$("reportClass").options[1]||null);
+ // The legacy First Class is represented once by CLASS1.
+ // Ignore the duplicate daily_work_classes code "1" in this PDF selector.
+ const opts=classesForTeacher()
+  .filter(x=>String(x.class_code)!=="1")
+  .sort((a,b)=>{
+    const order=code=>{
+      const s=String(code);
+      if(/^\\d+$/.test(s)) return Number(s);
+      if(s==="+1") return 11;
+      if(s==="+2") return 12;
+      return 99;
+    };
+    return order(a.class_code)-order(b.class_code);
+  });
+ const items=opts.map(x=>({
+   class_code:x.class_code,
+   label:/^\\d+$/.test(String(x.class_code))
+     ? "STD "+String(x.class_code)
+     : String(x.class_code)==="+1" ? "PLUS ONE"
+     : String(x.class_code)==="+2" ? "PLUS TWO"
+     : x.class_name
+ }));
+ if(teacher && teacher.role==="HEAD_TEACHER"){
+   items.unshift({class_code:"CLASS1",label:"STD 1"});
+ }
+ setOptions($("reportClass"),items,"ക്ലാസ് തിരഞ്ഞെടുക്കുക",x=>x.label,x=>x.class_code);
 }
 function fillReportStudents(){
  const m=new Map();
