@@ -13,6 +13,7 @@
 <div class="panel row"><div><h2 id="teacherName">Teacher</h2><span class="role" id="teacherRole"></span><p class="small" id="teacherScope"></p></div><div><button class="secondary" id="logoutBtn">Sign Out</button></div></div>
 <section class="panel"><h2>Send a New Message</h2><label for="audience">Send To</label><select id="audience"><option value="ALL">All Classes’ Parents</option><option value="CLASS">All Parents in a Class</option><option value="STUDENT">A Student’s Parent</option></select><div id="classWrap" class="hidden"><label for="classCode">Select Class</label><select id="classCode"><option value="">Select Class</option></select></div><div id="studentWrap" class="hidden"><label for="studentKey">Select Student</label><select id="studentKey" disabled><option value="">Select Class First</option></select></div><label for="message">Message / Instruction</label><textarea id="message" maxlength="3000" placeholder="Write a message for parents"></textarea><p class="small hint">The Head Teacher can message all classes and students. Class Teachers can message only their assigned classes and students. Supabase enforces the final permissions.</p><button class="primary" id="sendBtn">Send Message</button><p id="status" role="status" aria-live="polite"></p></section>
 <section class="panel"><h2>Sent Messages</h2><p class="small">See how many parents have read each message. Only the read count is displayed.</p><div id="sentList"><div class="empty">Loading...</div></div><button class="secondary" id="refreshBtn">Refresh</button></section>
+<section class="panel"><h2>Parent Comments · രക്ഷിതാക്കളുടെ അഭിപ്രായങ്ങൾ</h2><p class="small">രക്ഷിതാക്കൾ അയച്ച അഭിപ്രായങ്ങൾ ഇവിടെ കാണാം. നിങ്ങളുടെ അധ്യാപക ചുമതലയ്ക്ക് അനുമതിയുള്ള ക്ലാസുകളിലെ അഭിപ്രായങ്ങൾ മാത്രമേ കാണിക്കൂ.</p><div id="parentCommentsList"><div class="empty">Loading parent comments...</div></div><button class="secondary" id="parentCommentsRefreshBtn" type="button">Refresh Comments</button></section>
 <section class="panel" id="tenDayPanel"><h2>10-Day Daily Work Report</h2><p class="small">Generate a complete class report for 10 consecutive days. Each day's score is converted to 10 marks. Missing reports count as zero. The final score is out of 100.</p><div class="row"><div><label for="reportClass">Select Class</label><select id="reportClass"><option value="">Select Class</option></select></div><div><label for="reportStart">Start Date</label><input id="reportStart" type="date"></div></div><button class="primary" id="loadReportBtn">Generate 10-Day Report</button><p id="reportStatus" role="status" aria-live="polite"></p><div id="reportPreview" class="hidden"><div class="report-summary" id="reportSummary"></div><div class="table-wrap" id="reportTableWrap"></div><div class="winner-box"><h3>🏆 Class Top 3 Winners</h3><div id="classWinnersList"></div></div><div class="report-actions"><button class="primary" id="printReportBtn">Download Class PDF</button></div><p class="small">PDF contains all active students, daily scores, total marks and the class Top 3 winners.</p></div></section>
 <section class="panel hidden" id="grandPanel"><h2>🏆 Madrasa Grand Winners</h2><p class="small">The first-place winner(s) from each of the 12 classes will be compared using the same 10-day period and normalized score out of 100. Students sharing first place are all included.</p><label for="grandStart">Select 10-Day Period Start Date</label><input id="grandStart" type="date"><p class="small">Choose the first date of the 10-day period. This date is independent of the class report date above.</p><button class="gold-button" id="grandBtn">Generate Madrasa Grand Winners PDF</button><p id="grandStatus" role="status" aria-live="polite"></p></section>
 </section></main>
@@ -27,11 +28,50 @@ function audienceUI(){let a=$('audience').value;$('classWrap').classList.toggle(
 function fillStudents(){let c=$('classCode').value,l=studentsForClass(c);setOptions($('studentKey'),l,c?(l.length?'Select Student':'No Active Students'):'Select Class First',x=>x.student_name,x=>x.student_key);$('studentKey').disabled=!c||!l.length}
 async function loadProfile(){let {data:{user},error}=await db.auth.getUser();if(error||!user)throw Error('Please sign in again');let {data,error:e}=await db.rpc('daily_work_teacher_get_profile');if(e)throw e;let p=Array.isArray(data)?data[0]:data;if(!p)throw Error('This account does not have active teacher access');if(!['HEAD_TEACHER','CLASS_TEACHER'].includes(p.role))throw Error('Invalid teacher role');teacher=p;$('teacherName').textContent=p.display_name||'Teacher';$('teacherRole').textContent=p.role==='HEAD_TEACHER'?'Head Teacher':'Class Teacher';$('teacherScope').textContent=p.role==='HEAD_TEACHER'?'Message access for all classes':'Message access for your assigned classes';$('audience').querySelector('option[value="ALL"]').disabled=p.role!=='HEAD_TEACHER';if(p.role==='CLASS_TEACHER')$('audience').value='CLASS';$('grandPanel').classList.toggle('hidden',p.role!=='HEAD_TEACHER')}
 async function loadTargets(){let {data,error}=await db.rpc('daily_work_teacher_get_targets');if(error)throw error;targets=data||[];classMap.clear();studentMap.clear();targets.forEach(t=>{classMap.set(t.class_code,t.class_name);if(t.student_key)studentMap.set(t.student_key,t.student_name)});let c=classesForTeacher();setOptions($('classCode'),c,'Select Class',classLabel,x=>x.class_code);if(!c.length)throw Error('No classes are assigned to this teacher account')}
-async function enterApp(){await loadProfile();await loadTargets();setupReportClasses();$('loginPanel').classList.add('hidden');$('app').classList.remove('hidden');audienceUI();await loadNotes()}
+async function enterApp(){await loadProfile();await loadTargets();setupReportClasses();$('loginPanel').classList.add('hidden');$('app').classList.remove('hidden');audienceUI();await Promise.all([loadNotes(),loadParentComments()])}
 $('audience').addEventListener('change',audienceUI);$('classCode').addEventListener('change',()=>{if($('audience').value==='STUDENT')fillStudents()});
 $('loginBtn').addEventListener('click',async()=>{$('loginBtn').disabled=true;say('loginStatus','Signing in...');try{let {error}=await db.auth.signInWithPassword({email:$('email').value.trim(),password:$('password').value});if(error)throw error;await enterApp();say('loginStatus','')}catch(e){say('loginStatus',e.message||'Sign-in failed')}finally{$('loginBtn').disabled=false}});
 $('sendBtn').addEventListener('click',async()=>{let a=$('audience').value,c=a==='ALL'?null:($('classCode').value||null),k=a==='STUDENT'?($('studentKey').value||null):null,m=$('message').value.trim();if(!m)return say('status','Please enter a message');if(a!=='ALL'&&!c)return say('status','Select Class');if(a==='STUDENT'&&!k)return say('status','Select Student');if(a==='CLASS'&&!classMap.has(c))return say('status','You are not authorized to select this class');if(a==='STUDENT'&&!studentsForClass(c).some(s=>s.student_key===k))return say('status','You are not authorized to select this student');$('sendBtn').disabled=true;say('status','Sending message...');try{let {error}=await db.rpc('daily_work_teacher_send_note',{p_audience_type:a,p_class_code:c,p_student_key:k,p_message:m});if(error)throw error;$('message').value='';say('status','Message sent successfully.',true);await loadNotes()}catch(e){say('status',e.message||'Could not send the message')}finally{$('sendBtn').disabled=false}});
 async function loadNotes(){$('sentList').textContent='Loading...';try{let {data,error}=await db.rpc('daily_work_teacher_list_notes');if(error)throw error;$('sentList').replaceChildren();if(!data||!data.length){let e=document.createElement('div');e.className='empty';e.textContent='No messages have been sent yet.';$('sentList').append(e);return}data.forEach(n=>{let b=document.createElement('article');b.className='note';let tag=document.createElement('span');tag.className='pill';let k=n.student_key||'';tag.textContent=n.audience_type==='ALL'?'All Classes':n.audience_type==='CLASS'?'Class '+classLabel({class_code:n.class_code,class_name:classMap.get(n.class_code)}):'Student · '+(studentMap.get(k)||k);let p=document.createElement('p');p.textContent=n.message||'';let meta=document.createElement('div');meta.className='meta';meta.textContent=(n.created_at?new Date(n.created_at).toLocaleString('ml-IN'):'')+' · Parents who read: '+(Number(n.read_count)||0);b.append(tag,p,meta);$('sentList').append(b)})}catch(e){$('sentList').textContent='Could not load messages: '+(e.message||'')}}$('refreshBtn').addEventListener('click',loadNotes);
+
+async function loadParentComments(){
+ const box=$('parentCommentsList');
+ box.textContent='Loading parent comments...';
+ try{
+  const {data,error}=await db.rpc('daily_work_teacher_list_parent_comments');
+  if(error)throw error;
+  box.replaceChildren();
+  if(!data||!data.length){
+   const empty=document.createElement('div');
+   empty.className='empty';
+   empty.textContent='No parent comments available.';
+   box.append(empty);
+   return;
+  }
+  data.forEach(c=>{
+   const card=document.createElement('article');
+   card.className='note';
+   const tag=document.createElement('span');
+   tag.className='pill';
+   tag.textContent=classLabel({class_code:c.class_code,class_name:classMap.get(c.class_code)});
+   const student=document.createElement('div');
+   student.className='meta';
+   student.textContent=c.student_key?(studentMap.get(c.student_key)||c.student_key):'Student ID: '+(c.student_id??'—');
+   const recipient=document.createElement('div');
+   recipient.className='meta';
+   recipient.textContent=({HEAD_TEACHER:'Recipient: Head Teacher',CLASS_TEACHER:'Recipient: Class Teacher',BOTH:'Recipient: Both Teachers'})[c.recipient_type]||'';
+   const message=document.createElement('p');
+   message.textContent=c.comment_text||'';
+   const time=document.createElement('div');
+   time.className='meta';
+   time.textContent=c.created_at?new Date(c.created_at).toLocaleString('ml-IN'):'';
+   card.append(tag,student,recipient,message,time);
+   box.append(card);
+  });
+ }catch(e){box.textContent='Could not load parent comments: '+(e.message||'')}
+}
+$('parentCommentsRefreshBtn').addEventListener('click',loadParentComments);
+
 $('logoutBtn').addEventListener('click',async()=>{await db.auth.signOut();teacher=null;targets=[];reportRows=[];classWinners=[];$('app').classList.add('hidden');$('loginPanel').classList.remove('hidden');say('loginStatus','Signed out.',true)});
 function escapeHTML(v){return String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}function setupReportClasses(){let items=classesForTeacher().filter(x=>String(x.class_code)!=='1').map(x=>({class_code:x.class_code,label:classLabel(x)}));if(teacher&&teacher.role==='HEAD_TEACHER')items.unshift({class_code:'CLASS1',label:'STD 1'});setOptions($('reportClass'),items,'Select Class',x=>x.label,x=>x.class_code)}
 function todayIST(){const parts=new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Kolkata',year:'numeric',month:'2-digit',day:'2-digit'}).formatToParts(new Date());const v={};parts.forEach(p=>v[p.type]=p.value);return v.year+'-'+v.month+'-'+v.day}
