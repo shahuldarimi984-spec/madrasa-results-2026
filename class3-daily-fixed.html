@@ -18,7 +18,7 @@ button,input{font:inherit}button{cursor:pointer;border:0}.primary,.secondary{wid
 .choice{padding:16px;border:1px solid var(--line);background:#f8fafd;border-radius:12px;text-align:center;font-weight:800;color:var(--navy);font-size:18px}
 .back-link{background:transparent;color:var(--blue);font-weight:700;padding:4px 0 14px}.name-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
 .name-btn{padding:13px 10px;border:1px solid var(--line);border-radius:10px;background:white;text-align:left;color:var(--ink)}
-input[type=date]{width:100%;padding:12px;border:1px solid #cbd6e5;border-radius:11px}
+input[type=text]{width:100%;padding:12px;border:1px solid #cbd6e5;border-radius:11px}
 .selected{background:#edf4fc;border:1px solid #b9cce4;border-radius:12px;padding:14px;font-size:19px;font-weight:800;color:var(--navy);margin:10px 0 16px}
 .question{border:1px solid var(--line);border-radius:13px;padding:13px;margin:12px 0}.question-title{font-weight:750;line-height:1.6;margin-bottom:10px}
 .options{display:grid;gap:8px}.option{display:flex;align-items:center;gap:10px;border:1px solid #e1e7ef;border-radius:10px;padding:10px;background:#fbfcfe;cursor:pointer}
@@ -36,7 +36,7 @@ footer{text-align:center;padding:18px;color:var(--muted);font-size:12px}@media(m
 <section class="panel" id="loginPanel">
  <div id="genderScreen"><div class="choice-grid"><button class="choice" id="boys">BOYS</button><button class="choice" id="girls">GIRLS</button></div></div>
  <div id="studentScreen" class="hidden"><button class="back-link" id="backGender">← മടങ്ങുക</button><h2 id="genderTitle"></h2><div class="name-list" id="names"></div></div>
- <div id="dobScreen" class="hidden"><button class="back-link" id="backNames">← പേരുകളിലേക്ക്</button><div class="selected" id="chosenName"></div><label for="dob">ജനനത്തീയതി</label><input id="dob" type="date"><p class="small">രജിസ്റ്ററിലുള്ള ജനനത്തീയതി തിരഞ്ഞെടുക്കുക.</p><button class="primary" id="login">പ്രവേശിക്കുക</button></div>
+ <div id="dobScreen" class="hidden"><button class="back-link" id="backNames">← പേരുകളിലേക്ക്</button><div class="selected" id="chosenName"></div><label for="dob">ജനനത്തീയതി</label><input id="dob" type="text" inputmode="numeric" autocomplete="bday" placeholder="DD/MM/YYYY" maxlength="10" aria-describedby="dobHelp"><p class="small" id="dobHelp">രജിസ്റ്ററിലുള്ള ജനനത്തീയതി DD/MM/YYYY രൂപത്തിൽ നൽകുക. ഉദാ: 07/04/2018</p><button class="primary" id="login">പ്രവേശിക്കുക</button></div>
  <p id="loginStatus" class="status" role="status"></p>
 </section>
 <section id="dashboard" class="hidden">
@@ -59,7 +59,9 @@ $('boys').onclick=()=>{gender='BOYS';loadStudents().catch(e=>msg('loginStatus','
 $('girls').onclick=()=>{gender='GIRLS';loadStudents().catch(e=>msg('loginStatus','പട്ടിക ലഭിച്ചില്ല: '+e.message));};
 $('backGender').onclick=()=>{$('studentScreen').classList.add('hidden');$('genderScreen').classList.remove('hidden');};
 $('backNames').onclick=()=>{$('dobScreen').classList.add('hidden');$('studentScreen').classList.remove('hidden');};
-$('login').onclick=async()=>{if(!student)return;const dob=$('dob').value;if(!dob)return msg('loginStatus','ജനനത്തീയതി നൽകുക.');const b=$('login');b.disabled=true;msg('loginStatus','പ്രവേശനം പരിശോധിക്കുന്നു...');try{
+function dobToISO(value){const m=/^(\d{2})\/(\d{2})\/(\d{4})$/.exec(value.trim());if(!m)return null;const day=Number(m[1]),month=Number(m[2]),year=Number(m[3]);const d=new Date(Date.UTC(year,month-1,day));if(d.getUTCFullYear()!==year||d.getUTCMonth()!==month-1||d.getUTCDate()!==day)return null;return `${m[3]}-${m[2]}-${m[1]}`;}
+$('dob').addEventListener('input',e=>{let v=e.target.value.replace(/\D/g,'').slice(0,8);if(v.length>4)v=v.slice(0,2)+'/'+v.slice(2,4)+'/'+v.slice(4);else if(v.length>2)v=v.slice(0,2)+'/'+v.slice(2);e.target.value=v;});
+$('login').onclick=async()=>{if(!student)return;const dob=dobToISO($('dob').value);if(!dob)return msg('loginStatus','ജനനത്തീയതി DD/MM/YYYY രൂപത്തിൽ ശരിയായി നൽകുക. ഉദാ: 07/04/2018');const b=$('login');b.disabled=true;msg('loginStatus','പ്രവേശനം പരിശോധിക്കുന്നു...');try{
  const {data,error}=await db.rpc('daily_work_parent_login',{p_student_key:String(student.student_key),p_dob:dob});
  if(error)throw error;const r=Array.isArray(data)?data[0]:(data&&data.token?data:null);
  if(!r||!r.token)throw Error('ജനനത്തീയതിയോ വിദ്യാർത്ഥി വിവരങ്ങളോ പൊരുത്തപ്പെടുന്നില്ല. വീണ്ടും വീണ്ടും ശ്രമിക്കാതെ തീയതി പരിശോധിക്കുക.');
