@@ -12,13 +12,14 @@ header{background:linear-gradient(120deg,#142b50,#285789);color:white;text-align
 header h1{font-size:clamp(22px,5vw,30px);margin:0 0 6px;color:#ffe7b3}header p{margin:4px 0;color:#e6eef9}
 main{max-width:760px;margin:20px auto;padding:0 13px 32px}.panel{background:white;border:1px solid var(--line);border-radius:17px;padding:18px;margin:0 0 15px;box-shadow:0 7px 22px #18365a0c}
 h2{font-size:20px;color:var(--navy);margin:0 0 14px}.small{font-size:13px;color:var(--muted);line-height:1.65}
-button,input{font:inherit}button{cursor:pointer;border:0}.primary,.secondary{width:100%;padding:13px 15px;border-radius:11px;font-weight:700;margin-top:12px}
+button,input,select,textarea{font:inherit}button{cursor:pointer;border:0}.primary,.secondary{width:100%;padding:13px 15px;border-radius:11px;font-weight:700;margin-top:12px}
 .primary{background:var(--navy);color:white}.secondary{background:#eaf0f8;color:var(--navy)}button:disabled{opacity:.55;cursor:not-allowed}
 .hidden{display:none!important}.choice-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
 .choice{padding:16px;border:1px solid var(--line);background:#f8fafd;border-radius:12px;text-align:center;font-weight:800;color:var(--navy);font-size:18px}
 .back-link{background:transparent;color:var(--blue);font-weight:700;padding:4px 0 14px}.name-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
 .name-btn{padding:13px 10px;border:1px solid var(--line);border-radius:10px;background:white;text-align:left;color:var(--ink)}
-input[type=text]{width:100%;padding:12px;border:1px solid #cbd6e5;border-radius:11px}
+input[type=text],select,textarea{width:100%;padding:12px;border:1px solid #cbd6e5;border-radius:11px;background:#fff;color:var(--ink)}
+textarea{min-height:110px;resize:vertical;line-height:1.6}
 .selected{background:#edf4fc;border:1px solid #b9cce4;border-radius:12px;padding:14px;font-size:19px;font-weight:800;color:var(--navy);margin:10px 0 16px}
 .question{border:1px solid var(--line);border-radius:13px;padding:13px;margin:12px 0}.question-title{font-weight:750;line-height:1.6;margin-bottom:10px}
 .options{display:grid;gap:8px}.option{display:flex;align-items:center;gap:10px;border:1px solid #e1e7ef;border-radius:10px;padding:10px;background:#fbfcfe;cursor:pointer}
@@ -44,6 +45,20 @@ footer{text-align:center;padding:18px;color:var(--muted);font-size:12px}@media(m
  <div class="panel"><h2>അധ്യാപകന്റെ പ്രത്യേക നിർദ്ദേശങ്ങൾ</h2><div id="notes" class="small">നിർദ്ദേശങ്ങൾ പരിശോധിക്കുന്നു...</div></div>
  <div class="panel"><h2>ഇന്നത്തെ പ്രവർത്തനങ്ങൾ</h2><div class="notice">റിപ്പോർട്ട് ദിവസം ഇന്ത്യൻ സമയം രാവിലെ 5 മണി മുതൽ അടുത്ത ദിവസം രാവിലെ 5 മണി വരെയാണ്.</div>
   <form id="reportForm"><div id="questions"></div><div class="scorebar"><div><strong>ഇന്നത്തെ ആകെ മാർക്ക്</strong><div class="small">പരമാവധി <span id="maxScore">0</span> മാർക്ക്</div></div><div class="score"><span id="score">0</span>/<span id="maxScore2">0</span></div></div><button class="primary" id="submit">റിപ്പോർട്ട് സമർപ്പിക്കുക</button></form><p id="reportStatus" class="status" role="status"></p>
+ </div>
+ <div class="panel" id="parentCommentPanel">
+  <h2>രക്ഷിതാവിന്റെ അഭിപ്രായം</h2>
+  <p class="small">നിങ്ങളുടെ അഭിപ്രായം ഏത് അധ്യാപകനാണ് ലഭിക്കേണ്ടതെന്ന് തിരഞ്ഞെടുക്കുക.</p>
+  <label for="commentRecipient">അഭിപ്രായം ലഭിക്കേണ്ടത്</label>
+  <select id="commentRecipient">
+   <option value="HEAD_TEACHER">ഹെഡ് ടീച്ചർക്ക്</option>
+   <option value="CLASS_TEACHER">ക്ലാസ് ടീച്ചർക്ക്</option>
+   <option value="BOTH">രണ്ട് അധ്യാപകർക്കും</option>
+  </select>
+  <label for="parentComment">അഭിപ്രായം</label>
+  <textarea id="parentComment" maxlength="2000" placeholder="നിങ്ങളുടെ അഭിപ്രായം ഇവിടെ എഴുതുക..."></textarea>
+  <button class="primary" id="sendParentComment" type="button">അഭിപ്രായം അയക്കുക</button>
+  <p id="parentCommentStatus" class="status" role="status"></p>
  </div>
 </section></main><footer>അസാസുൽ ഉലൂം മദ്രസ · ദൈനംദിന പ്രവർത്തന റിപ്പോർട്ട്</footer>
 <script>
@@ -82,6 +97,31 @@ function score(){let total=0;questions.forEach(q=>{const id=document.querySelect
 async function loadNotes(){const box=$('notes');try{const {data,error}=await db.rpc('daily_work_parent_get_notes',{p_token:token});if(error)throw error;box.replaceChildren();if(!data?.length){box.textContent='ഇപ്പോൾ പ്രത്യേക നിർദ്ദേശങ്ങളൊന്നുമില്ല.';return;}if(!document.getElementById('noteColorStyles')){const style=document.createElement('style');style.id='noteColorStyles';style.textContent='.note.unread-note{background:#fff0d8;border:2px solid #e89a24;color:#704500}.note.read-note{background:#e5f5ed;border:2px solid #48a879;color:#176a43}.notes-alert{padding:11px;margin:0 0 12px;border:1px solid #e89a24;border-radius:11px;background:#fff0d8;color:#805400;font-weight:750}';document.head.append(style);}const orderedNotes=[...data].sort((a,b)=>Number(!!a.is_read)-Number(!!b.is_read));const unreadCount=orderedNotes.filter(n=>!n.is_read).length;if(unreadCount){const alertBox=document.createElement('div');alertBox.className='notes-alert';alertBox.setAttribute('role','alert');alertBox.textContent='🔔 വായിക്കാത്ത പുതിയ നിർദ്ദേശങ്ങൾ: '+unreadCount+' എണ്ണം';box.append(alertBox);}orderedNotes.forEach(n=>{const card=document.createElement('div');card.className='note '+(n.is_read?'read-note':'unread-note');const t=document.createElement('div');t.className='note-text';t.textContent=n.message;const badge=document.createElement('span');badge.className='badge '+(n.is_read?'read':'unread');badge.textContent=n.is_read?'വായിച്ചു':'വായിച്ചിട്ടില്ല';card.append(t,badge);if(!n.is_read){const b=document.createElement('button');b.className='secondary';b.textContent='വായിച്ചു';b.onclick=async()=>{b.disabled=true;const {error}=await db.rpc('daily_work_parent_mark_note_read',{p_token:token,p_note_id:n.note_id});if(error){b.disabled=false;alert(error.message);return;}loadNotes();};card.append(b);}box.append(card);});}catch(e){box.textContent='നിർദ്ദേശങ്ങൾ ലഭിച്ചില്ല: '+e.message;}}
 
 $('reportForm').onsubmit=async e=>{e.preventDefault();if(questions.some(q=>!document.querySelector('input[name="q_'+q.question_id+'"]:checked')))return msg('reportStatus','എല്ലാ ചോദ്യങ്ങൾക്കും ഉത്തരം തിരഞ്ഞെടുക്കുക.');const answers=questions.map(q=>({question_id:q.question_id,option_id:document.querySelector('input[name="q_'+q.question_id+'"]:checked').value})),b=$('submit');b.disabled=true;msg('reportStatus','റിപ്പോർട്ട് സമർപ്പിക്കുന്നു...');try{const {data,error}=await db.rpc('daily_work_parent_submit_daily_report',{p_token:token,p_answers:answers});if(error)throw error;const r=Array.isArray(data)?data[0]:data;msg('reportStatus','റിപ്പോർട്ട് സമർപ്പിച്ചു. ആകെ മാർക്ക്: '+(r?.total_score??'—')+'/'+$('maxScore').textContent,true);}catch(e){msg('reportStatus',e.message||'റിപ്പോർട്ട് സമർപ്പിക്കാനായില്ല.');}finally{b.disabled=false;}};
+
+$('sendParentComment').onclick=async()=>{
+ const comment=$('parentComment').value.trim(),
+       recipient=$('commentRecipient').value,
+       b=$('sendParentComment');
+ if(!comment)return msg('parentCommentStatus','അഭിപ്രായം എഴുതുക.');
+ if(comment.length>2000)return msg('parentCommentStatus','അഭിപ്രായം 2000 അക്ഷരങ്ങളിൽ കവിയരുത്.');
+ if(!token)return msg('parentCommentStatus','സെഷൻ കാലാവധി കഴിഞ്ഞു. വീണ്ടും പ്രവേശിക്കുക.');
+ b.disabled=true;
+ msg('parentCommentStatus','അഭിപ്രായം അയക്കുന്നു...');
+ try {
+  const {error}=await db.rpc('daily_work_parent_add_comment',{
+   p_class_code:CLASS_CODE,
+   p_token:token,
+   p_comment_text:comment,
+   p_recipient_type:recipient
+  });
+  if(error)throw error;
+  $('parentComment').value='';
+  msg('parentCommentStatus','അഭിപ്രായം വിജയകരമായി അയച്ചു.',true);
+ } catch(e) {
+  msg('parentCommentStatus','അഭിപ്രായം അയക്കാനായില്ല: '+(e.message||'വീണ്ടും ശ്രമിക്കുക.'));
+ } finally {b.disabled=false;}
+};
+
 $('logout').onclick=async()=>{try{await db.rpc('daily_work_parent_logout',{p_token:token});}catch(_){}sessionStorage.removeItem(storeKey);token=null;student=null;questions=[];showLogin();};
 (async()=>{try{const s=JSON.parse(sessionStorage.getItem(storeKey)||'null');if(s?.token){token=s.token;await openDashboard(s.student_name);}}catch(e){sessionStorage.removeItem(storeKey);token=null;showLogin();}})();
 })();
