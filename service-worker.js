@@ -1,4 +1,5 @@
-const CACHE_NAME = "asasul-portal-v1";
+
+const CACHE_NAME = "asasul-portal-v2";
 
 const APP_SHELL = [
   "/madrasa-results-2026/",
@@ -7,14 +8,22 @@ const APP_SHELL = [
   "/madrasa-results-2026/app-icon-512.png"
 ];
 
+// Install the new version and prepare its app shell.
 self.addEventListener("install", (event) => {
   event.waitUntil(
     caches.open(CACHE_NAME)
       .then((cache) => cache.addAll(APP_SHELL))
-      .then(() => self.skipWaiting())
   );
 });
 
+// Activate only after the user chooses UPDATE.
+self.addEventListener("message", (event) => {
+  if (event.data && event.data.type === "SKIP_WAITING") {
+    self.skipWaiting();
+  }
+});
+
+// Remove old cache versions after activation.
 self.addEventListener("activate", (event) => {
   event.waitUntil(
     caches.keys().then((keys) =>
@@ -27,6 +36,7 @@ self.addEventListener("activate", (event) => {
   );
 });
 
+// Network first, with cached fallback.
 self.addEventListener("fetch", (event) => {
   const request = event.request;
   const url = new URL(request.url);
