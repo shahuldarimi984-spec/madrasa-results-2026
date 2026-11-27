@@ -15,6 +15,10 @@ body{background:#f7f4eb}
 button{font:inherit;cursor:pointer}
 #home{width:min(100%,900px);min-height:100dvh;margin:0 auto;position:relative;line-height:0;background:linear-gradient(180deg,#eef8ff 0%,#fffdf5 72%,#e8f5ff 100%)}
 #poster{display:block;width:100%;height:auto;max-height:none}
+@media(max-width:600px){
+  #home{width:100%;height:100dvh;min-height:100svh;overflow:hidden}
+  #poster{width:100%;height:100%;object-fit:fill}
+}
 .hotspot{position:absolute;display:block;border-radius:18px;outline:0;line-height:normal}
 .hotspot:focus-visible{outline:4px solid #ffbf36;outline-offset:3px;background:#ffffff20}
 #aboutLink{left:13.5%;top:39.0%;width:34%;height:9.0%}
@@ -59,7 +63,10 @@ button{font:inherit;cursor:pointer}
   <div class="topline"></div>
   <div class="toolbar">
     <strong id="sectionName">ASASUL ULOOM HIGHER SECONDARY MADRASA</strong>
-    <button type="button" id="homeButton">പോർട്ടലിലേക്ക് മടങ്ങുക</button>
+    <div style="display:flex;gap:7px;flex-wrap:wrap;justify-content:flex-end">
+      <button type="button" id="goAbout">മദ്രസ പരിചയപ്പെടാം</button>
+      <button type="button" id="homeButton">പോർട്ടലിലേക്ക്</button>
+    </div>
   </div>
   <main class="wrap">
     <section id="aboutSection" hidden>
@@ -113,7 +120,13 @@ button{font:inherit;cursor:pointer}
     </section>
 
     <section id="resultsSection" hidden class="paper">
-      <div class="toolbar"><strong>അർദ്ധവാർഷിക പരീക്ഷാ ഫലം</strong><button type="button" id="backExam">മുമ്പിലേക്ക്</button></div>
+      <div class="toolbar">
+        <strong>അർദ്ധവാർഷിക പരീക്ഷാ ഫലം</strong>
+        <div style="display:flex;gap:7px;flex-wrap:wrap;justify-content:flex-end">
+          <button type="button" id="resultsAbout">മദ്രസ പരിചയപ്പെടാം</button>
+          <button type="button" id="backExam">BACK</button>
+        </div>
+      </div>
       <iframe id="resultFrame" title="മദ്രസ പരീക്ഷാ ഫലം"></iframe>
     </section>
   </main>
@@ -137,6 +150,14 @@ document.getElementById('examLink').addEventListener('click',e=>{e.preventDefaul
 document.getElementById('homeButton').addEventListener('click',()=>{
   results.hidden=true;content.style.display='none';home.style.display='block';window.scrollTo(0,0);
 });
+function goToAbout(){
+  home.style.display='none';content.style.display='block';
+  about.hidden=false;exam.hidden=true;results.hidden=true;
+  name.textContent='നമ്മുടെ മദ്രസ';
+  window.scrollTo(0,0);
+}
+document.getElementById('goAbout').addEventListener('click',goToAbout);
+document.getElementById('resultsAbout').addEventListener('click',goToAbout);
 document.getElementById('showResults').addEventListener('click',()=>{
   exam.hidden=true;results.hidden=false;
   const frame=document.getElementById('resultFrame');
