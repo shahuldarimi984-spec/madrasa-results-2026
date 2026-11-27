@@ -49,6 +49,37 @@ button{font:inherit;cursor:pointer}
 .action.primary{background:var(--navy);color:#fff;border-color:var(--navy);font-size:17px;padding:13px 24px}
 #resultFrame{display:block;width:100%;height:calc(100vh - 55px);border:0;background:#fff}
 @media(max-width:480px){.wrap{padding:11px}.story,.encourage{font-size:14px}.toolbar strong{font-size:12px}}
+  #updateNotice{
+  position:fixed;
+  left:12px;
+  right:12px;
+  bottom:14px;
+  z-index:9999;
+  max-width:560px;
+  margin:0 auto;
+  padding:14px 15px;
+  background:#172b4d;
+  color:#fff;
+  border:1px solid #c9a45c;
+  border-radius:14px;
+  box-shadow:0 8px 28px #0003;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  font:600 14px/1.5 system-ui,"Noto Sans Malayalam",sans-serif;
+}
+#updateNotice[hidden]{
+  display:none!important;
+}
+#updateNotice button{
+  border:0;
+  border-radius:9px;
+  padding:10px 16px;
+  background:#ffe3a1;
+  color:#172b4d;
+  font-weight:850;
+}
 </style>
 </head>
 <body>
