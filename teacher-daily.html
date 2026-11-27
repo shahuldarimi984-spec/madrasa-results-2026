@@ -60,6 +60,20 @@ button:disabled{opacity:.55;cursor:not-allowed}.primary{background:var(--navy);c
   <div id="sentList"><div class="empty">വിവരങ്ങൾ ലോഡ് ചെയ്യുന്നു...</div></div>
   <button class="secondary" id="refreshBtn">പുതുക്കുക</button>
  </section>
+
+ <section class="panel" id="tenDayPanel">
+  <h2>10 ദിവസത്തെ പ്രവർത്തന റിപ്പോർട്ട്</h2>
+  <p class="small">ഓരോ കുട്ടിയുടെയും തുടർച്ചയായ 10 ദിവസത്തെ മാർക്ക് 100-ൽ കണക്കാക്കുന്നു. റിപ്പോർട്ട് ഇല്ലാത്ത ദിവസം 0 മാർക്കായിരിക്കും.</p>
+  <div class="row">
+   <div><label for="reportClass">ക്ലാസ്</label><select id="reportClass"><option value="">ക്ലാസ് തിരഞ്ഞെടുക്കുക</option></select></div>
+   <div><label for="reportStart">ആദ്യ തീയതി</label><input id="reportStart" type="date" value="2026-11-27"></div>
+  </div>
+  <label for="reportStudent">കുട്ടി</label><select id="reportStudent" disabled><option value="">ആദ്യം റിപ്പോർട്ട് ലോഡ് ചെയ്യുക</option></select>
+  <button class="primary" id="loadReportBtn">റിപ്പോർട്ട് ലോഡ് ചെയ്യുക</button>
+  <p id="reportStatus" role="status" aria-live="polite"></p>
+  <div id="reportPreview" class="hidden"></div>
+  <button class="secondary hidden" id="printReportBtn">PDF ആയി സേവ് ചെയ്യുക</button>
+ </section>
 </section>
 </main>
 <script>
@@ -116,7 +130,7 @@ async function loadTargets(){
  if(!classes.length)throw new Error("ഈ അധ്യാപക അക്കൗണ്ടിന് ക്ലാസ് അനുവദിച്ചിട്ടില്ല");
 }
 async function enterApp(){
- await loadProfile();await loadTargets();
+ await loadProfile();await loadTargets();setupReportClasses();
  $("loginPanel").classList.add("hidden");$("app").classList.remove("hidden");
  audienceUI();await loadNotes();
 }
@@ -167,6 +181,65 @@ $("refreshBtn").addEventListener("click",loadNotes);
 $("logoutBtn").addEventListener("click",async()=>{
  await db.auth.signOut();teacher=null;targets=[];$("app").classList.add("hidden");$("loginPanel").classList.remove("hidden");say("loginStatus","പുറത്തുകടന്നു.",true);
 });
+
+let reportRows=[];
+function reportEscape(v){return String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
+function setupReportClasses(){
+ const opts=classesForTeacher();
+ setOptions($("reportClass"),opts,"ക്ലാസ് തിരഞ്ഞെടുക്കുക",x=>x.class_name+" ("+x.class_code+")",x=>x.class_code);
+ const first=document.createElement("option");
+ first.value="CLASS1";
+ first.textContent="ഒന്നാം ക്ലാസ്";
+ $("reportClass").insertBefore(first,$("reportClass").options[1]||null);
+}
+function fillReportStudents(){
+ const m=new Map();
+ reportRows.forEach(r=>m.set(r.student_key,r.student_name));
+ const items=[...m.entries()].map(([student_key,student_name])=>({student_key,student_name}));
+ setOptions($("reportStudent"),items,items.length?"കുട്ടിയെ തിരഞ്ഞെടുക്കുക":"കുട്ടികളെ കണ്ടെത്തിയില്ല",x=>x.student_name,x=>x.student_key);
+ $("reportStudent").disabled=!items.length;
+ if(items.length){$("reportStudent").value=items[0].student_key;render10DayPreview();}
+}
+function render10DayPreview(){
+ const key=$("reportStudent").value;
+ const rows=reportRows.filter(r=>r.student_key===key).sort((a,b)=>a.report_date.localeCompare(b.report_date));
+ const el=$("reportPreview");
+ if(!rows.length){el.classList.add("hidden");$("printReportBtn").classList.add("hidden");return;}
+ const total=rows.reduce((sum,r)=>sum+Number(r.score_out_of_10||0),0);
+ el.classList.remove("hidden");$("printReportBtn").classList.remove("hidden");
+ el.innerHTML='<article class="note"><strong>'+reportEscape(rows[0].student_name)+'</strong><div class="meta">'+reportEscape(rows[0].class_name)+' · '+reportEscape(rows[0].report_date)+' മുതൽ '+reportEscape(rows[rows.length-1].report_date)+' വരെ</div><p>ആകെ മാർക്ക്: <strong>'+total.toFixed(2)+' / 100</strong></p></article>';
+}
+async function load10DayReport(){
+ const code=$("reportClass").value,start=$("reportStart").value;
+ if(!code)return say("reportStatus","ക്ലാസ് തിരഞ്ഞെടുക്കുക");
+ if(!start)return say("reportStatus","ആദ്യ തീയതി തിരഞ്ഞെടുക്കുക");
+ $("loadReportBtn").disabled=true;say("reportStatus","റിപ്പോർട്ട് വിവരങ്ങൾ ശേഖരിക്കുന്നു...");
+ try{
+  const {data,error}=await db.rpc("daily_work_teacher_get_10day_report",{p_class_code:code,p_start_date:start});
+  if(error)throw error;
+  reportRows=data||[];
+  if(!reportRows.length)throw new Error("ഈ ക്ലാസിൽ കുട്ടികളെ കണ്ടെത്തിയില്ല");
+  fillReportStudents();
+  say("reportStatus","റിപ്പോർട്ട് തയ്യാറായി. കുട്ടിയെ തിരഞ്ഞെടുത്ത് PDF സേവ് ചെയ്യാം.",true);
+ }catch(e){reportRows=[];$("reportPreview").classList.add("hidden");$("printReportBtn").classList.add("hidden");say("reportStatus",e.message||"റിപ്പോർട്ട് ലോഡ് ചെയ്യാനായില്ല");}
+ finally{$("loadReportBtn").disabled=false;}
+}
+function print10DayReport(){
+ const key=$("reportStudent").value;
+ const rows=reportRows.filter(r=>r.student_key===key).sort((a,b)=>a.report_date.localeCompare(b.report_date));
+ if(!rows.length)return;
+ const total=rows.reduce((sum,r)=>sum+Number(r.score_out_of_10||0),0);
+ const w=window.open("","_blank");
+ if(!w){say("reportStatus","പോപ്പ്-അപ്പ് അനുവദിക്കുക; ശേഷം PDF സേവ് ചെയ്യാം");return;}
+ const body=rows.map((r,i)=>'<tr><td>'+(i+1)+'</td><td>'+reportEscape(r.report_date)+'</td><td>'+Number(r.score_out_of_10||0).toFixed(2)+' / 10</td></tr>').join("");
+ w.document.open();
+ w.document.write('<!doctype html><html lang="ml"><head><meta charset="utf-8"><title>10 ദിവസത്തെ റിപ്പോർട്ട്</title><style>body{font-family:system-ui,"Noto Sans Malayalam",sans-serif;color:#172b49;padding:24px}h1,h2{text-align:center}h1{font-size:22px}h2{font-size:18px}p{text-align:center}table{width:100%;border-collapse:collapse;margin-top:22px}th,td{border:1px solid #9eacc0;padding:11px;text-align:center}th{background:#edf3fa}.total{font-size:20px;font-weight:800;text-align:center;margin:24px}@media print{body{padding:8mm}}</style></head><body><h1>അസാസുൽ ഉലൂം മദ്രസ</h1><h2>10 ദിവസത്തെ ദൈനംദിന പ്രവർത്തന റിപ്പോർട്ട്</h2><p><strong>'+reportEscape(rows[0].class_name)+'</strong></p><p>വിദ്യാർത്ഥി: <strong>'+reportEscape(rows[0].student_name)+'</strong></p><p>'+reportEscape(rows[0].report_date)+' മുതൽ '+reportEscape(rows[rows.length-1].report_date)+' വരെ</p><table><thead><tr><th>ദിവസം</th><th>തീയതി</th><th>മാർക്ക്</th></tr></thead><tbody>'+body+'</tbody></table><div class="total">ആകെ: '+total.toFixed(2)+' / 100</div><p>ഓരോ ദിവസത്തെയും മാർക്ക് 10-ലേക്ക് മാറ്റിയാണ് കണക്കാക്കിയിരിക്കുന്നത്.</p><script>window.onload=()=>window.print();<\\/script></body></html>');
+ w.document.close();
+}
+$("loadReportBtn").addEventListener("click",load10DayReport);
+$("reportStudent").addEventListener("change",render10DayPreview);
+$("printReportBtn").addEventListener("click",print10DayReport);
+
 db.auth.getSession().then(async({data})=>{if(data.session){try{await enterApp();}catch(e){await db.auth.signOut();say("loginStatus",e.message||"ഡാഷ്ബോർഡ് തുറക്കാനായില്ല");}}});
 })();
 </script>
